@@ -98,6 +98,12 @@ $accent-color: #ff6d0a;
         position: relative;
         z-index: 20;
     }
+    .nav-link{
+        color: black !important;
+    }
+    .carousel-inner{
+        height: 930px;
+    }
 }
 
 /* Custom position classes */
@@ -128,6 +134,7 @@ $accent-color: #ff6d0a;
     .left-sm-1 { left: 1% !important; }
     .left-sm-20 { left: 20% !important; }
     /* Add more classes as needed */
+
     .test-form{
         max-width: 470px;
     }

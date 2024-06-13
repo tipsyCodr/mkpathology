@@ -98,6 +98,12 @@
     position: relative;
     z-index: 20;
   }
+  .nav-link {
+    color: black !important;
+  }
+  .carousel-inner {
+    height: 930px;
+  }
 }
 /* Custom position classes */
 .top-10 {

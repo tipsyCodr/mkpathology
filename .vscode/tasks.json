@@ -1,0 +1,25 @@
+{
+    "tasks": [
+        {
+            "type": "npm",
+            "script": "dev",
+            "problemMatcher": [],
+            "label": "npm: dev",
+            "detail": "vite"
+        },
+        {
+            "type": "shell",
+            "label": "php artisan serve",
+            "command": "php artisan serve",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+       
+    ]
+}

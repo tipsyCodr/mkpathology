@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\TestController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
 
-//basic routes
+// Frontend
+// Basic
 Route::view('/', 'home')->name('home');
 Route::view('test', 'tests')->name('test');
 Route::view('contact', 'contact')->name('contact');
@@ -16,6 +18,14 @@ Route::view('register', 'register')->name('register');
 //booking
 Route::view('book', 'book')->name('book');
 
+// Test
+Route::get('test-view', [TestController::class, 'view'])->name('test.view');
 
-//backend routes
-Route::post('book-test', [BookingController::class, 'bookTest'])->name('book.store');
+
+// Backend 
+//Booking  routes
+Route::post('package-book', [BookingController::class, 'bookPackage'])->name('package.book.store');
+Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.book.store');
+
+// Test
+Route::post('store-test', [TestController::class, 'store'])->name('test.store');

@@ -1,4 +1,4 @@
-<form action="{{ route('book.store') }}" method="post" class="form-layout border border-amber-600">
+<form action="{{ route('package.book.store') }}" method="post" class="form-layout border border-amber-600">
     @csrf
 
     <div class="row g-4">

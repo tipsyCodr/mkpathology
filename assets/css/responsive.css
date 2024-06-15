@@ -101,9 +101,6 @@
   .nav-link {
     color: black !important;
   }
-  .carousel-inner {
-    height: 930px;
-  }
 }
 /* Custom position classes */
 .top-10 {
@@ -209,6 +206,9 @@
     left: 40% !important;
   }
   /* Add more classes as needed */
+  .test-form {
+    display: none;
+  }
 }
 @media (max-width: 992px) { /* Large devices (desktops, 992px and up) */
   .top-lg-10 {

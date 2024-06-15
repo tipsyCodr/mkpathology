@@ -101,9 +101,9 @@ $accent-color: #ff6d0a;
     .nav-link{
         color: black !important;
     }
-    .carousel-inner{
-        height: 930px;
-    }
+    // .carousel-inner{
+    //     height: 930px;
+    // }
 }
 
 /* Custom position classes */
@@ -146,6 +146,9 @@ $accent-color: #ff6d0a;
     .top-md-40 { top: 40% !important; }
     .left-md-40 { left: 40% !important; }
     /* Add more classes as needed */
+    .test-form{
+        display: none;
+    }
 }
 
 @media (max-width: 992px) { /* Large devices (desktops, 992px and up) */

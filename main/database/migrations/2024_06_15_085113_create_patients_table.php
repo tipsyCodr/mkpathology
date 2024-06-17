@@ -16,8 +16,11 @@ return new class extends Migration {
             $table->text('address');
             $table->string('gender');
             $table->string('pincode');
-            $table->string('city');
+            $table->string('city')->nullable();
             $table->bigInteger('age');
+            $table->string('reach')->nullable();
+            $table->boolean('authorize')->default(false);
+
             $table->timestamps();
 
         });

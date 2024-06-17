@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('package_id');
             $table->string('booking_date');
             $table->string('slot');
-            $table->bigInteger('status');
+            $table->enum('status', ['pending', 'booked', 'completed'])->default('pending');
             $table->timestamps();
         });
     }

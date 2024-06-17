@@ -1,5 +1,15 @@
 <x-guest>
-
+    @if (session('status'))
+        <script>
+            window.addEventListener('DOMContentLoaded', (event) => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success',
+                    text: "{{ session('status') }}",
+                })
+            });
+        </script>
+    @endif
     <!-- Carousel Form Start -->
     <div
         class="container position-absolute bg-white  rounded-md test-form p-0  top-40 to p-xl-40 top-lg-20 top-sm-10  left-10 left-sm-1">

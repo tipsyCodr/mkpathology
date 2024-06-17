@@ -1,6 +1,11 @@
 <form action="{{ route('package.book.store') }}" method="post" class="form-layout border border-amber-600">
     @csrf
 
+    @if (session()->has('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row g-4">
         <div class="col-md-6">
             <div class="mb-3">
@@ -21,7 +26,7 @@
         <div class="col-md-6">
             <div class="mb-3">
                 {{-- <label for="pincode" class="form-label">Pincode</label> --}}
-                <input type="text" class="form-control" id="pincode" placeholder="Enter your pincode"
+                <input type="number" class="form-control" id="pincode" placeholder="Enter your pincode"
                     name="pincode" required>
             </div>
         </div>
@@ -47,7 +52,7 @@
         <div class="col-md-6">
             <div class="mb-3">
                 {{-- <label for="mobile" class="form-label">Mobile No.</label> --}}
-                <input type="mobile" class="form-control" id="mobile" placeholder="Enter your mobile number"
+                <input type="tel" class="form-control" id="mobile" placeholder="Enter your mobile number"
                     name="mobile" required>
             </div>
         </div>
@@ -69,13 +74,13 @@
                 <select class="form-select" id="package" name="package" required>
                     <option value="">Select A Package</option>
                     <!-- populate with packages -->
-                    <option class=" ">Total Health Checkup</option>
-                    <option class="">Essential Wellness Check</option>
-                    <option class="">Basic Health Screening</option>
-                    <option class="">Advanced Health Plus</option>
-                    <option class="">Basic Health Plus</option>
-                    <option class="">Advanced Diagnostic Package</option>
-                    <option class="">Complete Wellness Profile</option>mak
+
+                    @php
+                        $packages = \App\Models\Package::all();
+                    @endphp
+                    @foreach ($packages as $package)
+                        <option class="" value="{{ $package->id }}">{{ $package->name }}</option>
+                    @endforeach
                 </select>
             </div>
         </div>

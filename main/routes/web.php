@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\WebController;
 use Illuminate\Support\Facades\Route;
@@ -21,6 +22,9 @@ Route::view('book', 'book')->name('book');
 // Test
 Route::get('test-view', [TestController::class, 'view'])->name('test.view');
 
+// Package
+Route::get('package-view', [PackageController::class, 'view'])->name('package.view');
+
 
 // Backend 
 //Booking  routes
@@ -29,3 +33,7 @@ Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.boo
 
 // Test
 Route::post('store-test', [TestController::class, 'store'])->name('test.store');
+Route::post('destroy-test/{id}', [TestController::class, 'destroy'])->name('test.destroy');
+
+Route::post('store-package', [PackageController::class, 'store'])->name('package.store');
+Route::post('destroy-package/{id}', [PackageController::class, 'destroy'])->name('package.destroy');

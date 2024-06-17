@@ -2,6 +2,7 @@
     "tasks": [
         {
             "type": "npm",
+            "path": "main",
             "script": "dev",
             "problemMatcher": [],
             "label": "npm: dev",
@@ -10,7 +11,7 @@
         {
             "type": "shell",
             "label": "php artisan serve",
-            "command": "php artisan serve",
+            "command": "cd main && php artisan serve",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -18,8 +19,8 @@
             "presentation": {
                 "reveal": "always",
                 "panel": "new"
-            }
-        },
-       
+            },
+            "problemMatcher": []
+        }
     ]
 }

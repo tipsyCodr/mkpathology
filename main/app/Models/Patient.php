@@ -9,7 +9,17 @@ class Patient extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'address', 'gender', 'pincode', 'city', 'age'];
+    protected $fillable = [
+        'user_id',
+        'address',
+        'gender',
+        'pincode',
+        'city',
+        'age',
+        'reach',
+        'authorize',
+
+    ];
     public function user()
     {
         return $this->belongsTo(User::class);

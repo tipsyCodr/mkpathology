@@ -19,3 +19,4 @@ yarn-error.log
 /.idea
 /.vscode
 ssh details mk pathology.txt
+.ssh details mk pathology.txt

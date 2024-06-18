@@ -27,6 +27,7 @@ class BookingController extends Controller
             'address' => $request->address,
             'city' => $request->city,
             'pincode' => $request->pincode,
+            'reach' => json_encode(explode(',', $request->reach)),
             'authorize' => $request->authorize ? 1 : 0,
         ]);
 

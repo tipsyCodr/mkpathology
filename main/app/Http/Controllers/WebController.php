@@ -10,5 +10,8 @@ class WebController extends Controller
     {
         return view($view);
     }
-
+    public function admin()
+    {
+        return view('admin.dashboard');
+    }
 }

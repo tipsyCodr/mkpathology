@@ -215,7 +215,12 @@
     </div>
     <!-- Footer End -->
 
-
+    <!-- Whatsapp Button -->
+    <a href="https://wa.me/+919581016768" class=" fixed-bottom left-5  text-white font-bold py-2 px-4 rounded"
+        style="background-color: #32D851;width: fit-content;" target="_blank">
+        <img src="{{ asset('assets/img/wp.png') }}" alt="whatsapp-icon" width="40">
+        Chat On Whatsapp
+    </a>
     <!-- Copyright Start -->
     <div class="container-fluid copyright bg-accent text-white-50 py-4">
         <div class="container">

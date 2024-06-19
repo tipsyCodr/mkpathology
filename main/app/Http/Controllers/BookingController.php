@@ -55,4 +55,6 @@ class BookingController extends Controller
         echo "Tests: ";
         dd($request->all());
     }
+
+
 }

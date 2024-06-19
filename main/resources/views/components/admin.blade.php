@@ -9,41 +9,29 @@
     @vite('resources/css/app.css')
 
 </head>
+<style>
+    .sidebar {
+        width: 200px;
+    }
+</style>
 
 <body>
+    <!--Navbar-->
+    <x-navbar />
+    <!--Navbar End-->
 
-    <!-- Navbar Start -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="#">Admin Panel</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
-                </ul>
+    <!-- Sidebar and Main Content Start -->
+    <div class="flex">
+        <div class="sidebar">
+            <x-sidebar />
+        </div>
+        <div class="w-4/5 ">
+            <div class="container mt-16 pl-5">
+                {{ $slot }}
             </div>
         </div>
-    </nav>
-    <!-- Navbar End -->
-
-    <!-- Main Content Start -->
-    <div class="container mt-5">
-        {{ $slot }}
     </div>
+    <!-- Sidebar and Main Content End -->
     <!-- Main Content End -->
 
     <!-- Bootstrap JS -->

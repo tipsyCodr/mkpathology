@@ -17,5 +17,12 @@ class TestBooking extends Model
         'slot',
         'status',
     ];
-
+    public function test()
+    {
+        return $this->belongsTo(Test::class, 'tests_ids', 'id');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'tests_ids', 'id');
+    }
 }

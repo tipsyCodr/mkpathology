@@ -16,4 +16,12 @@ class PackageBooking extends Model
         'slot',
         'status',
     ];
+    public function package()
+    {
+        return $this->belongsTo(Package::class);
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

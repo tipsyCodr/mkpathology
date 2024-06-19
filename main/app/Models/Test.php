@@ -13,4 +13,9 @@ class Test extends Model
         'price',
         'description',
     ];
+
+    public function testBooking()
+    {
+        return $this->hasMany(TestBooking::class);
+    }
 }

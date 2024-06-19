@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
@@ -26,8 +27,15 @@ Route::get('test-view', [TestController::class, 'view'])->name('test.view');
 // Package
 Route::get('package-view', [PackageController::class, 'view'])->name('package.view');
 
+//Prescription
+Route::get('prescription', [PrescriptionController::class, 'index'])->name('prescription');
+
 //Admin
 Route::get('admin', [WebController::class, 'admin'])->name('admin');
+Route::get('all-bookings', [WebController::class, 'booking'])->name('all.bookings');
+Route::get('prescription-view', [PrescriptionController::class, 'view'])->name('prescription.view');
+
+
 
 // Backend 
 //Booking  routes
@@ -45,3 +53,5 @@ Route::post('destroy-package/{id}', [PackageController::class, 'destroy'])->name
 //Patient Register
 Route::post('user-store', [UserController::class, 'store'])->name('user.store');
 
+//prescription
+Route::post('prescription-save', [PrescriptionController::class, 'store'])->name('prescription.store');

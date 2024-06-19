@@ -1,4 +1,4 @@
-<x-app>
+<x-admin>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Test View') }}
@@ -63,4 +63,4 @@
             </div>
         </div>
     </div>
-</x-app>
+</x-admin>

@@ -20,7 +20,13 @@
                     <a class="block py-2 px-4 text-gray-800 hover:text-gray-600" href="#">Settings</a>
                 </li>
                 <li>
-                    <a class="block py-2 px-4 text-gray-800 hover:text-gray-600" href="#">Logout</a>
+                    <a class="block py-2 px-4 text-gray-800 hover:text-gray-600" href="{{ route('logout') }}"
+                        onclick="event.preventDefault();
+                    document.getElementById('logout-form').submit();">Logout</a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </div>

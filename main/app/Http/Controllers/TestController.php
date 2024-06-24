@@ -22,7 +22,7 @@ class TestController extends Controller
     {
         // retrieve test details here
         $tests = Test::paginate(10);
-        return view('test.view', compact('tests'));
+        return view('admin.test.view', compact('tests'));
 
     }
     public function destroy($id)

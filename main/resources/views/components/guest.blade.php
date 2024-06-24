@@ -128,6 +128,7 @@
                         </div> -->
                         <a href="{{ route('contact') }}" class="nav-item nav-link text-white px-4">Contact</a>
                         <a href="/login" class="nav-item nav-link text-white px-4">Login</a>
+                        <a href="/register" class="nav-item nav-link text-white px-4">Register</a>
                     </div>
                     <div class="ms-auto d-none d-lg-flex">
                         <a class="btn btn-sm-square btn-dark ms-2" href=""><i
@@ -216,8 +217,9 @@
     <!-- Footer End -->
 
     <!-- Whatsapp Button -->
-    <a href="https://wa.me/+919581016768" class=" fixed-bottom left-5  text-white font-bold py-2 px-4 rounded"
-        style="background-color: #32D851;width: fit-content;" target="_blank">
+    <a href="https://wa.me/+919581016768" class="  text-white font-bold py-1 px-2"
+        style="background-color: #32D851;width: fit-content; position: fixed;border-radius: 10px; bottom: 20px; left: 20px;"
+        target="_blank">
         <img src="{{ asset('assets/img/wp.png') }}" alt="whatsapp-icon" width="40">
         Chat On Whatsapp
     </a>

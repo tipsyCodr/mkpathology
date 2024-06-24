@@ -14,32 +14,55 @@
     </div>
     <ul class="space-y-4" id="sidebar-menu">
         <li>
-            <a href="{{ route('admin') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                <span class="flaticon-home mr-2"></span> Dashboard
-            </a>
+            @if (auth()->user()->hasRole('patient'))
+                <a href="{{ route('patient.dashboard') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-home mr-2"></span> Dashboard
+                </a>
+            @else
+                <a href="{{ route('admin') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-home mr-2"></span> Admin Dashboard
+                </a>
+            @endif
         </li>
         <li>
-            <a href="{{ route('all.bookings') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                <span class="flaticon-list mr-2"></span> Bookings
-            </a>
+            @if (auth()->user()->hasRole('patient'))
+                <a href="{{ route('patient.bookings') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-list mr-2"></span> Bookings
+                </a>
+            @else
+                <a href="{{ route('all.bookings') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-list mr-2"></span> All Bookings
+                </a>
+            @endif
         </li>
         <li>
-            <a href="{{ route('prescription.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                <span class="flaticon-users mr-2"></span> Prescriptions
-            </a>
+            @if (auth()->user()->hasRole('patient'))
+                <a href="{{ route('patient.prescription.view') }}"
+                    class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-users mr-2"></span> Prescriptions
+                </a>
+            @endif
+            @if (auth()->user()->hasRole('admin'))
+                <a href="{{ route('prescription.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-users mr-2"></span> Prescriptions
+                </a>
+            @endif
         </li>
 
-        <li>
-            <a href="{{ route('package.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                <span class="flaticon-folder mr-2"></span> Packages
-            </a>
-        </li>
-        <li>
-            <a href="{{ route('test.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                <span class="flaticon-folder mr-2"></span> Tests
-            </a>
-        </li>
-
+        @if (!auth()->user()->hasRole('admin'))
+            <li>
+                <a href="{{ route('package.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-folder mr-2"></span> Packages
+                </a>
+            </li>
+        @endif
+        @if (!auth()->user()->hasRole('admin'))
+            <li>
+                <a href="{{ route('test.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-folder mr-2"></span> Tests
+                </a>
+            </li>
+        @endif
         <li>
             <a href="{{ route('all.bookings') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
                 <span class="flaticon-settings mr-2"></span> Settings

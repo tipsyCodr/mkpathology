@@ -40,7 +40,7 @@
                 </tr>
             </thead>
             <tbody class="divide-y divide-gray-100">
-                @foreach ($bookings as $booking)
+                @foreach ($bookings->sortBy('date')->sortByDesc('status') as $booking)
                     <tr class="hover:bg-gray-100">
                         <td class="py-2 px-4">{{ $booking['title'] }}</td>
                         <td class="py-2 px-4"><span

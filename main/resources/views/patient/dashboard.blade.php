@@ -21,14 +21,29 @@
                                     });
                                 })
                                 ->where('user_id', auth()->id())
-                                ->latest()
-                                ->get();
+                                ->orderByDesc('booking_date')
+                                ->get()
+                                ->merge(
+                                    auth()
+                                        ->user()
+                                        ->testBooking()
+                                        ->where('status', 'pending')
+                                        ->orWhere(function ($query) {
+                                            $query->where('status', 'booked')->whereHas('test', function ($query) {
+                                                $query->whereNotNull('name');
+                                            });
+                                        })
+                                        ->where('user_id', auth()->id())
+                                        ->orderByDesc('booking_date')
+                                        ->get(),
+                                );
+                            // dd($upcomingBookings);
                         @endphp
                         {{-- @dd($upcomingBookings); --}}
                         @forelse ($upcomingBookings as $booking)
                             <div
                                 class="border-b border-gray-200 {{ $booking->status == 'pending' ? 'bg-orange-100' : 'bg-green-100' }} p-4">
-                                <p class="mb-2 flex items-center">{{ $booking->package->name ?? '' }} -
+                                <p class="mb-2 flex items-center">{{ $booking->package->name ?? $booking->test->name }} -
                                     {{ $booking->booking_date }} -
                                     {{ $booking->slot }}
                                     <span

@@ -6,10 +6,12 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class book-modal extends Component
+class BookModal extends Component
 {
     /**
      * Create a new component instance.
+     *
+     * @return void
      */
     public function __construct()
     {
@@ -24,3 +26,4 @@ class book-modal extends Component
         return view('components.book-modal');
     }
 }
+

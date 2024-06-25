@@ -147,6 +147,54 @@ class UserController extends Controller
         }
         return redirect()->back()->with('error', 'Invalid Credentials');
     }
+    public function fetchPatientSetting()
+    {
+        $user = Auth::user();
+        $patient = Patient::where('user_id', $user->id)->first();
+        // return $patient;
+        return view('patient.settings', ['patient' => $patient]);
+    }
+    //updatepassword
+    public function updatePassword(Request $request)
+    {
+        $user = Auth::user();
+        $user->password = bcrypt($request->password);
+        $user->save();
+        return redirect()->back()->with('success', 'Password updated successfully');
+
+    }
+
+    public function updateEmail(Request $request)
+    {
+        $user = Auth::user();
+        $user->email = $request->email;
+        $user->save();
+        return redirect()->back()->with('success', 'Email updated successfully');
+
+    }
+    public function updateName(Request $request)
+    {
+        $user = Auth::user();
+        $user->name = $request->name;
+        $user->save();
+        return redirect()->back()->with('success', 'Name updated successfully');
+    }
+
+    public function updatePatientSetting(Request $request)
+    {
+        $user = Auth::user();
+        $patient = Patient::where('user_id', $user->id)->first();
+        $patient->age = $request->age;
+        $patient->gender = $request->gender;
+        $patient->address = $request->address;
+        $patient->city = $request->city;
+        $patient->pincode = $request->pincode;
+        // $patient->authorize = (bool) $request->authorize;
+        $patient->save();
+        return redirect()->back()->with('success', 'Patient Details updated successfully!');
+
+
+    }
 
     // make a Logout function
     public function logout(Request $request)

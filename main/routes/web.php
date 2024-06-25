@@ -64,6 +64,8 @@ Route::middleware(['ispatient'])->group(function () {
     Route::view('dashboard', 'patient.dashboard')->name('patient.dashboard');
     Route::get('patient-bookings', [BookingController::class, 'booking'])->name('patient.bookings');
     Route::view('patient-prescription', 'patient.prescription')->name('patient.prescription.view');
+    // Route::view('patient-setting', 'patient.settings')->name('patient.settings');
+    Route::get('patient-setting', [UserController::class, 'fetchPatientSetting'])->name('patient.settings');
 
     //Booking  routes
     Route::post('package-book', [BookingController::class, 'bookPackage'])->name('package.book.store');
@@ -78,8 +80,11 @@ Route::middleware(['ispatient'])->group(function () {
     Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.book.store');
     Route::get('patient-tests', [BookingController::class, 'PatientTestView'])->name('patient.tests.view');
 
-
-
+    //Setting Update
+    Route::post('patient-update-profile', [UserController::class, 'updatePatientSetting'])->name('patient.update.profile');
+    Route::post('patient-update-name', [UserController::class, 'updateName'])->name('patient.update.name');
+    Route::post('patient-update-email', [UserController::class, 'updatetEmail'])->name('patient.update.email');
+    Route::post('patient-update-pass', [UserController::class, 'updatePassword'])->name('patient.update.pass');
 
 });
 
@@ -91,8 +96,6 @@ Route::middleware(['isadmin'])->group(function () {
     Route::get('admin', [WebController::class, 'admin'])->name('admin');
     Route::get('all-bookings', [WebController::class, 'booking'])->name('all.bookings');
     Route::get('prescription-view', [PrescriptionController::class, 'view'])->name('prescription.view');
-
-
 
     // Test
     Route::post('store-test', [TestController::class, 'store'])->name('test.store');

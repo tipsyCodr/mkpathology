@@ -70,7 +70,7 @@
             </li>
         @endif
         <li>
-            <a href="{{ route('all.bookings') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+            <a href="{{ route('patient.settings') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
                 <span class="flaticon-settings mr-2"></span> Settings
             </a>
         </li>

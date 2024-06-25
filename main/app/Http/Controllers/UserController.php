@@ -91,6 +91,12 @@ class UserController extends Controller
             return redirect()->route('home');
         }
     }
+
+    /**
+     * Checks if the user with ID 8 has the 'book test' permission.
+     * Used just for testing purposes
+     * @return \Illuminate\Http\JsonResponse Returns a JSON response indicating if the user has the permission or not.
+     */
     public function checkPermission()
     {
 

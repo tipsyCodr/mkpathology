@@ -1,11 +1,13 @@
 <form action="{{ route('package.book.store') }}" method="post" class="form-layout border border-amber-600">
     @csrf
 
-    @php
-        if (auth()->user()->hasRole('patient')) {
-            $user = auth()->user();
-        }
-    @endphp
+    @auth
+        @php
+            if (auth()->user()->hasRole('patient')) {
+                $user = auth()->user();
+            }
+        @endphp
+    @endauth
 
     @if (session()->has('success'))
         <div class="alert alert-success">

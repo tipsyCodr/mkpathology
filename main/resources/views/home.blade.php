@@ -82,7 +82,7 @@
                 <div class="col-lg-4 wow zoomIn " data-wow-delay="0.3s">
                     <div class="bg-warning d-flex flex-column p-5" style="height: 300px">
                         <h3 class="text-white text-center mb-3">Upload Prescription</h3>
-                        <a href={{ route('upload.prescription') }}><img class='icon'
+                        <a href={{ route('patient.prescription.view') }}><img class='icon'
                                 src={{ asset('assets/img/icon/prescription.png') }} alt=""></a>
                     </div>
                 </div>

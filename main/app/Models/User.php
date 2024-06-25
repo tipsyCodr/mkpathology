@@ -60,7 +60,7 @@ class User extends Authenticatable
     {
         return $this->hasMany(PackageBooking::class);
     }
-    public function prescription()
+    public function prescriptions()
     {
         return $this->hasMany(Prescription::class);
     }

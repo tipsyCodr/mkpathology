@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Prescription;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PrescriptionController extends Controller
 {
@@ -14,8 +16,10 @@ class PrescriptionController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->all());
-        $user = User::find($request->user_id);
+        // dd($request->all());
+        // currently authenticated user;
+        $user = auth()->user();
+        // dd($user);
         $inp = $request->except('prescription');
         $prescription = $request->file('prescription');
         if ($prescription) {
@@ -23,17 +27,31 @@ class PrescriptionController extends Controller
             $file_extension = strtolower($prescription->getClientOriginalExtension());
             if (in_array($file_extension, $allowed_file_types)) {
                 $prescription_file_name = $user->id . '_' . time() . '.' . $file_extension;
-                $prescription->storeAs('public/prescriptions', $prescription_file_name);
+                $prescription->storeAs('uploads/prescriptions', $prescription_file_name, 'public');
+                // Accessing the uploaded file
+                // $filePath = public_path('storage/uploads/prescriptions/' . $prescription_file_name);
                 $inp['prescription'] = $prescription_file_name;
             } else {
                 return redirect()->back()->with('error', 'Invalid file format. Only PDF or JPG files are supported');
             }
         }
-        $user = User::create($inp);
+        Prescription::create([
+            'user_id' => $user->id,
+            'prescription' => $inp['prescription'],
+            'status' => 'unread',
+        ]);
         return redirect()->back()->with('success', 'Prescription created successfully');
     }
     public function view(Request $request)
     {
         return view('admin.prescription.index');
+    }
+
+    public function destroy($id)
+    {
+        $prescription = Prescription::find($id);
+        Storage::disk('public')->delete('uploads/prescriptions/' . $prescription->prescription);
+        $prescription->delete();
+        return redirect()->back()->with('success', 'Prescription deleted successfully');
     }
 }

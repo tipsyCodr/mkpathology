@@ -65,9 +65,21 @@ Route::middleware(['ispatient'])->group(function () {
     Route::get('patient-bookings', [BookingController::class, 'booking'])->name('patient.bookings');
     Route::view('patient-prescription', 'patient.prescription')->name('patient.prescription.view');
 
+    //Booking  routes
+    Route::post('package-book', [BookingController::class, 'bookPackage'])->name('package.book.store');
+    Route::get('package-cancel', [BookingController::class, 'cancelPackage'])->name('package.cancel');
+    Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.book.store');
+
     //prescription
     Route::post('prescription-save', [PrescriptionController::class, 'store'])->name('prescription.store');
     Route::delete('prescription-destroy/{id}', [PrescriptionController::class, 'destroy'])->name('prescription.destroy');
+
+    //Test
+    Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.book.store');
+    Route::get('patient-tests', [BookingController::class, 'PatientTestView'])->name('patient.tests.view');
+
+
+
 
 });
 
@@ -80,10 +92,7 @@ Route::middleware(['isadmin'])->group(function () {
     Route::get('all-bookings', [WebController::class, 'booking'])->name('all.bookings');
     Route::get('prescription-view', [PrescriptionController::class, 'view'])->name('prescription.view');
 
-    //Booking  routes
-    Route::post('package-book', [BookingController::class, 'bookPackage'])->name('package.book.store');
-    Route::get('package-cancel', [BookingController::class, 'cancelPackage'])->name('package.cancel');
-    Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.book.store');
+
 
     // Test
     Route::post('store-test', [TestController::class, 'store'])->name('test.store');

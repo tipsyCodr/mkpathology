@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ config('app.name') }}</title>
 
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 </head>
 <style>
@@ -17,6 +17,7 @@
 </style>
 
 <body>
+
     <!--Navbar-->
     <x-navbar />
     <!--Navbar End-->
@@ -27,6 +28,7 @@
             <x-sidebar />
         </div>
         <div class="w-4/5 ">
+            <x-alerts />
             <div class="container mt-16 pl-5">
                 {{ $slot }}
             </div>
@@ -36,6 +38,7 @@
     <!-- Main Content End -->
 
     <!-- Bootstrap JS -->
+
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     @vite('resources/js/app.js')
 </body>

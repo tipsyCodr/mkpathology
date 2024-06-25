@@ -25,6 +25,7 @@ class TestController extends Controller
         return view('admin.test.view', compact('tests'));
 
     }
+
     public function destroy($id)
     {
         // delete test details here

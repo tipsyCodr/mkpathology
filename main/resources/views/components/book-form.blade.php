@@ -7,6 +7,7 @@
                 $user = auth()->user();
             }
         @endphp
+
     @endauth
 
     @if (session()->has('success'))
@@ -83,7 +84,9 @@
             </div>
         </div>
     @endguest
-
+    {{-- @auth
+        <h1>Book A Test </h1>
+    @endauth --}}
     <div class="package-book">
 
         <div class="row g-4">
@@ -106,10 +109,17 @@
 
             <div class="col-md-6">
                 <div class="mb-3">
-                    {{-- <label for="date" class="form-label">Appointment Date</label> --}}
-                    <input type="date" class="form-control" id="date" name="date" required>
+                    <input type="date" class="form-control" id="date" name="date" required
+                        min="<?php echo date('Y-m-d'); ?>" onchange="this.setCustomValidity('')"
+                        oninput="this.setCustomValidity(this.value < new Date().toISOString().split('T')[0] ? 'Date cannot be in the past!' : '')"
+                        pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-30)|(?:(?:0[13578]|1[02])-31))"
+                        title="Enter a date in the format DD-MM-YYYY" onkeydown="if(event.key=='Enter'){this.blur()}">
+
                 </div>
             </div>
+            <span id='date-error' class=" text-red-500"></span>
+            <br>
+
         </div>
 
 
@@ -118,9 +128,9 @@
             {{-- <label for="slot" class="form-label">Slot</label> --}}
             <select class="form-select" id="slot" name="slot" required>
                 <option value="">Select A Slot</option>
-                <option value="morning">Morning</option>
-                <option value="afternoon">Afternoon</option>
-                <option value="evening">Evening</option>
+                <option value="morning">Morning (10:00 AM - 12:00 PM)</option>
+                <option value="afternoon">Afternoon (12:00 PM - 04:00 PM)</option>
+                <option value="evening">Evening (04:00 PM - 08:00 PM)</option>
             </select>
         </div>
 
@@ -166,3 +176,20 @@
     @endguest
     <button type="submit" class="btn btn-accent bg-orange-500 p-2 text-white rounded ml-3">Book Now</button>
 </form>
+<script>
+    var dateInput = document.getElementById('date');
+    var dateError = document.getElementById('date-error');
+    if (dateInput) {
+        dateInput.addEventListener('input', function(e) {
+            var day = new Date(this.value).getDay();
+
+            if (day === 0) {
+                dateError.textContent = 'Sunday is not available.';
+            } else {
+                dateError.textContent = '';
+            }
+
+            this.setCustomValidity(day === 0 ? 'Sunday is not available.' : '');
+        });
+    }
+</script>

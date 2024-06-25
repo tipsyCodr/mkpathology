@@ -11,9 +11,14 @@
         </script>
     @endif
     <!-- Carousel Form Start -->
+
     <div
         class="container position-absolute bg-white  rounded-md test-form p-0  top-40 to p-xl-40 top-lg-20 top-sm-10  left-10 left-sm-1">
+        @auth
+            <h1 class="p-2">Book Now</h1>
+        @endauth
         <x-book-form></x-book-form>
+
     </div>
     <!-- Carousel Form  Start -->
 
@@ -23,7 +28,7 @@
     <div class="container-fluid header-carousel px-0  flex-row">
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
-                <div class="carousel-item active" style="height: 600px;">
+                <div class="carousel-item active" style="height: 660px;">
                     <img class="w-100 fit-image" src={{ asset('assets/img/carousel/1.jpg') }} alt="Image">
                     <div class="carousel-caption">
                         <div class="container">
@@ -37,7 +42,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="carousel-item" style="height: 600px;">
+                <div class="carousel-item" style="height: 660px;">
                     <img class="img-fluid w-100 fit-image" src={{ asset('assets/img/carousel/2.jpg') }} alt="Image">
                     <div class="carousel-caption">
                         <div class="container">

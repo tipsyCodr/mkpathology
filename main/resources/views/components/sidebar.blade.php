@@ -49,16 +49,22 @@
             @endif
         </li>
 
-        @if (!auth()->user()->hasRole('admin'))
+        @if (auth()->user()->hasRole('admin'))
             <li>
                 <a href="{{ route('package.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
                     <span class="flaticon-folder mr-2"></span> Packages
                 </a>
             </li>
         @endif
-        @if (!auth()->user()->hasRole('admin'))
+        @if (auth()->user()->hasRole('admin'))
             <li>
                 <a href="{{ route('test.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-folder mr-2"></span> Tests
+                </a>
+            </li>
+        @else
+            <li>
+                <a href="{{ route('patient.tests.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
                     <span class="flaticon-folder mr-2"></span> Tests
                 </a>
             </li>

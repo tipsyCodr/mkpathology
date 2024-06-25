@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PackageBooking;
 use App\Models\Patient;
+use App\Models\Test;
 use App\Models\TestBooking;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -92,10 +93,19 @@ class BookingController extends Controller
     }
 
     //
-    public function bookTests(Request $request)
+    public function bookTest(Request $request)
     {
         echo "Tests: ";
-        dd($request->all());
+        // dd($request->all());
+        $bookingData = [
+            'user_id' => Auth::user()->id,
+            'tests_ids' => $request->test_id,
+            'booking_date' => $request->date,
+            'slot' => $request->slot,
+            'status' => 'pending',
+        ];
+        $booking = TestBooking::create($bookingData);
+        return redirect()->back()->with('success', 'Booking created successfully.');
     }
 
     //  Fetch bookings
@@ -150,6 +160,30 @@ class BookingController extends Controller
         } else {
             return redirect()->back()->with('error', 'Failed to cancel booking.');
         }
+    }
+
+    public function PatientTestView(Request $request)
+    {
+        // $request = $request->all();
+        $search = $request->input('search');
+        $user = auth()->user();
+        $query = Test::select('id', 'name', 'price', 'description');
+
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('name', 'like', "%{$search}%");
+        }
+
+        $tests = $query->get();
+        return view('patient.tests', compact('tests'));
+    }
+
+    public function viewTestByPatient($id)
+    {
+        // retrieve data for all test patient has booked here details here
+        $tests = TestBooking::where('user_id', $id)->get();
+        return $tests;
+
     }
 
 }

@@ -15,11 +15,14 @@ class UserController extends Controller
 {
     public function store(Request $request)
     {
+        if (!isset($request->password)) {
+            $pass = bcrypt($request->mobile);
+        }
         $userData = [
             'name' => $request->name,
             'email' => $request->email,
             'mobile' => $request->mobile,
-            'password' => bcrypt($request->mobile),
+            'password' => $pass ?? $request->password,
         ];
 
         $user = User::updateOrCreate($userData, $userData);
@@ -135,6 +138,7 @@ class UserController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->only('email', 'password');
+        // dd($credentials);
         if (Auth::validate($credentials)) {
             $user = Auth::getProvider()->retrieveByCredentials($credentials);
             Auth::login($user, $request->has('remember'));

@@ -10,6 +10,9 @@
   background: linear-gradient(rgba(3, 27, 78, 0.3), rgba(3, 27, 78, 0.3)), url(../img/testi_bg.jpg) left center no-repeat;
   background-size: cover;
 }
+a.nav-item.text-white.nav-link.active.px-4 {
+  border-bottom: 5px solid #ff6d0a;
+}
 
 .font-weight-bold {
   font-weight: 900 !important;

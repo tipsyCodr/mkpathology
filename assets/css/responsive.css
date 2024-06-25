@@ -81,7 +81,7 @@
 }
 
 .fit-image {
-  max-height: 600px;
+  max-height: 660px;
   -o-object-fit: cover;
      object-fit: cover;
 }
@@ -209,6 +209,7 @@
   .test-form {
     display: none;
   }
+  
 }
 @media (max-width: 992px) { /* Large devices (desktops, 992px and up) */
   .top-lg-10 {
@@ -230,6 +231,9 @@
     left: 60% !important;
   }
   /* Add more classes as needed */
+  a.nav-item.text-white.nav-link.active.px-4 {
+    background-color: #ff6d0a !important;
+  }
 }
 @media (max-width: 1200px) { /* Extra large devices (large desktops, 1200px and up) */
   .top-xl-10 {

@@ -115,9 +115,9 @@
                         pattern="(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-30)|(?:(?:0[13578]|1[02])-31))"
                         title="Enter a date in the format DD-MM-YYYY" onkeydown="if(event.key=='Enter'){this.blur()}">
 
+                    <span id='date-error' class="  text-danger"></span>
                 </div>
             </div>
-            <span id='date-error' class=" text-red-500"></span>
             <br>
 
         </div>
@@ -166,7 +166,8 @@
         </div>
 
         <div class="mb-3 form-check">
-            <input class="form-check-input" type="checkbox" id="authorize" name="authorize" value="true" required>
+            <input class="form-check-input" type="checkbox" id="authorize" name="authorize" value="true" required
+                checked>
             <label class="form-check-label" for="authorize">
                 I authorize MK Pathology representative to contact me. I understand that this information will be used
                 to
@@ -184,12 +185,12 @@
             var day = new Date(this.value).getDay();
 
             if (day === 0) {
-                dateError.textContent = 'Sunday is not available.';
+                dateError.textContent = 'We\'re closed on Sundays. Please select a different day';
             } else {
                 dateError.textContent = '';
             }
 
-            this.setCustomValidity(day === 0 ? 'Sunday is not available.' : '');
+            this.setCustomValidity(day === 0 ? 'We\'re closed on Sundays. Please select a different day' : '');
         });
     }
 </script>

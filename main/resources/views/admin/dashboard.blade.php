@@ -79,18 +79,23 @@
                             <th class="px-4 py-2">Package</th>
                             <th class="px-4 py-2">Date</th>
                             <th class="px-4 py-2">Slot</th>
+                            <th class="px-4 py-2">Type</th>
                             <th class="px-4 py-2">Status</th>
                             <th class="px-4 py-2">Actions</th>
                         </tr>
+                        {{-- @dd($bookings) --}}
                     </thead>
                     <tbody>
                         @foreach ($bookings as $booking)
                             <tr class="border-b border-gray-200">
-                                <td class="p-2 px-4">{{ $booking['patient'] }}</td>
-                                <td class="p-2 px-4 text-center">{{ $booking['package'] }}</td>
-                                <td class="p-2 px-4 text-center">{{ $booking['date'] }}</td>
-                                <td class="p-2 px-4 text-center">{{ $booking['slot'] }}</td>
-                                <td class="p-2 px-4 text-center">
+                                <td class="p-2 ">{{ $booking['patient'] }}</td>
+                                <td class="p-2  text-center">
+                                    {{ isset($booking['package']) ? $booking['package'] : $booking['test'] }}</td>
+
+                                <td class="p-2  text-center">{{ $booking['date'] }}</td>
+                                <td class="p-2  text-center">{{ $booking['slot'] }}</td>
+                                <td class="p-2  text-center">{{ $booking['type'] }}</td>
+                                <td class="p-2  text-center">
                                     <span
                                         class="px-2 py-1 rounded-md {{ $booking['status_classes'] }}">{{ $booking['status'] }}</span>
                                 </td>
@@ -110,13 +115,19 @@
                                                 d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                         </svg>
                                     </a>
-                                    <a href="#"
-                                        class="bg-red-400 text-white p-2 mx-1 hover:bg-red-500 inline-block my-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none"
-                                            viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M6 18L18 6M6 6l12 12" />
-                                        </svg>
+                                    <form class="m-0 inline" action="{{ route('package.cancel') }}" method="GET">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $booking['id'] }}">
+                                        <input type="hidden" name="type" value="{{ $booking['type'] }}">
+
+                                        <button type="submit"
+                                            class="bg-red-500 text-white p-2 rounded text-red-500 hover:text-red-700"><svg
+                                                xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 inline" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M6 18L18 6M6 6l12 12" />
+                                            </svg></button>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

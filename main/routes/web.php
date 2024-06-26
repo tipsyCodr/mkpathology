@@ -32,6 +32,7 @@ Route::get('check-permission', [UserController::class, 'CheckPermission'])->name
 //booking
 Route::view('book', 'book')->name('book');
 Route::post('package-book', [BookingController::class, 'bookPackage'])->name('package.book.store');
+Route::get('package-cancel', [BookingController::class, 'cancelPackage'])->name('package.cancel');
 
 
 // Test
@@ -72,7 +73,6 @@ Route::middleware(['ispatient'])->group(function () {
     Route::get('patient-setting', [UserController::class, 'fetchPatientSetting'])->name('patient.settings');
 
     //Booking  routes
-    Route::get('package-cancel', [BookingController::class, 'cancelPackage'])->name('package.cancel');
     Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.book.store');
 
     //prescription

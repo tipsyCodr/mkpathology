@@ -86,12 +86,13 @@ class UserController extends Controller
 
     public function redirectBasedOnRole($user)
     {
+        $intendedUrl = session('url.intended', 'home');
         if ($user->hasRole('admin')) {
-            return redirect()->route('admin');
+            return redirect()->intended(route('admin'));
         } elseif ($user->hasRole('patient')) {
-            return redirect()->route('patient.dashboard');
+            return redirect()->intended(route('patient.dashboard'));
         } else {
-            return redirect()->route('home');
+            return redirect()->intended($intendedUrl);
         }
     }
 
@@ -145,7 +146,9 @@ class UserController extends Controller
             $request->session()->regenerate();
 
             $intendedUrl = $request->session()->get('url.intended', '/');
-            return redirect()->intended($intendedUrl);
+
+            return $this->redirectBasedOnRole(Auth::user());
+            // return redirect()->intended($intendedUrl);
         }
         return redirect()->back()->with('error', 'Invalid Credentials');
     }

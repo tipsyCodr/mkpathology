@@ -7,40 +7,153 @@
                 <h1 class="display-6 mb-3">Mostly Booked Lab Tests</h1>
                 <p class="mb-5">Here is a list of mostly used lab test that you can choose from.</p>
             </div>
-
-            <div class="container mb-5">
-                <form method="GET">
-                    <div class="input-group">
-                        <input type="text" name="search" value="{{ request()->query('search') }}"
-                            class="form-control" placeholder="Search...">
-                        <button type="submit" class="btn btn-primary">Search</button>
-                    </div>
-                </form>
+            <div class="">
+                <input class='form-control m-4' placeholder="Search Test Here...." type="text" name="search"
+                    id="searchInput" onkeyup="searchTest();">
             </div>
             <div class="row g-4">
-                <?php
-                $search = request()->query('search');
-                
-                ?>
-
                 @foreach ($tests as $test)
                     <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="{{ $loop->index * 0.1 }}s">
                         <div class="service-item">
-                            {{-- <div class="icon-box-primary mb-4">
+                            <div class="icon-box-primary mb-4">
                                 <i class="{{ $test->icon }} text-dark"></i>
-                            </div> --}}
+                            </div>
                             <h5 class="mb-3">{{ $test->name }}</h4>
-                                {{-- <small class="text-muted">{{ $test->parameters->count() }} Parameter(s) Covered</small> --}}
+                                <small class="text-muted">{{ $test->description }} </small>
                                 <p class="text-primary"><b>₹ {{ $test->price }}</b></p>
-                                <a class="btn btn-primary px-3"
-                                    href="{{ route('patient.tests.view') }}?search={{ $search }}">Add<i
+                                <a class="btn btn-primary px-3" href="{{ route('patient.tests.view') }}">Add<i
                                         class="bi bi-chevron-double-right ms-1"></i></a>
                         </div>
                     </div>
                 @endforeach
-                {{-- {{ $tests->links() }} --}}
-                <a href="{{ route('patient.tests.view') }}" class="btn btn-primary py-3 px-5 wow fadeIn"
-                    data-wow-delay="0.5s">More Tests >></a>
+                <script>
+                    var delay = (function() {
+                        var timer = 0;
+                        return function(callback, ms) {
+                            clearTimeout(timer);
+                            timer = setTimeout(callback, ms);
+                        };
+                    })();
+
+                    function searchTest() {
+                        delay(function() {
+                            const searchInput = document.getElementById('searchInput');
+                            const searchText = searchInput.value.toLowerCase();
+                            $.ajax({
+                                url: '{{ route('test.search') }}',
+                                type: 'GET',
+                                data: {
+                                    search: searchText
+                                },
+                                success: function(data) {
+                                    var target = $('#searchInput').closest('div').siblings('div.row.g-4');
+                                    target.empty();
+                                    data.forEach(function(test) {
+                                        target.append(`
+                                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="${test.index * 0.1}s">
+                                                <div class="service-item">
+                                                    <div class="icon-box-primary mb-4">
+                                                        <i class="${test.icon} text-dark"></i>
+                                                    </div>
+                                                    <h5 class="mb-3">${test.name}</h5>
+                                                        <small class="text-muted">${test.description} </small>
+                                                        <p class="text-primary"><b>₹ ${test.price}</b></p>
+                                                        <a class="btn btn-primary px-3" href="${test.url}">Add<i
+                                                                class="bi bi-chevron-double-right ms-1"></i></a>
+                                                </div>
+                                            </div>
+                                        `);
+                                    });
+                                }
+                            });
+                        }, 500);
+                    }
+                </script>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item">
+                        <div class="icon-box-primary mb-4">
+                            <i class="bi bi-lungs text-dark"></i>
+                        </div>
+                        <h5 class="mb-3">HbA1c; GLYCOSYLATED HEMOGLOBIN</h4>
+                            <small class="text-muted">2 Parameter(s) Covered</small>
+                            <p class="text-primary"><b>₹ 350</b></p>
+                            <a class="btn btn-primary px-3" href="">Add<i
+                                    class="bi bi-chevron-double-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item">
+                        <div class="icon-box-primary mb-4">
+                            <i class="bi bi-virus text-dark"></i>
+                        </div>
+                        <h5 class="mb-3">URINE EXAMINATION, ROUTINE; URINE, R/E</h4>
+                            <small class="text-muted">16 Parameter(s) Covered</small>
+                            <p class="text-primary"><b>₹ 80</b></p>
+                            <a class="btn btn-primary px-3" href="">Add<i
+                                    class="bi bi-chevron-double-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item">
+                        <div class="icon-box-primary mb-4">
+                            <i class="bi bi-capsule-pill text-dark"></i>
+                        </div>
+                        <h5 class="mb-3">GLUCOSE, FASTING (F) AND POST MEAL (PP), 2 HOURS</h4>
+                            <small class="text-muted">2 Parameter(s) Covered</small>
+                            <p class="text-primary"><b>₹ 150</b></p>
+                            <a class="btn btn-primary px-3" href="">Add<i
+                                    class="bi bi-chevron-double-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <div class="service-item">
+                        <div class="icon-box-primary mb-4">
+                            <i class="bi bi-capsule text-dark"></i>
+                        </div>
+                        <h5 class="mb-3">THYROID PROFILE, TOTAL</h4>
+                            <small class="text-muted">3 Parameter(s) Covered</small>
+
+                            <p class="text-primary"><b>₹ 550</b></p>
+                            <a class="btn btn-primary px-3" href="">Add<i
+                                    class="bi bi-chevron-double-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                    <div class="service-item">
+                        <div class="icon-box-primary mb-4">
+                            <i class="bi bi-prescription2 text-dark"></i>
+                        </div>
+                        <h5 class="mb-3">SMART REPORT</h4>
+                            <small class="text-muted">1 Parameter(s) Covered</small>
+                            <p class="text-primary"><b>₹ 200</b></p>
+                            <a class="btn btn-primary px-3" href="">Add<i
+                                    class="bi bi-chevron-double-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                    <div class="service-item">
+                        <div class="icon-box-primary mb-4">
+                            <i class="bi bi-clipboard2-pulse text-dark"></i>
+                        </div>
+                        <h5 class="mb-3">GLUCOSE, FASTING (F)</h4>
+                            <small class="text-muted">2 Parameter(s) Covered</small>
+                            <p class="text-primary"><b>₹ 60</b></p>
+                            <a class="btn btn-primary px-3" href="">Add<i
+                                    class="bi bi-chevron-double-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="service-item">
+                        <div class="icon-box-primary mb-4">
+                            <i class="bi bi-file-medical text-dark"></i>
+                        </div>
+                        <h5 class="mb-3">SWASTHFIT SUPER 2</h4>
+                            <small class="text-muted">55 Parameter(s) Covered</small>
+                            <p class="text-primary"><b>₹ 1250 </b></p>
+                            <a class="btn btn-primary px-3" href="">Add<i
+                                    class="bi bi-chevron-double-right ms-1"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

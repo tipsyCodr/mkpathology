@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 Route::view('/', 'home')->name('home');
 // Route::view('test', 'tests')->name('test');
 Route::get('test', [WebController::class, 'showAllTests'])->name('test');
+Route::get('test-search', [WebController::class, 'searchAllTests'])->name('test.search');
 Route::view('contact', 'contact')->name('contact');
 Route::view('login', 'login')->name('login');
 Route::view('admin-register', 'admin.register')->name('admin.register');
@@ -30,6 +31,8 @@ Route::get('check-permission', [UserController::class, 'CheckPermission'])->name
 
 //booking
 Route::view('book', 'book')->name('book');
+Route::post('package-book', [BookingController::class, 'bookPackage'])->name('package.book.store');
+
 
 // Test
 Route::get('test-view', [TestController::class, 'view'])->name('test.view');
@@ -69,7 +72,6 @@ Route::middleware(['ispatient'])->group(function () {
     Route::get('patient-setting', [UserController::class, 'fetchPatientSetting'])->name('patient.settings');
 
     //Booking  routes
-    Route::post('package-book', [BookingController::class, 'bookPackage'])->name('package.book.store');
     Route::get('package-cancel', [BookingController::class, 'cancelPackage'])->name('package.cancel');
     Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.book.store');
 

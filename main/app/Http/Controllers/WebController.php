@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Test;
+use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class WebController extends Controller
@@ -83,14 +85,25 @@ class WebController extends Controller
         return view('admin.bookings', compact('bookings'));
     }
 
-    public function showAllTests()
+    /**
+     * Show all tests.
+     *
+     * @param \Illuminate\Http\Request $request The request object.
+     * @return \Illuminate\Contracts\View\View The view displaying all tests.
+     */
+    public function showAllTests(Request $request): \Illuminate\Contracts\View\View
     {
-        $search = request()->query('search', '');
-        $tests = \App\Models\Test::when($search, function ($query) use ($search) {
+        $search = $request->query('search', '');
+        $tests = Test::when($search, function (Builder $query) use ($search): void {
             $query->where('name', 'like', '%' . $search . '%');
         })->paginate(30);
 
         return view('tests', compact('tests', 'search'));
     }
-
+    public function searchAllTests(Request $request, )
+    {
+        $search = $request->get('search', '');
+        $tests = $search ? Test::where('name', 'like', '%' . $search . '%')->get() : Test::all()->paginate(30);
+        return $tests;
+    }
 }

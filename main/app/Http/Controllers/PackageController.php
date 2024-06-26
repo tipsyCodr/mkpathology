@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Package;
+use App\Models\Report;
 use App\Models\Test;
 use Illuminate\Http\Request;
 
@@ -32,12 +33,20 @@ class PackageController extends Controller
         // retrieve test details here
         $packages = Package::paginate(10);
         $tests = Test::paginate(10);
-        return view('package.view', compact('packages', 'tests'));
+        return view('admin.package.view', compact('packages', 'tests'));
     }
     public function destroy($id)
     {
         // delete test details here
         Package::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Package Deleted successfully!');
+    }
+    public function allReports()
+    {
+        $reports = Report::all();
+        if ($reports == null) {
+            return redirect()->back()->with('success', 'No Report data to show!');
+        }
+        return view('admin.reports', compact('reports'));
     }
 }

@@ -12,9 +12,11 @@ use Illuminate\Support\Facades\Route;
 // Frontend
 // Basic
 Route::view('/', 'home')->name('home');
-Route::view('test', 'tests')->name('test');
+// Route::view('test', 'tests')->name('test');
+Route::get('test', [WebController::class, 'showAllTests'])->name('test');
 Route::view('contact', 'contact')->name('contact');
 Route::view('login', 'login')->name('login');
+Route::view('admin-register', 'admin.register')->name('admin.register');
 Route::view('register', 'register')->name('register');
 
 //===============================================================
@@ -32,8 +34,6 @@ Route::view('book', 'book')->name('book');
 // Test
 Route::get('test-view', [TestController::class, 'view'])->name('test.view');
 
-// Package
-Route::get('package-view', [PackageController::class, 'view'])->name('package.view');
 
 //Prescription (Not used)
 // Route::get('prescription', [PrescriptionController::class, 'index'])->name('prescription');
@@ -52,6 +52,7 @@ Route::view('forgot-password', 'patient.forgotpassword')->name('forgot.password'
 
 //Admin Login
 Route::post('auth-admin', [UserController::class, 'authenticate'])->name('authenticate.admin');
+Route::post('create-admin', [UserController::class, 'createAdmin'])->name('create.admin');
 
 
 //Logout
@@ -86,6 +87,9 @@ Route::middleware(['ispatient'])->group(function () {
     Route::post('patient-update-email', [UserController::class, 'updatetEmail'])->name('patient.update.email');
     Route::post('patient-update-pass', [UserController::class, 'updatePassword'])->name('patient.update.pass');
 
+    Route::view('patient-reports', 'patient.reports')->name('patient.reports');
+
+
 });
 
 //Make a middleware group for admin
@@ -96,6 +100,10 @@ Route::middleware(['isadmin'])->group(function () {
     Route::get('admin', [WebController::class, 'admin'])->name('admin');
     Route::get('all-bookings', [WebController::class, 'booking'])->name('all.bookings');
     Route::get('prescription-view', [PrescriptionController::class, 'view'])->name('prescription.view');
+
+    // Package
+    Route::get('package-view', [PackageController::class, 'view'])->name('package.view');
+    Route::get('all-reports', [PackageController::class, 'allReports'])->name('admin.reports');
 
     // Test
     Route::post('store-test', [TestController::class, 'store'])->name('test.store');

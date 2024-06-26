@@ -69,11 +69,28 @@
                 </a>
             </li>
         @endif
-        <li>
-            <a href="{{ route('patient.settings') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
-                <span class="flaticon-settings mr-2"></span> Settings
-            </a>
-        </li>
+        @if (auth()->user()->hasRole('patient'))
+            <li>
+                <a href="{{ route('patient.reports') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-folder mr-2"></span> Reports
+                </a>
+            </li>
+        @endif
+        @if (auth()->user()->hasRole('admin'))
+            <li>
+                <a href="{{ route('admin.reports') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-folder mr-2"></span> Reports
+                </a>
+            </li>
+        @endif
+        @if (auth()->user()->hasRole('patient'))
+            <li>
+                <a href="{{ route('patient.settings') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-settings mr-2"></span> Settings
+                </a>
+            </li>
+        @endif
+
     </ul>
 </div>
 

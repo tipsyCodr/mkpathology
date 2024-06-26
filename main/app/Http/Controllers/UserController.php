@@ -143,10 +143,38 @@ class UserController extends Controller
             $user = Auth::getProvider()->retrieveByCredentials($credentials);
             Auth::login($user, $request->has('remember'));
             $request->session()->regenerate();
-            return $this->redirectBasedOnRole(Auth::user());
+
+            $intendedUrl = $request->session()->get('url.intended', '/');
+            return redirect()->intended($intendedUrl);
         }
         return redirect()->back()->with('error', 'Invalid Credentials');
     }
+
+    public function createAdmin(Request $request)
+    {
+        // dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email',
+            'mobile' => 'required|unique:users,mobile',
+            'password' => 'required|min:6|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'mobile' => $request->mobile,
+            'password' => bcrypt($request->password),
+        ]);
+
+        $user->assignRole('admin');
+
+        return redirect()->back()->with([
+            'success' => 'Admin created successfully',
+        ]);
+    }
+
+
     public function fetchPatientSetting()
     {
         $user = Auth::user();

@@ -18,4 +18,8 @@ class Test extends Model
     {
         return $this->hasMany(TestBooking::class);
     }
+    public function packages()
+    {
+        return $this->belongsTo(Package::class);
+    }
 }

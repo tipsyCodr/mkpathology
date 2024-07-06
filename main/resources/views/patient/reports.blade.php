@@ -41,9 +41,7 @@
                             <ul class="list-none">
                                 @foreach ($reports as $report)
                                     <li class="flex items-center justify-between p-2 border-b-2 border-gray-200">
-                                        <a href="{{ route('patient.reports', $report->id) }}"
-                                            class="text-blue-500 hover:text-blue-700">Report from
-                                            {{ $report->created_at }}</a>
+
                                         <span
                                             class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{{ $report->test->name }}</span>
                                     </li>

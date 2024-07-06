@@ -11,7 +11,8 @@ use Illuminate\Support\Facades\Route;
 
 // Frontend
 // Basic
-Route::view('/', 'home')->name('home');
+// Route::view('/', 'home')->name('home');
+Route::get('/', [WebController::class, 'home'])->name('home');
 // Route::view('test', 'tests')->name('test');
 Route::get('test', [WebController::class, 'showAllTests'])->name('test');
 Route::get('test-search', [WebController::class, 'searchAllTests'])->name('test.search');
@@ -63,14 +64,16 @@ Route::post('create-admin', [UserController::class, 'createAdmin'])->name('creat
 Route::get('logout', [UserController::class, 'logout'])->name('logout');
 Route::post('logout', [UserController::class, 'logout'])->name('logout.post');
 
+
 //Make a middleware group for patient
 Route::middleware(['ispatient'])->group(function () {
     //Patient
     Route::view('dashboard', 'patient.dashboard')->name('patient.dashboard');
     Route::get('patient-bookings', [BookingController::class, 'booking'])->name('patient.bookings');
     Route::view('patient-prescription', 'patient.prescription')->name('patient.prescription.view');
-    // Route::view('patient-setting', 'patient.settings')->name('patient.settings');
     Route::get('patient-setting', [UserController::class, 'fetchPatientSetting'])->name('patient.settings');
+    Route::get('patient-reports', [UserController::class, 'patientReports'])->name('patient.reports');
+
 
     //Booking  routes
     Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.book.store');
@@ -80,8 +83,8 @@ Route::middleware(['ispatient'])->group(function () {
     Route::delete('prescription-destroy/{id}', [PrescriptionController::class, 'destroy'])->name('prescription.destroy');
 
     //Test
-    Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.book.store');
     Route::get('patient-tests', [BookingController::class, 'PatientTestView'])->name('patient.tests.view');
+    Route::post('test-book', [BookingController::class, 'bookTest'])->name('test.book.store');
 
     //Setting Update
     Route::post('patient-update-profile', [UserController::class, 'updatePatientSetting'])->name('patient.update.profile');
@@ -89,7 +92,6 @@ Route::middleware(['ispatient'])->group(function () {
     Route::post('patient-update-email', [UserController::class, 'updatetEmail'])->name('patient.update.email');
     Route::post('patient-update-pass', [UserController::class, 'updatePassword'])->name('patient.update.pass');
 
-    Route::view('patient-reports', 'patient.reports')->name('patient.reports');
 
 
 });

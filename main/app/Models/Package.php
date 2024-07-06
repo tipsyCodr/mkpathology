@@ -14,4 +14,8 @@ class Package extends Model
     {
         return $this->hasMany(PackageBooking::class);
     }
+    public function tests()
+    {
+        return $this->hasMany(Test::class, 'id');
+    }
 }

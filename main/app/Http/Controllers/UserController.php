@@ -226,7 +226,10 @@ class UserController extends Controller
 
 
     }
-
+    public function patientReports()
+    {
+        return "no reports yet";
+    }
     // make a Logout function
     public function logout(Request $request)
     {

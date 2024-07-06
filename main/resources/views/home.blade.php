@@ -113,173 +113,115 @@
                         selection of packages to get the right care for you.</p>
                 </div>
             </div>
-            <div class="row g-4 gx-0">
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.1s">
-                    <div class="card health-package-card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title font-weight-bold">Total Health Checkup</h5>
-                            <a class="text-primary font-weight-bold">Price: INR 1,999</a>
 
-                            <p class="card-text">Our total health checkup includes a comprehensive range of tests to
-                                help you identify any potential health concerns.</p>
+            <div class="row mb-4">
+                <div class="col-12 d-flex justify-content-center">
+                    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+                        <input type="radio" class="btn-check" name="package-test-radio" id="package-radio"
+                            autocomplete="off" checked>
+                        <label class="btn btn-outline-primary rounded" for="package-radio">Packages</label>
 
-                            <b>Tests Included:</b>
-                            <ul class="list-unstyled">
-                                <li>Cholesterol Test</li>
-                                <li>Lipid Profile</li>
-                                <li>Complete Hemogram</li>
-                                <li>Kidney Function Test</li>
-                                <li>Liver Function Test</li>
-                                <li>Blood Sugar</li>
-                                <li>Thyroid Profile</li>
-                                <li>Urine Routine Examination</li>
-                            </ul>
-
-                            <a href="#" class="btn btn-accent">Learn More</a>
-                        </div>
+                        <input type="radio" class="btn-check" name="package-test-radio" id="test-radio"
+                            autocomplete="off">
+                        <label class="btn btn-outline-primary rounded" for="test-radio">Test</label>
                     </div>
                 </div>
+            </div>
 
 
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.3s">
-                    <div class="card health-package-card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Essential Wellness Check</h5>
-                            <a class="text-primary font-weight-bold">Price: INR 999</a>
+            <div id='package-wrapper' class="row g-4 gx-0 ">
+                @foreach ($packages as $package)
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" data-wow-offset="0">
+                        <div class="card health-package-card h-100 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold">{{ $package->name }}</h5>
+                                <a class="text-primary font-weight-bold">Price: INR
+                                    {{ $package->price }}</a>
 
-                            <p class="card-text">Our essential wellness checkup includes basic tests to give you an
-                                overview of your health.</p>
-                            <b>Tests Included:</b>
-                            <ul class="list-unstyled">
-                                <li>Complete Blood Count (CBC)</li>
-                                <li>Blood Sugar</li>
-                                <li>Lipid Profile</li>
-                                <li>Liver Function Test</li>
-                                <li>Kidney Function Test</li>
-                            </ul>
+                                <p class="card-text">{{ $package->description }}</p>
 
-                            <a href="#" class="btn btn-accent">Learn More</a>
+                                <b>Tests Included:</b>
+                                <ul class="list-unstyled">
+                                    @foreach ($package->tests as $test)
+                                        <li>{{ $test->name }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            <a href="{{ route('book') }}" class="position-relative bottom-10 btn btn-accent">Book
+                            </a>
                         </div>
                     </div>
+                @endforeach
+
+
+            </div>
+
+            <div id="test-wrapper" class="d-none">
+                <h2>All Tests</h2>
+                <div class="">
+                    <input class='form-control m-4' placeholder="Search Test Here...." type="text" name="search"
+                        id="searchInput" onkeyup="searchTest();">
                 </div>
-
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.5s">
-                    <div class="card health-package-card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Basic Health Screening</h5>
-                            <a class="text-primary font-weight-bold">Price: INR 1,200</a>
-                            <p class="card-text">Our basic health screening includes basic tests to give you an
-                                overview of your health.</p>
-                            <b>Tests Included:</b>
-                            <ul class="list-unstyled">
-                                <li>Complete Blood Count (CBC)</li>
-                                <li>Lipid Profile</li>
-                                <li>Liver Function Test</li>
-                                <li>Kidney Function Test</li>
-                                <li>Thyroid Profile</li>
-                            </ul>
-
-                            <a href="#" class="btn btn-accent">Learn More</a>
+                <div class="row g-4">
+                    @foreach ($tests as $test)
+                        <div class="col-lg-3 col-md-6 o-wow fadeInUp" data-wow-delay="{{ $loop->index * 0.1 }}s">
+                            <div class="service-item">
+                                <div class="icon-box-primary mb-4">
+                                    <i class="{{ $test->icon }} text-dark"></i>
+                                </div>
+                                <h5 class="mb-3">{{ $test->name }}</h4>
+                                    <small class="text-muted">{{ $test->description }} </small>
+                                    <p class="text-primary"><b>₹ {{ $test->price }}</b></p>
+                                    <a class="btn btn-primary px-3" href="{{ route('patient.tests.view') }}">Book<i
+                                            class="bi bi-chevron-double-right ms-1"></i></a>
+                            </div>
                         </div>
-                    </div>
+                    @endforeach
+                    <script>
+                        var delay = (function() {
+                            var timer = 0;
+                            return function(callback, ms) {
+                                clearTimeout(timer);
+                                timer = setTimeout(callback, ms);
+                            };
+                        })();
+
+                        function searchTest() {
+                            delay(function() {
+                                const searchInput = document.getElementById('searchInput');
+                                const searchText = searchInput.value.toLowerCase();
+                                $.ajax({
+                                    url: '{{ route('test.search') }}',
+                                    type: 'GET',
+                                    data: {
+                                        search: searchText
+                                    },
+                                    success: function(data) {
+                                        var target = $('#searchInput').closest('div').siblings('div.row.g-4');
+                                        target.empty();
+                                        data.forEach(function(test) {
+                                            target.append(`
+                                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="${test.index * 0.1}s">
+                                                <div class="service-item">
+                                                    <div class="icon-box-primary mb-4">
+                                                        <i class="${test.icon} text-dark"></i>
+                                                    </div>
+                                                    <h5 class="mb-3">${test.name}</h5>
+                                                        <small class="text-muted">${test.description} </small>
+                                                        <p class="text-primary"><b>₹ ${test.price}</b></p>
+                                                        <a class="btn btn-primary px-3" href="${test.url}">Add<i
+                                                                class="bi bi-chevron-double-right ms-1"></i></a>
+                                                </div>
+                                            </div>
+                                        `);
+                                        });
+                                    }
+                                });
+                            }, 500);
+                        }
+                    </script>
+
                 </div>
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.8s">
-                    <div class="card health-package-card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Advanced Health Plus</h5>
-                            <a class="text-primary font-weight-bold">Price: INR 2,500</a>
-
-                            <p class="card-text">Our advanced health plus package includes additional tests to provide
-                                a more comprehensive overview of your health.</p>
-                            <b>Tests Included:</b>
-                            <ul class="list-unstyled">
-                                <li>Complete Blood Count (CBC)</li>
-                                <li>Lipid Profile</li>
-                                <li>Liver Function Test</li>
-                                <li>Kidney Function Test</li>
-                                <li>Thyroid Profile</li>
-                                <li>Vitamin D</li>
-                                <li>Vitamin B12</li>
-                            </ul>
-
-                            <a href="#" class="btn btn-accent">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.6s">
-                    <div class="card health-package-card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Basic Health Plus</h5>
-                            <a class="text-primary font-weight-bold">Price: INR 800</a>
-
-                            <p class="card-text">Our basic health plus package includes additional tests to provide a
-                                more comprehensive overview of your health.</p>
-                            <b>Tests Included:</b>
-                            <ul class="list-unstyled">
-                                <li>Complete Blood Count (CBC)</li>
-                                <li>Blood Sugar</li>
-                                <li>Lipid Profile</li>
-                                <li>Liver Function Test</li>
-                            </ul>
-                            <a href="#" class="btn btn-accent">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="0.9s">
-                    <div class="card health-package-card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Advanced Diagnostic Package</h5>
-                            <a class="text-primary font-weight-bold">Price: INR 1,500</a>
-
-                            <p class="card-text">Our advanced diagnostic package includes additional tests to provide a
-                                more detailed assessment of your overall health.</p>
-                            <b>Tests Included:</b>
-                            <ul class="list-unstyled">
-                                <li>Complete Blood Count (CBC)</li>
-                                <li>Blood Sugar</li>
-                                <li>Lipid Profile</li>
-                                <li>Liver Function Test</li>
-                                <li>Kidney Function Test</li>
-                                <li>Thyroid Profile</li>
-                            </ul>
-                            <a href="#" class="btn btn-accent">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-4 col-md-6 wow zoomIn" data-wow-delay="1.1s">
-                    <div class="card health-package-card h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title">Complete Wellness Profile</h5>
-                            <a class="text-primary font-weight-bold">Price: INR 2,000</a>
-                            <p class="card-text">Our complete wellness profile includes additional tests to provide a
-                                comprehensive assessment of your overall health.
-                                <br>
-                            </p>
-
-
-                            <b>Tests Included:</b>
-                            <ul class="list-unstyled">
-                                <li>Complete Blood Count (CBC)</li>
-                                <li>Blood Sugar</li>
-                                <li>Lipid Profile</li>
-                                <li>Liver Function Test</li>
-                                <li>Kidney Function Test</li>
-                                <li>Thyroid Profile</li>
-                                <li>Vitamin D</li>
-                                <li>Vitamin B12</li>
-                            </ul>
-
-                            <a href="#" class="btn btn-accent">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-
-
             </div>
         </div>
     </div>
@@ -613,4 +555,20 @@
     </div>
     <!-- Testimonial End -->
 
+    <script>
+        const packageRadio = document.getElementById('package-radio')
+        const testRadio = document.getElementById('test-radio')
+        const packageWrapper = document.getElementById('package-wrapper')
+        const testWrapper = document.getElementById('test-wrapper')
+
+        packageRadio.addEventListener('change', () => {
+            packageWrapper.classList.remove('d-none')
+            testWrapper.classList.add('d-none')
+        })
+
+        testRadio.addEventListener('change', () => {
+            testWrapper.classList.remove('d-none')
+            packageWrapper.classList.add('d-none')
+        })
+    </script>
 </x-guest>

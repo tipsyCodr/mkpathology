@@ -1,25 +1,7 @@
 <form action="{{ route('package.book.store') }}" method="post" class="form-layout border border-amber-600">
     @csrf
+    {{-- @include('bootstrap-alerts') --}}
 
-    @auth
-        @php
-            if (auth()->user()->hasRole('patient')) {
-                $user = auth()->user();
-            }
-        @endphp
-
-    @endauth
-
-    @if (session()->has('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session()->has('error'))
-        <div class="alert alert-error">
-            {{ session('error') }}
-        </div>
-    @endif
     @guest
         <div class="row g-4">
             <div class="col-md-6">
@@ -63,6 +45,9 @@
         </div>
     @endguest
     @auth
+        @php
+            $user = auth()->user();
+        @endphp
         <input type="hidden" name="email" value="{{ $user->email }}">
         <input type="hidden" name="mobile" value="{{ $user->mobile }}">
     @endauth
@@ -84,9 +69,7 @@
             </div>
         </div>
     @endguest
-    {{-- @auth
-        <h1>Book A Test </h1>
-    @endauth --}}
+
     <div class="package-book">
 
         <div class="row g-4">

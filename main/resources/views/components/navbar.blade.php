@@ -2,7 +2,8 @@
 <nav class="bg-white shadow-lg w-full z-50">
     <div class="container mx-auto px-4">
         <div class="flex justify-between items-center py-4">
-            <a class="text-2xl font-bold text-gray-800" href="#">Admin </a>
+            <a class="text-2xl font-bold text-gray-800"
+                href="#">{{ auth()->user()->hasRole('admin') ? 'Admin' : auth()->user()->name }} </a>
             <button class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" type="button"
                 onclick="toggleNavbar()">
                 <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png"

@@ -12,6 +12,20 @@ class WebController extends Controller
     {
         return view($view);
     }
+    public function home(Request $request)
+    {
+        $search = $request->query('search', '');
+        $tests = Test::when($search, function (Builder $query) use ($search): void {
+            $query->where('name', 'like', '%' . $search . '%');
+        })->paginate(30);
+
+        $packages = \App\Models\Package::with('tests')->get()->map(function ($package) {
+            $package->test_ids = $package->tests->pluck('name')->toArray();
+            return $package;
+        });
+
+        return view('home', compact('tests', 'search', 'packages'));
+    }
     public function admin()
     {
         $bookings = \App\Models\PackageBooking::with('package', 'user')

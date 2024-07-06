@@ -40,9 +40,17 @@
                                             $package = []; // Initialize $items as an empty array if it's null
                                         }
                                         ?>
-                                        @foreach (json_decode($package->test_id) as $test)
-                                            <span
-                                                class="bg-yellow-200 text-sm rounded px-2 py-1 mr-1">{{ App\Models\Test::find($test)->name }}</span>
+                                        @foreach (json_decode($package->test_id) as $testId)
+                                            @php
+                                                $test = App\Models\Test::find($testId);
+                                            @endphp
+                                            @if ($test)
+                                                <span
+                                                    class="bg-yellow-200 text-sm rounded px-2 py-1 mr-1">{{ $test->name }}</span>
+                                            @else
+                                                <span class="bg-red-200 text-sm rounded px-2 py-1 mr-1">Unknown
+                                                    Test</span>
+                                            @endif
                                         @endforeach
                                     </td>
                                     <td class="border border-gray-400 px-4 py-2">{{ $package->description }}</td>

@@ -35,6 +35,13 @@ class PackageController extends Controller
         $tests = Test::paginate(10);
         return view('admin.package.view', compact('packages', 'tests'));
     }
+    public function viewAll()
+    {
+        // retrieve test details here
+        $packages = Package::paginate(10);
+        $tests = Test::all();
+        return view('admin.package.view', compact('packages', 'tests'));
+    }
     public function destroy($id)
     {
         // delete test details here

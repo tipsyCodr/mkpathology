@@ -86,16 +86,63 @@
 
                         <div>
                             <h3>Available Tests</h3>
-                            <div class="tags-input py-2">
-                                @foreach ($tests as $test)
-                                    <span
-                                        class="text-white inline-block bg-blue-400 text-nowrap p-2 mx-1 my-1 rounded-xl hover:bg-blue-600 cursor-pointer ">
-                                        <input class="bg-blue-400 checked:bg-red-500" type="checkbox"
-                                            value="{{ $test->id }}" name="tests[]" id="test{{ $test->id }}">
-                                        <label for="test{{ $test->id }}">{{ $test->name }}</label>
-                                    </span>
-                                @endforeach
+                            <input type="text" id='searchInput'class='rounded w-full' placeholder="Search Tests..."
+                                oninput="searchTests()">
+                            <!-- Added oninput event to trigger search -->
+
+                            <div class="h-40 overflow-x-auto whitespace-nowrap scroll-smooth">
+                                <div class="flex flex-wrap" id='showTests'>
+                                    @foreach ($tests as $test)
+                                        <label for="test{{ $test->id }}"
+                                            class="inline-block bg-blue-400 text-white px-4 py-2 mx-1 my-1 rounded-xl hover:bg-blue-600 cursor-pointer">
+                                            <input class="mr-2" type="checkbox" value="{{ $test->id }}"
+                                                name="tests[]" id="test{{ $test->id }}">
+                                            {{ $test->name }}
+                                        </label>
+                                    @endforeach
+                                </div>
                             </div>
+
+                            <script>
+                                // Array to store all tests
+                                let tests = [];
+                                @foreach ($tests as $test)
+                                    tests.push({
+                                        id: "{{ $test->id }}",
+                                        name: "{{ $test->name }}"
+                                    });
+                                @endforeach
+
+                                // Get search input and test wrapper elements
+                                let searchInput = document.getElementById('searchInput');
+                                var testWrapper = document.getElementById('showTests');
+
+                                // Function to search and display tests
+                                function searchTests() {
+                                    if (!tests.length) {
+                                        testWrapper.innerHTML = '<h1>No Tests Found</h1>';
+                                        return;
+                                    }
+
+                                    const searchText = searchInput.value.toLowerCase();
+                                    const matchingTests = tests.filter(test => test.name.toLowerCase().includes(searchText));
+
+                                    if (matchingTests.length) {
+                                        testWrapper.innerHTML = matchingTests.map(test =>
+                                            `<label for="test${test.id}" class="inline-block bg-blue-400 text-white px-4 py-2 mx-1 my-1 rounded-xl hover:bg-blue-600 cursor-pointer">
+                                                    <input class="mr-2" type="checkbox" value="${test.id}" name="tests[]" id="test${test.id}">
+                                                    ${test.name}
+                                                </label>`
+                                        ).join('');
+                                    } else {
+                                        testWrapper.innerHTML = '<h1>No Tests Found</h1>';
+                                    }
+                                }
+
+                                // Initial display of all tests
+                                // searchTests();
+                            </script>
+
                         </div>
                         <x-input name="description" label="Package Description" type="textarea" :placeholder="'Enter package description'" />
                         <button class='bg-blue-500 p-2 rounded-md text-white'>Add Package</button>

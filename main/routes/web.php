@@ -106,7 +106,7 @@ Route::middleware(['isadmin'])->group(function () {
     Route::get('prescription-view', [PrescriptionController::class, 'view'])->name('prescription.view');
 
     // Package
-    Route::get('package-view', [PackageController::class, 'view'])->name('package.view');
+    Route::get('package-view', [PackageController::class, 'viewAll'])->name('package.view');
     Route::get('all-reports', [PackageController::class, 'allReports'])->name('admin.reports');
 
     // Test

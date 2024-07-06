@@ -90,7 +90,7 @@
                                 oninput="searchTests()">
                             <!-- Added oninput event to trigger search -->
 
-                            <div class="h-40 overflow-x-auto whitespace-nowrap scroll-smooth">
+                            <div class="h-40 overflow-x-auto whitespace-nowrap scroll-smooth" style="overflow:scroll;">
                                 <div class="flex flex-wrap" id='showTests'>
                                     @foreach ($tests as $test)
                                         <label for="test{{ $test->id }}"

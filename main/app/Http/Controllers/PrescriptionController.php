@@ -47,11 +47,13 @@ class PrescriptionController extends Controller
     {
         $prescriptions = Prescription::with('user')->get();
         $prescriptions->transform(function ($prescription) {
-            $prescription->user_name = $prescription->user->name;
-            $prescription->user_email = $prescription->user->email;
-            $prescription->user_mobile = $prescription->user->mobile;
+            if ($prescription->user) {
+                $prescription->user_name = $prescription->user->name;
+                $prescription->user_email = $prescription->user->email;
+                $prescription->user_mobile = $prescription->user->mobile;
+            }
             unset($prescription->user);
-            return $prescription;
+            return $prescriptiason;
         });
 
         return view('admin.prescription.index', compact('prescriptions'));

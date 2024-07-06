@@ -54,7 +54,7 @@ class WebController extends Controller
                         $data = [
                             'id' => $booking->id,
                             'type' => 'Test',
-                            'patient' => $booking->user->name,
+                            'patient' => $booking->user ? $booking->user->name : 'Unknown',
                             'date' => $booking->booking_date,
                             'status' => ucfirst($booking->status),
                             'test' => $booking->test->name,
@@ -76,7 +76,7 @@ class WebController extends Controller
                 $data = [
                     'id' => $booking->id,
                     'type' => 'Package',
-                    'patient' => $booking->user->name,
+                    'patient' => $booking->user ? $booking->user->name : 'Unknown',
                     'date' => $booking->booking_date,
                     'status' => ucfirst($booking->status),
                     'package' => $booking->package->name,
@@ -94,7 +94,7 @@ class WebController extends Controller
                         $data = [
                             'id' => $booking->id,
                             'type' => 'Test',
-                            'patient' => $booking->user->name,
+                            'patient' => $booking->user ? $booking->user->name : 'Unknown',
                             'date' => $booking->booking_date,
                             'status' => ucfirst($booking->status),
                             'test' => $booking->test->name,

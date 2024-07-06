@@ -103,7 +103,12 @@ Route::middleware(['isadmin'])->group(function () {
     //Admin
     Route::get('admin', [WebController::class, 'admin'])->name('admin');
     Route::get('all-bookings', [WebController::class, 'booking'])->name('all.bookings');
+
+
     Route::get('prescription-view', [PrescriptionController::class, 'view'])->name('prescription.view');
+    Route::get('prescription-show', [PrescriptionController::class, 'show'])->name('admin.prescription.show');
+    Route::post('book-for', [BookingController::class, 'bookFor'])->name('test.book.for');
+
 
     // Package
     Route::get('package-view', [PackageController::class, 'viewAll'])->name('package.view');

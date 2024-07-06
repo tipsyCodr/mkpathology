@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Prescription;
+use App\Models\Test;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -44,7 +45,25 @@ class PrescriptionController extends Controller
     }
     public function view(Request $request)
     {
-        return view('admin.prescription.index');
+        $prescriptions = Prescription::with('user')->get();
+        $prescriptions->transform(function ($prescription) {
+            $prescription->user_name = $prescription->user->name;
+            $prescription->user_email = $prescription->user->email;
+            $prescription->user_mobile = $prescription->user->mobile;
+            unset($prescription->user);
+            return $prescription;
+        });
+
+        return view('admin.prescription.index', compact('prescriptions'));
+    }
+    public function show(Request $request)
+    {
+        $id = $request->id;
+
+        $prescription = Prescription::find($id);
+        $user = User::find($prescription->user_id);
+        $tests = Test::all();
+        return view('admin.prescription.show', compact('prescription', 'user', 'tests'));
     }
 
     public function destroy($id)

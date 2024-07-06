@@ -107,6 +107,18 @@ class BookingController extends Controller
         $booking = TestBooking::create($bookingData);
         return redirect()->back()->with('success', 'Booking created successfully.');
     }
+    public function bookFor(Request $request)
+    {
+        dump($request->all());
+        $bookTestFor = TestBooking::create([
+            'user_id' => $request->user_id,
+            'booking_date' => $request->booking_date,
+            'tests_ids' => $request->test_id,
+            'slot' => $request->slot,
+            'status' => $request->has('status') ? 'booked' : 'pending',
+        ]);
+        return redirect()->back()->with('success', 'Test Booked successfully.');
+    }
 
     //  Fetch bookings
     public function booking()

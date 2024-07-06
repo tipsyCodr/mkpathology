@@ -3,6 +3,9 @@
 
     @auth
         @php
+            $user = auth()->user();
+        @endphp
+        @php
             if (auth()->user()->hasRole('patient')) {
                 $user = auth()->user();
             }

@@ -39,7 +39,7 @@ class WebController extends Controller
                     'patient' => $booking->user ? $booking->user->name : 'Unknown',
                     'date' => $booking->booking_date,
                     'status' => ucfirst($booking->status),
-                    'package' => $booking->package->name,
+                    'package' => $booking->package ? $booking->package->name : 'No Packages found',
                     'slot' => $booking->slot,
                     'status_classes' => $booking->status == 'completed' ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
                 ];
@@ -79,7 +79,7 @@ class WebController extends Controller
                     'patient' => $booking->user ? $booking->user->name : 'Unknown',
                     'date' => $booking->booking_date,
                     'status' => ucfirst($booking->status),
-                    'package' => $booking->package->name,
+                    'package' => $booking->package ? $booking->package->name : 'No Packages found',
                     'slot' => $booking->slot,
                     'status_classes' => $booking->status == 'completed' ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
                 ];

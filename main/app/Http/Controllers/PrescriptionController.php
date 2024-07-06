@@ -53,7 +53,7 @@ class PrescriptionController extends Controller
                 $prescription->user_mobile = $prescription->user->mobile;
             }
             unset($prescription->user);
-            return $prescriptiason;
+            return $prescription;
         });
 
         return view('admin.prescription.index', compact('prescriptions'));

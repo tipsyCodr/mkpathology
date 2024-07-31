@@ -86,22 +86,13 @@
 
                         <div>
                             <h3>Available Tests</h3>
-                            <input type="text" id='searchInput'class='rounded w-full' placeholder="Search Tests..."
-                                oninput="searchTests()">
-                            <!-- Added oninput event to trigger search -->
+                            <select name="tests[]" aria-placeholder="Select Tests" placeholder="Select Tests"
+                                id="tests" multiple multiselect-search="true">
+                                @foreach ($tests as $test)
+                                    <option value="{{ $test->id }}">{{ $test->name }}</option>
+                                @endforeach
+                            </select>
 
-                            <div class="h-40 overflow-x-auto whitespace-nowrap scroll-smooth" style="overflow:scroll;">
-                                <div class="flex flex-wrap" id='showTests'>
-                                    @foreach ($tests as $test)
-                                        <label for="test{{ $test->id }}"
-                                            class="inline-block bg-blue-400 text-white px-4 py-2 mx-1 my-1 rounded-xl hover:bg-blue-600 cursor-pointer">
-                                            <input class="mr-2" type="checkbox" value="{{ $test->id }}"
-                                                name="tests[]" id="test{{ $test->id }}">
-                                            {{ $test->name }}
-                                        </label>
-                                    @endforeach
-                                </div>
-                            </div>
 
                             <script>
                                 // Array to store all tests

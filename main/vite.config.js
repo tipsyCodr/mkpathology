@@ -20,6 +20,12 @@ export default defineConfig({
             },
         },
     ],
+    resolve: {
+        alias: {
+            "@": "/resources",
+            $: "Jquery",
+        },
+    },
     // Define where to output built assets
     build: {
         outDir: "../public/build",

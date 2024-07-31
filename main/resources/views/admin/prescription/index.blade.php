@@ -27,6 +27,7 @@
                         </th>
                     </tr>
                 </thead>
+
                 <tbody class="bg-white divide-y divide-gray-200">
                     @foreach ($prescriptions as $prescription)
                         <tr>
@@ -38,6 +39,7 @@
                                     <img src="{{ asset('storage/uploads/prescriptions/' . $prescription->prescription) }}"
                                         alt="prescription" class="w-8 h-8 object-cover">
                                 </a>
+
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $prescription->user_email }}</td>
                             <td class="px-6 py-4 whitespace-nowrap">{{ $prescription->user_mobile }}</td>

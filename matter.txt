@@ -1,0 +1,41 @@
+Total Health Checkup
+1999
+	Our total health checkup includes a comprehensive range of tests to help you identify any potential health concerns.
+    
+    Tests Included: Cholesterol Test Lipid Profile Complete Hemogram Kidney Function Test Liver Function Test Blood Sugar Thyroid Profile Urine Routine Examination	
+Delete
+Essential Wellness Check
+	999
+	Our essential wellness checkup includes basic tests to give you an overview of your health.
+    
+    Tests Included: Complete Blood Count (CBC) Blood Sugar Lipid Profile Liver Function Test Kidney Function Test	
+Delete
+Basic Health Screening
+	1200
+	Our basic health screening includes basic tests to give you an overview of your health.
+    
+    Tests Included: Complete Blood Count (CBC) Lipid Profile Liver Function Test Kidney Function Test Thyroid Profile	
+Delete
+Advanced Health Plus
+	2500
+	Our advanced health plus package includes additional tests to provide a more comprehensive overview of your health.
+    
+    Tests Included: Complete Blood Count (CBC) Lipid Profile Liver Function Test Kidney Function Test Thyroid Profile Vitamin D Vitamin B12	
+Delete
+Basic Health Plus
+	800
+	Our basic health plus package includes additional tests to provide a more comprehensive overview of your health.
+    
+    Tests Included: Complete Blood Count (CBC) Blood Sugar Lipid Profile Liver Function Test	
+Delete
+Advanced Diagnostic Package
+	1500
+	Our advanced diagnostic package includes additional tests to provide a more detailed assessment of your overall health.
+    
+    Tests Included: Complete Blood Count (CBC) Blood Sugar Lipid Profile Liver Function Test Kidney Function Test Thyroid Profile	
+Delete
+Complete Wellness Profile
+	2000
+	Our complete wellness profile includes additional tests to provide a comprehensive assessment of your overall health.
+    
+    Tests Included: Complete Blood Count (CBC) Blood Sugar Lipid Profile Liver Function Test Kidney Function Test Thyroid Profile Vitamin D Vitamin B12

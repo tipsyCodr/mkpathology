@@ -140,12 +140,39 @@
 
                                 <p class="card-text">{{ $package->description }}</p>
 
-                                <b>Tests Included:</b>
-                                <ul class="list-unstyled">
-                                    @foreach ($package->tests as $test)
-                                        <li>{{ $test->name }}</li>
-                                    @endforeach
-                                </ul>
+                                <style>
+                                    .collapse-content {
+                                        display: none;
+                                    }
+
+                                    .collapse-hover:hover>.collapse-content {
+                                        display: block;
+                                    }
+                                </style>
+                                <div class="collapse-hover">
+                                    <b>Tests Included:</b>
+                                    <ul class="list-unstyled collapse-content">
+                                        {{-- @dd($package->tests) --}}
+                                        @php
+                                            $testNames = [];
+                                            if (!empty($package->test_id)) {
+                                                $testIds = json_decode($package->test_id, true);
+                                                foreach ($testIds as $testId) {
+                                                    $test = App\Models\Test::find($testId);
+                                                    if ($test) {
+                                                        $testNames[] = $test->name;
+                                                    }
+                                                }
+                                            }
+                                        @endphp
+                                        @foreach ($testNames as $testName)
+                                            <li>{{ $testName }}</li>
+                                        @endforeach
+                                        @foreach ($package->tests as $test)
+                                            <li>{{ $test->name }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
                             </div>
                             <a href="{{ route('book') }}" class="position-relative bottom-10 btn btn-accent">Book
                             </a>

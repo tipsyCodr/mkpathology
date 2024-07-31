@@ -22,4 +22,8 @@ class Test extends Model
     {
         return $this->belongsTo(Package::class);
     }
+    public function parameters()
+    {
+        return $this->belongsToMany(Parameter::class)->withPivot('parameters');
+    }
 }

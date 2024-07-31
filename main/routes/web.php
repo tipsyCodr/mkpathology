@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PackageController;
+use App\Http\Controllers\ParameterController;
 use App\Http\Controllers\PrescriptionController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
@@ -36,8 +37,6 @@ Route::post('package-book', [BookingController::class, 'bookPackage'])->name('pa
 Route::get('package-cancel', [BookingController::class, 'cancelPackage'])->name('package.cancel');
 
 
-// Test
-Route::get('test-view', [TestController::class, 'view'])->name('test.view');
 
 
 //Prescription (Not used)
@@ -101,9 +100,26 @@ Route::middleware(['isadmin'])->group(function () {
 
     // Backend 
     //Admin
+
+    // Test
+    Route::get('test-view', [TestController::class, 'view'])->name('test.view');
+    Route::get('test-edit/{id}', [TestController::class, 'edit'])->name('test.edit');
+    Route::post('test-update', [TestController::class, 'update'])->name('test.update');
+
     Route::get('admin', [WebController::class, 'admin'])->name('admin');
     Route::get('all-bookings', [WebController::class, 'booking'])->name('all.bookings');
+    Route::get('confirm-booking/{type}/{id}/{status}', [WebController::class, 'confirmBooking'])->name('confirm.booking');
+    Route::post('reschedule-booking/', [WebController::class, 'rescheduleBooking'])->name('reschedule.booking');
 
+
+    //parameters
+    // Route::post('parameters-import', [ParameterController::class, 'importFromExcel'])->name('parameters.import');
+    Route::post('parameters-import-do', [ParameterController::class, 'importFromExcel'])->name('parameters.import.do');
+    Route::get('parameters-view', [ParameterController::class, 'index'])->name('parameters.view');
+    Route::post('parameters-add', [ParameterController::class, 'store'])->name('parameters.store');
+    Route::get('/parameters-edit/{parameter}', [ParameterController::class, 'edit'])->name('parameters.edit');
+    Route::put('/parameters/{parameter}', [ParameterController::class, 'update'])->name('parameters.update');
+    Route::delete('parameters-delete/{parameter}', [ParameterController::class, 'destroy'])->name('parameters.delete');
 
     Route::get('prescription-view', [PrescriptionController::class, 'view'])->name('prescription.view');
     Route::get('prescription-show', [PrescriptionController::class, 'show'])->name('admin.prescription.show');

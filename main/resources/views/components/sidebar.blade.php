@@ -51,6 +51,11 @@
 
         @if (auth()->user()->hasRole('admin'))
             <li>
+                <a href="{{ route('parameters.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-folder mr-2"></span> Parameters
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('package.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
                     <span class="flaticon-folder mr-2"></span> Packages
                 </a>

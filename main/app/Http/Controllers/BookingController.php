@@ -15,6 +15,12 @@ class BookingController extends Controller
     //
     public function bookPackage(Request $request)
     {
+
+        $bookingDate = new \DateTime($request->booking_date);
+        if ($bookingDate->format('l') == 'Sunday') {
+            return redirect()->back()->with('error', 'Booking can not be done on Sunday.');
+        }
+
         // Check if user exists
         $user = User::where('email', $request->email)
             ->orWhere('mobile', $request->mobile)
@@ -48,10 +54,11 @@ class BookingController extends Controller
             $bookingData = [
                 'user_id' => $user->id,
                 'package_id' => $request->package,
-                'booking_date' => $request->date,
+                'booking_`date`' => $request->date,
                 'slot' => $request->slot,
                 'status' => 'pending',
             ];
+
             $booking = PackageBooking::create($bookingData);
 
             if ($user && $patient && $booking) {
@@ -95,7 +102,13 @@ class BookingController extends Controller
     //
     public function bookTest(Request $request)
     {
-        echo "Tests: ";
+        // echo "Tests: ";
+        // dd($request->booking_date);
+
+        $bookingDate = new \DateTime($request->booking_date);
+        if ($bookingDate->format('l') == 'Sunday') {
+            return redirect()->back()->with('error', 'Booking can not be done on Sunday.');
+        }
         // dd($request->all());
         $bookingData = [
             'user_id' => Auth::user()->id,
@@ -109,7 +122,12 @@ class BookingController extends Controller
     }
     public function bookFor(Request $request)
     {
-        dump($request->all());
+        // dump($request->all());
+        // dd($request->booking_date);
+        $bookingDate = new \DateTime($request->booking_date);
+        if ($bookingDate->format('l') == 'Sunday') {
+            return redirect()->back()->with('error', 'Booking can not be done on Sunday.');
+        }
         $bookTestFor = TestBooking::create([
             'user_id' => $request->user_id,
             'booking_date' => $request->booking_date,
@@ -162,8 +180,8 @@ class BookingController extends Controller
             return redirect()->back()->with('error', 'Booking not found.');
         }
 
-        if ($booking->status == 'canceled') {
-            return redirect()->back()->with('error', 'Booking already canceled.');
+        if ($booking->status == 'cancelled') {
+            return redirect()->back()->with('error', 'Booking already cancelled.');
         }
 
         $booking->status = 'cancelled';
@@ -190,12 +208,21 @@ class BookingController extends Controller
         return view('patient.tests', compact('tests'));
     }
 
+    /**
+     * Retrieves the list of tests booked by a patient.
+     *
+     * @param int $id The ID of the patient.
+     * @return \Illuminate\Support\Collection The collection of tests booked by the patient.
+     */
     public function viewTestByPatient($id)
     {
-        // retrieve data for all test patient has booked here details here
+        // Retrieve the data for all tests that the patient has booked.
+        // The tests are retrieved based on the user ID of the patient.
         $tests = TestBooking::where('user_id', $id)->get();
-        return $tests;
 
+        // Return the collection of tests booked by the patient.
+        return $tests;
     }
+
 
 }

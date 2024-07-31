@@ -27,10 +27,12 @@
                         <span>Confirm Immediately</span>
                     </label>
                 </div>
-                <button type="submit" class="mt-4 px-4 py-2 bg-amber-700 text-white rounded-md hover:bg-amber-600">Book
+                <button type="submit"
+                    class="mt-4 px-4 py-2 bg-red-500 hover:bg-red-700 text-white rounded-md hover:bg-amber-600">Book
                     Now</button>
             </form>
         </section>
+
         <div class="w-1/2 pl-4">
             <div class="flex flex-col items-center mb-8">
                 <h1 class="text-4xl font-semibold">{{ $user->name }}'s Prescription</h1>
@@ -59,4 +61,11 @@
             </div>
         </div>
     </div>
+    <ul>
+        @foreach (Storage::files('public/uploads') as $file)
+            <li>{{ $file }}</li>
+        @endforeach
+        {{ Storage::files('public/uploads') }}
+    </ul>
+
 </x-admin>

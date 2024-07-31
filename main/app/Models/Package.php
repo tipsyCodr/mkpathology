@@ -18,4 +18,8 @@ class Package extends Model
     {
         return $this->hasMany(Test::class, 'id');
     }
+    public function parameter()
+    {
+        return $this->belongsToMany(Parameter::class)->withPivot('parameters');
+    }
 }

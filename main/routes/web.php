@@ -37,6 +37,9 @@ Route::get('book/{packageId}', [BookingController::class, 'index'])->name('packa
 Route::post('package-book', [BookingController::class, 'bookPackage'])->name('package.book.store');
 Route::get('package-cancel', [BookingController::class, 'cancelPackage'])->name('package.cancel');
 
+// Test Booking
+Route::view('test-book-view', 'test-book')->name('test.book.view');
+Route::get('test-bookview/{testId}', [BookingController::class, 'testViewBook'])->name('test.view.select');
 
 
 
@@ -63,6 +66,7 @@ Route::post('create-admin', [UserController::class, 'createAdmin'])->name('creat
 //Logout
 Route::get('logout', [UserController::class, 'logout'])->name('logout');
 Route::post('logout', [UserController::class, 'logout'])->name('logout.post');
+
 
 
 //Make a middleware group for patient

@@ -208,9 +208,11 @@
                                 <h5 class="mb-3">{{ $test->name }}</h4>
                                     <small class="text-muted">{{ $test->description }} </small>
                                     <p class="text-primary"><b>₹ {{ $test->price }}</b></p>
-                                    <a class="btn btn-primary px-3" href="{{ route('patient.tests.view') }}">Book<i
+                                    <a class="btn btn-primary px-3"
+                                        href="{{ route('test.view.select', $test->id) }}">Book<i
                                             class="bi bi-chevron-double-right ms-1"></i></a>
                             </div>
+                            {{-- {{ route('test.book.view', $test->id) }} --}}
                         </div>
                     @endforeach
                     <script>

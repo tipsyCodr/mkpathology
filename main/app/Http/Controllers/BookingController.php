@@ -21,6 +21,13 @@ class BookingController extends Controller
 
         return view('book', compact('packageId', 'packageName'));
     }
+    public function testViewBook($testId)
+    {
+        $test = Test::find($testId);
+        $testName = $test->name;
+
+        return view('test-book', compact('testId', 'testName'));
+    }
     public function bookPackage(Request $request)
     {
 

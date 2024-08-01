@@ -95,17 +95,22 @@
         <div class="row g-4">
             <div class="col-md-6">
                 <div class="mb-3">
-                    {{-- <label for="test" class="form-label">Select A Test</label> --}}
                     <select class="form-select" id="test" name="test" required>
                         <option value="">Select A Test</option>
                         <!-- populate with tests -->
-
                         @php
                             $tests = \App\Models\Test::all();
                         @endphp
                         @foreach ($tests as $test)
-                            <option class="" value="{{ $test->id }}">{{ $test->name }}</option>
+                            @if (isset($testId) && $test->id == $testId)
+                                <option class="" value="{{ $test->id }}" selected>{{ $test->name }}
+                                </option>
+                            @else
+                                <option class="" value="{{ $test->id }}">{{ $test->name }}</option>
+                            @endif
                         @endforeach
+
+
                     </select>
                 </div>
             </div>

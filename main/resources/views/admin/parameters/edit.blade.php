@@ -3,8 +3,12 @@
     <form action="{{ route('parameters.update', $parameter->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <x-input name="name" label="Parameter Name" :placeholder="'Enter parameter name'" :value="$parameter->name" />
-        <x-input name="unit" label="Parameter Unit" :placeholder="'Enter parameter unit'" :value="$parameter->unit" />
+        {{-- <x-input name="name" label="Parameter Name" :placeholder="Enter parameter name" :value="$parameter->name" /> --}}
+        {{-- <x-input name="unit"  :placeholder="'Enter parameter unit'" :value="$parameter->unit" /> --}}
+        <label for="name">Parameter Name</label>
+        <input type="text" name="name" id="name" placeholder="Enter parameter name">
+        <label for="unit">Parameter Unit</label>
+        <input type="text" name="unit" id="unit" placeholder="'Enter parameter unit'">
         <x-input name="normal_range" label="Parameter Normal Range" :placeholder="'Enter parameter normal range'" :value="$parameter->normal_range" />
         {{-- <x-input name="is_active" type="hidden" :value="$parameter->is_active" /> --}}
         <label for="is_active">Status</label><br>

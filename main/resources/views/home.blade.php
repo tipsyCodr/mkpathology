@@ -71,28 +71,36 @@
 
     <!-- Carousel End -->
 
+    <style>
+        .hover-effect {
+            background-color: #031b4e;
+        }
 
+        .hover-effect:hover {
+            background-color: #ff6d0a
+        }
+    </style>
 
     <!-- Banner Start -->
     <div class="container-fluid banner mb-1 ">
         <div class="container">
             <div class="row gx-0">
-                <div class="col-lg-4 wow zoomIn" data-wow-delay="0.1s">
-                    <div class="bg-primary d-flex flex-column p-5 " style="height: 300px">
+                <div class=" col-lg-4 wow zoomIn" data-wow-delay="0.1s">
+                    <div class=" hover-effect d-flex flex-column p-5 " style="height: 300px">
                         <h3 class="text-white text-center mb-3">Book a Test</h3>
                         <a href="{{ route('book') }}"><img class='icon' src={{ asset('assets/img/icon/test.png') }}
                                 alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-4 wow zoomIn " data-wow-delay="0.3s">
-                    <div class="bg-warning d-flex flex-column p-5" style="height: 300px">
+                <div class=" col-lg-4 wow zoomIn " data-wow-delay="0.3s">
+                    <div class=" hover-effect d-flex flex-column p-5" style="height: 300px">
                         <h3 class="text-white text-center mb-3">Upload Prescription</h3>
                         <a href={{ route('patient.prescription.view') }}><img class='icon'
                                 src={{ asset('assets/img/icon/prescription.png') }} alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-4 wow zoomIn " data-wow-delay="0.6s">
-                    <div class="bg-info d-flex flex-column p-5" style="height: 300px">
+                    <div class=" hover-effect d-flex flex-column p-5" style="height: 300px">
                         <h3 class="text-white text-center mb-3">Download Report</h3>
                         <a href="{{ route('login') }}"><img class='icon' src={{ asset('assets/img/icon/report.png') }}
                                 alt=""></a>

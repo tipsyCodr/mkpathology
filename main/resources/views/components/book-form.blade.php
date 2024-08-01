@@ -86,7 +86,7 @@
                             $packages = \App\Models\Package::all();
                         @endphp
                         @foreach ($packages as $package)
-                            @if (isset($packageId) && $package->id !== $packageId)
+                            @if (isset($packageId) && $package->id == $packageId)
                                 <option class="" value="{{ $package->id }}" selected>{{ $package->name }}
                                 </option>
                             @else

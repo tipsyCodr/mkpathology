@@ -182,7 +182,8 @@
                                     </ul>
                                 </div>
                             </div>
-                            <a href="{{ route('book') }}" class="position-relative bottom-10 btn btn-accent">Book
+                            <a href="{{ route('package.book', $package->id) }}"
+                                class="position-relative bottom-10 btn btn-accent">Book
                             </a>
                         </div>
                     </div>

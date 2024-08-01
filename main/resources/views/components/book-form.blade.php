@@ -44,6 +44,7 @@
             <textarea class="form-control" id="address" placeholder="Enter your address" name="address" required></textarea>
         </div>
     @endguest
+
     @auth
         @php
             $user = auth()->user();
@@ -75,6 +76,7 @@
         <div class="row g-4">
             <div class="col-md-6">
                 <div class="mb-3">
+
                     {{-- <label for="package" class="form-label">Select P   ackage</label> --}}
                     <select class="form-select" id="package" name="package" required>
                         <option value="">Select A Package</option>
@@ -84,7 +86,12 @@
                             $packages = \App\Models\Package::all();
                         @endphp
                         @foreach ($packages as $package)
-                            <option class="" value="{{ $package->id }}">{{ $package->name }}</option>
+                            @if (isset($packageId) && $package->id !== $packageId)
+                                <option class="" value="{{ $package->id }}" selected>{{ $package->name }}
+                                </option>
+                            @else
+                                <option class="" value="{{ $package->id }}">{{ $package->name }}</option>
+                            @endif
                         @endforeach
                     </select>
                 </div>

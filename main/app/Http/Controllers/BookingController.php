@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
 use App\Models\PackageBooking;
 use App\Models\Patient;
 use App\Models\Test;
@@ -13,6 +14,13 @@ use Illuminate\Support\Facades\Auth;
 class BookingController extends Controller
 {
     //
+    public function index($packageId)
+    {
+        $package = Package::find($packageId);
+        $packageName = $package->name;
+
+        return view('book', compact('packageId', 'packageName'));
+    }
     public function bookPackage(Request $request)
     {
 
@@ -54,7 +62,7 @@ class BookingController extends Controller
             $bookingData = [
                 'user_id' => $user->id,
                 'package_id' => $request->package,
-                'booking_`date`' => $request->date,
+                'booking_date' => $request->date,
                 'slot' => $request->slot,
                 'status' => 'pending',
             ];
@@ -66,7 +74,8 @@ class BookingController extends Controller
                 if (Auth::loginUsingId($user->id)) {
                     $request->session()->regenerate();
 
-                    return view('create-password', compact('user', 'patient', 'booking'));
+                    // Uncomment if you want user to create a password on registration
+                    // return view('create-password', compact('user', 'patient', 'booking'));
                 }
 
             } else {

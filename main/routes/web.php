@@ -33,6 +33,7 @@ Route::get('check-permission', [UserController::class, 'CheckPermission'])->name
 
 //booking
 Route::view('book', 'book')->name('book');
+Route::get('book/{packageId}', [BookingController::class, 'index'])->name('package.book');
 Route::post('package-book', [BookingController::class, 'bookPackage'])->name('package.book.store');
 Route::get('package-cancel', [BookingController::class, 'cancelPackage'])->name('package.cancel');
 
@@ -40,7 +41,7 @@ Route::get('package-cancel', [BookingController::class, 'cancelPackage'])->name(
 
 
 //Prescription (Not used)
-// Route::get('prescription', [PrescriptionController::class, 'index'])->name('prescription');
+// Route::get('prescription', [PrescriptionController::cl1ass, 'index'])->name('prescription');
 
 //Patient Register
 Route::post('user-store', [UserController::class, 'store'])->name('user.store');

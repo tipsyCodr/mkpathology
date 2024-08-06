@@ -50,16 +50,7 @@
             @endif
             @if (!is_null($item->test_id))
 
-                @php
-                    $testId = json_decode($item->id);
-                    $test = App\Models\Test::find($testId);
-                    $parameter_id = json_decode($test->parameter_id);
-                    if (!is_null($parameter_id)) {
-                        $parameters = App\Models\Parameter::whereIn('id', $parameter_id)->get();
-                    } else {
-                        $parameters = collect();
-                    }
-                @endphp
+
                 <h3>Parameters:</h3>
                 <ul>
                     @foreach ($parameters as $parameter)

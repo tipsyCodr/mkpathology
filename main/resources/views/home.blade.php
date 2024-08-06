@@ -37,7 +37,7 @@
             </div>
         </form>
         <div class="d-flex flex-row">
-            <a href ="#" class='w-100 border border-muted mx-2 px-3 py-4 text-center  '
+            <a href ="#" class='w-100 border border-muted mx-2 px-2 py-4 text-center  '
                 style="border-radius:10px; font-size: .8rem;">
                 <span class=" text-white p-2 rounded-circle"
                     style='width: 5px; height: 5px; background-color: rgb(156, 156, 228)'><i

@@ -636,28 +636,34 @@
                 xhr.onload = function() {
                     if (xhr.status === 200) {
                         var searchResults = JSON.parse(xhr.responseText);
+                        var tests = searchResults.tests;
+                        var packages = searchResults.packages;
+
+                        console.log(tests);
+                        console.log(packages);
+
                         var resultsHTML = '';
 
-                        for (var i = 0; i < searchResults.data.length; i++) {
-                            var item = searchResults.data[i];
+                        for (var i = 0; i < tests.data.length; i++) {
+                            var item = tests.data[i];
 
                             resultsHTML +=
-                                '<li  class="p-2 px-4 bg-white w-100"><a class="text-black"  href="/view/' +
+                                '<li  class="p-2 px-4 bg-white w-100"><a class="text-black"  href="/view/test/' +
                                 item
                                 .id + '">' +
                                 item
                                 .name + '</a></li>';
+                        }
 
-                            // resultsHTML += '<h2>' + (item.test_no ? 'Test: ' + item.test_no + ' - ' + item.name :
-                            //     'Package: ' + item.name) + '</h2>';
-                            // resultsHTML += '<p>Price: ' + item.price + '</p>';
-                            // if (item.test_no) {
-                            //     resultsHTML += '<p>Description: ' + item.description + '</p>';
-                            // } else {
-                            //     resultsHTML += '<p>Tests: ' + item.tests.map(function(test) {
-                            //         return test.name;
-                            //     }).join(', ') + '</p>';
-                            // }
+                        for (var i = 0; i < packages.data.length; i++) {
+                            var item = packages.data[i];
+
+                            resultsHTML +=
+                                '<li  class="p-2 px-4 bg-white w-100"><a class="text-black"  href="/view/package/' +
+                                item
+                                .id + '">' +
+                                item
+                                .name + '</a></li>';
                         }
 
 

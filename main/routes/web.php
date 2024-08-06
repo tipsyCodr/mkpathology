@@ -23,7 +23,7 @@ Route::view('admin-register', 'admin.register')->name('admin.register');
 Route::view('register', 'register')->name('register');
 
 Route::get('searchAll', [WebController::class, 'searchAll'])->name('search.all');
-Route::get('view/{id}', [WebController::class, 'viewDescription'])->name('view.description');
+Route::get('view/{type}/{id}', [WebController::class, 'viewDescription'])->name('view.description');
 
 //===============================================================
 //Not used

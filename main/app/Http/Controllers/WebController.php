@@ -130,23 +130,39 @@ class WebController extends Controller
         $tests = $search ? Test::where('name', 'like', '%' . $search . '%')->get() : Test::all()->paginate(30);
         return $tests;
     }
-    public function searchAll(Request $request, )
+    public function searchAll(Request $request)
     {
-        $search = $request->get('q', '');
-        $tests = Test::when($search, function (Builder $query) use ($search): void {
+        $search = $request->input('q', '');
+
+        $tests = Test::when($search, function (Builder $query) use ($search) {
             $query->where('name', 'like', '%' . $search . '%');
-        })->union(
-                Package::when($search, function (Builder $query) use ($search): void {
-                    $query->where('name', 'like', '%' . $search . '%');
-                })
-            )->paginate(30);
-        return $tests;
+        })->paginate(30);
+
+        $packages = Package::when($search, function (Builder $query) use ($search) {
+            $query->where('name', 'like', '%' . $search . '%');
+        })->paginate(30);
+
+        // Check if the $tests and $packages are not null
+        if ($tests === null || $packages === null) {
+            abort(500, 'Failed to fetch data.');
+        }
+
+        return [
+            'tests' => $tests,
+            'packages' => $packages,
+        ];
     }
     public function viewDescription(Request $request)
     {
-        $id = request()->segment(2);
-        $item = Test::find($id);
-        return view('view-description', compact('item'));
+        $type = request()->segment(2);
+        $id = request()->segment(3);
+        if ($type === "package") {
+            $item = Package::find($id);
+        } else {
+            $item = Test::find($id);
+
+        }
+        return view('view-description', compact('item', 'type'));
     }
 
     public function confirmBooking($id, $status, $type)

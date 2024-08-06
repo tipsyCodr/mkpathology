@@ -5,14 +5,18 @@
                 <h1 class='text-accent'> {{ $item->name }}</h1>
                 <p class=" text-dark " style="font-size:1.5rem; font-weight: 900">₹{{ $item->price }}</p>
             </div>
-            @if (!is_null($item->test_id) && $type == 'test')
+            @if (!is_null($item->id) && $type == 'test')
                 @php
-                    $testId = json_decode($item->test_id)[0];
+                    $testId = json_decode($item->id);
                     $test = App\Models\Test::find($testId);
                     $parameter_id = json_decode($test->parameter_id);
-                    $parameters = App\Models\Parameter::whereIn('id', $parameter_id)->get();
+                    dump($parameter_id);
+                    if (!is_null($parameter_id)) {
+                        $parameters = App\Models\Parameter::whereIn('id', $parameter_id)->get();
+                    } else {
+                        $parameters = collect();
+                    }
                 @endphp
-                <h3>Parameters:</h3>
                 <p><b>{{ $parameters->count() }}</b> parameters</p>
                 <ul>
                     @foreach ($parameters as $parameter)

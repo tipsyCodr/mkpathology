@@ -37,18 +37,22 @@
             </div>
         </form>
         <div class="d-flex flex-row">
-            <a href ="#" class='w-100 border border-muted mx-2 px-2 py-4 text-center  '
-                style="border-radius:10px; font-size: .8rem;">
+            <a href ="http://mkhealth.test/patient-prescription"
+                class='w-100 border border-muted mx-2 px-2 py-4 text-center  ' style="border-radius:10px; ">
                 <span class=" text-white p-2 rounded-circle"
                     style='width: 5px; height: 5px; background-color: rgb(156, 156, 228)'><i
-                        class="bi bi-upload text-white"></i></span> Upload
-                Prescription
+                        class="bi bi-upload text-white"></i></span>
+                <br>
+                <p class='my-2'> Upload
+                    Prescription</p>
             </a>
-            <a href ="#" class='w-100 border border-muted mx-2 px-3 py-4 text-center  '
-                style="border-radius:10px;font-size: .8rem;">
+            <a href ="http://mkhealth.test/login" class='w-100 border border-muted mx-2 px-3 py-4 text-center  '
+                style="border-radius:10px;">
                 <span class=" text-white p-2 rounded-circle"
                     style=' width: 10px; height: 10px; background-color: rgb(156, 228, 185)'><i
-                        class="bi bi-clipboard-data text-white"></i></span> Reports
+                        class="bi bi-clipboard-data text-white"></i></span>
+                <br>
+                <p class='my-2'>Reports</p>
             </a>
 
         </div>

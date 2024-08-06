@@ -10,14 +10,13 @@
                     $testId = json_decode($item->id);
                     $test = App\Models\Test::find($testId);
                     $parameter_id = json_decode($test->parameter_id);
-                    dump($parameter_id);
                     if (!is_null($parameter_id)) {
                         $parameters = App\Models\Parameter::whereIn('id', $parameter_id)->get();
                     } else {
                         $parameters = collect();
                     }
                 @endphp
-                <p><b>{{ $parameters->count() }}</b> parameters</p>
+                <p class='text-dark '><b>{{ $parameters->count() }}</b> parameters</p>
                 <ul>
                     @foreach ($parameters as $parameter)
                         <li>{{ $parameter->name }}</li>

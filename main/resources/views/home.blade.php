@@ -37,8 +37,8 @@
             </div>
         </form>
         <div class="d-flex flex-row">
-            <a href ="/patient-prescription" class='w-100 border border-muted mx-2 px-2 py-4 text-center  '
-                style="border-radius:10px; ">
+            <a href ="{{ route('patient.prescription.view') }}"
+                class='w-100 border border-muted mx-2 px-2 py-4 text-center  ' style="border-radius:10px; ">
                 <span class=" text-white p-2 rounded-circle"
                     style='width: 5px; height: 5px; background-color: rgb(156, 156, 228)'><i
                         class="bi bi-upload text-white"></i></span>
@@ -46,7 +46,7 @@
                 <p class='my-2'> Upload
                     Prescription</p>
             </a>
-            <a href ="/login" class='w-100 border border-muted mx-2 px-3 py-4 text-center  '
+            <a href ="{{ route('patient.reports') }}" class='w-100 border border-muted mx-2 px-3 py-4 text-center  '
                 style="border-radius:10px;">
                 <span class=" text-white p-2 rounded-circle"
                     style=' width: 10px; height: 10px; background-color: rgb(156, 228, 185)'><i
@@ -228,7 +228,8 @@
                 </div>
             </div>
 
-            <div class="row mb-4">
+
+            <div class="row mb-4 package-test-toggle">
                 <div class="col-12 d-flex justify-content-center">
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="package-test-radio" id="package-radio"
@@ -242,8 +243,23 @@
                 </div>
             </div>
 
+            <style>
+                .health-package {
+                    display: flex;
+                }
 
-            <div id='package-wrapper' class="row g-4 gx-0 ">
+                @media (max-width: 750px) {
+                    .health-package {
+                        display: none;
+                    }
+
+                    .package-test-toggle {
+                        display: none;
+                    }
+                }
+            </style>
+
+            <div id='package-wrapper' class="row g-4 gx-0 health-package">
                 @foreach ($packages as $package)
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" data-wow-offset="0">
                         <div class="card health-package-card h-100 shadow">
@@ -298,7 +314,79 @@
 
             </div>
 
-            <div id="test-wrapper" class="d-none">
+
+            <!-- package mobile view  -->
+            <style>
+                .health-package-mobile {
+                    display: none;
+                }
+
+                .health-package-head {
+                    display: none;
+                    justify-content: center;
+                    font-weight: 800;
+                }
+
+
+                @media (max-width: 750px) {
+                    .health-package-mobile .health-test-mobile {
+                        display: block;
+                    }
+
+                    .card-text {
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;
+                        /* Change this number to set the number of lines */
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 100%;
+                    }
+
+                    .owl-carousel .item {
+                        display: flex;
+                        align-items: stretch;
+                    }
+
+                    .card {
+                        display: flex;
+                        flex-direction: column;
+                        height: 100%;
+                    }
+
+                    .health-package-head {
+                        display: flex;
+                    }
+
+                }
+            </style>
+            <div class="health-package-head btn fs-2 btn-primary text-center ">
+                Packages</div>
+            <div id='package-wrapper' class="owl-carousel owl-theme health-package-mobile">
+                @foreach ($packages as $package)
+                    <div class="item">
+                        <div class="card health-package-card h-100 shadow">
+                            <div class="card-body">
+                                <h5 class="card-title font-weight-bold">{{ $package->name }}</h5>
+                                <p class="card-text ">{{ $package->description }}</p>
+                                <div class="collapse-hover d-flex justify-content-between align-items-end">
+                                    <a class="text-primary font-weight-bold fs-4">
+                                        <span>Price: INR</span> {{ $package->price }}
+                                    </a>
+                                    <a href="{{ route('package.book', $package->id) }}"
+                                        class="position-relative bottom-10 btn btn-accent w-50"
+                                        style="border-radius:10px;">Book
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- package mobile view End -->
+
+            <div id="test-wrapper" class="d-none health-test-mobile">
                 <h2>All Tests</h2>
                 <div class="">
                     <input class='form-control m-4' placeholder="Search Test Here...." type="text" name="search"
@@ -306,7 +394,7 @@
                 </div>
                 <div class="row g-4">
                     @foreach ($tests as $test)
-                        <div class="col-lg-3 col-md-6 o-wow fadeInUp" data-wow-delay="{{ $loop->index * 0.1 }}s">
+                        <div class="col-lg-3 col-md-6 o-">
                             <div class="service-item">
                                 <div class="icon-box-primary mb-4">
                                     <i class="{{ $test->icon }} text-dark"></i>
@@ -367,6 +455,33 @@
 
                 </div>
             </div>
+            <!-- test desktop view end  -->
+
+            <!-- test mobile view start  -->
+            <div class="health-package-head btn fs-2 btn-primary text-center  mt-5">
+                Tests</div>
+            <div id='package-wrapper' class="owl-carousel owl-theme health-package-mobile">
+                @foreach ($tests as $test)
+                    <div class="item card ">
+                        <div class="service-item">
+                            <div class="icon-box-primary mb-4">
+                                <i class="{{ $test->icon }} text-dark"></i>
+                            </div>
+                            <h5 class="mb-3">{{ $test->name }}</h4>
+                                <small class="text-muted">{{ $test->description }} </small>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <p class="text-primary fs-3"><b>₹ {{ $test->price }}</b></p>
+                                    <a class="btn btn-accent px-3 w-50" style="border-radius:10px;"
+                                        href="{{ route('test.view.select', $test->id) }}">Book<i
+                                            class="bi bi-chevron-double-right ms-1"></i></a>
+                                </div>
+                        </div>
+                        {{-- {{ route('test.book.view', $test->id) }} --}}
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- test mobile view end  -->
         </div>
     </div>
     <!-- About End -->

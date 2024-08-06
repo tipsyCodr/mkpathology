@@ -220,7 +220,7 @@
     <!-- About Start -->
     <div class="container-fluid py-5">
         <div class="container">
-            <div class="row g-5">
+            <div class="row g-5 d-none d-lg-block">
                 <div class="col-lg-12 text-center">
                     <h1 class="display-6">Comprehensive Health Solutions</h1>
                     <p class="mb-5">We offer a wide range of health packages to suit your needs. Choose from our
@@ -360,12 +360,12 @@
 
                 }
             </style>
-            <div class="health-package-head btn fs-2 btn-primary text-center ">
-                Packages</div>
+            <h2 class=" text-dark font">
+                Top Health Packages</h2>
             <div id='package-wrapper' class="owl-carousel owl-theme health-package-mobile">
                 @foreach ($packages as $package)
                     <div class="item">
-                        <div class="card health-package-card h-100 shadow">
+                        <div class=" health-package-card h-100 shadow">
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold">{{ $package->name }}</h5>
                                 <p class="card-text ">{{ $package->description }}</p>
@@ -458,8 +458,8 @@
             <!-- test desktop view end  -->
 
             <!-- test mobile view start  -->
-            <div class="health-package-head btn fs-2 btn-primary text-center  mt-5">
-                Tests</div>
+            <h2 class=" text-dark font">
+                Top Tests</h2>
             <div id='package-wrapper' class="owl-carousel owl-theme health-package-mobile">
                 @foreach ($tests as $test)
                     <div class="item card ">

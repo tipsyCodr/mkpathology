@@ -17,11 +17,6 @@
                     }
                 @endphp
                 <p class='text-dark '><b>{{ $parameters->count() }}</b> parameters</p>
-                <ul>
-                    @foreach ($parameters as $parameter)
-                        <li>{{ $parameter->name }}</li>
-                    @endforeach
-                </ul>
             @endif
 
 
@@ -62,6 +57,11 @@
                     $parameters = App\Models\Parameter::whereIn('id', $parameter_id)->get();
                 @endphp
                 <h3>Parameters:</h3>
+                <ul>
+                    @foreach ($parameters as $parameter)
+                        <li>{{ $parameter->name }}</li>
+                    @endforeach
+                </ul>
                 <ul>
                     @foreach ($parameters as $parameter)
                         <li>{{ $parameter->name }}</li>

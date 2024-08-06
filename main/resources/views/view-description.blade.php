@@ -48,7 +48,7 @@
                     @endforeach
                 </ul>
             @endif
-            @if (!is_null($item->test_id))
+            @if (!is_null($item->id))
 
 
                 <h3>Parameters:</h3>

@@ -142,7 +142,12 @@ class WebController extends Controller
             )->paginate(30);
         return $tests;
     }
-
+    public function viewDescription(Request $request)
+    {
+        $id = request()->segment(2);
+        $item = Test::find($id);
+        return view('view-description', compact('item'));
+    }
 
     public function confirmBooking($id, $status, $type)
     {

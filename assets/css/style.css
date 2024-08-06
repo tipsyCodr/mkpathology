@@ -598,3 +598,7 @@
 .copyright a:hover {
   color: var(--bs-primary);
 }
+
+#searchListOverlay ul li:hover {
+  background-color: #ff6d0a;
+}

@@ -13,19 +13,36 @@
     <!-- Carousel Form Start -->
 
     <div
-        class="container position-absolute bg-white  rounded-md test-form p-0  top-40 to p-xl-40 top-lg-20 top-sm-10  left-10 left-sm-1">
+        class="container position-absolute d-md-none d-lg-block bg-white  rounded-md test-form p-0  top-40 to p-xl-40 top-lg-20 top-sm-10  left-10 left-sm-1">
         @auth
             <h1 class="p-2">Book Now</h1>
         @endauth
         <x-book-form></x-book-form>
 
     </div>
-    <!-- Carousel Form  Start -->
+    <!-- Carousel Form  end -->
 
+    {{-- Mobile search bar --}}
+
+    <div class="container-fluid bg-dark p-5 d-lg-none d-sm-block">
+        <form class="d-flex flex-column " onfocus="showlist();" onblur="hidelist();">
+            <input id=searchInput class="rounded-pill  form-control me-2 border border-muted"
+                style="background-color: #f8f9fa;" type="search" placeholder="&#128270; Search Packages and Tests"
+                aria-label="Search" onkeyup="searchAll();">
+            {{-- <button class="btn btn-outline-success" type="submit">Search</button> --}}
+            <div id='searchListOverlay' class='p-2 mt-2 ' style="border-radius: 20px;">
+                <ul id='searchList' class='list-none fixed ' style=" list-style:none; padding:0;">
+
+                </ul>
+            </div>
+        </form>
+    </div>
+
+    {{-- Mobile search bar end --}}
 
     <!-- Carousel Start -->
 
-    <div class="container-fluid header-carousel px-0  flex-row">
+    <div class="container-fluid header-carousel px-0 flex-row d-none d-lg-block">
         <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active" style="height: 660px;">
@@ -82,7 +99,7 @@
     </style>
 
     <!-- Banner Start -->
-    <div class="container-fluid banner mb-1 ">
+    <div class="container-fluid banner mb-1 d-none d-lg-block">
         <div class="container">
             <div class="row gx-0">
                 <div class=" col-lg-4 wow zoomIn" data-wow-delay="0.1s">
@@ -608,5 +625,60 @@
             testWrapper.classList.remove('d-none')
             packageWrapper.classList.add('d-none')
         })
+
+        function searchAll() {
+            var searchInput = document.getElementById('searchInput');
+            var searchTerm = searchInput.value.trim().toLowerCase();
+
+            if (searchTerm.length > 0) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/searchAll?q=' + searchTerm, true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        var searchResults = JSON.parse(xhr.responseText);
+                        var resultsHTML = '';
+
+                        for (var i = 0; i < searchResults.data.length; i++) {
+                            var item = searchResults.data[i];
+
+                            resultsHTML +=
+                                '<li  class="p-2 px-4 bg-white w-100"><a class="text-black"  href="/view/' +
+                                item
+                                .id + '">' +
+                                item
+                                .name + '</a></li>';
+
+                            // resultsHTML += '<h2>' + (item.test_no ? 'Test: ' + item.test_no + ' - ' + item.name :
+                            //     'Package: ' + item.name) + '</h2>';
+                            // resultsHTML += '<p>Price: ' + item.price + '</p>';
+                            // if (item.test_no) {
+                            //     resultsHTML += '<p>Description: ' + item.description + '</p>';
+                            // } else {
+                            //     resultsHTML += '<p>Tests: ' + item.tests.map(function(test) {
+                            //         return test.name;
+                            //     }).join(', ') + '</p>';
+                            // }
+                        }
+
+
+                        document.getElementById('searchList').innerHTML = resultsHTML;
+                    }
+                };
+                xhr.send();
+            } else {
+                document.getElementById('searchList').innerHTML = '';
+            }
+
+        }
+
+        // function showlist() {
+        //     var list = document.getElementById('searchListOverlay');
+        //     list.classList.remove('d-none');
+        // }
+
+        // function hidelist() {
+        //     var list = document.getElementById('searchListOverlay');
+        //     list.classList.add('d-none');
+        // }
     </script>
 </x-guest>

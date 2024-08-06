@@ -22,6 +22,7 @@ Route::view('login', 'login')->name('login');
 Route::view('admin-register', 'admin.register')->name('admin.register');
 Route::view('register', 'register')->name('register');
 
+Route::get('searchAll', [WebController::class, 'searchAll'])->name('search.all');
 //===============================================================
 //Not used
 // Route::view('upload-prescription', 'prescription')->name('upload.prescription');

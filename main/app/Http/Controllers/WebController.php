@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
 use App\Models\Test;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -129,6 +130,19 @@ class WebController extends Controller
         $tests = $search ? Test::where('name', 'like', '%' . $search . '%')->get() : Test::all()->paginate(30);
         return $tests;
     }
+    public function searchAll(Request $request, )
+    {
+        $search = $request->get('q', '');
+        $tests = Test::when($search, function (Builder $query) use ($search): void {
+            $query->where('name', 'like', '%' . $search . '%');
+        })->union(
+                Package::when($search, function (Builder $query) use ($search): void {
+                    $query->where('name', 'like', '%' . $search . '%');
+                })
+            )->paginate(30);
+        return $tests;
+    }
+
 
     public function confirmBooking($id, $status, $type)
     {

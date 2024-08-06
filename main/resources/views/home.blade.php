@@ -24,11 +24,11 @@
 
     {{-- Mobile search bar --}}
 
-    <div class="container-fluid bg-dark p-5 d-lg-none d-sm-block">
+    <div class="container-fluid m-0 p-3 d-lg-none d-sm-block">
         <form class="d-flex flex-column " onfocus="showlist();" onblur="hidelist();">
-            <input id=searchInput class="rounded-pill  form-control me-2 border border-muted"
-                style="background-color: #f8f9fa;" type="search" placeholder="&#128270; Search Packages and Tests"
-                aria-label="Search" onkeyup="searchAll();">
+            <input id=searchInput class="  form-control me-2 border border-muted" style="border-radius: 10px"
+                type="search" placeholder="&#128270; Search Packages and Tests" aria-label="Search"
+                onkeyup="searchAll();">
             {{-- <button class="btn btn-outline-success" type="submit">Search</button> --}}
             <div id='searchListOverlay' class='p-2 mt-2 ' style="border-radius: 20px;">
                 <ul id='searchList' class='list-none fixed ' style=" list-style:none; padding:0;">
@@ -36,9 +36,28 @@
                 </ul>
             </div>
         </form>
+        <div class="d-flex flex-row">
+            <a href ="#" class='w-100 border border-muted mx-2 px-3 py-4 text-center  '
+                style="border-radius:10px;">
+                <span class=" text-white p-2 rounded-circle"
+                    style='width: 10px; height: 10px; background-color: rgb(156, 156, 228)'><i
+                        class="bi bi-upload text-white"></i></span> Upload
+                Prescription
+            </a>
+            <a href ="#" class='w-100 border border-muted mx-2 px-3 py-4 text-center  '
+                style="border-radius:10px;">
+                <span class=" text-white p-2 rounded-circle"
+                    style=' width: 10px; height: 10px; background-color: rgb(156, 228, 185)'><i
+                        class="bi bi-clipboard-data text-white"></i></span> Reports
+            </a>
+
+        </div>
     </div>
 
     {{-- Mobile search bar end --}}
+
+
+
 
     <!-- Carousel Start -->
 
@@ -90,13 +109,79 @@
 
     <style>
         .hover-effect {
-            background-color: #031b4e;
+            /* background-color: #031b4e; */
+            background-color: white;
+            color: #031b4e;
+        }
+
+        .hover-text {
+
+            color: gray;
+        }
+
+        .hover-text:hover {
+            color: white;
         }
 
         .hover-effect:hover {
-            background-color: #ff6d0a
+            background-color: #ff6d0a;
+        }
+
+        .hover-effect:hover .hover-text {
+            color: #ffffff;
         }
     </style>
+    <!-- Bottom Navbar -->
+    <style>
+        /* Additional styles for the bottom navbar */
+        /* Additional styles for the bottom navbar */
+
+        .overflow-hidden {
+            overflow-x: hidden;
+            width: 100vw;
+        }
+
+        .bottom-link {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 80px;
+        }
+
+        .navbar .nav-link {
+            color: white;
+            text-align: center;
+            flex: 1;
+        }
+
+        .navbar .nav-link i {
+            font-size: 24px;
+        }
+
+        .navbar .nav-link div {
+            font-size: 12px;
+        }
+    </style>
+    <!-- Bottom Navbar -->
+    <nav class="navbar fixed-bottom navbar-dark bg-light d-md-none overflow-hidden">
+        <div class="container d-flex justify-content-between">
+            <a class="nav-link bottom-link text-center hover-effect" href="{{ route('book') }}">
+                <i class="bi bi-journal-medical hover-text"></i>
+                <div class=" hover-text pt-0 ">Book a Test</div>
+            </a>
+            <a class="nav-link bottom-link text-center hover-effect" href="{{ route('patient.prescription.view') }}">
+                <i class="fas fa-file-upload hover-text"></i>
+                <div class="hover-text pt-2">Upload Prescriptions</div>
+            </a>
+            <a class="nav-link bottom-link text-center hover-effect" href="{{ route('login') }}">
+                <i class="fas fa-file-download hover-text"></i>
+                <div class="hover-text pt-2">Download Reports</div>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Bottom Navbar  end -->
 
     <!-- Banner Start -->
     <div class="container-fluid banner mb-1 d-none d-lg-block">
@@ -119,8 +204,8 @@
                 <div class="col-lg-4 wow zoomIn " data-wow-delay="0.6s">
                     <div class=" hover-effect d-flex flex-column p-5" style="height: 300px">
                         <h3 class="text-white text-center mb-3">Download Report</h3>
-                        <a href="{{ route('login') }}"><img class='icon' src={{ asset('assets/img/icon/report.png') }}
-                                alt=""></a>
+                        <a href="{{ route('login') }}"><img class='icon'
+                                src={{ asset('assets/img/icon/report.png') }} alt=""></a>
                     </div>
                 </div>
             </div>
@@ -650,7 +735,7 @@
                             resultsHTML +=
                                 '<li  class="p-2 px-4 bg-white w-100"><a class="text-black"  href="/view/test/' +
                                 item
-                                .id + '">' +
+                                .id + '" style="color:black;">' +
                                 item
                                 .name + '</a></li>';
                         }
@@ -661,7 +746,7 @@
                             resultsHTML +=
                                 '<li  class="p-2 px-4 bg-white w-100"><a class="text-black"  href="/view/package/' +
                                 item
-                                .id + '">' +
+                                .id + '" style="color:black;">' +
                                 item
                                 .name + '</a></li>';
                         }

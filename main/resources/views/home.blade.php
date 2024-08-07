@@ -358,14 +358,15 @@
 
                 }
             </style>
-            <div class="health-package-head btn fs-2 btn-primary text-center wow fadeInUp" data-wow-delay="0.1s"> Top
+            <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem"> Top
                 Packages</div>
-            <div id='package-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile wow fadeInUp"
+            <div id='package-wrapper-mobile'
+                class="owl-carousel owl-theme health-package-mobile wow fadeInUp m-2 p-3 border"
                 data-wow-delay="0.1s">
                 @foreach ($packages as $package)
                     <div class="item">
-                        <div class="card health-package-card h-100 shadow w-100">
-                            <div class="card-body">
+                        <div class=" health-package-card h-100 shadow w-100">
+                            <div class="">
                                 <h5 class="card-title font-weight-bold">{{ $package->name }}</h5>
                                 <p class="card-text ">{{ $package->description }}</p>
                                 <div class="collapse-hover d-flex justify-content-between align-items-end">
@@ -458,16 +459,14 @@
             <!-- test desktop view end  -->
 
             <!-- test mobile view start  -->
-            <div class="health-package-head btn fs-2 btn-primary text-center wow fadeInUp mt-5" data-wow-delay="0.1s">
+            <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem">
                 Top Tests</div>
             <div id='test-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile wow fadeInUp"
                 data-wow-delay="0.1s">
                 @foreach ($tests as $test)
-                    <div class="item card w-100">
-                        <div class="service-item">
-                            <div class="icon-box-primary mb-4">
-                                <i class="{{ $test->icon }} text-dark"></i>
-                            </div>
+                    <div class=" card w-100">
+                        <div class="p-4">
+
                             <h5 class="mb-3">{{ $test->name }}</h4>
                                 <small class="text-muted card-text">{{ $test->description }} </small>
                                 <div class="d-flex justify-content-between align-items-center">

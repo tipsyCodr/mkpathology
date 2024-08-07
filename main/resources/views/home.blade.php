@@ -192,21 +192,21 @@
         <div class="container">
             <div class="row gx-0">
                 <div class=" col-lg-4 wow zoomIn" data-wow-delay="0.1s">
-                    <div class=" hover-effect d-flex flex-column p-5 " style="height: 300px">
+                    <div class=" bg-dark d-flex flex-column p-5 " style="height: 300px">
                         <h3 class="text-white text-center mb-3">Book a Test</h3>
                         <a href="{{ route('book') }}"><img class='icon' src={{ asset('assets/img/icon/test.png') }}
                                 alt=""></a>
                     </div>
                 </div>
                 <div class=" col-lg-4 wow zoomIn " data-wow-delay="0.3s">
-                    <div class=" hover-effect d-flex flex-column p-5" style="height: 300px">
+                    <div class=" bg-dark d-flex flex-column p-5" style="height: 300px">
                         <h3 class="text-white text-center mb-3">Upload Prescription</h3>
                         <a href={{ route('patient.prescription.view') }}><img class='icon'
                                 src={{ asset('assets/img/icon/prescription.png') }} alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-4 wow zoomIn " data-wow-delay="0.6s">
-                    <div class=" hover-effect d-flex flex-column p-5" style="height: 300px">
+                    <div class=" bg-dark d-flex flex-column p-5" style="height: 300px">
                         <h3 class="text-white text-center mb-3">Download Report</h3>
                         <a href="{{ route('login') }}"><img class='icon'
                                 src={{ asset('assets/img/icon/report.png') }} alt=""></a>
@@ -313,8 +313,6 @@
 
 
             </div>
-
-
             <!-- package mobile view  -->
             <style>
                 .health-package-mobile {
@@ -360,12 +358,13 @@
 
                 }
             </style>
-            <h2 class=" text-dark font">
-                Top Health Packages</h2>
-            <div id='package-wrapper' class="owl-carousel owl-theme health-package-mobile">
+            <div class="health-package-head btn fs-2 btn-primary text-center wow fadeInUp" data-wow-delay="0.1s"> Top
+                Packages</div>
+            <div id='package-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile wow fadeInUp"
+                data-wow-delay="0.1s">
                 @foreach ($packages as $package)
                     <div class="item">
-                        <div class=" health-package-card h-100 shadow">
+                        <div class="card health-package-card h-100 shadow w-100">
                             <div class="card-body">
                                 <h5 class="card-title font-weight-bold">{{ $package->name }}</h5>
                                 <p class="card-text ">{{ $package->description }}</p>
@@ -375,7 +374,8 @@
                                     </a>
                                     <a href="{{ route('package.book', $package->id) }}"
                                         class="position-relative bottom-10 btn btn-accent w-50"
-                                        style="border-radius:10px;">Book
+                                        style="border-radius:10px;">Book<i
+                                            class="bi bi-chevron-double-right ms-1"></i>
                                     </a>
                                 </div>
                             </div>
@@ -458,20 +458,21 @@
             <!-- test desktop view end  -->
 
             <!-- test mobile view start  -->
-            <h2 class=" text-dark font">
-                Top Tests</h2>
-            <div id='package-wrapper' class="owl-carousel owl-theme health-package-mobile">
+            <div class="health-package-head btn fs-2 btn-primary text-center wow fadeInUp mt-5" data-wow-delay="0.1s">
+                Top Tests</div>
+            <div id='test-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile wow fadeInUp"
+                data-wow-delay="0.1s">
                 @foreach ($tests as $test)
-                    <div class="item card ">
+                    <div class="item card w-100">
                         <div class="service-item">
                             <div class="icon-box-primary mb-4">
                                 <i class="{{ $test->icon }} text-dark"></i>
                             </div>
                             <h5 class="mb-3">{{ $test->name }}</h4>
-                                <small class="text-muted">{{ $test->description }} </small>
+                                <small class="text-muted card-text">{{ $test->description }} </small>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p class="text-primary fs-3"><b>₹ {{ $test->price }}</b></p>
-                                    <a class="btn btn-accent px-3 w-50" style="border-radius:10px;"
+                                    <a class="btn btn-accent px-3 w-50"style="border-radius:10px;"
                                         href="{{ route('test.view.select', $test->id) }}">Book<i
                                             class="bi bi-chevron-double-right ms-1"></i></a>
                                 </div>
@@ -904,15 +905,5 @@
             }
 
         }
-
-        // function showlist() {
-        //     var list = document.getElementById('searchListOverlay');
-        //     list.classList.remove('d-none');
-        // }
-
-        // function hidelist() {
-        //     var list = document.getElementById('searchListOverlay');
-        //     list.classList.add('d-none');
-        // }
     </script>
 </x-guest>

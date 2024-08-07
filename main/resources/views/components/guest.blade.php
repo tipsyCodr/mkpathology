@@ -270,61 +270,23 @@
 </body>
 <script>
     $(document).ready(function() {
-        function updateCarousel() {
-            var width = $(window).width();
-            var $wrapper = $('.health-package-mobile ');
 
-            if (width < 600) {
-                // Add Owl Carousel classes
-                if (!$wrapper.hasClass('owl-carousel')) {
-                    $wrapper.addClass('owl-carousel owl-theme');
-                    $wrapper.owlCarousel({
-                        items: 1, // or however many items you want
-                        loop: true,
-                        margin: 10,
-                        nav: false,
-                        dots: true,
-                        // navText: ["<", ">"],
-                        autoplay: true,
-                        autoplayTimeout: 3000,
-                        autoplayHoverPause: true,
-                        smartSpeed: 450, // Speed of the smart transition in milliseconds.
-                        fluidSpeed: 450, // Speed of the slide transition when dragging.
-                        onInitialized: function() {
-                            setEqualHeight(); // Ensure heights are equal after initialization
-                        },
-                        onTranslated: function() {
-                            setEqualHeight(); // Ensure heights are equal after translation
-                        }
-                    });
-                }
-            } else {
-                // Remove Owl Carousel classes
-                if ($wrapper.hasClass('owl-carousel')) {
-                    $wrapper.trigger('destroy.owl.carousel').removeClass('owl-carousel owl-theme');
-                }
-            }
-        }
+        var $wrapper = $('.health-package-mobile ');
 
-        // Initial check
-        updateCarousel();
+        $wrapper.owlCarousel({
+            items: 1, // or however many items you want
+            loop: true,
+            margin: 10,
+            nav: false,
+            dots: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplayHoverPause: true,
+            smartSpeed: 450, // Speed of the smart transition in milliseconds.
+            fluidSpeed: 450, // Speed of the slide transition when dragging.
 
-        // Check on window resize
-        $(window).resize(function() {
-            updateCarousel();
         });
 
-
-        function setEqualHeight() {
-            var maxHeight = 0;
-            $('.health-package-mobile .item').each(function() {
-                var thisHeight = $(this).outerHeight();
-                if (thisHeight > maxHeight) {
-                    maxHeight = thisHeight;
-                }
-            });
-            $('.health-package-mobile .item').height(maxHeight);
-        }
 
     });
 </script>

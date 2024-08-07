@@ -819,6 +819,30 @@
         const testRadio = document.getElementById('test-radio')
         const packageWrapper = document.getElementById('package-wrapper')
         const testWrapper = document.getElementById('test-wrapper')
+        const packageWrapperMobile = document.getElementById('package-wrapper-mobile')
+        const testWrapperMobile = document.getElementById('test-wrapper-mobile')
+
+        function updateVisibility() {
+            const width = window.innerWidth;
+            if (width < 750) {
+                packageWrapperMobile.classList.remove('d-none');
+                testWrapperMobile.classList.remove('d-none');
+
+                packageWrapper.classList.add('d-none')
+                testWrapper.classList.add('d-none')
+            } else {
+                packageWrapperMobile.classList.add('d-none');
+                testWrapperMobile.classList.add('d-none');
+
+                packageWrapper.classList.remove('d-none')
+                testWrapper.classList.add('d-none')
+            }
+        }
+
+        window.addEventListener('resize', updateVisibility);
+
+        // Initial check on page load
+        updateVisibility();
 
         packageRadio.addEventListener('change', () => {
             packageWrapper.classList.remove('d-none')

@@ -270,11 +270,32 @@
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" data-wow-offset="0">
                         <div class="card health-package-card h-100 shadow">
                             <div class="card-body">
-                                <h5 class="card-title font-weight-bold">{{ $package->name }}</h5>
-                                <a class="text-primary font-weight-bold">Price: INR
-                                    {{ $package->price }}</a>
+                                <div class="d-flex flex-row justify-content-between">
+                                    <h5 class="card-title font-weight-bold" data-bs-toggle="modal"
+                                        data-bs-target="#package-modal" data-id="{{ $package->id }}"
+                                        onclick="getPackage({{ $package->id }})">{{ $package->name }}</h5>
+                                    <a class="font-weight-bold text-accent">₹{{ $package->price }}</a>
+                                </div>
 
-                                <p class="card-text">{{ $package->description }}</p>
+                                <div class="">
+
+                                    {{-- @dd($package->tests) --}}
+                                    @php
+                                        $testNames = [];
+                                        if (!empty($package->test_id)) {
+                                            $testIds = json_decode($package->test_id, true);
+                                            foreach ($testIds as $testId) {
+                                                $test = App\Models\Test::find($testId);
+                                                if ($test) {
+                                                    $testNames[] = $test->name;
+                                                }
+                                            }
+                                        }
+                                    @endphp
+                                    <b class="text-accent fs-6 ">{{ count($testNames) }} Tests</b>
+                                </div>
+
+                                <p class="card-text text-dark">{{ $package->description }}</p>
 
                                 <style>
                                     .collapse-content {
@@ -285,11 +306,12 @@
                                         display: block;
                                     }
                                 </style>
-                                <div class="collapse-hover">
+
+                                {{-- <div class="">
                                     <b>Tests Included:</b>
-                                    <ul class="list-unstyled collapse-content">
-                                        {{-- @dd($package->tests) --}}
-                                        @php
+                                    <ul class="list-unstyled "> --}}
+                                {{-- @dd($package->tests) --}}
+                                {{-- @php
                                             $testNames = [];
                                             if (!empty($package->test_id)) {
                                                 $testIds = json_decode($package->test_id, true);
@@ -299,16 +321,16 @@
                                                         $testNames[] = $test->name;
                                                     }
                                                 }
-                                            }
-                                        @endphp
-                                        @foreach ($testNames as $testName)
-                                            <li>{{ $testName }}</li>
-                                        @endforeach
-                                        @foreach ($package->tests as $test)
-                                            <li>{{ $test->name }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
+                                            } --}}
+                                {{-- @endphp
+                                @foreach ($testNames as $testName)
+                                    <li>{{ $testName }}</li>
+                                @endforeach
+                                @foreach ($package->tests as $test)
+                                    <li>{{ $test->name }}</li>
+                                @endforeach --}}
+                                {{-- </ul>
+                            </div> --}}
                             </div>
                             <a href="{{ route('package.book', $package->id) }}"
                                 class="position-relative bottom-10 btn btn-accent">Book
@@ -426,10 +448,12 @@
                     .health-package-head {
                         display: flex;
                     }
-
                 }
             </style>
-            <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem"> Top Packages</div>
+
+
+            <div class="font-weight-bolder text-dark my-2 d-md-none d-sm-block" style="font-size: 1.8rem"> Top
+                Packages</div>
             <div id='package-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile "
                 data-wow-delay="0.1s">
                 @foreach ($packages as $package)
@@ -447,7 +471,7 @@
                                 <p class="card-text ">{{ $package->description }}</p>
                                 <div class="collapse-hover d-flex justify-content-between align-items-end">
                                     <a class="text-primary font-weight-bold fs-4">
-                                        <span>Price: INR</span> {{ $package->price }}
+                                        <span>₹ </span> {{ $package->price }}
                                     </a>
                                     <a href="{{ route('package.book', $package->id) }}"
                                         class="position-relative bottom-10 btn btn-accent w-50"
@@ -472,18 +496,22 @@
                 <div class="row g-4">
                     @foreach ($tests as $test)
                         <div class="col-lg-3 col-md-6 o-">
-                            <div class="service-item">
-                                <div class="icon-box-primary mb-4">
-                                    <i class="{{ $test->icon }} text-dark"></i>
+                            <div class="p-2 shadow card-hover">
+
+                                <div class="d-flex flex-row justify-content-between">
+                                    <h5 class="mb-3 text-accent" data-bs-toggle="modal" data-bs-target="#test-modal"
+                                        data-id="{{ $test->id }}" onclick="getTest('{{ $test->id }}')"
+                                        style='height: 65px;'>
+                                        {{ $test->name }}</h5>
+                                    <p class="text-dark"><b style='white-space: nowrap;'>₹ {{ $test->price }}</b>
+                                    </p>
                                 </div>
-                                <h5 class="mb-3">{{ $test->name }}</h4>
-                                    <small class="text-muted">{{ $test->description }} </small>
-                                    <p class="text-primary"><b>₹ {{ $test->price }}</b></p>
-                                    <a class="btn btn-primary px-3"
-                                        href="{{ route('test.view.select', $test->id) }}">Book<i
-                                            class="bi bi-chevron-double-right ms-1"></i></a>
+                                <h3 class="fs-6 text-dark">Description</h3>
+                                <p class="text-black" style='height: 48px;'>{{ $test->description }} </p>
+                                <a class="btn btn-block btn-accent w-100"
+                                    href="{{ route('test.view.select', $test->id) }}">Book<i
+                                        class="bi bi-chevron-double-right ms-1"></i></a>
                             </div>
-                            {{-- {{ route('test.book.view', $test->id) }} --}}
                         </div>
                     @endforeach
                     <script>
@@ -575,6 +603,7 @@
             </div>
             <style>
                 .card-hover {
+                    border-radius: 10px;
                     transition: 0.2s ease-in-out;
                 }
 
@@ -583,13 +612,15 @@
                 }
 
                 .card-hover:hover {
-                    background-color: #efefef;
+                    transform: scale(1.02);
+                    background-color: #f5f5f5;
                 }
             </style>
 
 
             <!-- test mobile view start  -->
-            <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem">Top Tests</div>
+            <div class="font-weight-bolder text-dark my-2 d-md-none d-sm-block " style="font-size: 1.8rem">Top Tests
+            </div>
             <div id='test-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile ">
                 @foreach ($tests as $test)
                     <div class="item card w-100">

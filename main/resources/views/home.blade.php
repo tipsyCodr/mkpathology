@@ -319,8 +319,8 @@
 
 <!-- Modal -->
 <div class="modal fade" id="package-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="bottom:-30px; top:initial;">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
+  <div class="modal-dialog modal-dialog-scrollable d-flex align-items-end">
+    <div class="modal-content mb-4">
       <div class="modal-header">
       @for ($i = 0; $i < 1; $i++)
         <h5 class="modal-title fs-2" id="staticBackdropLabel">{{ $package->name }}</h5>
@@ -479,8 +479,8 @@
             
 <!-- Modal -->
 <div class="modal fade" id="test-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="bottom:-30px; top:initial;">
-  <div class="modal-dialog modal-dialog-scrollable">
-    <div class="modal-content">
+  <div class="modal-dialog modal-dialog-scrollable d-flex align-items-end">
+    <div class="modal-content mb-4">
        
         @for ($i = 0; $i < 1; $i++)
       <div class="modal-header">

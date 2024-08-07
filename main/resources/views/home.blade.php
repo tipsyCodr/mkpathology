@@ -285,6 +285,22 @@
                     background:none;
 
                 }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 100%, 0);
+            }
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .fade-in-up {
+            animation-name: fadeInUp;
+            animation-duration: 0.5s;
+            animation-fill-mode: both;
+        }
 
 
                 @media (max-width: 750px) {
@@ -318,7 +334,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade" id="package-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="bottom:-30px; top:initial;">
+<div class="modal fade-in-up" id="package-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="bottom:-30px; top:initial;">
   <div class="modal-dialog modal-dialog-scrollable d-flex align-items-end">
     <div class="modal-content mb-4">
       <div class="modal-header">
@@ -478,7 +494,7 @@
 
             
 <!-- Modal -->
-<div class="modal fade" id="test-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="bottom:-30px; top:initial;">
+<div class="modal fade-in-up" id="test-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="bottom:-30px; top:initial;">
   <div class="modal-dialog modal-dialog-scrollable d-flex align-items-end">
     <div class="modal-content mb-4">
        

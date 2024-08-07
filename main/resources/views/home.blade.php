@@ -358,14 +358,14 @@
                             <div class="d-flex flex-row justify-content-between my-2">
                                 <h5 class="modal-title fs-2 package_name text-accent" id="staticBackdropLabel">
                                     {{ $package->name }}</h5>
-                                <a class="text-dark font-weight-bold fs-3 package_price">
+                                <p class="text-dark font-weight-bold fs-5 package_price nowrap">
                                     ₹
-                                    {{ $package->price }}</a> </br>
+                                    {{ $package->price }}</p> </br>
 
                             </div>
 
                             <span class="fs-5 font-weight-bold text-dark">What is it for ?</span>
-                            <p class="package_description">{{ $package->description }}</p>
+                            <p class="package_description text-dark">{{ $package->description }}</p>
 
                             <div class="">
                                 <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
@@ -384,18 +384,18 @@
                                         }
                                     @endphp
                                     @foreach ($testNames as $testName)
-                                        <li>{{ $testName }}</li>
+                                        <li class='text-accent'>{{ $testName }}</li>
                                     @endforeach
-                                    @foreach ($package->tests as $test)
-                                        <li>{{ $test->name }}</li>
-                                    @endforeach
+                                    {{-- @foreach ($package->tests as $test)
+                                        <li class='text-dark'>{{ $test->name }}</li>
+                                    @endforeach --}}
                                 </ul>
                             </div>
                         </div> <!-- end of modal body  -->
                         @endfor
                         <div class="modal-footer">
                             <a href="{{ route('package.book', $package->id) }}"
-                                class="position-relative bottom-10 btn btn-block btn-accent w-30"
+                                class="position-relative bottom-10 btn btn-block btn-accent w-100"
                                 style="">Book<i class="bi bi-chevron-double-right ms-1"></i>
                             </a>
                             <!-- <button type="button" class="btn btn-primary">Understood</button> -->
@@ -417,6 +417,9 @@
                     font-weight: 800;
                 }
 
+                .nowrap {
+                    white-space: nowrap;
+                }
 
                 @media (max-width: 750px) {
                     .health-package-mobile .health-test-mobile {
@@ -563,7 +566,7 @@
             <!-- test desktop view end  -->
 
             <!-- Modal -->
-            <div class="modal fade-in-up " id="test-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+            <div class="modal fade-in-up " id="test-modal" data-bs-backdrop="static" data-bs-keyboard="true"
                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
                 style="bottom:-35px; top:initial;">
                 <div class="modal-dialog modal-dialog-scrollable d-flex align-items-end">

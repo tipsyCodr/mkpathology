@@ -24,6 +24,8 @@ Route::view('register', 'register')->name('register');
 
 Route::get('searchAll', [WebController::class, 'searchAll'])->name('search.all');
 Route::get('view/{type}/{id}', [WebController::class, 'viewDescription'])->name('view.description');
+Route::get('getTest/{id}', [WebController::class, 'getTest'])->name('get.test.data');
+Route::get('getPackage/{id}', [WebController::class, 'getPackage'])->name('get.package.data');
 
 //===============================================================
 //Not used

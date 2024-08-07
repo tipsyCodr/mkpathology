@@ -166,6 +166,12 @@
         .navbar .nav-link div {
             font-size: 12px;
         }
+
+        .fade-in-up {
+            animation-name: fadeInUp;
+            animation-duration: 0.5s;
+            animation-fill-mode: both;
+        }
     </style>
     <!-- Bottom Navbar -->
     <nav class="navbar fixed-bottom navbar-dark bg-light d-md-none overflow-hidden">
@@ -313,6 +319,70 @@
 
 
             </div>
+
+            <!-- Package Modal -->
+            <div class="modal fade-in-up" id="package-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+                style="bottom:-30px; top:initial;">
+                <div class="modal-dialog modal-dialog-scrollable d-flex align-items-end">
+                    <div class="modal-content mb-4"
+                        style="border-top-left-radius: 25px;border-top-right-radius: 25px;">
+                        <div class="modal-header">
+                            @for ($i = 0; $i < 1; $i++)
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="d-flex flex-row justify-content-between">
+                                <h5 class="modal-title fs-2 package_name" id="staticBackdropLabel">
+                                    {{ $package->name }}</h5>
+                                <a class="text-primary font-weight-bold fs-3 package_price">
+                                    ₹
+                                    {{ $package->price }}</a> </br>
+
+                            </div>
+                            <span class="fs-5 font-weight-bold text-dark">What is it for ?</span>
+                            <p class="package_description">{{ $package->description }}</p>
+
+                            <div class="">
+                                <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
+                                <ul class="list-unstyled ">
+                                    {{-- @dd($package->tests) --}}
+                                    @php
+                                        $testNames = [];
+                                        if (!empty($package->test_id)) {
+                                            $testIds = json_decode($package->test_id, true);
+                                            foreach ($testIds as $testId) {
+                                                $test = App\Models\Test::find($testId);
+                                                if ($test) {
+                                                    $testNames[] = $test->name;
+                                                }
+                                            }
+                                        }
+                                    @endphp
+                                    @foreach ($testNames as $testName)
+                                        <li>{{ $testName }}</li>
+                                    @endforeach
+                                    @foreach ($package->tests as $test)
+                                        <li>{{ $test->name }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        </div> <!-- end of modal body  -->
+                        @endfor
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <a href="{{ route('package.book', $package->id) }}"
+                                class="position-relative bottom-10 btn btn-accent w-30" style="">Book<i
+                                    class="bi bi-chevron-double-right ms-1"></i>
+                            </a>
+                            <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Package Modal Ends-->
+
             <!-- package mobile view  -->
             <style>
                 .health-package-mobile {
@@ -359,16 +429,20 @@
 
                 }
             </style>
-            <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem"> Top
-                Packages</div>
-            <div id='package-wrapper-mobile'
-                class="owl-carousel owl-theme health-package-mobile wow fadeInUp m-2 p-3 border"
+            <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem"> Top Packages</div>
+            <div id='package-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile "
                 data-wow-delay="0.1s">
                 @foreach ($packages as $package)
-                    <div class="item">
-                        <div class=" health-package-card h-100 shadow w-100">
-                            <div class="">
-                                <h5 class="card-title font-weight-bold">{{ $package->name }}</h5>
+                    <div class="item" data-bs-toggle="modal" data-bs-target="#package-modal"
+                        data-id="{{ $package->id }}" onclick="getPackage({{ $package->id }})">
+                        <div class="card health-package-card h-100 shadow w-100">
+                            <div class="p-4 card-hover">
+                                <div class="d-flex justify-content-start align-items-end">
+                                    <h5 class="card-title font-weight-bold">
+                                        {{ $package->name }}</h5> &nbsp;&nbsp;
+
+
+                                </div>
                                 <p class="card-text ">{{ $package->description }}</p>
                                 <div class="collapse-hover d-flex justify-content-between align-items-end">
                                     <a class="text-primary font-weight-bold fs-4">
@@ -459,29 +533,81 @@
             </div>
             <!-- test desktop view end  -->
 
-            <!-- test mobile view start  -->
-            <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem">
-                Top Tests</div>
-            <div id='test-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile wow fadeInUp"
-                data-wow-delay="0.1s">
-                @foreach ($tests as $test)
-                    <div class=" card w-100">
-                        <div class="p-4">
+            <!-- Modal -->
+            <div class="modal fade-in-up " id="test-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+                tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
+                style="bottom:-35px; top:initial;">
+                <div class="modal-dialog modal-dialog-scrollable d-flex align-items-end">
+                    <div class="modal-content mb-4"
+                        style="border-top-left-radius: 25px;border-top-right-radius: 25px;">
 
-                            <h5 class="mb-3">{{ $test->name }}</h4>
-                                <small class="text-muted card-text">{{ $test->description }} </small>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="text-primary fs-3"><b>₹ {{ $test->price }}</b></p>
-                                    <a class="btn btn-accent px-3 w-50"style="border-radius:10px;"
-                                        href="{{ route('test.view.select', $test->id) }}">Book<i
-                                            class="bi bi-chevron-double-right ms-1"></i></a>
+                        @for ($i = 0; $i < 1; $i++)
+                            <div class="modal-header ">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="">
+                                    <div class=" mb-4 d-flex justify-content-between">
+                                        <div>
+                                            <h2 class="test_name"></h2>
+                                        </div>
+                                        <div class="d-flex flex-row">
+                                            <p class="text-primary fs-5 "><b class="test_price"
+                                                    style="white-space: nowrap;"> </b></p>
+                                        </div>
+                                    </div>
+                                    <span class="fs-4 font-weight-bold text-dark">What is it for ?</span></br>
+                                    <small class="text-black test_description">{{ $test->description }} </small>
+
                                 </div>
+                            </div>
+                        @endfor
+                        <div class="modal-footer">
+                            <a class="btn btn-block btn-accent px-3 w-100"
+                                href="{{ route('test.view.select', $test->id) }}">Book<i
+                                    class="bi bi-chevron-double-right ms-1"></i></a>
                         </div>
-                        {{-- {{ route('test.book.view', $test->id) }} --}}
+                    </div>
+                </div>
+            </div>
+            <style>
+                .card-hover {
+                    transition: 0.2s ease-in-out;
+                    cursor: pointer;
+                }
+
+                .card-hover:hover {
+                    background-color: #efefef;
+                }
+            </style>
+            <!-- test mobile view start  -->
+            <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem">Top Tests</div>
+            <div id='test-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile ">
+                @foreach ($tests as $test)
+                    <div class="item card w-100" data-bs-toggle="modal" data-bs-target="#test-modal"
+                        data-id="{{ $test->id }}" onclick="getTest('{{ $test->id }}')">
+                        <div class="p-4 card-hover">
+                            <div class=" mb-4">
+                                <i class="{{ $test->icon }} text-dark"></i>
+                            </div>
+                            <div class="d-flex justify-content-start align-items-start">
+
+                                <h5 class="mb-3">{{ $test->name }}</h4> &nbsp;&nbsp;&nbsp;
+
+                            </div>
+                            <small class="text-muted card-text">{{ $test->description }} </small>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="text-primary fs-3"><b>₹ {{ $test->price }}</b></p>
+                                <a class="btn btn-accent px-3 w-50"style="border-radius:10px;"
+                                    href="{{ route('test.view.select', $test->id) }}">Book<i
+                                        class="bi bi-chevron-double-right ms-1"></i></a>
+                            </div>
+                        </div>
                     </div>
                 @endforeach
             </div>
-
             <!-- test mobile view end  -->
         </div>
     </div>
@@ -652,118 +778,6 @@
     <!-- Video Modal End -->
 
 
-    <!-- Service Start -->
-    <div class="container-fluid container-service py-5">
-        <div class="container pt-5">
-            <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
-                <h1 class="display-6 mb-3">Mostly Booked Lab Tests</h1>
-                <p class="mb-5">Here is a list of mostly used lab test that you can choose from.</p>
-            </div>
-            <div class="row g-4">
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item">
-                        <div class="icon-box-primary mb-4">
-                            <i class="bi bi-heart-pulse text-dark"></i>
-                        </div>
-                        <h5 class="mb-3">COMPLETE BLOOD COUNT; CBC</h4>
-                            <small class="text-muted">20 Parameter(s) Covered</small>
-                            <p class="text-primary"><b>₹ 200</b></p>
-                            <a class="btn btn-dark px-3" href="">Add<i
-                                    class="bi bi-chevron-double-right ms-1"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item">
-                        <div class="icon-box-primary mb-4">
-                            <i class="bi bi-lungs text-dark"></i>
-                        </div>
-                        <h5 class="mb-3">HbA1c; GLYCOSYLATED HEMOGLOBIN</h4>
-                            <small class="text-muted">2 Parameter(s) Covered</small>
-                            <p class="text-primary"><b>₹ 350</b></p>
-                            <a class="btn btn-dark px-3" href="">Add<i
-                                    class="bi bi-chevron-double-right ms-1"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item">
-                        <div class="icon-box-primary mb-4">
-                            <i class="bi bi-virus text-dark"></i>
-                        </div>
-                        <h5 class="mb-3">URINE EXAMINATION, ROUTINE; URINE, R/E</h4>
-                            <small class="text-muted">16 Parameter(s) Covered</small>
-                            <p class="text-primary"><b>₹ 80</b></p>
-                            <a class="btn btn-dark px-3" href="">Add<i
-                                    class="bi bi-chevron-double-right ms-1"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="service-item">
-                        <div class="icon-box-primary mb-4">
-                            <i class="bi bi-capsule-pill text-dark"></i>
-                        </div>
-                        <h5 class="mb-3">GLUCOSE, FASTING (F) AND POST MEAL (PP), 2 HOURS</h4>
-                            <small class="text-muted">2 Parameter(s) Covered</small>
-                            <p class="text-primary"><b>₹ 150</b></p>
-                            <a class="btn btn-dark px-3" href="">Add<i
-                                    class="bi bi-chevron-double-right ms-1"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                    <div class="service-item">
-                        <div class="icon-box-primary mb-4">
-                            <i class="bi bi-capsule text-dark"></i>
-                        </div>
-                        <h5 class="mb-3">THYROID PROFILE, TOTAL</h4>
-                            <small class="text-muted">3 Parameter(s) Covered</small>
-
-                            <p class="text-primary"><b>₹ 550</b></p>
-                            <a class="btn btn-dark px-3" href="">Add<i
-                                    class="bi bi-chevron-double-right ms-1"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                    <div class="service-item">
-                        <div class="icon-box-primary mb-4">
-                            <i class="bi bi-prescription2 text-dark"></i>
-                        </div>
-                        <h5 class="mb-3">SMART REPORT</h4>
-                            <small class="text-muted">1 Parameter(s) Covered</small>
-                            <p class="text-primary"><b>₹ 200</b></p>
-                            <a class="btn btn-dark px-3" href="">Add<i
-                                    class="bi bi-chevron-double-right ms-1"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                    <div class="service-item">
-                        <div class="icon-box-primary mb-4">
-                            <i class="bi bi-clipboard2-pulse text-dark"></i>
-                        </div>
-                        <h5 class="mb-3">GLUCOSE, FASTING (F)</h4>
-                            <small class="text-muted">2 Parameter(s) Covered</small>
-                            <p class="text-primary"><b>₹ 60</b></p>
-                            <a class="btn btn-dark px-3" href="">Add<i
-                                    class="bi bi-chevron-double-right ms-1"></i></a>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="service-item">
-                        <div class="icon-box-primary mb-4">
-                            <i class="bi bi-file-medical text-dark"></i>
-                        </div>
-                        <h5 class="mb-3">SWASTHFIT SUPER 2</h4>
-                            <small class="text-muted">55 Parameter(s) Covered</small>
-                            <p class="text-primary"><b>₹ 1250 </b></p>
-                            <a class="btn btn-dark px-3" href="">Add<i
-                                    class="bi bi-chevron-double-right ms-1"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Service End -->
-
-
-
     <!-- Testimonial Start -->
     <div class="container-fluid testimonial py-5">
         <div class="container pt-5">
@@ -904,6 +918,87 @@
                 document.getElementById('searchList').innerHTML = '';
             }
 
+        }
+
+        function getTest(id) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `/getTest/${id}`, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    // console.log(response);
+                    let test = {
+                        id: response.id,
+                        name: response.name,
+                        test_no: response.test_no,
+                        price: response.price,
+                        description: response.description,
+                        parameter_id: response.parameter_id,
+                        created_at: response.created_at,
+                        updated_at: response.updated_at
+                    };
+                    console.log("ID:", test.id);
+                    console.log("Name:", test.name);
+                    console.log("Test No:", test.test_no);
+                    console.log("Price:", test.price);
+                    console.log("Description:", test.description);
+                    console.log("Parameter ID:", test.parameter_id);
+                    console.log("Created at:", test.created_at);
+                    console.log("Updated at:", test.updated_at);
+                    const testNameElement = document.querySelector('.test_name');
+                    if (testNameElement) {
+                        testNameElement.innerHTML = test.name;
+                    }
+                    const testDescriptionElement = document.querySelector('.test_description');
+                    if (testDescriptionElement) {
+                        testDescriptionElement.innerHTML = response.description;
+                    }
+                    const testPriceElement = document.querySelector('.test_price');
+                    if (testPriceElement) {
+                        testPriceElement.innerHTML = "₹ " + response.price + "/-";
+                    }
+                    // document.getElementById('test_id').href = "/view/test/" + response.id;
+                }
+            };
+            xhr.send();
+        }
+
+        function getPackage(id) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `/getPackage/${id}`, true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var response = JSON.parse(xhr.responseText);
+                    let package = {
+                        id: response.id,
+                        name: response.name,
+                        price: response.price,
+                        description: response.description,
+                        test_ids: response.test_ids,
+                        created_at: response.created_at,
+                        updated_at: response.updated_at
+                    };
+                    console.log("ID:", package.id);
+
+                    var packageNameElement = document.getElementsByClassName('package_name')[0];
+                    if (packageNameElement) {
+                        packageNameElement.innerHTML = response.name;
+                    }
+                    var packageDescriptionElement = document.getElementsByClassName('package_description')[0];
+                    if (packageDescriptionElement) {
+                        packageDescriptionElement.innerHTML = response.description;
+                    }
+                    var packagePriceElement = document.getElementsByClassName('package_price')[0];
+                    if (packagePriceElement) {
+                        packagePriceElement.innerHTML = "₹ " + response.price + "/-";
+                    }
+                    var packageIdElement = document.getElementsByClassName('package_id')[0];
+                    if (packageIdElement) {
+                        packageIdElement.href = "/view/test/" + response.id;
+                    }
+                }
+            };
+            xhr.send();
         }
     </script>
 </x-guest>

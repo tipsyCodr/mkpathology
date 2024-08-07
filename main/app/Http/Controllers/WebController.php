@@ -130,6 +130,7 @@ class WebController extends Controller
         $tests = $search ? Test::where('name', 'like', '%' . $search . '%')->get() : Test::all()->paginate(30);
         return $tests;
     }
+
     public function searchAll(Request $request)
     {
         $search = $request->input('q', '');
@@ -152,6 +153,7 @@ class WebController extends Controller
             'packages' => $packages,
         ];
     }
+
     public function viewDescription(Request $request)
     {
         $type = request()->segment(2);
@@ -164,7 +166,16 @@ class WebController extends Controller
         }
         return view('view-description', compact('item', 'type'));
     }
-
+    public function getTest(Request $request)
+    {
+        $id = request()->segment(2);
+        return Test::find($id);
+    }
+    public function getPackage(Request $request)
+    {
+        $id = request()->segment(2);
+        return Package::find($id);
+    }
     public function confirmBooking($id, $status, $type)
     {
         $type == "Package" ? $booking = \App\Models\PackageBooking::find($id) : $booking = \App\Models\TestBooking::find($id);

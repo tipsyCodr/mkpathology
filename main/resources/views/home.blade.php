@@ -321,7 +321,7 @@
             </div>
 
             <!-- Package Modal -->
-            <div class="modal fade-in-up" id="package-modal" data-bs-backdrop="static" data-bs-keyboard="false"
+            <div class="modal fade-in-up" id="package-modal" data-bs-backdrop="static" data-bs-keyboard="true"
                 tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"
                 style="bottom:-30px; top:initial;">
                 <div class="modal-dialog modal-dialog-scrollable d-flex align-items-end">
@@ -333,14 +333,15 @@
                                     aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="d-flex flex-row justify-content-between">
-                                <h5 class="modal-title fs-2 package_name" id="staticBackdropLabel">
+                            <div class="d-flex flex-row justify-content-between my-2">
+                                <h5 class="modal-title fs-2 package_name text-accent" id="staticBackdropLabel">
                                     {{ $package->name }}</h5>
-                                <a class="text-primary font-weight-bold fs-3 package_price">
+                                <a class="text-dark font-weight-bold fs-3 package_price">
                                     ₹
                                     {{ $package->price }}</a> </br>
 
                             </div>
+
                             <span class="fs-5 font-weight-bold text-dark">What is it for ?</span>
                             <p class="package_description">{{ $package->description }}</p>
 
@@ -371,10 +372,9 @@
                         </div> <!-- end of modal body  -->
                         @endfor
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <a href="{{ route('package.book', $package->id) }}"
-                                class="position-relative bottom-10 btn btn-accent w-30" style="">Book<i
-                                    class="bi bi-chevron-double-right ms-1"></i>
+                                class="position-relative bottom-10 btn btn-block btn-accent w-30"
+                                style="">Book<i class="bi bi-chevron-double-right ms-1"></i>
                             </a>
                             <!-- <button type="button" class="btn btn-primary">Understood</button> -->
                         </div>
@@ -433,12 +433,13 @@
             <div id='package-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile "
                 data-wow-delay="0.1s">
                 @foreach ($packages as $package)
-                    <div class="item" data-bs-toggle="modal" data-bs-target="#package-modal"
-                        data-id="{{ $package->id }}" onclick="getPackage({{ $package->id }})">
+                    <div class="item">
                         <div class="card health-package-card h-100 shadow w-100">
                             <div class="p-4 card-hover">
                                 <div class="d-flex justify-content-start align-items-end">
-                                    <h5 class="card-title font-weight-bold">
+                                    <h5 class="card-title font-weight-bold" data-bs-toggle="modal"
+                                        data-bs-target="#package-modal" data-id="{{ $package->id }}"
+                                        onclick="getPackage({{ $package->id }})">
                                         {{ $package->name }}</h5> &nbsp;&nbsp;
 
 
@@ -575,6 +576,9 @@
             <style>
                 .card-hover {
                     transition: 0.2s ease-in-out;
+                }
+
+                .card-title {
                     cursor: pointer;
                 }
 
@@ -582,19 +586,22 @@
                     background-color: #efefef;
                 }
             </style>
+
+
             <!-- test mobile view start  -->
             <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem">Top Tests</div>
             <div id='test-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile ">
                 @foreach ($tests as $test)
-                    <div class="item card w-100" data-bs-toggle="modal" data-bs-target="#test-modal"
-                        data-id="{{ $test->id }}" onclick="getTest('{{ $test->id }}')">
+                    <div class="item card w-100">
                         <div class="p-4 card-hover">
                             <div class=" mb-4">
                                 <i class="{{ $test->icon }} text-dark"></i>
                             </div>
                             <div class="d-flex justify-content-start align-items-start">
 
-                                <h5 class="mb-3">{{ $test->name }}</h4> &nbsp;&nbsp;&nbsp;
+                                <h5 class="mb-3 card-title" data-bs-toggle="modal" data-bs-target="#test-modal"
+                                    data-id="{{ $test->id }}" onclick="getTest('{{ $test->id }}')">
+                                    {{ $test->name }}</h4> &nbsp;&nbsp;&nbsp;
 
                             </div>
                             <small class="text-muted card-text">{{ $test->description }} </small>

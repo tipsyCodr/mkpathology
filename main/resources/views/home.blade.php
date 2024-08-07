@@ -552,10 +552,10 @@
                                 <div class="">
                                     <div class=" mb-4 d-flex justify-content-between">
                                         <div>
-                                            <h2 class="test_name"></h2>
+                                            <h2 class="test_name text-accent"></h2>
                                         </div>
                                         <div class="d-flex flex-row">
-                                            <p class="text-primary fs-5 "><b class="test_price"
+                                            <p class="text-dark fs-5 "><b class="test_price"
                                                     style="white-space: nowrap;"> </b></p>
                                         </div>
                                     </div>

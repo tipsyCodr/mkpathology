@@ -83,6 +83,7 @@
                         <x-input name="name" label="Package Name" :placeholder="'Enter package name'" />
                         <x-input name="price" :type="'number'" :pattern="'\d*'" inputmode="numeric"
                             label="Package Price" :placeholder="'Enter package price'" />
+                        {{-- <x-input name="image" type="file" label="Package Image" accept="image/*" /> --}}
 
                         <div>
                             <h3>Available Tests</h3>

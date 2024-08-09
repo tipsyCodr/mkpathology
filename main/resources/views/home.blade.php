@@ -579,9 +579,7 @@
 
                     </div>
 
-                    <img class="w-100 py-2 package_photo_url"
-                        src="{{ asset('assets/img/packages') . '/' . $package->package_photo_url }}"
-                        alt="Jaanch Infertility Profile" />
+                    <img class="w-100 py-2 package_photo_url" src="" alt="Jaanch Infertility Profile" />
                     <span class="fs-5 font-weight-bold text-dark">What is it for ?</span>
                     <p class="package_description text-dark">{{ $package->description }}</p>
 

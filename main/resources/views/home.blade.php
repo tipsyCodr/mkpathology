@@ -1198,7 +1198,7 @@
                     }
                     var packageIdElement = document.getElementsByClassName('package_photo_url')[0];
                     if (packageIdElement) {
-                        packageIdElement.src = {{ asset('assets/img/packages') . '/' }}response.package_photo_url;
+                        packageIdElement.src = 'assets/img/packages/' + response.package_photo_url;
                     }
                 }
             };

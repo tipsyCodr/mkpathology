@@ -579,7 +579,7 @@
 
                     </div>
 
-                    <img class="w-100 py-2"
+                    <img class="w-100 py-2 package_photo_url"
                         src="{{ asset('assets/img/packages') . '/' . $package->package_photo_url }}"
                         alt="Jaanch Infertility Profile" />
                     <span class="fs-5 font-weight-bold text-dark">What is it for ?</span>
@@ -1174,6 +1174,7 @@
                         price: response.price,
                         description: response.description,
                         test_ids: response.test_ids,
+                        package_photo_url: response.package_photo_url,
                         created_at: response.created_at,
                         updated_at: response.updated_at
                     };
@@ -1194,6 +1195,10 @@
                     var packageIdElement = document.getElementsByClassName('package_id')[0];
                     if (packageIdElement) {
                         packageIdElement.href = "/view/test/" + response.id;
+                    }
+                    var packageIdElement = document.getElementsByClassName('package_photo_url')[0];
+                    if (packageIdElement) {
+                        packageIdElement.src = response.package_photo_url;
                     }
                 }
             };

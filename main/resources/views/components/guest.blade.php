@@ -103,15 +103,23 @@
     <div class="container-fluid sticky-top main-nav">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-0 px-lg-3">
+                <button type="button" class="navbar-toggler me-0 bg-accent" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <a href="index.html" class="navbar-brand lg-none">
                     <h1 class="text-primary m-0"><img src={{ asset('assets/img/logo_trans.png') }} width="200"
                             alt=""></h1>
                     <!-- <h1 class="text-primary m-0">Lab<span class="text-dark">sky</span></h1> -->
                 </a>
-                <button type="button" class="navbar-toggler me-0 bg-accent" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a href="https://wa.me/+919581016768" class="  text-white font-bold py-1 px-2"
+                    style="background-color: #fff;width: fit-content; border-radius: 10px;" target="_blank">
+                    <img src="{{ asset('assets/img/wp.png') }}" alt="whatsapp-icon" width="40">
+                </a>
+                <a href="tel:8827440557">
+                    <i class="bi bi-telephone-inbound fs-2"></i>
+                </a>
+
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav">
                         <a href="{{ route('home') }}"

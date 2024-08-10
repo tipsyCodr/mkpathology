@@ -836,7 +836,7 @@
             height: 40px
         }
 
-        .car-text {
+        .card-text {
             height: 50px;
         }
 

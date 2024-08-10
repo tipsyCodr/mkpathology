@@ -314,10 +314,10 @@
         var $frequently_booked_test = $('#frequently_booked_test');
         $frequently_booked_test.owlCarousel({
             loop: true,
-            margin: 10, // Adjust if necessary
-            freeDrag: true,
+            margin: 1, // Adjust if necessary
             nav: false,
             dots: true,
+            mergeFit: true,
             dotsEach: false,
             autoplay: true,
             autoplayTimeout: 3000,

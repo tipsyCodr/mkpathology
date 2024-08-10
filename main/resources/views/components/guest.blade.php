@@ -103,15 +103,23 @@
     <div class="container-fluid sticky-top main-nav">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-0 px-lg-3">
+                <button type="button" class="navbar-toggler me-0 bg-accent" data-bs-toggle="collapse"
+                    data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <a href="index.html" class="navbar-brand lg-none">
                     <h1 class="text-primary m-0"><img src={{ asset('assets/img/logo_trans.png') }} width="200"
                             alt=""></h1>
                     <!-- <h1 class="text-primary m-0">Lab<span class="text-dark">sky</span></h1> -->
                 </a>
-                <button type="button" class="navbar-toggler me-0 bg-accent" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+                <a href="https://wa.me/+919581016768" class="  text-white font-bold py-1 px-2"
+                    style="background-color: #fff;width: fit-content; border-radius: 10px;" target="_blank">
+                    <img src="{{ asset('assets/img/wp.png') }}" alt="whatsapp-icon" width="40">
+                </a>
+                <a href="tel:8827440557">
+                    <i class="bi bi-telephone-inbound fs-2"></i>
+                </a>
+
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav">
                         <a href="{{ route('home') }}"
@@ -271,28 +279,61 @@
 <script>
     $(document).ready(function() {
 
-        $('#myModal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus')
-})
+        var $wrapper = $('.health-package-mobile ');
 
-            var $wrapper = $('.health-package-mobile ');
+        $wrapper.owlCarousel({
+            items: 1, // or however many items you want
+            loop: true,
+            margin: 10,
+            nav: false,
+            dots: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplayHoverPause: true,
+            smartSpeed: 450, // Speed of the smart transition in milliseconds.
+            fluidSpeed: 450, // Speed of the slide transition when dragging.
 
-                    $wrapper.owlCarousel({
-                        items: 1, // or however many items you want
-                        loop: true,
-                        margin: 10,
-                        nav: false,
-                        dots:true,
-                        autoplay: true,
-                        autoplayTimeout: 3000,
-                        autoplayHoverPause: true,
-                        smartSpeed: 450, // Speed of the smart transition in milliseconds.
-                        fluidSpeed: 450, // Speed of the slide transition when dragging.
-              
-                    });
-               });
+        });
+        
+        var $frequently_booked_test = $('#frequently_booked_test');
+        $frequently_booked_test.owlCarousel({
+    loop: true,
+    margin: 10, // Adjust if necessary
+    nav: false,
+    dots: true,
+    autoplay: true,
+    autoplayTimeout: 3000,
+    autoplayHoverPause: true,
+    smartSpeed: 450,
+    fluidSpeed: 450,
+    merge: true,
+    responsive: {
+        
+        0: {
+            items: 1,
+        },
+        450: {
+            items: 2,
+        },
+        750: {
+            items: 3,
+        },
+        1000: {
+            items: 4,
+            margin: 10,
+        },
+        1200: {
+            items: 5,
+            margin: 10,
+        }
+    },
+    responsiveRefreshRate: 100
+});
 
 
+
+
+    });
 </script>
 
 </html>

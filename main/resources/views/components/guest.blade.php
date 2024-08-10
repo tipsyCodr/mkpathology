@@ -102,23 +102,34 @@
     <!-- Navbar Start -->
     <div class="container-fluid sticky-top main-nav">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-0 px-lg-3">
-                <button type="button" class="navbar-toggler me-0 bg-accent" data-bs-toggle="collapse"
-                    data-bs-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <a href="index.html" class="navbar-brand lg-none">
-                    <h1 class="text-primary m-0"><img src={{ asset('assets/img/logo_trans.png') }} width="200"
-                            alt=""></h1>
-                    <!-- <h1 class="text-primary m-0">Lab<span class="text-dark">sky</span></h1> -->
-                </a>
-                <a href="https://wa.me/+919581016768" class="  text-white font-bold py-1 px-2"
-                    style="background-color: #fff;width: fit-content; border-radius: 10px;" target="_blank">
-                    <img src="{{ asset('assets/img/wp.png') }}" alt="whatsapp-icon" width="40">
-                </a>
-                <a href="tel:8827440557">
-                    <i class="bi bi-telephone-inbound fs-2"></i>
-                </a>
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-0 px-lg-3 ">
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <button type="button" class="navbar-toggler me-0 text-accent pt-3" data-bs-toggle="collapse"
+                        data-bs-target="#navbarCollapse">
+                        {{-- <span class="navbar-toggler-icon"></span> --}}
+                        <svg class="bi bi-list text-accent" width="1em" height="1em" viewBox="0 0 16 16"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                        </svg>
+                    </button>
+                    <a href="index.html" class="navbar-brand lg-none">
+                        <h1 class="text-primary m-0"><img src={{ asset('assets/img/logo_trans.png') }} width="140"
+                                alt=""></h1>
+                        <!-- <h1 class="text-primary m-0">Lab<span class="text-dark">sky</span></h1> -->
+                    </a>
+                </div>
+
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <a href="https://wa.me/+919581016768" class="  text-white font-bold py-1 px-2"
+                        style="background-color: #fff;width: fit-content; border-radius: 10px;" target="_blank">
+                        <img src="{{ asset('assets/img/whatsapp_outline.png') }}" alt="whatsapp-icon" width="40">
+                    </a>
+                    <a href="tel:8827440557">
+                        {{-- <i class="bi bi-telephone-inbound fs-2"></i> --}}
+                        <img src="{{ asset('assets/img/phone_blue.png') }}" alt="whatsapp-icon" width="40">
+                    </a>
+                </div>
 
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav">

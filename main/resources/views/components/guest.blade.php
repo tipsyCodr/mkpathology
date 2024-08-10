@@ -121,13 +121,17 @@
                 </div>
 
                 <div class="d-flex flex-row justify-content-between align-items-center">
-                    <a href="https://wa.me/+919581016768" class="  text-white font-bold py-1 px-2"
-                        style="background-color: #fff;width: fit-content; border-radius: 10px;" target="_blank">
-                        <img src="{{ asset('assets/img/whatsapp_outline.png') }}" alt="whatsapp-icon" width="40">
+
+                    <a href="https://wa.me/+919581016768" class="  text-white font-bold  mt-4 ml-2 p-1 rounded-pill"
+                        style="background-color: #e1e1e1; width: 30px; height:30px;" target="_blank">
+                        <img class='w-100 mb-1' src="{{ asset('assets/img/whatsapp_outline.png') }}"
+                            alt="whatsapp-icon">
                     </a>
-                    <a href="tel:8827440557">
+                    <div style="visibility: hidden;"> O</div>
+                    <a class="p-1 mr-2  mt-4 rounded-circle" href="tel:8827440557"
+                        style="background-color: #e1e1e1; width: 30px; height:30px;">
                         {{-- <i class="bi bi-telephone-inbound fs-2"></i> --}}
-                        <img src="{{ asset('assets/img/phone_blue.png') }}" alt="whatsapp-icon" width="40">
+                        <img class="w-100 mb-1" src="{{ asset('assets/img/phone.png') }}" alt="whatsapp-icon">
                     </a>
                 </div>
 
@@ -304,6 +308,41 @@
             smartSpeed: 450, // Speed of the smart transition in milliseconds.
             fluidSpeed: 450, // Speed of the slide transition when dragging.
 
+        });
+
+        var $frequently_booked_test = $('#frequently_booked_test');
+        $frequently_booked_test.owlCarousel({
+            loop: true,
+            margin: 10, // Adjust if necessary
+            nav: false,
+            dots: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplayHoverPause: true,
+            smartSpeed: 450,
+            fluidSpeed: 450,
+            merge: true,
+            responsive: {
+
+                0: {
+                    items: 1,
+                },
+                450: {
+                    items: 2,
+                },
+                750: {
+                    items: 3,
+                },
+                1000: {
+                    items: 4,
+                    margin: 10,
+                },
+                1200: {
+                    items: 5,
+                    margin: 10,
+                }
+            },
+            responsiveRefreshRate: 100
         });
 
 

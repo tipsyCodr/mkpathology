@@ -243,6 +243,73 @@
             </div>
 
 
+            <!-- Frequently Booked  --><?php
+            $frequently_booked = [
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/1070/cd862c2a-0776-4332-979c-d11a46e59309.png', 'title' => 'Full Body'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/8/efa9c45e-471b-43bc-add9-707d6935798b.png', 'title' => 'Fever'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/1062/ada3732a-b9e0-48d0-8679-1b93f4871a3e.png', 'title' => 'Heart'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/1067/e6025409-aeb1-4f88-987b-75026750e801.png', 'title' => 'Diabetes'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/1075/93db45fe-8e57-4ae1-ad5a-66ae6e8e3bc5.png', 'title' => 'Vitamin'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/36/acbe04f3-78aa-4d55-99c1-cb5f5eca8ef2.png', 'title' => 'Thyroid'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/16/582417a6-62d5-4407-8393-debaa0fe8e79.png', 'title' => 'Arthritis'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/21/15ff2632-b29e-41ab-b177-52bf405569b9.png', 'title' => 'Cancer'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/13/a531cc6d-2923-4be9-9f3e-8fb4b889dac0.png', 'title' => 'Hormone Tests'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/14/6e64f3f8-22f1-4050-8a59-3abdfc48dae1.png', 'title' => 'Allergy'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/1059/abbc08e3-f5ac-41fb-8c09-33c9da36c99b.png', 'title' => 'STD'],
+                ['image' => 'https://static-redcliffelabs.s3.amazonaws.com/media/category-files/1061/733b4390-d624-441a-9a5d-e1be7764040d.png', 'title' => 'Combo'],
+            ];
+            ?>
+            <style>
+                .PackagesCategories_frequent__option__j3Xr0 {
+                    cursor: pointer;
+                    /* height: 80px; */
+                    padding: 10px 16px;
+                    margin: 10px 1px;
+                    gap: 20px;
+                    flex-direction: row;
+                    align-items: center;
+                    /* width: 200px; */
+                    justify-content: flex-start;
+                }
+
+                .PackagesCategories_frequent__option--icon__tovns {
+                    width: 80px;
+                    height: 80px;
+                    place-self: center;
+                    padding: 14px 14px 15px 15px;
+                    background: linear-gradient(223.23deg, #fff -39.74%, #dbf5f9 94.44%);
+                    border-radius: 50%;
+                }
+            </style>
+            <div class="container-fluid py-5">
+                <div class="font-weight-bolder text-dark my-2" style="font-size: 1.8rem">Frequently Booked</div>
+                <div id='frequently_booked_test' class="owl-carousel owl-theme" data-wow-delay="0.1s">
+                    @foreach ($frequently_booked as $package)
+                        <div class="item ">
+                            <a href="/test">
+                                <div class="rounded-lg mx-4"
+                                    style="box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); border-radius:10px; width: fit-content;">
+                                    <div class="d-flex PackagesCategories_frequent__option__j3Xr0">
+                                        <div class="PackagesCategories_frequent__option--icon__tovns">
+                                            <img alt="{{ $package['title'] }}" loading="lazy" width="100"
+                                                height="100" decoding="async" src="{{ $package['image'] }}"
+                                                style="color: transparent; height: 100%; width: 100%;">
+                                        </div>
+                                        <p class="mb-0 font-weight-bold" style="color:#000000;">
+                                            {{ $package['title'] }}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <!-- Frequently Booked end  -->
+
+
+
+
             <div class="row mb-4 package-test-toggle">
                 <div class="col-12 d-flex justify-content-center">
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
@@ -559,7 +626,51 @@
     {{-- Modals --}}
 
 
+    <style>
+        .ProductDetailInstructions_homeCollection__c8urV {
+            margin: 0 0 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            flex-direction: row;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 500;
+            color: #2f3032;
+            text-transform: capitalize;
+            background: linear-gradient(90deg, rgba(219, 245, 249, .75), hsla(0, 0%, 100%, .75));
+            border-radius: 10px;
+            padding: 8px;
+        }
 
+        .ProductDetailInstructions_product__instructions__YlmoF {
+            display: flex;
+            column-gap: 10px;
+            justify-content: flex-start;
+            align-items: center;
+            width: 90%;
+            margin: 20px auto 30px;
+            scroll-behavior: smooth;
+            white-space: nowrap;
+        }
+
+        .ProductDetailInstructions_product__instructions__box__6ZaNF {
+            border: 1px solid #d9d9d9;
+            border-radius: 15px;
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            flex: 1 1;
+        }
+
+        .ProductDetailInstructions_product__instructions__box__fastingDur__mDNMM {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+            color: #000;
+        }
+    </style>
     <!-- Package Modal -->
     <div class="modal fade-in-up" id="package-modal" data-bs-backdrop="static" data-bs-keyboard="true"
         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="bottom:-30px; top:initial;">
@@ -580,32 +691,83 @@
                     </div>
 
                     <img class="w-100 py-2 package_photo_url" src="" alt="Jaanch Infertility Profile" />
-                    <span class="fs-5 font-weight-bold text-dark">What is it for ?</span>
-                    <p class="package_description text-dark">{{ $package->description }}</p>
+                    <div class="package-detail-instructions">
+                        <div class="ProductDetailInstructions_product__instructions__YlmoF">
+                            <div class="ProductDetailInstructions_product__instructions__box__6ZaNF undefined"><span
+                                    class="ProductDetailInstructions_product__instructions__box__heading__DzWSr">Fasting</span><span
+                                    class="ProductDetailInstructions_product__instructions__box__fastingDur__mDNMM">10-12
+                                    Hrs Required</span></div>
+                            <div class="ProductDetailInstructions_product__instructions__box__6ZaNF undefined"><span
+                                    class="ProductDetailInstructions_product__instructions__box__heading__DzWSr">Get
+                                    reports in</span><span
+                                    class="ProductDetailInstructions_product__instructions__box__fastingDur__mDNMM">12
+                                    hrs</span></div>
+                        </div>
 
-                    <div class="">
-                        <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
-                        <ul class="list-unstyled ">
-                            {{-- @dd($package->tests) --}}
-                            @php
-                                $testNames = [];
-                                if (!empty($package->test_id)) {
-                                    $testIds = json_decode($package->test_id, true);
-                                    foreach ($testIds as $testId) {
-                                        $test = App\Models\Test::find($testId);
-                                        if ($test) {
-                                            $testNames[] = $test->name;
+                        <div class="ProductDetailInstructions_homeCollection__c8urV">
+                            <img src="assets/img/delievery.png" alt="" class=""
+                                style="height:5rem;"><span>Home Sample Collection Available </span>
+                        </div>
+                        <span class="fs-5 font-weight-bold text-dark">What is it for ?</span>
+                        <p class="package_description text-dark">{{ $package->description }}</p>
+
+                        <div class="">
+                            <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
+                            <ul class="list-unstyled ">
+                                {{-- @dd($package->tests) --}}
+                                @php
+                                    $testNames = [];
+                                    if (!empty($package->test_id)) {
+                                        $testIds = json_decode($package->test_id, true);
+                                        foreach ($testIds as $testId) {
+                                            $test = App\Models\Test::find($testId);
+                                            if ($test) {
+                                                $parameters = []; // Initialize parameters array
+                                                if (!empty($test->parameter_id)) {
+                                                    $parameterIds = json_decode($test->parameter_id, true);
+                                                    foreach ($parameterIds as $parameterId) {
+                                                        $parameter = App\Models\Parameter::find($parameterId);
+                                                        if ($parameter) {
+                                                            $parameters[] = $parameter->name;
+                                                        }
+                                                    }
+                                                }
+                                                $testNames[] = [
+                                                    'test' => $test->name,
+                                                    'parameters' => $parameters,
+                                                ];
+                                            }
                                         }
                                     }
-                                }
-                            @endphp
-                            @foreach ($testNames as $testName)
-                                <li class='text-accent'>{{ $testName }}</li>
-                            @endforeach
-                            {{-- @foreach ($package->tests as $test)
-                                        <li class='text-dark'>{{ $test->name }}</li>
-                                    @endforeach --}}
-                        </ul>
+                                @endphp
+
+                                <ul class="list-unstyled">
+                                    @foreach ($testNames as $index => $testName)
+                                        <li class='text-accent list-none py-2'>
+                                            <!-- Trigger for collapsing the parameters list -->
+                                            <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
+                                                data-bs-toggle="collapse"
+                                                href="#collapseParameters{{ $index }}" role="button"
+                                                aria-expanded="false"
+                                                aria-controls="collapseParameters{{ $index }}"
+                                                style="color: inherit;">
+                                                {{ $testName['test'] }} <span
+                                                    class="font-weight-bold">({{ count($testName['parameters']) }})</span>
+                                            </a>
+
+
+                                            <!-- Collapsible content -->
+                                            <ul class="collapse" id="collapseParameters{{ $index }}">
+                                                @foreach ($testName['parameters'] as $parameter)
+                                                    <li>{{ $parameter }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                            </ul>
+                        </div>
                     </div>
                 </div> <!-- end of modal body  -->
                 @endfor

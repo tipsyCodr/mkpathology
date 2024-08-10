@@ -124,13 +124,13 @@
                 <div class="d-flex flex-row justify-content-between align-items-center">
 
                     <a href="https://wa.me/+919581016768" class="  text-white font-bold  mt-4 ml-2 p-1 rounded-pill"
-                        style="background-color: #e1e1e1; width: 30px; height:30px;" target="_blank">
+                        style="background-color: #efefef; width: 30px; height:30px;" target="_blank">
                         <img class='w-100 mb-1' src="{{ asset('assets/img/whatsapp_outline.png') }}"
                             alt="whatsapp-icon">
                     </a>
                     <div style="visibility: hidden;"> O</div>
                     <a class="p-1 mr-2  mt-4 rounded-circle" href="tel:8827440557"
-                        style="background-color: #e1e1e1; width: 30px; height:30px;">
+                        style="background-color: #efefef; width: 30px; height:30px;">
                         {{-- <i class="bi bi-telephone-inbound fs-2"></i> --}}
                         <img class="w-100 mb-1" src="{{ asset('assets/img/phone.png') }}" alt="whatsapp-icon">
                     </a>

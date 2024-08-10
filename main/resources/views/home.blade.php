@@ -833,6 +833,11 @@
 
         .card-title {
             cursor: pointer;
+            height: 40px
+        }
+
+        .car-text {
+            height: 50px;
         }
 
         .card-hover:hover {

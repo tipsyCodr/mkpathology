@@ -273,10 +273,10 @@
                 }
 
                 .PackagesCategories_frequent__option--icon__tovns {
-                    width: 80px;
-                    height: 80px;
+                    width: 60px;
+                    height: 60px;
                     place-self: center;
-                    padding: 14px 14px 15px 15px;
+                    padding: 11px 7px 7px 6px;
                     background: linear-gradient(223.23deg, #fff -39.74%, #dbf5f9 94.44%);
                     border-radius: 50%;
                 }
@@ -295,8 +295,8 @@
                                                 height="100" decoding="async" src="{{ $package['image'] }}"
                                                 style="color: transparent; height: 100%; width: 100%;">
                                         </div>
-                                        <p class="mb-0 font-weight-bold" style="color:#000000;">
-                                            {{ $package['title'] }}</p>
+                                        <div class="mb-0 " style="color:#000000;">
+                                            {{ $package['title'] }}</div>
                                     </div>
                                 </div>
                             </a>

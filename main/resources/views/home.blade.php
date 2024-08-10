@@ -705,7 +705,7 @@
                         </div>
 
                         <div class="ProductDetailInstructions_homeCollection__c8urV">
-                            <img src="assets/img/delievery.png" alt="" class=""
+                            <img src="assets/img/icon/delivery-boy.png" alt="" class=""
                                 style="height:5rem;"><span>Home Sample Collection Available </span>
                         </div>
                         <span class="fs-5 font-weight-bold text-dark">What is it for ?</span>

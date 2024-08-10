@@ -26,6 +26,7 @@
     <!-- Libraries Stylesheet -->
     <link href={{ asset('assets/lib/animate/animate.min.css') }} rel="stylesheet">
     <link href={{ asset('assets/lib/owlcarousel/assets/owl.carousel.min.css') }} rel="stylesheet">
+    <link href={{ asset('assets/lib/owlcarousel/assets/owl.theme.green.css') }} rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
     <link href={{ asset('assets/css/bootstrap.min.css') }} rel="stylesheet">
@@ -314,8 +315,11 @@
         $frequently_booked_test.owlCarousel({
             loop: true,
             margin: 10, // Adjust if necessary
+            freeDrag: true,
             nav: false,
+            rewind: true,
             dots: true,
+            dotsEach: false,
             autoplay: true,
             autoplayTimeout: 3000,
             autoplayHoverPause: true,

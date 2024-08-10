@@ -280,6 +280,11 @@
                     background: linear-gradient(223.23deg, #fff -39.74%, #dbf5f9 94.44%);
                     border-radius: 50%;
                 }
+
+                .owl-dots {
+                    overflow: hidden;
+                    height: 25px;
+                }
             </style>
             <div class="container-fluid py-5">
                 <div class="font-weight-bolder text-dark my-2" style="font-size: 1.8rem">Frequently Booked</div>

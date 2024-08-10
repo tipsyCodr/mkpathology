@@ -230,11 +230,11 @@
         </div>
     </div>
     <!-- Banner Start -->
-
+    `
     <!-- About Start -->
-    <div class="container-fluid py-5">
+    <div class="container-fluid ">
         <div class="container">
-            <div class="row g-5 d-none d-lg-block">
+            <div class="row py-5 g-5 d-none d-lg-block">
                 <div class="col-lg-12 text-center">
                     <h1 class="display-6">Comprehensive Health Solutions</h1>
                     <p class="mb-5">We offer a wide range of health packages to suit your needs. Choose from our
@@ -286,7 +286,7 @@
                     height: 25px;
                 }
             </style>
-            <div class="container-fluid py-5">
+            <div class="container-fluid ">
                 <div class="font-weight-bolder text-dark my-2" style="font-size: 1.8rem">Frequently Booked</div>
                 <div id='frequently_booked_test' class="owl-carousel owl-theme" data-wow-delay="0.1s">
                     @foreach ($frequently_booked as $package)
@@ -866,7 +866,7 @@
 
     {{-- desktop version package  --}}
     <h2 class="px-2 mx-2 d-lg-none">Mostly Booked Packages</h2>
-    <div id='package-wrapper' class=" px-2 my-5 mx-3 d-lg-none d-sm-block" style='height: 300px;'>
+    <div id='package-wrapper' class=" px-2 my-5 mx-3 d-lg-none d-sm-block">
         @foreach ($packages as $package)
             <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" data-wow-offset="0">
                 <div class="card health-package-card h-100 shadow">

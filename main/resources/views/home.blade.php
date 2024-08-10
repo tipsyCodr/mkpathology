@@ -293,7 +293,7 @@
                         <div class="item ">
                             <a href="/test">
                                 <div class="rounded-lg mx-4"
-                                    style="box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); border-radius:10px; width: fit-content;">
+                                    style="box-shadow: 0px 0px 18px 2px rgb(200 187 187 / 30%); border-radius:10px; width: fit-content;">
                                     <div class="d-flex PackagesCategories_frequent__option__j3Xr0">
                                         <div class="PackagesCategories_frequent__option--icon__tovns">
                                             <img alt="{{ $package['title'] }}" loading="lazy" width="100"
@@ -311,6 +311,19 @@
             </div>
 
             <!-- Frequently Booked end  -->
+
+
+            <!-- Images -->
+            <h2>Family Care Packages </h2>
+            <div id="package-images" class="owl-carousel owl-theme py-2 my-4 ">
+                @foreach ($packages as $package)
+                    <div class="item ">
+                        <img src="{{ asset('assets/img/packages/wide/' . $package->package_photo_url) }}"
+                            class="w-100 d-block " style="border-radius: 15px;" alt="{{ $package->name }} slide" />
+                    </div>
+                @endforeach
+            </div>
+
 
 
 

@@ -312,6 +312,42 @@
         });
 
         var $frequently_booked_test = $('#frequently_booked_test');
+        var $package_images = $('#package-images');
+
+        $package_images.owlCarousel({
+            loop: true,
+            margin: 10, // Adjust if necessary
+            nav: false,
+            center: true,
+            dots: true,
+            dotsEach: true,
+            autoplay: true,
+            autoplayTimeout: 3000,
+            autoplayHoverPause: true,
+            smartSpeed: 450,
+            fluidSpeed: 450,
+            responsive: {
+
+                0: {
+                    items: 1.1,
+                },
+                450: {
+                    items: 2,
+                },
+                750: {
+                    items: 3,
+                },
+                1000: {
+                    items: 4,
+                    margin: 10,
+                },
+                1200: {
+                    items: 5,
+                    margin: 10,
+                }
+            },
+        });
+
         $frequently_booked_test.owlCarousel({
             loop: true,
             margin: 1, // Adjust if necessary

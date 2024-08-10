@@ -314,10 +314,11 @@
 
 
             <!-- Images -->
-            <h2>Family Care Packages </h2>
+            <h2 class="pt-4">Family Care Packages </h2>
             <div id="package-images" class="owl-carousel owl-theme py-2 my-4 ">
                 @foreach ($packages as $package)
-                    <div class="item ">
+                    <div class="item " data-bs-toggle="modal" data-bs-target="#package-modal"
+                        data-id="{{ $package->id }}" onclick="getPackage({{ $package->id }})">
                         <img src="{{ asset('assets/img/packages/wide/' . $package->package_photo_url) }}"
                             class="w-100 d-block " style="border-radius: 15px;" alt="{{ $package->name }} slide" />
                     </div>

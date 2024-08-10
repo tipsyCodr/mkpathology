@@ -317,7 +317,6 @@
             margin: 10, // Adjust if necessary
             freeDrag: true,
             nav: false,
-            rewind: true,
             dots: true,
             dotsEach: false,
             autoplay: true,

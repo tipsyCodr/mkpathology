@@ -374,7 +374,7 @@
                         overflow: hidden;
                         text-overflow: ellipsis;
                         width: 100%;
-                        min-height: 48px;
+                        height: 50px;
                     }
 
                     .owl-carousel .item {

@@ -40,10 +40,18 @@ class WebController extends Controller
     public function searchByQuery(Request $request)
     {
         // $category = $request->input
+        $query = $request->query('q');
 
-        $query = $request->segment(3);
-        $tests = $query ? Test::where('name', 'like', '%' . $query . '%')->get() : Test::all()->paginate(30);
-        $packages = $query ? Package::where('name', 'like', '%' . $query . '%')->get() : Package::all()->paginate(30);
+        if ($query) {
+            $tests = Test::where('name', 'like', '%' . $query . '%')->get();
+            $packages = Package::where('name', 'like', '%' . $query . '%')->get();
+        } else {
+            // Handle the case when no query is provided
+            $tests = collect();  // Empty collection
+            $packages = collect();  // Empty collection
+        }
+
+        return view('search', compact('tests', 'packages'));
         foreach ($tests as $test) {
             echo $test->name;
             echo '<br>';
@@ -61,17 +69,7 @@ class WebController extends Controller
 
         return view('search', compact('testsByCategory', 'packageByCategory'));
 
-        foreach ($testsByCategory as $test) {
-            echo $test->name;
-            echo $test->price;
-            echo '<br>';
-        }
 
-        foreach ($packageByCategory as $package) {
-            echo $package->name;
-            echo $package->price;
-            echo '<br>';
-        }
     }
 
     public function admin()

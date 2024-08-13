@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WebController::class, 'home'])->name('home');
 
 Route::get('search/', [WebController::class, 'search'])->name('search');
-Route::get('search/query/{query}', [WebController::class, 'searchByQuery'])->name('search.query');
+Route::get('search/query', [WebController::class, 'searchByQuery'])->name('search.query');
 Route::get('search/category/{category}', [WebController::class, 'searchByCategory'])->name('search.category');
 
 Route::get('test', [WebController::class, 'showAllTests'])->name('test');

@@ -1,8 +1,9 @@
 <x-guest>
     <div class="container m-auto p-3">
-        <form class="d-flex flex-column " onfocus="showlist();" onblur="hidelist();">
+        <form class="d-flex flex-column " action='{{ route('search.query') }}' onfocus="showlist();" onblur="hidelist();">
             <input id=searchInput class="  form-control me-2 border border-muted" style="border-radius: 10px"
-                type="search" placeholder="&#128270; Search Packages and Tests" aria-label="Search" onkeyup="searchAll();">
+                type="search" placeholder="&#128270; Search Packages and Tests" aria-label="Search" name='q'
+                onkeyup="searchAll();">
             {{-- <button class="btn btn-outline-success" type="submit">Search</button> --}}
             <div id='searchListOverlay' class='p-2 mt-2 ' style="border-radius: 20px;">
                 <ul id='searchList' class='list-group ' style=" list-style:none; padding:0;">
@@ -64,7 +65,7 @@
                 </div>
             </div>
             @if ($testsByCategory->count() < 1)
-                <h5 class="text-center text-muted"> No test</h5>
+                <h5 class="text-center text-muted  m-5"> No test</h5>
             @endif
         @endif
 
@@ -104,13 +105,96 @@
                     </div>
                 </div>
                 @if ($packageByCategory->count() < 1)
-                    <h5 class="text-center text-muted"> No Packages</h5>
+                    <h5 class="text-center text-muted m-5"> No Packages</h5>
                 @endif
 
             @endif
         </div>
 
     @endif
-    </div>
 
+    @if (isset($tests) || isset($packages))
+        <div class='container d-flex flex-row flex-wrap justify-content-evenly'>
+            @foreach ($tests as $test)
+                <div class="m-2 p-4  d-flex flex-column border" style="width:500px">
+                    <div class="d-flex flex-row justify-content-between ">
+                        <p>
+                            <b class=""><a class="d-block text-accent fs-4"
+                                    href="{{ route('view.description', ['type' => 'test', 'id' => $test->id]) }}"
+                                    style="width:265px; height:100px">
+                                    {{ $test->name }}
+                                </a></b>
+                        </p>
+                        <div style="width:60px;"></div>
+                        <p class="text-dark bold font-weight-bold m-0 fs-5">₹{{ $test->price }}</p>
+                    </div>
+                    <div class="body d-flex flex-row justify-content-between">
+                        <div class="">
+                            <p class="text-dark m-0" style='max-height: 48px;'>{{ $test->description }}
+                            </p>
+                            <small class='d-inline-block mb-2'>Reports in <span
+                                    class='badge badge-danger bg-dark  rounded-pill'>72hr</span>
+                            </small>
+                        </div>
+                        <div class="">
+                            <a href="{{ route('test.view.select', $test->id) }}"
+                                class="bg-accent d-block text-white btn">Book</a>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+    <script>
+        function searchAll() {
+            var searchInput = document.getElementById('searchInput');
+            var searchTerm = searchInput.value.trim().toLowerCase();
+
+            if (searchTerm.length > 0) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/searchAll?q=' + searchTerm, true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        var searchResults = JSON.parse(xhr.responseText);
+                        var tests = searchResults.tests;
+                        var packages = searchResults.packages;
+
+                        console.log(tests);
+                        console.log(packages);
+
+                        var resultsHTML = '';
+
+                        for (var i = 0; i < tests.data.length; i++) {
+                            var item = tests.data[i];
+
+                            resultsHTML +=
+                                '<li  class="p-2 px-4 bg-white w-100"><a class="text-black"  href="/view/test/' +
+                                item
+                                .id + '" style="color:black;">' +
+                                item
+                                .name + '</a></li>';
+                        }
+
+                        for (var i = 0; i < packages.data.length; i++) {
+                            var item = packages.data[i];
+
+                            resultsHTML +=
+                                '<li  class="p-2 px-4 bg-white w-100"><a class="text-black"  href="/view/package/' +
+                                item
+                                .id + '" style="color:black;">' +
+                                item
+                                .name + '</a></li>';
+                        }
+
+
+                        document.getElementById('searchList').innerHTML = resultsHTML;
+                    }
+                };
+                xhr.send();
+            } else {
+                document.getElementById('searchList').innerHTML = '';
+            }
+
+        }
+    </script>
 </x-guest>

@@ -25,8 +25,8 @@
     {{-- Mobile search bar --}}
 
     <div class="container-fluid m-0 p-3 d-lg-none d-sm-block">
-        <form class="d-flex flex-column " onfocus="showlist();" onblur="hidelist();">
-            <input id=searchInput class="  form-control me-2 border border-muted" style="border-radius: 10px"
+        <form class="d-flex flex-column " action='{{ route('search.query') }}' onfocus="showlist();" onblur="hidelist();">
+            <input id=searchInput name="q" class="form-control me-2 border border-muted" style="border-radius: 10px"
                 type="search" placeholder="&#128270; Search Packages and Tests" aria-label="Search"
                 onkeyup="searchAll();">
             {{-- <button class="btn btn-outline-success" type="submit">Search</button> --}}

@@ -85,8 +85,8 @@
                     </div>
                 </div>
                 <!-- <a href="index.html" class="h1 text-primary mb-0">Lab<span class="text-dark">sky</span></a> -->
-                <a href="index.html" class="h1 text-primary mb-0"><img src={{ asset('assets/img/logo_trans.png') }}
-                        width="300" alt=""></a>
+                <a href="{{ route('home') }}" class="h1 text-primary mb-0"><img
+                        src={{ asset('assets/img/logo_trans.png') }} width="300" alt=""></a>
                 <div class="d-flex">
                     <i class="bi bi-envelope fs-2"></i>
                     <div class="ms-3">

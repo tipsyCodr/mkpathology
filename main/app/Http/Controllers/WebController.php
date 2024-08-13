@@ -63,11 +63,13 @@ class WebController extends Controller
 
         foreach ($testsByCategory as $test) {
             echo $test->name;
+            echo $test->price;
             echo '<br>';
         }
 
         foreach ($packageByCategory as $package) {
             echo $package->name;
+            echo $package->price;
             echo '<br>';
         }
     }

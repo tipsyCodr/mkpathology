@@ -22,4 +22,8 @@ class Package extends Model
     {
         return $this->belongsToMany(Parameter::class)->withPivot('parameters');
     }
+    public function categories()
+    {
+        return $this->belongsToMany(Categories::class)->withPivot('categories');
+    }
 }

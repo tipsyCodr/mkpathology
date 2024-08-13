@@ -9,6 +9,21 @@
             everywhere)</label>
         <textarea class="w-full" name="description" label="Test Description" value=""
             placeholder="'Enter test description'">{{ $test->description }}</textarea>
+
+        <label for="categories" class='mb-6'>Select Categories <br></label>
+        <Select class="p-2 my-2" aria-placeholder="Select Categories" placeholder="Select Categories" id="categories"
+            name="categories[]" multiple multiselect-search="true">
+
+            @foreach ($testCategory as $category)
+                <option value="{{ $category['id'] }}" selected>{{ $category['name'] }}</option>
+            @endforeach
+
+            @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+            @endforeach
+
+        </Select>
+
         <label for="parameters" class='mb-6'>Select Parameters <br></label>
         <style>
             .multiselect-dropdown {

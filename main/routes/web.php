@@ -11,10 +11,13 @@ use App\Http\Middleware\CheckPatient;
 use Illuminate\Support\Facades\Route;
 
 // Frontend
-// Basic
-// Route::view('/', 'home')->name('home');
+// --Basic
 Route::get('/', [WebController::class, 'home'])->name('home');
-// Route::view('test', 'tests')->name('test');
+
+Route::get('search/', [WebController::class, 'search'])->name('search');
+Route::get('search/query/{query}', [WebController::class, 'searchByQuery'])->name('search.category');
+Route::get('search/category/{category}', [WebController::class, 'searchByCategory'])->name('search.category');
+
 Route::get('test', [WebController::class, 'showAllTests'])->name('test');
 Route::get('test-search', [WebController::class, 'searchAllTests'])->name('test.search');
 Route::view('contact', 'contact')->name('contact');
@@ -117,11 +120,20 @@ Route::middleware(['isadmin'])->group(function () {
     Route::get('test-edit/{id}', [TestController::class, 'edit'])->name('test.edit');
     Route::post('test-update', [TestController::class, 'update'])->name('test.update');
 
+    Route::post('store-test', [TestController::class, 'store'])->name('test.store');
+    Route::post('destroy-test/{id}', [TestController::class, 'destroy'])->name('test.destroy');
+
+
     Route::get('admin', [WebController::class, 'admin'])->name('admin');
     Route::get('all-bookings', [WebController::class, 'booking'])->name('all.bookings');
     Route::get('confirm-booking/{type}/{id}/{status}', [WebController::class, 'confirmBooking'])->name('confirm.booking');
     Route::post('reschedule-booking/', [WebController::class, 'rescheduleBooking'])->name('reschedule.booking');
 
+    // Categories
+    Route::get('admin/categories/show', [WebController::class, 'showCategory'])->name('category.show');
+    Route::post('admin/categories/create', [WebController::class, 'createCategory'])->name('category.create');
+    Route::post('admin/categories/edit/{id}', [WebController::class, 'editCategory'])->name('category.edit');
+    Route::delete('admin/categories/destroy/{id}', [WebController::class, 'deleteCategory'])->name('category.destroy');
 
     //parameters
     // Route::post('parameters-import', [ParameterController::class, 'importFromExcel'])->name('parameters.import');
@@ -141,12 +153,10 @@ Route::middleware(['isadmin'])->group(function () {
     Route::get('package-view', [PackageController::class, 'viewAll'])->name('package.view');
     Route::get('all-reports', [PackageController::class, 'allReports'])->name('admin.reports');
 
-    // Test
-    Route::post('store-test', [TestController::class, 'store'])->name('test.store');
-    Route::post('destroy-test/{id}', [TestController::class, 'destroy'])->name('test.destroy');
-
     // Package
     Route::post('store-package', [PackageController::class, 'store'])->name('package.store');
+    Route::get('edit-package/{id}', [PackageController::class, 'edit'])->name('package.edit');
+    Route::post('package-update', [PackageController::class, 'update'])->name('package.update');
     Route::post('destroy-package/{id}', [PackageController::class, 'destroy'])->name('package.destroy');
 
 });

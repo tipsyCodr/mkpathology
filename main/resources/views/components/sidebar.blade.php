@@ -56,6 +56,11 @@
                 </a>
             </li>
             <li>
+                <a href="{{ route('category.show') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                    <span class="flaticon-folder mr-2"></span> Category
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('package.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
                     <span class="flaticon-folder mr-2"></span> Packages
                 </a>

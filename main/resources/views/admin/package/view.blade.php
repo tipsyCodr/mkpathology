@@ -26,7 +26,7 @@
                                 <th class="border border-gray-400 px-4 py-2">Price</th>
                                 <th class="border border-gray-400 px-4 py-2">Tests</th>
                                 <th class="border border-gray-400 px-4 py-2">Description</th>
-                                <th class="border border-gray-400 px-4 py-2">Action</th>
+                                <th class="border border-gray-400 px-4 py-2" colspan="2">Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,6 +54,8 @@
                                         @endforeach
                                     </td>
                                     <td class="border border-gray-400 px-4 py-2">{{ $package->description }}</td>
+                                    <td class="border border-gray-400 px-4 py-2"><a class="p-2 rounded bg-green-400"
+                                            href="{{ route('package.edit', $package->id) }}"> Edit </a></td>
                                     <td class="border border-gray-400 px-4 py-2">
                                         <form action="{{ route('package.destroy', $package->id) }}" method="post">
                                             @csrf

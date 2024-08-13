@@ -30,7 +30,17 @@
                             package Description on
                             everywhere)</label>
                         <textarea class="w-full" name="description" label="Test Description" placeholder="'Enter test description'"></textarea>
+
+                        <label for="categories" class='mb-6'>Select Categories <br></label>
+                        <Select class="p-2 my-2" aria-placeholder="Select Categories" placeholder="Select Categories"
+                            id="categories" name="categories[]" multiple multiselect-search="true">
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                            @endforeach
+                        </Select>
+                        <br>
                         <label for="parameters" class='mb-6'>Select Parameters <br></label>
+
                         <style>
                             .multiselect-dropdown {
                                 padding: 6px;
@@ -44,6 +54,7 @@
                                 padding: 15px;
                             }
                         </style>
+
                         <Select class="p-2 my-2" aria-placeholder="Select Parameters" placeholder="Select Parameters"
                             id="parameters" name="parameters[]" multiple multiselect-search="true">
                             @foreach ($parameters as $parameter)

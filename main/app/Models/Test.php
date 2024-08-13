@@ -26,4 +26,8 @@ class Test extends Model
     {
         return $this->belongsToMany(Parameter::class)->withPivot('parameters');
     }
+    public function categories()
+    {
+        return $this->belongsToMany(Parameter::class)->withPivot('categories');
+    }
 }

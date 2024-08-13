@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Categories;
 use App\Models\Package;
 use App\Models\Test;
 use Illuminate\Contracts\Database\Eloquent\Builder;
@@ -28,6 +29,49 @@ class WebController extends Controller
 
         return view('home', compact('tests', 'search', 'packages'));
     }
+
+    public function search(Request $request)
+    {
+        $categories = Categories::all();
+
+        return view('search', compact('categories'));
+
+    }
+    public function searchByQuery(Request $request)
+    {
+        // $category = $request->input
+
+        $query = $request->segment(3);
+        $tests = $query ? Test::where('name', 'like', '%' . $query . '%')->get() : Test::all()->paginate(30);
+        $packages = $query ? Package::where('name', 'like', '%' . $query . '%')->get() : Package::all()->paginate(30);
+        foreach ($tests as $test) {
+            echo $test->name;
+            echo '<br>';
+        }
+
+    }
+    public function searchByCategory(Request $request)
+    {
+        // $category = $request->input
+        $categoryId = $request->segment(3);
+
+        // find all tests & Packages in that category
+        $testsByCategory = Test::whereJsonContains('category_id', $categoryId)->get();
+        $packageByCategory = Package::whereJsonContains('category_id', $categoryId)->get();
+
+        return view('search', compact('testsByCategory', 'packageByCategory'));
+
+        foreach ($testsByCategory as $test) {
+            echo $test->name;
+            echo '<br>';
+        }
+
+        foreach ($packageByCategory as $package) {
+            echo $package->name;
+            echo '<br>';
+        }
+    }
+
     public function admin()
     {
         $bookings = \App\Models\PackageBooking::with('package', 'user')
@@ -68,6 +112,43 @@ class WebController extends Controller
             );
         return view('admin.dashboard', compact('bookings'));
     }
+    public function showCategory()
+    {
+        // get categories from table
+        $categories = \App\Models\Categories::all();
+        return view('admin.categories', compact('categories'));
+    }
+    public function createCategory(Request $request)
+    {
+        // add category name to table
+        $request->validate([
+            'name' => 'required',
+        ]);
+
+        $category = new \App\Models\Categories();
+        $category->name = $request->name;
+        $category->save();
+        return redirect()->back();
+    }
+    public function editCategory()
+    {
+        return view('categories');
+    }
+    public function deleteCategory(Request $request)
+    {
+        try {
+            $categoryId = $request->id;
+            $category = \App\Models\Categories::find($categoryId);
+            if (!$category) {
+                throw new \Exception('Category not found');
+            }
+            $category->delete();
+            return redirect()->back()->with('success', "Deleted Successfully!");
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
     public function booking()
     {
         $bookings = \App\Models\PackageBooking::with('package', 'user')

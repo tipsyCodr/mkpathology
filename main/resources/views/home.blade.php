@@ -289,19 +289,19 @@
             <div class="container-fluid ">
                 <div class="font-weight-bolder text-dark my-2" style="font-size: 1.8rem">Frequently Booked</div>
                 <div id='frequently_booked_test' class="owl-carousel owl-theme" data-wow-delay="0.1s">
-                    @foreach ($frequently_booked as $package)
+                    @foreach ($categories as $category)
                         <div class="item ">
-                            <a href="/test">
+                            <a href="{{ route('search.category', $category->id) }}">
                                 <div class="rounded-lg mx-4"
                                     style="box-shadow: 0px 0px 18px 2px rgb(200 187 187 / 30%); border-radius:10px; width: fit-content;">
                                     <div class="d-flex PackagesCategories_frequent__option__j3Xr0">
                                         <div class="PackagesCategories_frequent__option--icon__tovns">
-                                            <img alt="{{ $package['title'] }}" loading="lazy" width="100"
-                                                height="100" decoding="async" src="{{ $package['image'] }}"
+                                            <img alt="{{ $category['name'] }}" loading="lazy" width="100"
+                                                height="100" decoding="async" src="{{ $category['img'] }}"
                                                 style="color: transparent; height: 100%; width: 100%;">
                                         </div>
                                         <div class="mb-0 " style="color:#000000;">
-                                            {{ $package['title'] }}</div>
+                                            {{ $category['name'] }}</div>
                                     </div>
                                 </div>
                             </a>

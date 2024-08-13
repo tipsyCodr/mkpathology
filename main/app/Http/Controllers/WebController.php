@@ -18,6 +18,7 @@ class WebController extends Controller
     public function home(Request $request)
     {
         $search = $request->query('search', '');
+        $categories = Categories::all();
         $tests = Test::when($search, function (Builder $query) use ($search): void {
             $query->where('name', 'like', '%' . $search . '%');
         })->paginate(30);
@@ -27,7 +28,7 @@ class WebController extends Controller
             return $package;
         });
 
-        return view('home', compact('tests', 'search', 'packages'));
+        return view('home', compact('tests', 'search', 'packages', 'categories'));
     }
 
     public function search(Request $request)
@@ -62,12 +63,12 @@ class WebController extends Controller
     {
         // $category = $request->input
         $categoryId = $request->segment(3);
-
+        $categoryName = Categories::find($categoryId)->name;
         // find all tests & Packages in that category
         $testsByCategory = Test::whereJsonContains('category_id', $categoryId)->get();
         $packageByCategory = Package::whereJsonContains('category_id', $categoryId)->get();
 
-        return view('search', compact('testsByCategory', 'packageByCategory'));
+        return view('search', compact('testsByCategory', 'packageByCategory', 'categoryName'));
 
 
     }

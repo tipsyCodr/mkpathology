@@ -33,7 +33,7 @@
     @if (isset($testsByCategory) || isset($packageByCategory))
         @if ($testsByCategory)
             <div class="container">
-                <h1>Search results for "Fever" test</h1>
+                <h1>Search results for "{{ $categoryName }}" test</h1>
                 <div class=" list-unstyled d-flex flex-sm-column flex-lg-row flex-wrap justify-content-evenly">
                     @foreach ($testsByCategory as $test)
                         <div class="m-2 p-4  d-flex flex-column border" style="width:500px">
@@ -72,7 +72,7 @@
         <div class="container my-4">
             @if ($packageByCategory)
                 <div class="container">
-                    <h1>Search results for "Fever" package</h1>
+                    <h1>Search results for "{{ $categoryName }}" package</h1>
                     <div class=" list-unstyled d-flex flex-sm-column flex-lg-row flex-wrap justify-content-evenly">
                         @foreach ($packageByCategory as $package)
                             <div class="m-2 p-4  d-flex flex-column border" style="width:500px">

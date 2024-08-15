@@ -318,7 +318,8 @@
             <div id="package-images" class="owl-carousel owl-theme py-2 my-4 ">
                 @foreach ($packages as $package)
                     <div class="item " data-bs-toggle="modal" data-bs-target="#package-modal"
-                        data-id="{{ $package->id }}" onclick="getPackage({{ $package->id }})">
+                        style="height: 176px; overflow: hidden;border-radius: 20px;" data-id="{{ $package->id }}"
+                        onclick="getPackage({{ $package->id }})">
                         <img src="{{ asset('assets/img/packages/wide/' . $package->package_photo_url) }}"
                             class="w-100 d-block " style="border-radius: 15px;" alt="{{ $package->name }} slide" />
                     </div>

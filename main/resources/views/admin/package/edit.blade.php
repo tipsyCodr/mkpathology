@@ -39,6 +39,10 @@
         <h3><b>Available Tests</b> </h3>
         <select name="tests[]" aria-placeholder="Select Tests" placeholder="Select Tests" id="tests" multiple
             multiselect-search="true" style="width: 100%;">
+            @foreach ($packageTests as $test)
+                <option value="{{ $test->id }}">{{ $test->name }}</option>
+            @endforeach
+
             @foreach ($tests as $test)
                 <option value="{{ $test->id }}">{{ $test->name }}</option>
             @endforeach

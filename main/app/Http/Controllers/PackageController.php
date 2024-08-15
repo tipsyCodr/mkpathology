@@ -111,7 +111,6 @@ class PackageController extends Controller
 
 
         // Filter out any null values in the testParameter array
-
         $packageCategory = array_filter($packageCategory);
 
         return view('admin.package.edit', compact('package', 'categories', 'packageCategory', 'tests', 'packageTests'));

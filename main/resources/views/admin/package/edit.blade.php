@@ -40,7 +40,7 @@
         <select name="tests[]" aria-placeholder="Select Tests" placeholder="Select Tests" id="tests" multiple
             multiselect-search="true" style="width: 100%;">
             @foreach ($packageTests as $test)
-                <option value="{{ $test->id }}">{{ $test->name }}</option>
+                <option value="{{ $test->id }}" selected>{{ $test->name }}</option>
             @endforeach
 
             @foreach ($tests as $test)

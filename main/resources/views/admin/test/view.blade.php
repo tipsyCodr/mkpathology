@@ -29,7 +29,7 @@
                         <label class='font-semibold' for="description"> Enter Description (This will be shown in the
                             package Description on
                             everywhere)</label>
-                        <textarea class="w-full" name="description" label="Test Description" placeholder="'Enter test description'"></textarea>
+                        <textarea class="w-full" required name="description" label="Test Description" placeholder="'Enter test description'"></textarea>
 
                         <label for="categories" class='mb-6'>Select Categories <br></label>
                         <Select class="p-2 my-2" aria-placeholder="Select Categories" placeholder="Select Categories"

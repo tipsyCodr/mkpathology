@@ -8,7 +8,7 @@
             package Description on
             everywhere)</label>
         <textarea class="w-full" name="description" label="Test Description" value=""
-            placeholder="'Enter test description'">{{ $test->description }}</textarea>
+            placeholder="'Enter test description'" required>{{ $test->description }}</textarea>
 
         <label for="categories" class='mb-6'>Select Categories <br></label>
         <Select class="p-2 my-2" aria-placeholder="Select Categories" placeholder="Select Categories" id="categories"

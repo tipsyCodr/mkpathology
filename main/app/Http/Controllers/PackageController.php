@@ -93,22 +93,28 @@ class PackageController extends Controller
 
         // Retrieve all Categories
         $categories = Categories::all();
+        $tests = Test::all();
 
 
         // Decode the parameter ids
         $testCategory_id = json_decode($package->category_id, true) ?? [];
+        $packageTests_id = json_decode($package->test_id, true) ?? [];
 
 
         $packageCategory = array_map(function ($value) {
             return Categories::find($value);
         }, $testCategory_id);
 
+        $packageTests = array_map(function ($value) {
+            return Test::find($value);
+        }, $packageTests_id);
+
 
         // Filter out any null values in the testParameter array
 
         $packageCategory = array_filter($packageCategory);
 
-        return view('admin.package.edit', compact('package', 'categories', 'packageCategory'));
+        return view('admin.package.edit', compact('package', 'categories', 'packageCategory', 'tests', 'packageTests'));
     }
     public function update(Request $request)
     {

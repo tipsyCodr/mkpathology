@@ -1,0 +1,36 @@
+$accent-color: #ff6d0a;
+// .carousel-inner{
+//     min-height: 700px;
+// }
+.icon{
+    height: 150px;
+    width: auto;
+    margin: 0 auto;
+    display: block;
+    background-size: 100% 100%;
+}
+.testimonial {
+    background: linear-gradient(rgba(3, 27, 78, .3), rgba(3, 27, 78, .3)), url(../img/testi_bg.jpg) left center no-repeat;
+    background-size: cover;
+}
+.font-weight-bold{
+    font-weight: 900 !important;
+    letter-spacing: 1px;
+}
+.footer {
+    background: linear-gradient(rgba(3, 27, 78, .3), rgba(3, 27, 78, .3)), url(../img/footer.png) center center no-repeat;
+    background-size: contain;
+}
+.navbar-nav .nav-item{
+    padding: 0px 10px;
+}
+.navbar-nav .nav-item:hover, .btn-sm-square:hover{
+    background-color: $accent-color;
+}
+.footer-phone-link{
+    color:$accent-color;
+    a{
+        color:$accent-color;
+
+    }
+}

@@ -1,6 +1,6 @@
 <x-admin>
 
-    <div class="flex">
+    <div class="flex ">
         <section class="w-1/2 pr-4">
             <h1 class="text-4xl font-semibold"> Book Tests for {{ $user->name }}</h1>
             <form action="{{ route('test.book.for') }}" method="post" class="mt-8 flex flex-col w-full">

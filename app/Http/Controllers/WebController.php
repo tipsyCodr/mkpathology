@@ -75,43 +75,49 @@ class WebController extends Controller
 
     public function admin()
     {
-        $bookings = \App\Models\PackageBooking::with('package', 'user')
-            ->latest()
-            ->take(10)
-            ->get()
-            ->map(function ($booking) {
-                $data = [
-                    'id' => $booking->id,
-                    'type' => 'Package',
-                    'patient' => $booking->user ? $booking->user->name : 'Unknown',
-                    'date' => $booking->booking_date,
-                    'status' => ucfirst($booking->status ?? ''),
-                    'package' => $booking->package ? $booking->package->name : 'No Packages found',
-                    'slot' => $booking->slot,
-                    'status_classes' => $booking->status === 'completed' ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
-                ];
-                return $data;
-            })
-            ->merge(
-                \App\Models\TestBooking::with('test', 'user')
-                    ->latest()
-                    ->take(10)
-                    ->get()
-                    ->map(function ($booking) {
-                        $data = [
-                            'id' => $booking->id,
-                            'type' => 'Test',
-                            'patient' => $booking->user ? $booking->user->name : 'Unknown',
-                            'date' => $booking->booking_date,
-                            'status' => ucfirst($booking->status ?? ''),
-                            'test' => $booking->test ? $booking->test->name : 'Unknown',
-                            'slot' => $booking->slot,
-                            'status_classes' => $booking->status === 'completed' ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
-                        ];
-                        return $data;
-                    })
-            );
-        return view('admin.dashboard', compact('bookings'));
+        try {
+            $bookings = \App\Models\PackageBooking::with('package', 'user')
+                ->latest()
+                ->take(10)
+                ->get()
+                ->map(function ($booking) {
+                    $data = [
+                        'id' => $booking->id ?? null,
+                        'type' => 'Package',
+                        'patient' => $booking->user ? $booking->user->name : 'Unknown',
+                        'date' => $booking->booking_date ?? null,
+                        'status' => ucfirst($booking->status ?? ''),
+                        'package' => $booking->package ? $booking->package->name : 'No Packages found',
+                        'slot' => $booking->slot ?? null,
+                        'status_classes' => $booking->status === 'completed' ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
+                    ];
+                    return $data;
+                })
+                ->merge(
+                    \App\Models\TestBooking::with('test', 'user')
+                        ->latest()
+                        ->take(10)
+                        ->get()
+                        ->map(function ($booking) {
+                            $data = [
+                                'id' => $booking->id ?? null,
+                                'type' => 'Test',
+                                'patient' => $booking->user ? $booking->user->name : 'Unknown',
+                                'date' => $booking->booking_date ?? null,
+                                'status' => ucfirst($booking->status ?? ''),
+                                'test' => $booking->test ? $booking->test->name : 'Unknown',
+                                'slot' => $booking->slot ?? null,
+                                'status_classes' => $booking->status === 'completed' ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
+                            ];
+                            return $data;
+                        })
+                );
+            return view('admin.dashboard', compact('bookings'));
+        } catch (\Exception $e) {
+            // Handle the exception appropriately
+            // For example, log the exception and display an error page to the user
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
     public function showCategory()
     {
@@ -152,41 +158,45 @@ class WebController extends Controller
 
     public function booking()
     {
-        $bookings = \App\Models\PackageBooking::with('package', 'user')
-            ->latest()
-            ->get()
-            ->map(function ($booking) {
-                $data = [
-                    'id' => $booking->id,
-                    'type' => 'Package',
-                    'patient' => $booking->user ? $booking->user->name : 'Unknown',
-                    'date' => $booking->booking_date,
-                    'status' => ucfirst($booking->status),
-                    'package' => $booking->package ? $booking->package->name : 'No Packages found',
-                    'slot' => $booking->slot,
-                    'status_classes' => $booking->status == 'completed' ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
-                ];
-                return $data;
-            })
-            ->merge(
-                \App\Models\TestBooking::with('test', 'user')
-                    ->latest()
-                    ->get()
-                    ->map(function ($booking) {
-                        $data = [
-                            'id' => $booking->id,
-                            'type' => 'Test',
-                            'patient' => $booking->user ? $booking->user->name : 'Unknown',
-                            'date' => $booking->booking_date,
-                            'status' => ucfirst($booking->status),
-                            'test' => $booking->test->name,
-                            'slot' => $booking->slot,
-                            'status_classes' => $booking->status == 'completed' ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
-                        ];
-                        return $data;
-                    })
-            );
-        return view('admin.bookings', compact('bookings'));
+        try {
+            $bookings = \App\Models\PackageBooking::with('package', 'user')
+                ->latest()
+                ->get()
+                ->map(function ($booking) {
+                    $data = [
+                        'id' => $booking->id ?? null,
+                        'type' => 'Package',
+                        'patient' => $booking->user ? $booking->user->name : 'Unknown',
+                        'date' => $booking->booking_date ?? null,
+                        'status' => ucfirst($booking->status ?? ''),
+                        'package' => $booking->package ? $booking->package->name : 'No Packages found',
+                        'slot' => $booking->slot ?? null,
+                        'status_classes' => $booking->status == 'completed' ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
+                    ];
+                    return $data;
+                })
+                ->merge(
+                    \App\Models\TestBooking::with('test', 'user')
+                        ->latest()
+                        ->get()
+                        ->map(function ($booking) {
+                            $data = [
+                                'id' => $booking->id ?? null,
+                                'type' => 'Test',
+                                'patient' => $booking->user ? $booking->user->name : 'Unknown',
+                                'date' => $booking->booking_date ?? null,
+                                'status' => ucfirst($booking->status ?? ''),
+                                'test' => $booking->test ? $booking->test->name : 'No Tests found',
+                                'slot' => $booking->slot ?? null,
+                                'status_classes' => $booking->status == 'completed' ? 'bg-green-500 text-white' : 'bg-red-500 text-white',
+                            ];
+                            return $data;
+                        })
+                );
+            return view('admin.bookings', compact('bookings'));
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 
 

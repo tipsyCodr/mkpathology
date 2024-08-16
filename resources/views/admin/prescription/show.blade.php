@@ -7,7 +7,7 @@
                 @csrf
                 <div class="flex flex-col space-y-4">
                     <input type="hidden" name="user_id" value="{{ $prescription->user_id }}">
-                    <select name="test_id" id="test_id" class="border border-gray-300 rounded-md">
+                    <select name="test_id" id="test_id" class="border border-gray-300 rounded-md" required>
                         <option value="">Select A Test</option>
                         @foreach ($tests as $test)
                             <option value="{{ $test->id }}">{{ $test->name }}</option>
@@ -23,7 +23,7 @@
                     </select>
                     <label for="status" class="flex items-center space-x-2">
                         <input type="checkbox" name="status" id="status" class="border border-gray-300 rounded-md"
-                            value="1">
+                            value="1" selected>
                         <span>Confirm Immediately</span>
                     </label>
                 </div>

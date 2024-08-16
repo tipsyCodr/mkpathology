@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\Package;
+use App\Models\PackageBooking;
 use App\Models\Parameter;
 use App\Models\Report;
 use App\Models\Test;
+use App\Models\TestBooking;
 use Illuminate\Http\Request;
 
 class PackageController extends Controller
@@ -75,10 +77,35 @@ class PackageController extends Controller
     public function allReports()
     {
         $reports = Report::all();
+
+        // $confirmedPackageBookings = PackageBooking::where('status', 'booked')->get();
+        $confirmedTestBookings = TestBooking::where('status', 'booked')->get();
+        $confirmedPackageBookings = PackageBooking::where('status', 'booked')
+            ->with('user:id,name', 'package:id,name')
+            ->get()
+            ->map(function ($booking) {
+                return [
+                    'user_name' => $booking->user ? $booking->user->name : null,
+                    'package_name' => $booking->package ? $booking->package->name : null,
+                    'booking_date' => $booking->booking_date,
+                ];
+            });
+        $confirmedTestBookings = TestBooking::where('status', 'booked')
+            ->with('user:id,name', 'test:id,name')
+            ->get()
+            ->map(function ($booking) {
+                return [
+                    'user_name' => $booking->user ? $booking->user->name : null,
+                    'test_name' => $booking->test ? $booking->test->name : null,
+                    'booking_date' => $booking->booking_date,
+                ];
+            });
+        // dd($confirmedTestBookings);
+
         if ($reports == null) {
             return redirect()->back()->with('success', 'No Report data to show!');
         }
-        return view('admin.reports', compact('reports'));
+        return view('admin.reports', compact('reports', 'confirmedPackageBookings', 'confirmedTestBookings'));
     }
 
     public function edit($id)

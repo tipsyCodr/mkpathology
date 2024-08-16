@@ -88,16 +88,18 @@ class BookingController extends Controller
             } else {
                 return redirect()->back()->with('error', 'Failed to create booking. Registration failed.');
             }
+        } else {
+
+            $bookingData = [
+                'user_id' => $user->id,
+                'package_id' => $request->package,
+                'booking_date' => $request->date,
+                'slot' => $request->slot,
+                'status' => 'pending',
+            ];
+            $booking = PackageBooking::create($bookingData);
         }
 
-        $bookingData = [
-            'user_id' => $user->id,
-            'package_id' => $request->package,
-            'booking_date' => $request->date,
-            'slot' => $request->slot,
-            'status' => 'pending',
-        ];
-        $booking = PackageBooking::create($bookingData);
 
         if ($user && $booking) {
             // Attempt to login

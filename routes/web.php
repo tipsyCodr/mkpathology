@@ -37,6 +37,11 @@ Route::get('getPackage/{id}', [WebController::class, 'getPackage'])->name('get.p
 // Used just for testing purposes
 Route::get('check-permission', [UserController::class, 'CheckPermission'])->name('check.permission');
 
+
+Route::get('/linkstorage', function () {
+    Artisan::call('storage:link');
+});
+
 //===============================================================
 
 //booking
@@ -144,6 +149,7 @@ Route::middleware(['isadmin'])->group(function () {
     Route::put('/parameters/{parameter}', [ParameterController::class, 'update'])->name('parameters.update');
     Route::delete('parameters-delete/{parameter}', [ParameterController::class, 'destroy'])->name('parameters.delete');
 
+    //prescriptions
     Route::get('prescription-view', [PrescriptionController::class, 'view'])->name('prescription.view');
     Route::get('prescription-show', [PrescriptionController::class, 'show'])->name('admin.prescription.show');
     Route::post('book-for', [BookingController::class, 'bookFor'])->name('test.book.for');

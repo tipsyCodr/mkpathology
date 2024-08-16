@@ -42,7 +42,7 @@
                                         </form>
                                     </td>
                                     <td>
-                                        Uploaded
+
                                     </td>
                                 </tr>
                             @endif
@@ -87,7 +87,7 @@
                                         </form>
                                     </td>
                                     <td>
-                                        Uploaded
+
                                     </td>
                                 </tr>
                             @endif

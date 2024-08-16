@@ -12,6 +12,14 @@ class TestController extends Controller
     //
     public function store(Request $request)
     {
+        // Validate the request data
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'description' => 'required',
+            'parameters' => 'required',
+        ]);
+
         // dd($request->all());
         $inp = $request->except('parameters');
         $test = new Test($inp);

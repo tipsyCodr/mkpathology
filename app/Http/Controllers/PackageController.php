@@ -25,6 +25,7 @@ class PackageController extends Controller
             'price' => 'required',
             'tests' => 'required',
         ]);
+
         // dd($request->all());
         $inp = $request->except(['package_photo_url', 'package_photo_url_wide']);
         $package = new Package();

@@ -7,16 +7,7 @@
     <?php
     // $tests = [(object) ['name' => 'name1', 'price' => 'price1', 'description' => 'description1'], (object) ['name' => 'name2', 'price' => 'price2', 'description' => 'description2']];
     ?>
-    @if (session('success'))
-        <div class="bg-green-300 p-4 rounded mb-4">
-            {{ session('success') }}
-        </div>
-    @endif
-    @if (session('error'))
-        <div class="bg-green-300 p-4 rounded mb-4">
-            {{ session('error') }}
-        </div>
-    @endif
+
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white p-4 overflow-hidden shadow-md sm:rounded-lg">
@@ -29,7 +20,7 @@
                         <label class='font-semibold' for="description"> Enter Description (This will be shown in the
                             package Description on
                             everywhere)</label>
-                        <textarea class="w-full" name="description" label="Test Description" placeholder="'Enter test description'"></textarea>
+                        <textarea class="w-full" name="description" label="Test Description" placeholder="'Enter test description'" required></textarea>
 
                         <label for="categories" class='mb-6'>Select Categories <br></label>
                         <Select class="p-2 my-2" aria-placeholder="Select Categories" placeholder="Select Categories"

@@ -62,10 +62,10 @@
         </div>
     </div>
     <ul>
-        @foreach (Storage::files('public/uploads') as $file)
+        {{-- @foreach (Storage::files('public/uploads') as $file)
             <li>{{ $file }}</li>
         @endforeach
-        {{ Storage::files('public/uploads') }}
+        {{ Storage::files('public/uploads') }} --}}
     </ul>
 
 </x-admin>

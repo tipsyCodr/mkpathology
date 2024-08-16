@@ -23,7 +23,7 @@
                     </select>
                     <label for="status" class="flex items-center space-x-2">
                         <input type="checkbox" name="status" id="status" class="border border-gray-300 rounded-md"
-                            value="1" selected>
+                            value="1" checked>
                         <span>Confirm Immediately</span>
                     </label>
                 </div>

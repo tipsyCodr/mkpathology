@@ -47,18 +47,34 @@
                     </div>
                 </div>
                 <br>
-                <a target="_blank" href="{{ asset('storage/uploads/prescriptions/' . $prescription->prescription) }}"
-                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                    Download Prescription
-                </a>
+                @if (pathinfo(asset('uploads/prescriptions/' . $prescription->prescription), PATHINFO_EXTENSION) == 'pdf')
+                    <a href="{{ asset('uploads/prescriptions/' . $prescription->prescription) }}" download
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Download Prescription
+                    </a>
+                @else
+                    <a target="_blank" href="{{ asset('uploads/prescriptions/' . $prescription->prescription) }}"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Preview Prescription
+                    </a>
+                @endif
             </div>
             <h2 class="text-xl text-center"> Preview </h2>
-            <div class="flex justify-center">
-                <div class="w-full max-w-md mb-4">
-                    <img src="{{ asset('storage/uploads/prescriptions/' . $prescription->prescription) }}"
-                        alt="Prescription" class="mx-auto w-full rounded-lg object-cover">
+            @if (pathinfo(asset('uploads/prescriptions/' . $prescription->prescription), PATHINFO_EXTENSION) == 'pdf')
+                <div class="flex justify-center">
+                    <div class="w-full max-w-md mb-4">
+                        <h3 class='text-center text-gray-500'>No Preview to show</h3>
+                    </div>
                 </div>
-            </div>
+            @else
+                <div class="flex justify-center">
+                    <div class="w-full max-w-md mb-4">
+                        <img src="{{ asset('storage/uploads/prescriptions/' . $prescription->prescription) }}"
+                            alt="Prescription" class="mx-auto w-full rounded-lg object-cover">
+                    </div>
+                </div>
+            @endif
+
         </div>
     </div>
     <ul>

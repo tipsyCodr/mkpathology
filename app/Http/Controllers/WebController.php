@@ -119,6 +119,17 @@ class WebController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+    public function downloadPDF(Request $request)
+    {
+        $filename = $request->segment(2);
+
+        $filePath = public_path('storage/uploads/prescriptions/' . $filename);
+        if (file_exists($filePath)) {
+            return response()->download($filePath);
+        } else {
+            abort(404, 'File not found.');
+        }
+    }
     public function showCategory()
     {
         // get categories from table

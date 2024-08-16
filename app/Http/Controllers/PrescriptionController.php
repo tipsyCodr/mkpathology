@@ -24,7 +24,7 @@ class PrescriptionController extends Controller
         $inp = $request->except('prescription');
         $prescription = $request->file('prescription');
         if ($prescription) {
-            $allowed_file_types = ['pdf', 'jpg'];
+            $allowed_file_types = ['pdf', 'jpg', 'png'];
             $file_extension = strtolower($prescription->getClientOriginalExtension());
             if (in_array($file_extension, $allowed_file_types)) {
                 $prescription_file_name = $user->id . '_' . time() . '.' . $file_extension;
@@ -33,7 +33,7 @@ class PrescriptionController extends Controller
                 // $filePath = public_path('storage/uploads/prescriptions/' . $prescription_file_name);
                 $inp['prescription'] = $prescription_file_name;
             } else {
-                return redirect()->back()->with('error', 'Invalid file format. Only PDF or JPG files are supported');
+                return redirect()->back()->with('error', 'Invalid file format. Only PDF or JPG or PNGfiles are supported');
             }
         }
         Prescription::create([
@@ -71,7 +71,7 @@ class PrescriptionController extends Controller
     public function destroy($id)
     {
         $prescription = Prescription::find($id);
-        Storage::disk('public')->delete('uploads/prescriptions/' . $prescription->prescription);
+        Storage::disk('public')->delete('prescriptions/' . $prescription->prescription);
         $prescription->delete();
         return redirect()->back()->with('success', 'Prescription deleted successfully');
     }

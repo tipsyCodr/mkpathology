@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 // --Basic
 Route::get('/', [WebController::class, 'home'])->name('home');
 
+Route::get('/downloadPdf/{prescription_file_name}', [WebController::class, 'downloadPDF'])->name('download.pdf');
+
 Route::get('search/', [WebController::class, 'search'])->name('search');
 Route::get('search/query', [WebController::class, 'searchByQuery'])->name('search.query');
 Route::get('search/category/{category}', [WebController::class, 'searchByCategory'])->name('search.category');
@@ -41,6 +43,8 @@ Route::get('check-permission', [UserController::class, 'CheckPermission'])->name
 Route::get('/linkstorage', function () {
     Artisan::call('storage:link');
 });
+
+
 
 //===============================================================
 

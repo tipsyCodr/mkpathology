@@ -13,12 +13,13 @@
         <div id="navbarNav"
             class="hidden lg:absolute top-16 right-0 md:items-end md:justify-end md:bg-white md:absolute md:w-48 md:mt-4 md:rounded-lg md:shadow-lg md:z-10">
             <ul class="flex flex-col md:flex-col w-full">
-                <li class="md:mr-4">
+                {{-- <li class="md:mr-4">
                     <a class="block py-2 px-4 text-gray-800 hover:text-gray-600" href="#">Profile</a>
-                </li>
+                </li> --}}
 
                 <li class="md:mr-4">
-                    <a class="block py-2 px-4 text-gray-800 hover:text-gray-600" href="#">Settings</a>
+                    <a class="block py-2 px-4 text-gray-800 hover:text-gray-600"
+                        href="{{ route('patient.settings') }}">Settings</a>
                 </li>
                 <li>
                     <a class="block py-2 px-4 text-gray-800 hover:text-gray-600" href="{{ route('logout') }}"

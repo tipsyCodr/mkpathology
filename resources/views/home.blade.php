@@ -17,7 +17,7 @@
         @auth
             <h1 class="p-2">Book Now</h1>
         @endauth
-        <x-book-form></x-book-form>
+        {{-- <x-book-form></x-book-form> --}}
 
     </div>
     <!-- Carousel Form  end -->

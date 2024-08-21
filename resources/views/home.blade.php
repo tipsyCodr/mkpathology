@@ -513,7 +513,9 @@
                                     <b class="text-accent fs-6 ">{{ count($testNames) }} Tests</b>
                                 </div>
 
-                                <p class="card-text text-dark">{{ $package->description }}</p>
+                                <p class="card-text text-dark overflow-hidden"
+                                    style="width:385px; height: 50px; text-overflow: ellipsis;">
+                                    {{ $package->description }}</p>
                                 <style>
                                     .collapse-content {
                                         display: none;
@@ -901,7 +903,9 @@
                             <b class="text-accent fs-6 ">{{ count($testNames) }} Tests</b>
                         </div>
 
-                        <p class="card-text text-dark">{{ $package->description }}</p>
+                        <p class="card-text text-dark overflow-hidden"
+                            style="width:375px; height: 50px; text-overflow: ellipsis;">
+                            {{ $package->description }}</p>
 
                         <style>
                             .collapse-content {

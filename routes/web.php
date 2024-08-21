@@ -4,6 +4,7 @@ use App\Http\Controllers\BookingController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\ParameterController;
 use App\Http\Controllers\PrescriptionController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
@@ -161,7 +162,11 @@ Route::middleware(['isadmin'])->group(function () {
 
     // Package
     Route::get('package-view', [PackageController::class, 'viewAll'])->name('package.view');
-    Route::get('all-reports', [PackageController::class, 'allReports'])->name('admin.reports');
+
+    //Reports
+    Route::get('all-report', [ReportController::class, 'allReports'])->name('admin.report.view');
+    Route::post('upload-report', [ReportController::class, 'uploadForm'])->name('admin.report.add');
+    Route::post('store-upload', [ReportController::class, 'store'])->name('admin.report.store');
 
     // Package
     Route::post('store-package', [PackageController::class, 'store'])->name('package.store');

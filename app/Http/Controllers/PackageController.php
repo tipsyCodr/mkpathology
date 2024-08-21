@@ -74,39 +74,7 @@ class PackageController extends Controller
         Package::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Package Deleted successfully!');
     }
-    public function allReports()
-    {
-        $reports = Report::all();
 
-        // $confirmedPackageBookings = PackageBooking::where('status', 'booked')->get();
-        $confirmedTestBookings = TestBooking::where('status', 'booked')->get();
-        $confirmedPackageBookings = PackageBooking::where('status', 'booked')
-            ->with('user:id,name', 'package:id,name')
-            ->get()
-            ->map(function ($booking) {
-                return [
-                    'user_name' => $booking->user ? $booking->user->name : null,
-                    'package_name' => $booking->package ? $booking->package->name : null,
-                    'booking_date' => $booking->booking_date,
-                ];
-            });
-        $confirmedTestBookings = TestBooking::where('status', 'booked')
-            ->with('user:id,name', 'test:id,name')
-            ->get()
-            ->map(function ($booking) {
-                return [
-                    'user_name' => $booking->user ? $booking->user->name : null,
-                    'test_name' => $booking->test ? $booking->test->name : null,
-                    'booking_date' => $booking->booking_date,
-                ];
-            });
-        // dd($confirmedTestBookings);
-
-        if ($reports == null) {
-            return redirect()->back()->with('success', 'No Report data to show!');
-        }
-        return view('admin.reports', compact('reports', 'confirmedPackageBookings', 'confirmedTestBookings'));
-    }
 
     public function edit($id)
     {

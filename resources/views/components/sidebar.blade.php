@@ -88,7 +88,7 @@
         @endif
         @if (auth()->user()->hasRole('admin'))
             <li>
-                <a href="{{ route('admin.reports') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
+                <a href="{{ route('admin.report.view') }}" class="flex items-center p-2 hover:bg-gray-700 rounded">
                     <span class="flaticon-folder mr-2"></span> Reports
                 </a>
             </li>

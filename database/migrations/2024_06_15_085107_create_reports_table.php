@@ -13,13 +13,11 @@ return new class extends Migration {
         Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->index();
-            $table->unsignedBigInteger('type')->index();
-            $table->boolean('doc')->default(false);
-            $table->string('location')->nullable();
-            $table->string('field1')->nullable();
-            $table->bigInteger('value1')->nullable();
+            $table->string('user_name');
+            $table->string('test_name');
+            $table->string('reports');
+            $table->text('comments')->nullable();
             $table->timestamps();
-
         });
     }
 

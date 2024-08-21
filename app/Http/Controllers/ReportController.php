@@ -20,7 +20,6 @@ class ReportController extends Controller
     public function fetchpatientReports()
     {
         $reports = Report::where('user_id', auth()->user()->id)->get();
-        dump($reports);
         return view('patient.reports', compact('reports'));
     }
 

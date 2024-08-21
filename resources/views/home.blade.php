@@ -479,15 +479,14 @@
 
 
             {{-- desktop version package  --}}
-
             <div id='package-wrapper' class="row g-4 gx-0 health-package">
                 @foreach ($packages as $package)
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" data-wow-offset="0">
                         <div class="card health-package-card h-100 shadow">
-                            <div class="card-header">
+                            {{-- <div class="card-header">
                                 <img class='w-100' src="assets/img/packages{{ '/' . $package->package_photo_url }}"
                                     alt="">
-                            </div>
+                            </div> --}}
                             <div class="card-body">
                                 <div class="d-flex flex-row justify-content-between">
                                     <h5 class="card-title font-weight-bold" data-bs-toggle="modal"
@@ -869,13 +868,13 @@
     <h2 class="px-2 mx-2 d-lg-none">Mostly Booked Packages</h2>
     <div id='package-wrapper' class=" px-2 my-5 mx-3 d-lg-none d-sm-block">
         @foreach ($packages as $package)
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" data-wow-offset="0">
+            <div class="col-lg-4 col-md-6 wow fadeInUp my-5" data-wow-delay="0.1s" data-wow-offset="0">
                 <div class="card health-package-card h-100 shadow">
-                    <div class="card-header">
+                    {{-- <div class="card-header">
                         <img class="w-100"
                             src="{{ asset('assets/img/packages') . '/' . $package->package_photo_url }}"
                             alt="Jaanch Infertility Profile" />
-                    </div>
+                    </div> --}}
                     <div class="card-body">
                         <div class="d-flex flex-row justify-content-between">
                             <h5 class="card-title font-weight-bold" data-bs-toggle="modal"

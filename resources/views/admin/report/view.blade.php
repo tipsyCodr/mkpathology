@@ -1,3 +1,7 @@
+@php
+    use App\Models\Report;
+@endphp
+
 <x-admin>
     <?php $reports = []; ?>
     <div class="container mx-auto">
@@ -37,15 +41,20 @@
                                                 value="{{ $packageBooking['user_id'] }}">
                                             <input type="hidden" name="user_name" id="user_name"
                                                 value="{{ $packageBooking['user_name'] }}">
-                                            <input type="hidden" name="package_name" id="package_name"
+                                            <input type="hidden" name="test_name" id="test_name"
                                                 value="{{ $packageBooking['package_name'] }}">
                                             <input class='bg-red-500 text-white p-2 rounded' type="submit"
                                                 value="Upload">
                                         </form>
-                                        {{-- <a class="rounded p-2 bg-red-500 text-white"
-                                            href="{{ route('admin.report.add') }}">Upload Report</a> --}}
                                     </td>
                                     <td>
+                                        @if (Report::where('user_id', $packageBooking['user_id'])->count() > 0)
+                                            Reports
+                                            Uploaded:
+                                            {{ Report::where('user_id', $packageBooking['user_id'])->count() }}
+                                        @else
+                                            Reports Uploaded: 0
+                                        @endif
                                     </td>
                                 </tr>
                             @endif
@@ -79,18 +88,26 @@
                                     <td class="py-2 px-4">{{ $testBooking['test_name'] }}</td>
                                     <td>{{ $testBooking['booking_date'] }}</td>
                                     <td class="py-2 px-4 flex flex-row justify-center">
-                                        <form action="post" method="POST" enctype="multipart/form-data"
-                                            class="flex items-center space-x-2">
+                                        <form action="{{ route('admin.report.add') }}" method="POST">
                                             @csrf
-                                            <input type="file" name="reports[]" id="reports" multiple required
-                                                class="hidden">
-                                            <label for="reports"
-                                                class="bg-blue-500 text-white p-2 rounded hover:bg-blue-600">Upload</label>
-                                            <input type="hidden" name="user_id" id="user_id">
+                                            <input type="hidden" name="user_id" id="user_id"
+                                                value="{{ $testBooking['user_id'] }}">
+                                            <input type="hidden" name="user_name" id="user_name"
+                                                value="{{ $testBooking['user_name'] }}">
+                                            <input type="hidden" name="test_name" id="test_name"
+                                                value="{{ $testBooking['test_name'] }}">
+                                            <input class='bg-red-500 text-white p-2 rounded' type="submit"
+                                                value="Upload">
                                         </form>
                                     </td>
                                     <td>
-
+                                        @if (Report::where('user_id', $testBooking['user_id'])->count() > 0)
+                                            Reports
+                                            Uploaded: {{ Report::where('user_id', $testBooking['user_id'])->count() }}
+                                        @else
+                                            Reports
+                                            Uploaded: 0
+                                        @endif
                                     </td>
                                 </tr>
                             @endif

@@ -95,7 +95,9 @@ Route::middleware(['ispatient'])->group(function () {
     Route::get('patient-bookings', [BookingController::class, 'booking'])->name('patient.bookings');
     Route::view('patient-prescription', 'patient.prescription')->name('patient.prescription.view');
     Route::get('patient-setting', [UserController::class, 'fetchPatientSetting'])->name('patient.settings');
-    Route::get('patient-reports', [UserController::class, 'patientReports'])->name('patient.reports');
+    Route::get('patient-reports', [ReportController::class, 'fetchpatientReports'])->name('patient.reports');
+
+
 
 
     //Booking  routes
@@ -165,8 +167,8 @@ Route::middleware(['isadmin'])->group(function () {
 
     //Reports
     Route::get('all-report', [ReportController::class, 'allReports'])->name('admin.report.view');
-    Route::post('upload-report', [ReportController::class, 'uploadForm'])->name('admin.report.add');
-    Route::post('store-upload', [ReportController::class, 'store'])->name('admin.report.store');
+    Route::post('admin/upload-report', [ReportController::class, 'uploadForm'])->name('admin.report.add');
+    Route::post('admin/store-report', [ReportController::class, 'store'])->name('admin.report.store');
 
     // Package
     Route::post('store-package', [PackageController::class, 'store'])->name('package.store');

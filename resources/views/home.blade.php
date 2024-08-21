@@ -12,14 +12,14 @@
     @endif
     <!-- Carousel Form Start -->
 
-    <div
+    {{-- <div
         class="container position-absolute d-md-none d-lg-block bg-white  rounded-md test-form p-0  top-40 to p-xl-40 top-lg-20 top-sm-10  left-10 left-sm-1">
         @auth
             <h1 class="p-2">Book Now</h1>
         @endauth
-        {{-- <x-book-form></x-book-form> --}}
+        <x-book-form></x-book-form>
 
-    </div>
+    </div> --}}
     <!-- Carousel Form  end -->
 
     {{-- Mobile search bar --}}

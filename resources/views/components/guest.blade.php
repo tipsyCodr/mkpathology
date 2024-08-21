@@ -121,7 +121,7 @@
                     </a>
                 </div>
 
-                <div class="d-flex flex-row justify-content-between align-items-center">
+                <div class="d-flex d-lg-none flex-row justify-content-between align-items-center">
 
                     <a href="https://wa.me/+919581016768" class="  text-white font-bold  mt-4 ml-2 p-1 rounded-pill"
                         style="background-color: #efefef; width: 30px; height:30px;" target="_blank">
@@ -140,19 +140,9 @@
                     <div class="navbar-nav">
                         <a href="{{ route('home') }}"
                             class="nav-item text-white nav-link {{ request()->routeIs('home') ? 'active' : '' }} px-4 ">Home</a>
-                        {{-- <a href="{{ route('about') }}" class="nav-item text-white nav-link  px-4">About</a> --}}
                         <a href="{{ route('test') }}"
                             class="nav-item text-white nav-link {{ request()->routeIs('test') ? 'active' : '' }} px-4">Tests</a>
-                        <!-- <div class="nav-item dropdown">
-                            <a href="#" class="nav-link text-white dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu bg-light m-0">
-                                <a href="feature.html" class="dropdown-item ">Tests</a>
-                                <a href="team.html" class="dropdown-item ">Our Team</a>
-                                <a href="testimonial.html" class="dropdown-item ">Testimonial</a>
-                                <a href="appoinment.html" class="dropdown-item ">Appoinment</a>
-                                <a href="404.html" class="dropdown-item ">404 Page</a>
-                            </div>
-                        </div> -->
+
                         <a href="{{ route('contact') }}"
                             class="nav-item nav-link text-white px-4 {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
                         <a href="{{ route('login') }}"

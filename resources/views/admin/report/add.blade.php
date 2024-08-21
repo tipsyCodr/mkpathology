@@ -23,18 +23,31 @@
         }
     </style>
     <h1 class='font-bold text-4xl my-5'>Add Report</h1>
-    <form action="{{ route('admin.report.store') }}" class="w-full space-y-4" enctype="multipart/form-data">
+    @if ($errors->any())
+        <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4" role="alert">
+            <p><strong>Opps! Something went wrong.</strong></p>
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    <form action="{{ route('admin.report.store') }}" method="POST" class="w-full space-y-4" enctype="multipart/form-data">
         @csrf
+        @method('POST')
+        <input type="hidden" name="user_id" id="user_id" value="{{ $inp['user_id'] }}">
         <p class="font-bold mt-4" for="user_name">Name of Patient</p>
-        <input type="text" name="user_name" id="user_name" value="{{ $inp['user_name'] }}" disabled
+        <input type="text" name="user_name" id="user_name" value="{{ $inp['user_name'] }}" readonly
             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
 
         <p class="font-bold mt-6" for="test_name">Name of Package</p>
-        <input type="text" name="test_name" id="test_name" value="{{ $inp['package_name'] }}" disabled
+        <input type="text" name="test_name" id="test_name" value="{{ $inp['test_name'] }}" readonly
             class="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-600">
         <div class="border px-4 pb-5">
             <p class="font-bold py-2">Upload Report (PDF, Image) </p>
-            <input type="file" name="reports[]" id="reports" multiple>
+            <input type="file" name="reports[]" id="reports" multiple required>
             <div class="file-preview" id="filePreview"></div>
         </div>
 

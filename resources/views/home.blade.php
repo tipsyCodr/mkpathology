@@ -10,107 +10,6 @@
             });
         </script>
     @endif
-    <!-- Carousel Form Start -->
-
-    {{-- <div
-        class="container position-absolute d-md-none d-lg-block bg-white  rounded-md test-form p-0  top-40 to p-xl-40 top-lg-20 top-sm-10  left-10 left-sm-1">
-        @auth
-            <h1 class="p-2">Book Now</h1>
-        @endauth
-        <x-book-form></x-book-form>
-
-    </div> --}}
-    <!-- Carousel Form  end -->
-
-    {{-- Mobile search bar --}}
-
-    <div class="container-fluid m-0 p-3 d-lg-none d-sm-block">
-        <form class="d-flex flex-column " action='{{ route('search.query') }}' onfocus="showlist();" onblur="hidelist();">
-            <input id=searchInput name="q" class="form-control me-2 border border-muted" style="border-radius: 10px"
-                type="search" placeholder="&#128270; Search Packages and Tests" aria-label="Search"
-                onkeyup="searchAll();">
-            {{-- <button class="btn btn-outline-success" type="submit">Search</button> --}}
-            <div id='searchListOverlay' class='p-2 mt-2 ' style="border-radius: 20px;">
-                <ul id='searchList' class='list-none fixed ' style=" list-style:none; padding:0;">
-
-                </ul>
-            </div>
-        </form>
-        <div class="d-flex flex-row">
-            <a href ="{{ route('patient.prescription.view') }}"
-                class='w-100 border border-muted mx-2 px-2 py-4 text-center  ' style="border-radius:10px; ">
-                <span class=" text-white p-2 rounded-circle"
-                    style='width: 5px; height: 5px; background-color: rgb(156, 156, 228)'><i
-                        class="bi bi-upload text-white"></i></span>
-                <br>
-                <p class='my-2'> Upload
-                    Prescription</p>
-            </a>
-            <a href ="{{ route('patient.reports') }}" class='w-100 border border-muted mx-2 px-3 py-4 text-center  '
-                style="border-radius:10px;">
-                <span class=" text-white p-2 rounded-circle"
-                    style=' width: 10px; height: 10px; background-color: rgb(156, 228, 185)'><i
-                        class="bi bi-clipboard-data text-white"></i></span>
-                <br>
-                <p class='my-2'>Reports</p>
-            </a>
-
-        </div>
-    </div>
-
-    {{-- Mobile search bar end --}}
-
-
-
-
-    <!-- Carousel Start -->
-
-    <div class="container-fluid header-carousel px-0 flex-row d-none d-lg-block">
-        <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active" style="height: 660px;">
-                    <img class="w-100 fit-image" src={{ asset('assets/img/carousel/1.jpg') }} alt="Image">
-                    <div class="carousel-caption">
-                        <div class="container">
-                            <div class="row justify-content-start">
-                                <div class="col-lg-7 text-start">
-                                    <!-- <h1 class="display-1 text-white animated slideInRight mb-3">Award Winning Laboratory Center</h1>
-                                    <p class="mb-5 animated slideInRight">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tellus augue, iaculis id elit eget, ultrices pulvinar tortor. Quisque vel lorem porttitor, malesuada arcu quis, fringilla risus.</p>
-                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInRight">Explore More</a> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item" style="height: 660px;">
-                    <img class="img-fluid w-100 fit-image" src={{ asset('assets/img/carousel/2.jpg') }} alt="Image">
-                    <div class="carousel-caption">
-                        <div class="container">
-                            <div class="row justify-content-end">
-                                <div class="col-lg-7 text-end">
-                                    <!-- <h1 class="display-1 text-white animated slideInLeft mb-3">Expet Doctors & Lab Assistants</h1>
-                                    <p class="mb-5 animated slideInLeft">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur tellus augue, iaculis id elit eget, ultrices pulvinar tortor. Quisque vel lorem porttitor, malesuada arcu quis, fringilla risus.</p>
-                                    <a href="" class="btn btn-primary py-3 px-5 animated slideInLeft">Explore More</a> -->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div>
-
-    </div>
-
-    <!-- Carousel End -->
-
     <style>
         .hover-effect {
             /* background-color: #031b4e; */
@@ -142,9 +41,8 @@
         .hover-effect:hover .hover-text {
             color: #ffffff;
         }
-    </style>
-    <!-- Bottom Navbar -->
-    <style>
+
+        /* Bottom Navbar */
         /* Additional styles for the bottom navbar */
         /* Additional styles for the bottom navbar */
 
@@ -180,8 +78,99 @@
             animation-duration: 0.5s;
             animation-fill-mode: both;
         }
+
+        /* Bottom Navbar */
     </style>
-    <!-- Bottom Navbar -->
+    <!-- Carousel Form Start -->
+
+    {{-- <div
+        class="container position-absolute d-md-none d-lg-block bg-white  rounded-md test-form p-0  top-40 to p-xl-40 top-lg-20 top-sm-10  left-10 left-sm-1">
+        @auth
+            <h1 class="p-2">Book Now</h1>
+        @endauth
+        <x-book-form></x-book-form>
+
+    </div> --}}
+    <!-- Carousel Form  end -->
+
+    {{-- Mobile search bar --}}
+    <div class="p-5 bg-dark m-0 p-3 "
+        style=" background: rgb(5,35,99);
+background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rgba(0,56,177,1) 100%); ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10">
+                    <form class="d-flex flex-column " action='{{ route('search.query') }}' onfocus="showlist();"
+                        onblur="hidelist();">
+                        <div class="d-flex align-items-center bg-white p-3"
+                            style="border-radius: 10px;padding-left:20px; font-size: 2.5rem">
+                            <svg width="24" height="24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="m19.24 20.727-4.99-4.979v-.788l-.269-.28a6.495 6.495 0 1 1 .7-.699l.279.27h.788l4.98 4.99-1.487 1.486ZM9.76 5.267a4.491 4.491 0 1 0 0 8.983 4.491 4.491 0 0 0 0-8.982Z"
+                                    fill="#616161"></path>
+                            </svg>
+                            <input id=searchInput name="q" class="form-control border-none ms-2 p-2"
+                                style="border-radius: 10px;border:1px solid white" type="search"
+                                placeholder=" Search Packages and Tests" aria-label="Search" onkeyup="searchAll();">
+                        </div>
+                        <div id='searchListOverlay' class='p-2 ' style="border-radius: 20px;">
+                            <ul id='searchList' class='list-none fixed ' style=" list-style:none; padding:0;">
+
+                            </ul>
+                        </div>
+                    </form>
+                    <div class="d-flex flex-row">
+                        <a href ="{{ route('book') }}"
+                            class='w-100 border bg-white fw-bold border-muted mx-2 px-2 py-4 text-center text-black '
+                            style="border-radius:10px; color: #000;font-size: 1.5rem">
+                            <div class="d-flex flex-row align-content-center justify-content-evenly">
+                                <span class=" text-white p-2 rounded-circle"
+                                    style='width: 80px; height: 80px; background-color: rgb(242, 217, 179)'>
+                                    <i class="bi bi-journal-medical text-black"
+                                        style="font-size: 2.5rem;color: black"></i></span>
+                                <p class='my-2'>Book Test</p>
+                            </div>
+                        </a>
+                        <a href ="{{ route('patient.prescription.view') }}"
+                            class='w-100 border bg-white border-muted mx-2 px-2 py-4 text-center  '
+                            style="border-radius:10px; color: #000; ">
+                            <span class=" text-white p-2 rounded-circle"
+                                style='width: 5px; height: 5px; background-color: rgb(165, 165, 232)'><i
+                                    class="bi bi-upload text-white"></i></span>
+                            <br>
+                            <p class='my-2'> Upload
+                                Prescription</p>
+                        </a>
+                        <a href ="{{ route('patient.reports') }}"
+                            class='w-100 bg-white border border-muted mx-2 px-3 py-4 text-center  '
+                            style="border-radius:10px; color: #000">
+                            <span class=" text-white p-2 rounded-circle"
+                                style=' width: 10px; height: 10px; background-color: rgb(156, 228, 185)'><i
+                                    class="bi bi-clipboard-data text-white"></i></span>
+                            <br>
+                            <p class='my-2'>Reports</p>
+                        </a>
+
+                    </div>
+                </div>
+                <div class="col-lg-2 d-lg-block d-sm-none">
+                    <img src="{{ asset('assets/img/hero_img.png') }}" style="width: 296px; " alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- Mobile search bar end --}}
+
+
+
+
+    <!-- Carousel Start -->
+
+
+    <!-- Carousel End -->
+
+
     <nav class="navbar fixed-bottom navbar-dark bg-light d-md-none overflow-hidden">
         <div class="container d-flex justify-content-between">
             <a class="nav-link bottom-link text-center hover-effect" href="{{ route('book') }}">
@@ -202,7 +191,7 @@
     <!-- Bottom Navbar  end -->
 
     <!-- Banner Start -->
-    <div class="container-fluid banner mb-1 d-none d-lg-block">
+    {{-- <div class="container-fluid banner mb-1 d-none d-lg-block">
         <div class="container">
             <div class="row gx-0">
                 <div class=" col-lg-4 wow zoomIn" data-wow-delay="0.1s">
@@ -228,7 +217,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Banner Start -->
     `
     <!-- About Start -->
@@ -734,7 +723,7 @@
                         <div class="">
                             <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
                             <ul class="list-unstyled ">
-                                {{-- @dd($package->tests) --}}
+                                @dd($package->tests)
                                 @php
                                     $testNames = [];
                                     if (!empty($package->test_id)) {

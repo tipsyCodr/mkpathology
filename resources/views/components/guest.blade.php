@@ -103,7 +103,7 @@
     <!-- Navbar Start -->
     <div class="container-fluid sticky-top main-nav">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark bg-dark py-lg-0 px-lg-3 ">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white py-lg-0 px-lg-3 ">
                 <div class="d-flex flex-row justify-content-between align-items-center">
                     <button type="button" class="navbar-toggler me-0 text-accent pt-3" data-bs-toggle="collapse"
                         data-bs-target="#navbarCollapse">
@@ -139,16 +139,16 @@
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav">
                         <a href="{{ route('home') }}"
-                            class="nav-item text-white nav-link {{ request()->routeIs('home') ? 'active' : '' }} px-4 ">Home</a>
+                            class="nav-item  nav-link {{ request()->routeIs('home') ? 'active' : '' }} px-4 ">Home</a>
                         <a href="{{ route('test') }}"
-                            class="nav-item text-white nav-link {{ request()->routeIs('test') ? 'active' : '' }} px-4">Tests</a>
+                            class="nav-item  nav-link {{ request()->routeIs('test') ? 'active' : '' }} px-4">Tests</a>
 
                         <a href="{{ route('contact') }}"
-                            class="nav-item nav-link text-white px-4 {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
+                            class="nav-item nav-link  px-4 {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
                         <a href="{{ route('login') }}"
-                            class="nav-item nav-link text-white px-4 {{ request()->routeIs('login') ? 'active' : '' }}">Login</a>
+                            class="nav-item nav-link  px-4 {{ request()->routeIs('login') ? 'active' : '' }}">Login</a>
                         <a href="{{ route('register') }}"
-                            class="nav-item nav-link text-white px-4 {{ request()->routeIs('register') ? 'active' : '' }}">Register</a>
+                            class="nav-item nav-link  px-4 {{ request()->routeIs('register') ? 'active' : '' }}">Register</a>
                     </div>
                     <div class="ms-auto d-none d-lg-flex">
                         <a class="btn btn-sm-square btn-dark ms-2" href=""><i

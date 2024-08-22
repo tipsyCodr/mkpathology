@@ -36,6 +36,18 @@
             @endforeach
 
         </select>
+
+        <h3><b>Available Tests</b> </h3>
+        <select name="tests[]" aria-placeholder="Select Tests" placeholder="Select Tests" id="tests" multiple
+            multiselect-search="true" style="width: 100%;">
+            @foreach ($packageTests as $test)
+                <option value="{{ $test['id'] }}" selected>{{ $test['name'] }}</option>
+            @endforeach
+            @foreach ($tests as $test)
+                <option value="{{ $test->id }}">{{ $test->name }}</option>
+            @endforeach
+        </select>
+
         <br>
         <button class='bg-blue-500 p-2 my-2 rounded-md text-white'>Update Package</button>
     </form>

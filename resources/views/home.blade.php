@@ -723,7 +723,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                         <div class="">
                             <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
                             <ul class="list-unstyled ">
-                                @dd($package->tests)
+                                {{-- @dd($package->tests) --}}
                                 @php
                                     $testNames = [];
                                     if (!empty($package->test_id)) {

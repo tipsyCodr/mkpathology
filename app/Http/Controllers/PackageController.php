@@ -160,6 +160,7 @@ class PackageController extends Controller
             $package->name = $request->input('name');
             $package->price = $request->input('price');
             $package->description = $request->input('description');
+            $package->tests = json_encode($request->input('test', []));
             $package->category_id = json_encode($request->input('categories', []));
             $package->save();
 

@@ -722,7 +722,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
 
                         <div class="">
                             <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
-                            <ul class="list-unstyled ">
+                            <ul class="list-unstyled "id='wrapperTest'>
                                 {{-- @dd($package->tests) --}}
                                 @php
                                     $testNames = [];
@@ -752,7 +752,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
 
                                 <ul class="list-unstyled">
                                     @foreach ($testNames as $index => $testName)
-                                        <li class='text-accent list-none py-2'>
+                                        <li class='text-accent list-none py-2' id="package_test_name">
                                             <!-- Trigger for collapsing the parameters list -->
                                             <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
                                                 data-bs-toggle="collapse"
@@ -766,7 +766,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
 
 
                                             <!-- Collapsible content -->
-                                            <ul class="collapse" id="collapseParameters{{ $index }}">
+                                            <ul class="collapse " id="collapseParameters{{ $index }}">
                                                 @foreach ($testName['parameters'] as $parameter)
                                                     <li>{{ $parameter }}</li>
                                                 @endforeach
@@ -1338,12 +1338,79 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             xhr.send();
         }
 
+
+        function getTestName(ids) {
+
+            ids = JSON.parse(ids);
+
+            ids = ids.map(function(id) {
+                id = Number(id);
+                return id;
+            });
+            console.info(ids);
+            var list = [];
+            var data = JSON.stringify(ids)
+            $.ajax({
+                type: "POST",
+                url: `/test/fetchAll`,
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    ids: data
+                },
+                success: function(response) {
+                    list = JSON.parse(response);
+                    console.log(list);
+
+                    var listElement = `
+                        <div class="">
+                            <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
+                            <ul class="list-unstyled ">
+                                ${list.map(function(test, index) {
+                                    var parameters = test.pname || [];
+                                    return `
+                                                <li class='text-accent list-none py-2' id="package_test_name">
+                                                    <!-- Trigger for collapsing the parameters list -->
+                                                    <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
+                                                        data-bs-toggle="collapse"
+                                                        href="#collapseParameters${index}" role="button"
+                                                        aria-expanded="false"
+                                                        aria-controls="collapseParameters${index}"
+                                                        style="color: inherit;">
+                                                        ${test.name} <span
+                                                            class="font-weight-bold">(${parameters.length})</span>
+                                                    </a>
+
+                                                    <!-- Collapsible content -->
+                                                    <ul class="collapse " id="collapseParameters${index}">
+                                                        ${parameters.map(function(parameter) {
+                                                            return `<li>${parameter}</li>`;
+                                                        }).join('')}
+                                                    </ul>
+                                                </li>
+                                            `;
+                                }).join('')}
+                            </ul>
+                        </div>
+                    `;
+
+                    $('#wrapperTest').html(listElement);
+                    console.log(listElement);
+
+                }
+            });
+
+        }
+
         function getPackage(id) {
+            var test_ids;
             var xhr = new XMLHttpRequest();
             xhr.open('GET', `/getPackage/${id}`, true);
             xhr.onreadystatechange = function() {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     var response = JSON.parse(xhr.responseText);
+                    // console.info(response);
+                    test_id = response.test_id;
+                    getTestName(test_id);
                     let package = {
                         id: response.id,
                         name: response.name,
@@ -1353,6 +1420,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                         package_photo_url: response.package_photo_url,
                         created_at: response.created_at,
                         updated_at: response.updated_at
+
                     };
                     console.log("ID:", package.id);
 
@@ -1376,6 +1444,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     if (packageIdElement) {
                         packageIdElement.src = 'assets/img/packages/' + response.package_photo_url;
                     }
+
                 }
             };
             xhr.send();

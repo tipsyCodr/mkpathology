@@ -53,6 +53,34 @@ class PackageController extends Controller
         return redirect()->back()->with('success', 'Package Added successfully!');
 
     }
+    public function fetchTestData(Request $request)
+    {
+        $ids = $request->input('ids');
+        $id = json_decode($ids, true);
+        $tname = [];
+        $i = 0;
+        $html = "<ul>";
+        foreach ($id as $key => $value) {
+            $test = Test::find($value);
+            $tname[$i]['name'] = $test->name;
+
+            $html .= "<li>" . $test->name . "</li>";
+
+            $html .= "<ul>";
+            $pids = json_decode($test->parameter_id);
+            $pids = (array) $pids;
+            foreach ($pids as $pid) {
+                // echo "Hello";
+                $html .= "<li>" . Parameter::find($pid)->name . "</li>";
+                $tname[$i]['pname'][] = Parameter::find($pid)->name;
+            }
+            $html .= "</ul>";
+            $i++;
+        }
+        $html .= "</ul>";
+
+        return json_encode($tname);
+    }
     public function view()
     {
         // retrieve test details here

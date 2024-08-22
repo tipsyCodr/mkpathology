@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Categories;
 use App\Models\Package;
+use App\Models\Parameter;
 use App\Models\Test;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -14,6 +15,8 @@ class WebController extends Controller
     {
         return view($view);
     }
+
+
 
     public function home(Request $request)
     {
@@ -206,7 +209,7 @@ class WebController extends Controller
         return view('tests', compact('tests', 'search'));
     }
 
-    public function searchAllTests(Request $request, )
+    public function searchAllTests(Request $request)
     {
         $search = $request->get('search', '');
         $tests = $search ? Test::where('name', 'like', '%' . $search . '%')->get() : Test::all()->paginate(30);
@@ -258,6 +261,9 @@ class WebController extends Controller
         $id = request()->segment(2);
         return Package::find($id);
     }
+
+
+
     public function confirmBooking($id, $status, $type)
     {
         $type == "Package" ? $booking = \App\Models\PackageBooking::find($id) : $booking = \App\Models\TestBooking::find($id);

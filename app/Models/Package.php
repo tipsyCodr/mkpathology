@@ -26,4 +26,8 @@ class Package extends Model
     {
         return $this->belongsToMany(Categories::class)->withPivot('categories');
     }
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }

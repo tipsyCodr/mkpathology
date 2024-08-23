@@ -11,6 +11,27 @@
         </script>
     @endif
     <style>
+        .cart_wrapper {
+            position: fixed;
+            bottom: 20vh;
+            right: -10px;
+            transform: translate(35px) rotate(90deg);
+            z-index: 1000;
+            color: white;
+            padding: 12px 18px;
+            padding-top: 12px;
+            font-size: 1.4rem;
+            font-weight: bolder;
+            padding-top: 47px;
+            transition: all 0.2s;
+        }
+
+        .cart_wrapper:hover {
+            cursor: pointer;
+            color: #efefef;
+            transform: translate(10px) rotate(90deg);
+        }
+
         .hover-effect {
             /* background-color: #031b4e; */
             background-color: white;
@@ -93,7 +114,16 @@
     </div> --}}
     <!-- Carousel Form  end -->
 
-    {{-- Mobile search bar --}}
+
+    {{-- floating checkout button --}}
+    <a href="{{ route('cart.view') }}" class=" bg-accent cart_wrapper " style="">
+        Cart
+    </a>
+    {{-- floating checkout button --}}
+
+
+
+    {{-- Was (Mobile) search bar --}}
     <div class="p-5 bg-dark m-0 p-3 "
         style=" background: rgb(5,35,99);
 background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rgba(0,56,177,1) 100%); ">
@@ -164,13 +194,6 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
 
 
 
-
-    <!-- Carousel Start -->
-
-
-    <!-- Carousel End -->
-
-
     <nav class="navbar fixed-bottom navbar-dark bg-light d-md-none overflow-hidden">
         <div class="container d-flex justify-content-between">
             <a class="nav-link bottom-link text-center hover-effect" href="{{ route('book') }}">
@@ -219,7 +242,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
         </div>
     </div> --}}
     <!-- Banner Start -->
-    `
+
     <!-- About Start -->
     <div class="container-fluid ">
         <div class="container">
@@ -420,11 +443,16 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                     <a class="text-primary font-weight-bold fs-4">
                                         <span>₹ </span> {{ $package->price }}
                                     </a>
-                                    <a href="{{ route('package.book', $package->id) }}"
-                                        class="position-relative bottom-10 btn btn-accent w-50"
-                                        style="border-radius:10px;">Book<i
-                                            class="bi bi-chevron-double-right ms-1"></i>
-                                    </a>
+
+                                    <form action="{{ route('cart.add') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" id="package_id" name="product_id"
+                                            value="{{ $package->id }}">
+                                        <input type="hidden" name="type" value="package">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input class="position-relative bottom-10 btn btn-block btn-accent w-100"
+                                            type="submit" value="Add to Cart">
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -435,7 +463,8 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             <!-- package mobile view End -->
 
             <!-- test mobile view start  -->
-            <div class="font-weight-bolder text-dark my-2 d-md-none d-sm-block " style="font-size: 1.8rem">Top Tests
+            <div class="font-weight-bolder text-dark my-2 d-md-none d-sm-block " style="font-size: 1.8rem">Top
+                Tests
             </div>
             <div id='test-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile ">
                 @foreach ($tests as $test)
@@ -541,9 +570,18 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                             </div> --}}
 
                             </div>
-                            <a href="{{ route('package.book', $package->id) }}"
+                            <form action="{{ route('cart.add') }}" method="post">
+                                @csrf
+                                <input type="hidden" id="package_id" name="product_id"
+                                    value="{{ $package->id }}">
+                                <input type="hidden" name="type" value="package">
+                                <input type="hidden" name="quantity" value="1">
+                                <input class="position-relative bottom-10 btn btn-block btn-accent w-100"
+                                    type="submit" value="Add to Cart">
+                            </form>
+                            {{-- <a href="{{ route('package.book', $package->id) }}"
                                 class="position-relative bottom-10 btn btn-accent">Book
-                            </a>
+                            </a> --}}
                         </div>
                     </div>
                 @endforeach
@@ -569,7 +607,8 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                         data-id="{{ $test->id }}" onclick="getTest('{{ $test->id }}')"
                                         style='height: 65px;'>
                                         {{ $test->name }}</h5>
-                                    <p class="text-dark"><b style='white-space: nowrap;'>₹ {{ $test->price }}</b>
+                                    <p class="text-dark"><b style='white-space: nowrap;'>₹
+                                            {{ $test->price }}</b>
                                     </p>
                                 </div>
                                 <h3 class="fs-6 text-dark">Description</h3>
@@ -702,15 +741,18 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     <img class="w-100 py-2 package_photo_url" src="" alt="Jaanch Infertility Profile" />
                     <div class="package-detail-instructions">
                         <div class="ProductDetailInstructions_product__instructions__YlmoF">
-                            <div class="ProductDetailInstructions_product__instructions__box__6ZaNF undefined"><span
+                            <div class="ProductDetailInstructions_product__instructions__box__6ZaNF undefined">
+                                <span
                                     class="ProductDetailInstructions_product__instructions__box__heading__DzWSr">Fasting</span><span
                                     class="ProductDetailInstructions_product__instructions__box__fastingDur__mDNMM">10-12
-                                    Hrs Required</span></div>
-                            <div class="ProductDetailInstructions_product__instructions__box__6ZaNF undefined"><span
-                                    class="ProductDetailInstructions_product__instructions__box__heading__DzWSr">Get
+                                    Hrs Required</span>
+                            </div>
+                            <div class="ProductDetailInstructions_product__instructions__box__6ZaNF undefined">
+                                <span class="ProductDetailInstructions_product__instructions__box__heading__DzWSr">Get
                                     reports in</span><span
                                     class="ProductDetailInstructions_product__instructions__box__fastingDur__mDNMM">12
-                                    hrs</span></div>
+                                    hrs</span>
+                            </div>
                         </div>
 
                         <div class="ProductDetailInstructions_homeCollection__c8urV">
@@ -723,7 +765,6 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                         <div class="">
                             <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
                             <ul class="list-unstyled "id='wrapperTest'>
-                                {{-- @dd($package->tests) --}}
                                 @php
                                     $testNames = [];
                                     if (!empty($package->test_id)) {
@@ -781,11 +822,15 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                 </div> <!-- end of modal body  -->
                 @endfor
                 <div class="modal-footer">
-                    <a href="{{ route('package.book', $package->id) }}"
-                        class="position-relative bottom-10 btn btn-block btn-accent w-100" style="">Book<i
-                            class="bi bi-chevron-double-right ms-1"></i>
-                    </a>
-                    <!-- <button type="button" class="btn btn-primary">Understood</button> -->
+                    <form action="{{ route('cart.add') }}" method="post">
+                        @csrf
+                        <input type="hidden" id="package_id" name="product_id" value="{{ $package->id }}">
+                        <input type="hidden" name="type" value="package">
+                        <input type="hidden" name="quantity" value="1">
+                        <input class="position-relative bottom-10 btn btn-block btn-accent w-100" type="submit"
+                            value="Add to Cart">
+                    </form>
+
                 </div>
             </div>
         </div>
@@ -822,9 +867,15 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     </div>
                 @endfor
                 <div class="modal-footer">
-                    <a class="btn btn-block btn-accent px-3 w-100"
-                        href="{{ route('test.view.select', $test->id) }}">Book<i
-                            class="bi bi-chevron-double-right ms-1"></i></a>
+                    <form action="{{ route('cart.add') }}" method="post">
+                        @csrf
+                        <input type="hidden" id="test_id" name="product_id" value="{{ $test->id }}">
+                        <input type="hidden" id="test_id" name="name" value="{{ $test->name }}">
+                        <input type="hidden" name="type" value="test">
+                        <input type="hidden" name="quantity" value="1">
+                        <input class="position-relative bottom-10 btn btn-block btn-accent w-100" type="submit"
+                            value="Add to Cart">
+                    </form>
                 </div>
             </div>
         </div>
@@ -906,9 +957,14 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                             }
                         </style>
                     </div>
-                    <a href="{{ route('package.book', $package->id) }}"
-                        class="position-relative bottom-10 btn btn-accent">Book
-                    </a>
+                    <form action="{{ route('cart.add') }}" method="post">
+                        @csrf
+                        <input type="hidden" id="package_id" name="product_id" value="{{ $package->id }}">
+                        <input type="hidden" name="type" value="package">
+                        <input type="hidden" name="quantity" value="1">
+                        <input class="position-relative bottom-10 btn btn-block btn-accent w-100" type="submit"
+                            value="Add to Cart">
+                    </form>
                 </div>
             </div>
         @endforeach
@@ -935,9 +991,15 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                         </div>
                         <h3 class="fs-6 text-dark">Description</h3>
                         <p class="text-black" style='height: 48px;'>{{ $test->description }} </p>
-                        <a class="btn btn-block btn-accent w-100"
-                            href="{{ route('test.view.select', $test->id) }}">Book<i
-                                class="bi bi-chevron-double-right ms-1"></i></a>
+
+                        <form action="{{ route('cart.add') }}" method="post">
+                            @csrf
+                            <input type="hidden" id="test_id" name="product_id" value="{{ $test->id }}">
+                            <input type="hidden" name="type" value="test">
+                            <input type="hidden" name="quantity" value="1">
+                            <input class="position-relative bottom-10 btn btn-block btn-accent w-100" type="submit"
+                                value="Add to Cart">
+                        </form>
                     </div>
                 </div>
             @endforeach
@@ -1042,11 +1104,13 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             <div class="row g-0">
                 <div class="col-lg-6 pt-lg-5">
                     <div class="bg-white p-5 mt-lg-5">
-                        <h1 class="display-6 mb-4 wow fadeIn" data-wow-delay="0.3s">The Best Medical Test & Laboratory
+                        <h1 class="display-6 mb-4 wow fadeIn" data-wow-delay="0.3s">The Best Medical Test &
+                            Laboratory
                             Solution</h1>
                         <p class="mb-4 wow fadeIn" data-wow-delay="0.4s">At MK Health Care Pathology Lab, we are
                             dedicated to providing top-notch medical testing services that are both affordable and
-                            convenient. Our home testing options ensure that you can take care of your health without
+                            convenient. Our home testing options ensure that you can take care of your health
+                            without
                             leaving the comfort of your home. Whether you need routine blood work or specialized
                             diagnostic tests, we have you covered.</p>
                         <div class="row g-5 pt-2 mb-5">
@@ -1056,8 +1120,10 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                 </div>
                                 <h5 class="mb-3">Experience Doctors</h5>
                                 <span>Our team of highly experienced and board-certified doctors is committed to
-                                    delivering accurate and reliable results. With years of expertise in the field of
-                                    pathology, they ensure that every test is conducted with the utmost precision and
+                                    delivering accurate and reliable results. With years of expertise in the field
+                                    of
+                                    pathology, they ensure that every test is conducted with the utmost precision
+                                    and
                                     care. Our doctors are always available to discuss your results and provide
                                     personalized medical advice.
 
@@ -1069,8 +1135,10 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                 </div>
                                 <h5 class="mb-3">Advanced Microscopy</h5>
                                 <span>Utilizing the latest advancements in microscopy, our lab is equipped with
-                                    state-of-the-art technology to conduct a wide range of tests. Our advanced equipment
-                                    ensures that we can detect even the smallest anomalies, providing you with the most
+                                    state-of-the-art technology to conduct a wide range of tests. Our advanced
+                                    equipment
+                                    ensures that we can detect even the smallest anomalies, providing you with the
+                                    most
                                     accurate and detailed results possible. This technology enables us to offer a
                                     comprehensive array of tests, from routine blood panels to complex genetic
                                     screenings.</span>
@@ -1185,7 +1253,8 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                 <div class="icon-box-primary mb-4">
                                     <i class="bi bi-chat-left-quote text-dark"></i>
                                 </div>
-                                <p class="fs-5 mb-4">"The efficiency and professionalism of MKHealthcare's lab team are
+                                <p class="fs-5 mb-4">"The efficiency and professionalism of MKHealthcare's lab team
+                                    are
                                     unmatched. I always feel confident in the quality of their services."</p>
                                 <div class="d-flex align-items-center">
                                     <img class="flex-shrink-0" src={{ asset('assets/img/testimonial-2.jpg') }}
@@ -1359,8 +1428,6 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                 },
                 success: function(response) {
                     list = JSON.parse(response);
-                    console.log(list);
-
                     var listElement = `
                         <div class="">
                             <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
@@ -1368,26 +1435,26 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                 ${list.map(function(test, index) {
                                     var parameters = test.pname || [];
                                     return `
-                                                            <li class='text-accent list-none py-2' id="package_test_name">
-                                                                <!-- Trigger for collapsing the parameters list -->
-                                                                <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
-                                                                    data-bs-toggle="collapse"
-                                                                    href="#collapseParameters${index}" role="button"
-                                                                    aria-expanded="false"
-                                                                    aria-controls="collapseParameters${index}"
-                                                                    style="color: inherit;">
-                                                                    ${test.name} <span
-                                                                        class="font-weight-bold">${parameters.length > 0 ? `(${parameters.length})` : ''}</span>
-                                                                </a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <li class='text-accent list-none py-2' id="package_test_name">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <!-- Trigger for collapsing the parameters list -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        data-bs-toggle="collapse"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        href="#collapseParameters${index}" role="button"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        aria-expanded="false"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        aria-controls="collapseParameters${index}"
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        style="color: inherit;">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ${test.name} <span
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            class="font-weight-bold">${parameters.length > 0 ? `(${parameters.length})` : ''}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </a>
 
-                                                                <!-- Collapsible content -->
-                                                                <ul class="collapse " id="collapseParameters${index}">
-                                                                    ${parameters.map(function(parameter) {
-                                                                        return `<li>${parameter}</li>`;
-                                                                    }).join('')}
-                                                                </ul>
-                                                            </li>
-                                                        `;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <!-- Collapsible content -->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <ul class="collapse " id="collapseParameters${index}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        ${parameters.map(function(parameter) {
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            return `<li>${parameter}</li>`;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        }).join('')}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </li>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            `;
                                 }).join('')}
                             </ul>
                         </div>
@@ -1439,6 +1506,10 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     var packageIdElement = document.getElementsByClassName('package_id')[0];
                     if (packageIdElement) {
                         packageIdElement.href = "/view/test/" + response.id;
+                    }
+                    var packageIdCart = document.getElementById('package_id');
+                    if (packageIdCart) {
+                        packageIdCart.value = response.id;
                     }
                     var packageIdElement = document.getElementsByClassName('package_photo_url')[0];
                     if (packageIdElement) {

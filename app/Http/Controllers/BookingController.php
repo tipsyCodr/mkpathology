@@ -28,6 +28,94 @@ class BookingController extends Controller
 
         return view('test-book', compact('testId', 'testName'));
     }
+    public function cartBooking($data, $user)
+    {
+
+        $bookingDate = new \DateTime($data->booking_date);
+        if ($bookingDate->format('l') == 'Sunday') {
+            return redirect()->back()->with('error', 'Booking can not be done on Sunday.');
+        }
+
+        // Check if user exists
+        $user = User::where('email', $data->email)
+            ->orWhere('mobile', $data->mobile)
+            ->orWhere('name', $data->name)
+            ->first();
+
+        if (!$user) {
+            // Create a new user
+            $user = User::create([
+                'name' => $data->name,
+                'email' => $data->email,
+                'mobile' => $data->mobile,
+                'password' => $data->mobile,
+            ]);
+
+            $user->assignRole('patient');
+
+            // Create a new patient
+            $patientData = [
+                'user_id' => $user->id,
+                'age' => $data->age,
+                'gender' => $data->gender,
+                'address' => $data->address,
+                'city' => $data->city,
+                'pincode' => $data->pincode,
+                'reach' => json_encode($data->reach),
+                'authorize' => (bool) $data->authorize,
+            ];
+            $patient = Patient::firstOrCreate($patientData);
+
+            $packageBookingData = [
+                'user_id' => $user->id,
+                'package_id' => $data->package,
+                'booking_date' => $data->date,
+                'slot' => $data->slot,
+                'status' => 'pending',
+            ];
+
+            $booking = PackageBooking::create($packageBookingData);
+
+            if ($user && $patient && $booking) {
+                // Attempt to login
+                if (Auth::loginUsingId($user->id)) {
+                    $data->session()->regenerate();
+
+                    // Uncomment if you want user to create a password on registration
+                    // return view('create-password', compact('user', 'patient', 'booking'));
+                }
+
+            } else {
+                return redirect()->back()->with('error', 'Failed to create booking. Registration failed.');
+            }
+        } else {
+
+            $packageBookingData = [
+                'user_id' => $user->id,
+                'package_id' => $data->package,
+                'booking_date' => $data->date,
+                'slot' => $data->slot,
+                'status' => 'pending',
+            ];
+            $booking = PackageBooking::create($packageBookingData);
+        }
+
+
+        if ($user && $booking) {
+            // Attempt to login
+            if (Auth::loginUsingId($user->id)) {
+                $data->session()->regenerate();
+
+                // Redirect based on role
+                $userController = new UserController();
+                return $userController->redirectBasedOnRole(Auth::user());
+            }
+
+            return redirect()->back()->with('success', 'Booking created successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to create booking. Registration failed.');
+        }
+    }
     public function bookPackage(Request $request)
     {
 

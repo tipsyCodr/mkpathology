@@ -9,6 +9,8 @@ use App\Http\Controllers\TestController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WebController;
 use App\Http\Middleware\CheckPatient;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use Illuminate\Support\Facades\Route;
 
 // Frontend
@@ -33,6 +35,23 @@ Route::get('view/{type}/{id}', [WebController::class, 'viewDescription'])->name(
 Route::get('getTest/{id}', [WebController::class, 'getTest'])->name('get.test.data');
 Route::get('getPackage/{id}', [WebController::class, 'getPackage'])->name('get.package.data');
 Route::post('test/fetchAll', [PackageController::class, 'fetchTestData'])->name('get.test.all');
+
+
+//Cart System
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+
+// Checkout System
+Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout.form');
+Route::post('/checkout-process', [CheckoutController::class, 'processCheckout'])->name('checkout.process');
+
+Route::get('/not-auth', function () {
+    return response('Not Authorized', 403);
+})->name('not.auth');
+
+Route::get('/not-patient', function () {
+    return response('Not Patient');
+})->name('not.patient');
 
 //===============================================================
 //Not used

@@ -30,4 +30,8 @@ class Test extends Model
     {
         return $this->belongsToMany(Parameter::class)->withPivot('categories');
     }
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class);
+    }
 }

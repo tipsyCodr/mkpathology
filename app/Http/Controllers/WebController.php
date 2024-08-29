@@ -282,12 +282,12 @@ class WebController extends Controller
         foreach ($testIDs as $testID) {
             $test = Test::find($testID);
             $testName = $test->name;
-
-            $parameters = $test->parameter_id;
-            $parameters = json_decode($parameters, true);
+            $parameters = json_decode($test->parameter_id, true);
             $parameterNames = [];
-            foreach ($parameters as $parameter) {
-                $parameterNames[] = Parameter::find($parameter)->name;
+            if (is_array($parameters)) {
+                foreach ($parameters as $parameter) {
+                    $parameterNames[] = Parameter::find($parameter)->name;
+                }
             }
             $tests[] = [
                 'name' => $testName,

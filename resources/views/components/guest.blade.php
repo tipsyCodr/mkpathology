@@ -282,6 +282,10 @@
             left: 85%;
             transform: translateX(-50%);
         }
+
+        .fam-package-text {
+            font-size: 1
+        }
     }
 
     .owl-prev i,

@@ -293,7 +293,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
 
 
             <!-- Images -->
-            <h2 class="pt-4">Family Care Packages </h2>
+            <h2 class="pt-4 mb-5">Family Care Packages </h2>
             <div id="package-images" class="owl-carousel owl-theme py-2 my-4 ">
                 @foreach ($packages as $package)
                     <div class="item " data-bs-toggle="modal" data-bs-target="#package-modal"
@@ -546,7 +546,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             </style>
 
 
-            <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem"> Top
+            <div class="font-weight-bolder text-dark my-2  mb-5" style="font-size: 1.8rem"> Top
                 Packages</div>
             <div id='package-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile "
                 data-wow-delay="0.1s">
@@ -615,7 +615,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             <!-- package mobile view End -->
 
             <!-- test mobile view start  -->
-            <div class="font-weight-bolder text-dark my-4" style="font-size: 1.8rem">Top
+            <div class="font-weight-bolder text-dark my-4  mb-5" style="font-size: 1.8rem">Top
                 Tests
             </div>
             <div id='test-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile ">
@@ -1649,25 +1649,25 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             ${list.map(function(test, index) {
               var parameters = test.pname || [];
               return `
-                                                                                                                                                                                                                                                                                            <li class='text-accent list-none py-2' id="package_test_name">
-                                                                                                                                                                                                                                                                                              <!-- Trigger for collapsing the parameters list -->
-                                                                                                                                                                                                                                                                                              <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
-                                                                                                                                                                                                                                                                                                data-bs-toggle="collapse"
-                                                                                                                                                                                                                                                                                                href="#collapseParameters${index}" role="button"
-                                                                                                                                                                                                                                                                                                aria-expanded="false"
-                                                                                                                                                                                                                                                                                                aria-controls="collapseParameters${index}"
-                                                                                                                                                                                                                                                                                                style="color: inherit;">
-                                                                                                                                                                                                                                                                                                ${test.name} <span
-                                                                                                                                                                                                                                                                                                  class="font-weight-bold">${parameters.length > 0 ? `(${parameters.length})` : ''}</span>
-                                                                                                                                                                                                                                                                                              </a>
-                                                                                                                                                                                                                                                                                              <!-- Collapsible content -->
-                                                                                                                                                                                                                                                                                              <ul class="collapse " id="collapseParameters${index}">
-                                                                                                                                                                                                                                                                                                ${parameters.map(function(parameter) {
-                                                                                                                                                                                                                                                                                                  return `<li>${parameter}</li>`;
-                                                                                                                                                                                                                                                                                                }).join('')}
-                                                                                                                                                                                                                                                                                              </ul>
-                                                                                                                                                                                                                                                                                            </li>
-                                                                                                                                                                                                                                                                                          `;
+                                                                                                                                                                                                                                                                                                        <li class='text-accent list-none py-2' id="package_test_name">
+                                                                                                                                                                                                                                                                                                          <!-- Trigger for collapsing the parameters list -->
+                                                                                                                                                                                                                                                                                                          <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
+                                                                                                                                                                                                                                                                                                            data-bs-toggle="collapse"
+                                                                                                                                                                                                                                                                                                            href="#collapseParameters${index}" role="button"
+                                                                                                                                                                                                                                                                                                            aria-expanded="false"
+                                                                                                                                                                                                                                                                                                            aria-controls="collapseParameters${index}"
+                                                                                                                                                                                                                                                                                                            style="color: inherit;">
+                                                                                                                                                                                                                                                                                                            ${test.name} <span
+                                                                                                                                                                                                                                                                                                              class="font-weight-bold">${parameters.length > 0 ? `(${parameters.length})` : ''}</span>
+                                                                                                                                                                                                                                                                                                          </a>
+                                                                                                                                                                                                                                                                                                          <!-- Collapsible content -->
+                                                                                                                                                                                                                                                                                                          <ul class="collapse " id="collapseParameters${index}">
+                                                                                                                                                                                                                                                                                                            ${parameters.map(function(parameter) {
+                                                                                                                                                                                                                                                                                                              return `<li>${parameter}</li>`;
+                                                                                                                                                                                                                                                                                                            }).join('')}
+                                                                                                                                                                                                                                                                                                          </ul>
+                                                                                                                                                                                                                                                                                                        </li>
+                                                                                                                                                                                                                                                                                                      `;
             }).join('')}
           </ul>
         </div>

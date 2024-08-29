@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\Categories;
 use App\Models\Package;
+use App\Models\Parameter;
 use App\Models\Test;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -269,6 +270,40 @@ class WebController extends Controller
         $id = request()->segment(2);
         return Test::find($id);
     }
+    public function fetchPackage(Request $request)
+    {
+        $id = request()->segment(2);
+        $package = Package::find($id);
+        $packageName = $package->name;
+        $testIDs = $package->test_id;
+        $price = $package->price;
+        $tests = [];
+        $testIDs = json_decode($testIDs, true);
+        foreach ($testIDs as $testID) {
+            $test = Test::find($testID);
+            $testName = $test->name;
+
+            $parameters = $test->parameter_id;
+            $parameters = json_decode($parameters, true);
+            $parameterNames = [];
+            foreach ($parameters as $parameter) {
+                $parameterNames[] = Parameter::find($parameter)->name;
+            }
+            $tests[] = [
+                'name' => $testName,
+                'items' => $parameterNames
+            ];
+        }
+
+        $data = [
+            'name' => $packageName,
+            'price' => $price,
+            'tests' => $tests
+        ];
+        return response()->json($data);
+
+    }
+
     public function getPackage(Request $request)
     {
         $id = request()->segment(2);

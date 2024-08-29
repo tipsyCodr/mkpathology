@@ -36,6 +36,7 @@ Route::get('getTest/{id}', [WebController::class, 'getTest'])->name('get.test.da
 Route::get('getPackage/{id}', [WebController::class, 'getPackage'])->name('get.package.data');
 Route::post('test/fetchAll', [PackageController::class, 'fetchTestData'])->name('get.test.all');
 
+Route::get('fetchPackage/{id}', [WebController::class, 'fetchPackage'])->name('fetch.package.data');
 
 //Cart System
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');

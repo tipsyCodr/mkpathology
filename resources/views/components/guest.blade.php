@@ -260,9 +260,8 @@
 </body>
 <style>
     .owl-theme .owl-nav [class*=owl-] {
-
+        padding: 10px 15px;
         background-color: darkblue;
-
     }
 
     .owl-theme .owl-nav [class*=owl-]:hover {
@@ -272,8 +271,8 @@
 
     .owl-theme .owl-nav {
         position: absolute;
-        top: -28%;
-        left: 95%;
+        top: -30%;
+        left: 93%;
         white-space: nowrap;
 
     }
@@ -304,8 +303,8 @@
                 ],
                 dots: false,
                 autoplay: false,
-                autoplayTimeout: 3000,
-                autoplayHoverPause: true,
+                // autoplayTimeout: 3000,
+                // autoplayHoverPause: true,
                 smartSpeed: 450, // Speed of the smart transition in milliseconds.
                 fluidSpeed: 450, // Speed of the slide transition when dragging.
                 responsive: {
@@ -342,10 +341,10 @@
                 ],
                 center: true,
                 dots: false,
-                dotsEach: true,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                autoplayHoverPause: true,
+                dotsEach: false,
+                autoplay: false,
+                // autoplayTimeout: 3000,
+                // autoplayHoverPause: true,
                 smartSpeed: 450,
                 fluidSpeed: 450,
                 responsive: {
@@ -377,9 +376,9 @@
                 dots: true,
                 mergeFit: true,
                 dotsEach: false,
-                autoplay: true,
-                autoplayTimeout: 3000,
-                autoplayHoverPause: true,
+                autoplay: false,
+                // autoplayTimeout: 3000,
+                // autoplayHoverPause: true,
                 smartSpeed: 450,
                 fluidSpeed: 450,
                 merge: true,

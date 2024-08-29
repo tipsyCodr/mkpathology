@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Categories;
 use App\Models\Package;
 use App\Models\Test;
@@ -28,7 +29,11 @@ class WebController extends Controller
             return $package;
         });
 
-        return view('home', compact('tests', 'search', 'packages', 'categories'));
+        $cart = auth()->user()
+            ? auth()->user()->cart()->latest()->first() ?? auth()->user()->cart()->create()
+            : Cart::where('session_id', session()->getId())->first() ?? Cart::create(['session_id' => session()->getId()]);
+
+        return view('home', compact('tests', 'search', 'packages', 'categories', 'cart'));
     }
 
     public function search(Request $request)

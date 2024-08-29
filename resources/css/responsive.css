@@ -1,0 +1,267 @@
+.text-accent {
+  color: #ff6d0a;
+}
+
+.bg-accent {
+  background-color: #ff6d0a;
+}
+
+.btn-accent {
+  background-color: #ff6d0a;
+  color: white;
+}
+
+.lg-none {
+  display: none !important;
+}
+
+.scrollable-container {
+  width: 100%;
+  max-height: 550px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.over-the-top {
+  margin-top: -50px;
+  position: relative;
+  z-index: 20;
+}
+
+.mega-center {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.card-body ul li {
+  list-style: square;
+  margin-left: 20px;
+}
+
+.card-body:hover {
+  transition: all 0.5s;
+  border-top: 15px solid #ff6d0a;
+}
+
+.test-form {
+  max-width: 500px;
+  border: 3px solid white;
+  border-radius: 10px;
+  overflow: hidden;
+  z-index: 99;
+}
+.test-form form {
+  background-color: #fff;
+  padding: 10px;
+}
+.test-form form label {
+  color: #000;
+}
+.test-form form input, .test-form form select, .test-form form textarea {
+  border: 2px solid black;
+  border-radius: 5px;
+  color: black;
+}
+.test-form form input::-moz-placeholder, .test-form form select::-moz-placeholder, .test-form form textarea::-moz-placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #000;
+  opacity: 1; /* Firefox */
+}
+.test-form form input::placeholder, .test-form form select::placeholder, .test-form form textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: #000;
+  opacity: 1; /* Firefox */
+}
+.test-form form input ::-webkit-input-placeholder, .test-form form select ::-webkit-input-placeholder, .test-form form textarea ::-webkit-input-placeholder { /* Chrome/ Safari */
+  color: #000;
+}
+.test-form form input ::-moz-placeholder, .test-form form select ::-moz-placeholder, .test-form form textarea ::-moz-placeholder { /* Firefox 18- */
+  color: #000;
+}
+.test-form form input :-ms-input-placeholder, .test-form form select :-ms-input-placeholder, .test-form form textarea :-ms-input-placeholder { /* IE 10-11 */
+  color: #000;
+}
+
+.fit-image {
+  max-height: 660px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (max-width: 992.98px) {
+  .lg-none {
+    display: inline !important;
+  }
+  .main-nav .bg-dark {
+    background-color: white !important;
+  }
+  .over-the-top {
+    margin-top: 10px;
+    position: relative;
+    z-index: 20;
+  }
+  .nav-link {
+    color: black !important;
+  }
+}
+/* Custom position classes */
+.top-10 {
+  top: 10% !important;
+}
+
+.top-20 {
+  top: 20% !important;
+}
+
+.top-30 {
+  top: 30% !important;
+}
+
+.top-40 {
+  top: 40% !important;
+}
+
+.top-60 {
+  top: 60% !important;
+}
+
+.top-70 {
+  top: 70% !important;
+}
+
+.top-80 {
+  top: 80% !important;
+}
+
+.top-90 {
+  top: 90% !important;
+}
+
+.left-10 {
+  left: 10% !important;
+}
+
+.left-20 {
+  left: 20% !important;
+}
+
+.left-30 {
+  left: 30% !important;
+}
+
+.left-40 {
+  left: 40% !important;
+}
+
+.left-60 {
+  left: 60% !important;
+}
+
+.left-70 {
+  left: 70% !important;
+}
+
+.left-80 {
+  left: 80% !important;
+}
+
+.left-90 {
+  left: 90% !important;
+}
+
+/* Custom responsive position classes */
+@media (max-width: 576px) { /* Small devices (landscape phones, 576px and up) */
+  .top-sm-1 {
+    top: 1% !important;
+  }
+  .top-sm-10 {
+    top: 10% !important;
+  }
+  .left-sm-10 {
+    left: 10% !important;
+  }
+  .top-sm-20 {
+    top: 20% !important;
+  }
+  .left-sm-1 {
+    left: 1% !important;
+  }
+  .left-sm-20 {
+    left: 20% !important;
+  }
+  /* Add more classes as needed */
+  .test-form {
+    max-width: 470px;
+  }
+}
+@media (max-width: 768px) { /* Medium devices (tablets, 768px and up) */
+  .top-md-30 {
+    top: 30% !important;
+  }
+  .left-md-30 {
+    left: 30% !important;
+  }
+  .top-md-40 {
+    top: 40% !important;
+  }
+  .left-md-40 {
+    left: 40% !important;
+  }
+  /* Add more classes as needed */
+  .test-form {
+    display: none;
+  }
+  
+}
+@media (max-width: 992px) { /* Large devices (desktops, 992px and up) */
+  .top-lg-10 {
+    top: 10% !important;
+  }
+  .top-lg-20 {
+    top: 20% !important;
+  }
+  .top-lg-50 {
+    top: 50% !important;
+  }
+  .left-lg-50 {
+    left: 50% !important;
+  }
+  .top-lg-60 {
+    top: 60% !important;
+  }
+  .left-lg-60 {
+    left: 60% !important;
+  }
+  /* Add more classes as needed */
+  a.nav-item.text-white.nav-link.active.px-4 {
+    background-color: #ff6d0a !important;
+  }
+}
+@media (max-width: 1200px) { /* Extra large devices (large desktops, 1200px and up) */
+  .top-xl-10 {
+    top: 10% !important;
+  }
+  .top-xl-20 {
+    top: 20% !important;
+  }
+  .top-xl-30 {
+    top: 30% !important;
+  }
+  .top-xl-40 {
+    top: 40% !important;
+  }
+  .top-xl-50 {
+    top: 50% !important;
+  }
+  .top-xl-70 {
+    top: 70% !important;
+  }
+  .left-xl-70 {
+    left: 70% !important;
+  }
+  .top-xl-80 {
+    top: 80% !important;
+  }
+  .left-xl-80 {
+    left: 80% !important;
+  }
+  /* Add more classes as needed */
+}/*# sourceMappingURL=responsive.css.map */

@@ -41,6 +41,33 @@ class CartController extends Controller
         return back()->with('success', 'Item added to cart!');
     }
 
+
+    public function removeFromCart(Request $request)
+    {
+        $cart = null;
+
+        if (auth()->check()) {
+            $user = auth()->user();
+            $cart = $user->cart;
+        } else {
+            $sessionId = session()->getId();
+            $cart = Cart::where('session_id', $sessionId)->first();
+        }
+        if ($request->type === 'test') {
+            $cartItem = $cart->items()->where('test_id', $request->product_id)->first();
+
+        } elseif ($request->type === 'package') {
+
+            $cartItem = $cart->items()->where('package_id', $request->product_id)->first();
+        }
+
+        if ($cartItem) {
+            $cartItem->delete();
+        }
+
+        return back()->with('success', 'Item removed from cart!');
+    }
+
     public function viewCart()
     {
         $cart = null;

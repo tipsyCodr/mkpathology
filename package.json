@@ -10,12 +10,16 @@
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0.4",
         "postcss": "^8.4.38",
+        "sass": "^1.77.8",
         "tailwindcss": "^3.4.4",
         "vite": "^5.3.1"
     },
     "dependencies": {
         "alpinejs": "^3.14.1",
+        "bootstrap": "^5.3.3",
         "flowbite": "^2.3.0",
-        "jquery": "^3.7.1"
+        "jquery": "^3.7.1",
+        "waypoints": "^4.0.1",
+        "wowjs": "^1.1.3"
     }
 }

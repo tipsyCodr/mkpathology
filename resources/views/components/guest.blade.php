@@ -14,8 +14,7 @@
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&family=Red+Rose:wght@600;700&display=swap"
-        rel="stylesheet"> -->
+
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
         rel="stylesheet">
@@ -23,19 +22,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
 
-    <!-- Libraries Stylesheet -->
-    <link href={{ asset('assets/lib/animate/animate.min.css') }} rel="stylesheet">
-    <link href={{ asset('assets/lib/owlcarousel/assets/owl.carousel.min.css') }} rel="stylesheet">
-    <link href={{ asset('assets/lib/owlcarousel/assets/owl.theme.green.css') }} rel="stylesheet">
+    @vite(['resources/sass/app.scss', 'resources/css/bootstrap.min.css', 'resources/css/style.css', 'resources/css/responsive.css', 'resources/css/custom.css', 'resources/lib/animate/animate.min.css', 'resources/lib/owlcarousel/assets/owl.carousel.min.css', 'resources/lib/owlcarousel/assets/owl.theme.green.css'])
 
-    <!-- Customized Bootstrap Stylesheet -->
-    <link href={{ asset('assets/css/bootstrap.min.css') }} rel="stylesheet">
-    <!-- <link href="scss/bootstrap.css" rel="stylesheet"> -->
-
-    <!-- Template Stylesheet -->
-    <link href={{ asset('assets/css/style.css') }} rel="stylesheet">
-    <link href={{ asset('assets/css/responsive.css') }} rel="stylesheet">
-    <link href={{ asset('assets/css/custom.css') }} rel="stylesheet">
 </head>
 
 <body>
@@ -58,13 +46,7 @@
                         Padmanabhpur Road, Maharaja Chowk, Durg (C.G.) - 491001</small>
                     <small class="me-3 text-white"><i class="fa fa-clock me-2"></i>Mon-Sat 09am-5pm, Sun Closed</small>
                 </div>
-                <!-- enable if extra nav required -->
-                <!-- <nav class="breadcrumb mb-0">
-                    <a class="breadcrumb-item text-white small text-body" href="#">Career</a>
-                    <a class="breadcrumb-item text-white small text-body" href="#">Support</a>
-                    <a class="breadcrumb-item text-white small text-body" href="#">Terms</a>
-                    <a class="breadcrumb-item text-white small text-body" href="#">FAQs</a>
-                </nav> -->
+
             </div>
         </div>
     </div>
@@ -76,29 +58,28 @@
         <div class="container pb-2">
             <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex">
-                    <i class="bi bi-telephone-inbound fs-2"></i>
+
                     <div class="ms-3">
-                        <h5 class="text-primary mb-0">Call Now</h5>
-                        <span><a href="tel:+916268933691">+91 6268 933 691</a></span> |
-                        <span><a href="tel:+918827440557">+91 8827440557</a></span> |
-                        <span><a href="tel:07884217599">0788-4217599</a></span>
+                        <h5 class="text-dark mb-0 fs-2">Give Us A Call</h5>
+                        <span><a href="tel:+916268933691"><i class="text-dark fa fa-phone-alt me-2"></i>+91 6268 933
+                                691</a></span>
+                        <br>
+                        <span><i class="text-dark fa fa-envelope me-2"></i>support@mkhealthcare.com</span>
+                        {{-- <span><a href="tel:+918827440557">+91 8827440557</a></span> |
+                        <span><a href="tel:07884217599">0788-4217599</a></span> --}}
                     </div>
                 </div>
                 <!-- <a href="index.html" class="h1 text-primary mb-0">Lab<span class="text-dark">sky</span></a> -->
                 <a href="{{ route('home') }}" class="h1 text-primary mb-0"><img
                         src={{ asset('assets/img/logo_trans.png') }} width="300" alt=""></a>
                 <div class="d-flex">
-                    <i class="bi bi-envelope fs-2"></i>
                     <div class="ms-3">
-                        <h5 class="text-primary mb-0">Mail Now</h5>
-                        <span>support@mkhealthcare.com</span>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Brand End -->
-
 
     <!-- Navbar Start -->
     <div class="container-fluid sticky-top main-nav">
@@ -145,12 +126,23 @@
 
                         <a href="{{ route('contact') }}"
                             class="nav-item nav-link  px-4 {{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a>
-                        <a href="{{ route('login') }}"
-                            class="nav-item nav-link  px-4 {{ request()->routeIs('login') ? 'active' : '' }}">Login</a>
-                        <a href="{{ route('register') }}"
-                            class="nav-item nav-link  px-4 {{ request()->routeIs('register') ? 'active' : '' }}">Register</a>
+                        @if (auth()->check() && auth()->user()->hasRole('admin'))
+                            <a href="{{ route('admin') }}"
+                                class="nav-item nav-link  px-4 {{ request()->routeIs('admin') ? 'active' : '' }}">Admin</a>
+                        @elseif (auth()->check() && auth()->user()->hasRole('patient'))
+                            <a href="{{ route('patient.dashboard') }}"
+                                class="nav-item nav-link  px-4 {{ request()->routeIs('patient.dashboard') ? 'active' : '' }}">Patient</a>
+                        @else
+                            <a href="{{ route('login') }}"
+                                class="nav-item nav-link  px-4 {{ request()->routeIs('login') ? 'active' : '' }}">Login</a>
+                            <a href="{{ route('register') }}"
+                                class="nav-item nav-link  px-4 {{ request()->routeIs('register') ? 'active' : '' }}">Register</a>
+                        @endif
+
                     </div>
-                    <div class="ms-auto d-none d-lg-flex">
+                    <div class="ms-auto d-none d-lg-flex align-items-center">
+                        <x-cart-button />
+
                         <a class="btn btn-sm-square btn-dark ms-2" href=""><i
                                 class="fab fa-facebook-f"></i></a>
                         <a class="btn btn-sm-square btn-dark ms-2" href=""><i class="fab fa-twitter"></i></a>
@@ -265,117 +257,158 @@
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square rounded-circle back-to-top"><i
             class="bi bi-arrow-up"></i></a>
-
-
-    <!-- JavaScript Libraries -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-    </script>
-    <script src={{ asset('assets/lib/wow/wow.min.js') }}></script>
-    <script src={{ asset('assets/lib/easing/easing.min.js') }}></script>
-    <script src={{ asset('assets/lib/waypoints/waypoints.min.js') }}></script>
-    <script src={{ asset('assets/lib/counterup/counterup.min.js') }}></script>
-    <script src={{ asset('assets/lib/owlcarousel/owl.carousel.min.js') }}></script>
-
-    <!-- Template Javascript -->
-    <script src={{ asset('assets/js/main.js') }}></script>
 </body>
+<style>
+    .owl-theme .owl-nav [class*=owl-] {
+
+        background-color: darkblue;
+
+    }
+
+    .owl-theme .owl-nav [class*=owl-]:hover {
+        background-color: orange;
+
+    }
+
+    .owl-theme .owl-nav {
+        position: absolute;
+        top: -28%;
+        left: 95%;
+        white-space: nowrap;
+
+    }
+
+    .owl-prev i,
+    .owl-next i {
+        /* transform: scale(1, 6); */
+        color: #fff;
+        background-color: ;
+    }
+</style>
+@vite(['resources/js/app.js', 'resources/js/main.js', 'resources/lib/easing/easing.min.js', 'resources/lib/owlcarousel/owl.carousel.min.js'])
+{{-- @vite('resources/lib/wow/wow.min.js'); --}}
 <script>
-    $(document).ready(function() {
+    document.addEventListener('DOMContentLoaded', function() {
 
-        var $wrapper = $('.health-package-mobile ');
+        $(document).ready(function() {
 
-        $wrapper.owlCarousel({
-            items: 1, // or however many items you want
-            loop: true,
-            margin: 10,
-            nav: false,
-            dots: true,
-            autoplay: true,
-            autoplayTimeout: 3000,
-            autoplayHoverPause: true,
-            smartSpeed: 450, // Speed of the smart transition in milliseconds.
-            fluidSpeed: 450, // Speed of the slide transition when dragging.
+            var $wrapper = $('.health-package-mobile ');
+
+            $wrapper.owlCarousel({
+                items: 1, // or however many items you want
+                loop: true,
+                margin: 10,
+                nav: true,
+                navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                    '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+                ],
+                dots: false,
+                autoplay: false,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                smartSpeed: 450, // Speed of the smart transition in milliseconds.
+                fluidSpeed: 450, // Speed of the slide transition when dragging.
+                responsive: {
+
+                    0: {
+                        items: 1.1,
+                    },
+                    450: {
+                        items: 1,
+                    },
+                    750: {
+                        items: 2,
+                    },
+                    1000: {
+                        items: 3,
+                        margin: 10,
+                    },
+                    1200: {
+                        items: 3,
+                        margin: 20,
+                    }
+                },
+            });
+
+            var $frequently_booked_test = $('#frequently_booked_test');
+            var $package_images = $('#package-images');
+
+            $package_images.owlCarousel({
+                loop: true,
+                margin: 10, // Adjust if necessary
+                nav: true,
+                navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>',
+                    '<i class="fa fa-angle-right" aria-hidden="true"></i>'
+                ],
+                center: true,
+                dots: false,
+                dotsEach: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                smartSpeed: 450,
+                fluidSpeed: 450,
+                responsive: {
+
+                    0: {
+                        items: 1.1,
+                    },
+                    450: {
+                        items: 1.1,
+                    },
+                    750: {
+                        items: 2,
+                    },
+                    1000: {
+                        items: 3,
+                        margin: 10,
+                    },
+                    1200: {
+                        items: 3,
+                        margin: 10,
+                    }
+                },
+            });
+
+            $frequently_booked_test.owlCarousel({
+                loop: true,
+                margin: 1, // Adjust if necessary
+                nav: false,
+                dots: true,
+                mergeFit: true,
+                dotsEach: false,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                autoplayHoverPause: true,
+                smartSpeed: 450,
+                fluidSpeed: 450,
+                merge: true,
+                responsive: {
+
+                    0: {
+                        items: 1.2,
+                    },
+                    450: {
+                        items: 2,
+                    },
+                    750: {
+                        items: 3,
+                    },
+                    1000: {
+                        items: 4,
+                        margin: 10,
+                    },
+                    1200: {
+                        items: 5,
+                        margin: 10,
+                    }
+                },
+                responsiveRefreshRate: 100
+            });
+
 
         });
-
-        var $frequently_booked_test = $('#frequently_booked_test');
-        var $package_images = $('#package-images');
-
-        $package_images.owlCarousel({
-            loop: true,
-            margin: 10, // Adjust if necessary
-            nav: false,
-            center: true,
-            dots: true,
-            dotsEach: true,
-            autoplay: true,
-            autoplayTimeout: 3000,
-            autoplayHoverPause: true,
-            smartSpeed: 450,
-            fluidSpeed: 450,
-            responsive: {
-
-                0: {
-                    items: 1.1,
-                },
-                450: {
-                    items: 2,
-                },
-                750: {
-                    items: 3,
-                },
-                1000: {
-                    items: 4,
-                    margin: 10,
-                },
-                1200: {
-                    items: 5,
-                    margin: 10,
-                }
-            },
-        });
-
-        $frequently_booked_test.owlCarousel({
-            loop: true,
-            margin: 1, // Adjust if necessary
-            nav: false,
-            dots: true,
-            mergeFit: true,
-            dotsEach: false,
-            autoplay: true,
-            autoplayTimeout: 3000,
-            autoplayHoverPause: true,
-            smartSpeed: 450,
-            fluidSpeed: 450,
-            merge: true,
-            responsive: {
-
-                0: {
-                    items: 1.2,
-                },
-                450: {
-                    items: 2,
-                },
-                750: {
-                    items: 3,
-                },
-                1000: {
-                    items: 4,
-                    margin: 10,
-                },
-                1200: {
-                    items: 5,
-                    margin: 10,
-                }
-            },
-            responsiveRefreshRate: 100
-        });
-
-
-    });
+    })
 </script>
 
 </html>

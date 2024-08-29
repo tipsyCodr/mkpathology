@@ -1,7 +1,13 @@
 <x-guest>
 
     <!-- Service Start -->
-    <div class="container-fluid container-service py-5">
+    <div class="container-fluid container-service py-5 my-5">
+        <div class="d-flex justify-content-start">
+            <button type="button" onclick="history.back()" class="btn btn-accent mb-3">
+                <i class="bi bi-arrow-left"></i> Back
+            </button>
+        </div>
+
         <div class="container pt-5">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h1 class="display-6 mb-3">Mostly Booked Lab Tests</h1>

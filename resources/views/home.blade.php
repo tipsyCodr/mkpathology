@@ -11,27 +11,6 @@
         </script>
     @endif
     <style>
-        .cart_wrapper {
-            position: fixed;
-            bottom: 20vh;
-            right: -10px;
-            transform: translate(35px) rotate(90deg);
-            z-index: 1000;
-            color: white;
-            padding: 12px 18px;
-            padding-top: 12px;
-            font-size: 1.4rem;
-            font-weight: bolder;
-            padding-top: 47px;
-            transition: all 0.2s;
-        }
-
-        .cart_wrapper:hover {
-            cursor: pointer;
-            color: #efefef;
-            transform: translate(10px) rotate(90deg);
-        }
-
         .hover-effect {
             /* background-color: #031b4e; */
             background-color: white;
@@ -64,7 +43,6 @@
         }
 
         /* Bottom Navbar */
-        /* Additional styles for the bottom navbar */
         /* Additional styles for the bottom navbar */
 
         .overflow-hidden {
@@ -102,41 +80,8 @@
 
         /* Bottom Navbar */
     </style>
-    <!-- Carousel Form Start -->
 
-    {{-- <div
-        class="container position-absolute d-md-none d-lg-block bg-white  rounded-md test-form p-0  top-40 to p-xl-40 top-lg-20 top-sm-10  left-10 left-sm-1">
-        @auth
-            <h1 class="p-2">Book Now</h1>
-        @endauth
-        <x-book-form></x-book-form>
-
-    </div> --}}
-    <!-- Carousel Form  end -->
-
-
-    {{-- floating checkout button --}}
-    <a href="{{ route('cart.view') }}" class=" bg-accent cart_wrapper " style="">
-        @if (auth()->check())
-            @if (auth()->user()->cart && auth()->user()->cart->items)
-                Cart ({{ auth()->user()->cart->items->count() }})
-            @else
-                Cart (0)
-            @endif
-        @else
-            @if (App\Models\Cart::where('session_id', session()->getId())->first() &&
-                    App\Models\Cart::where('session_id', session()->getId())->first()->items)
-                Cart ({{ App\Models\Cart::where('session_id', session()->getId())->first()->items->count() }})
-            @else
-                Cart (0)
-            @endif
-        @endif
-    </a>
-    {{-- floating checkout button --}}
-
-
-
-    {{-- Was (Mobile) search bar --}}
+    {{-- Main search bar --}}
     <div class="bg-dark m-0 p-3 "
         style=" background: rgb(5,35,99);
 background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rgba(0,56,177,1) 100%); ">
@@ -198,11 +143,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     <div class="d-flex flex-row flex-wrap justify-content-between">
                         <!-- Mobile View -->
                         <div class="d-flex d-lg-none flex-row flex-wrap justify-content-between">
-                            {{-- <a href="{{ route('book') }}"
-                                class="btn m-2 d-flex align-items-center btn-custom btn-mobile w-100">
-                                <i class="bi bi-journal-medical btn-icon me-2"></i>
-                                <span class="text-center">Book Test</span>
-                            </a> --}}
+
                             <a href="{{ route('book') }}" class="btn m-2 btn-custom btn-reports-mobile">
                                 <i class="bi bi-journal-medical btn-icon"></i>
                                 Book Test
@@ -267,37 +208,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
         </div>
     </nav>
 
-    <!-- Bottom Navbar  end -->
 
-    <!-- Banner Start -->
-    {{-- <div class="container-fluid banner mb-1 d-none d-lg-block">
-        <div class="container">
-            <div class="row gx-0">
-                <div class=" col-lg-4 wow zoomIn" data-wow-delay="0.1s">
-                    <div class=" hover-accent d-flex  flex-column p-5 " style="height: 300px">
-                        <h3 class="text-white text-center mb-3">Book a Test</h3>
-                        <a href="{{ route('book') }}"><img class='icon' src={{ asset('assets/img/icon/test.png') }}
-                                alt=""></a>
-                    </div>
-                </div>
-                <div class=" col-lg-4 wow zoomIn " data-wow-delay="0.3s">
-                    <div class="  hover-accent d-flex  flex-column p-5" style="height: 300px">
-                        <h3 class="text-white text-center mb-3">Upload Prescription</h3>
-                        <a href={{ route('patient.prescription.view') }}><img class='icon'
-                                src={{ asset('assets/img/icon/prescription.png') }} alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-4 wow zoomIn " data-wow-delay="0.6s">
-                    <div class="  hover-accent d-flex flex-column p-5" style="height: 300px">
-                        <h3 class="text-white text-center mb-3">Download Report</h3>
-                        <a href="{{ route('login') }}"><img class='icon'
-                                src={{ asset('assets/img/icon/report.png') }} alt=""></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- Banner Start -->
 
     <!-- About Start -->
     <div class="container-fluid ">
@@ -397,8 +308,8 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
 
 
 
-
-            <div class="row mb-4 package-test-toggle">
+            {{-- Radio switcher Package <--> Tests --}}
+            <div class="row mb-4 package-test-toggle d-none">
                 <div class="col-12 d-flex justify-content-center">
                     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
                         <input type="radio" class="btn-check" name="package-test-radio" id="package-radio"
@@ -411,156 +322,14 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     </div>
                 </div>
             </div>
-
-            <style>
-                .health-package {
-                    display: flex;
-                }
-
-                @media (max-width: 750px) {
-                    .health-package {
-                        /* display: none; */
-                    }
-
-                    .package-test-toggle {
-                        display: none;
-                    }
-                }
-            </style>
-
-            <!-- package mobile view  -->
-            <style>
-                .health-package-mobile {
-                    display: none;
-                }
-
-                .health-package-head {
-                    display: none;
-                    justify-content: center;
-                    font-weight: 800;
-                }
-
-                .nowrap {
-                    white-space: nowrap;
-                }
-
-                @media (max-width: 750px) {
-                    .health-package-mobile .health-test-mobile {
-                        display: block;
-                    }
-
-                    .card-text {
-                        display: -webkit-box;
-                        -webkit-line-clamp: 3;
-                        /* Change this number to set the number of lines */
-                        -webkit-box-orient: vertical;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        width: 100%;
-                        height: 50px;
-                    }
-
-                    .owl-carousel .item {
-                        display: flex;
-                        align-items: stretch;
-                    }
-
-                    .card {
-                        display: flex;
-                        flex-direction: column;
-                        height: 100%;
-                    }
-
-                    .health-package-head {
-                        display: flex;
-                    }
-                }
-            </style>
-
-
-            <div class="font-weight-bolder text-dark my-2 d-md-none d-sm-block" style="font-size: 1.8rem"> Top
-                Packages</div>
-            <div id='package-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile "
-                data-wow-delay="0.1s">
-                @foreach ($packages as $package)
-                    <div class="item">
-                        <div class="card health-package-card h-100 shadow w-100">
-                            <div class="p-4 card-hover">
-                                <div class="d-flex justify-content-start align-items-end">
-                                    <h5 class="card-title font-weight-bold" data-bs-toggle="modal"
-                                        data-bs-target="#package-modal" data-id="{{ $package->id }}"
-                                        onclick="getPackage({{ $package->id }})">
-                                        {{ $package->name }}</h5> &nbsp;&nbsp;
-
-
-                                </div>
-                                <p class="card-text ">{{ $package->description }}</p>
-                                <div class="collapse-hover d-flex justify-content-between align-items-end">
-                                    <a class="text-primary font-weight-bold fs-4">
-                                        <span>₹ </span> {{ $package->price }}
-                                    </a>
-
-                                    <form action="{{ route('cart.add') }}" method="post">
-                                        @csrf
-                                        <input type="hidden" id="package_id" name="product_id"
-                                            value="{{ $package->id }}">
-                                        <input type="hidden" name="type" value="package">
-                                        <input type="hidden" name="quantity" value="1">
-                                        <input class="position-relative bottom-10 btn btn-block btn-accent w-100"
-                                            type="submit" value="Add to Cart">
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-
-            <!-- package mobile view End -->
-
-            <!-- test mobile view start  -->
-            <div class="font-weight-bolder text-dark my-2 d-md-none d-sm-block " style="font-size: 1.8rem">Top
-                Tests
-            </div>
-            <div id='test-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile ">
-                @foreach ($tests as $test)
-                    <div class="item card w-100">
-                        <div class="p-4 card-hover">
-                            <div class=" mb-4">
-                                <i class="{{ $test->icon }} text-dark"></i>
-                            </div>
-                            <div class="d-flex justify-content-start align-items-start">
-
-                                <h5 class="mb-3 card-title" data-bs-toggle="modal" data-bs-target="#test-modal"
-                                    data-id="{{ $test->id }}" onclick="getTest('{{ $test->id }}')">
-                                    {{ $test->name }}</h4> &nbsp;&nbsp;&nbsp;
-
-                            </div>
-                            <small class="text-muted card-text">{{ $test->description }} </small>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <p class="text-primary fs-3"><b>₹ {{ $test->price }}</b></p>
-                                <a class="btn btn-accent px-3 w-50"style="border-radius:10px;"
-                                    href="{{ route('test.view.select', $test->id) }}">Book<i
-                                        class="bi bi-chevron-double-right ms-1"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <!-- test mobile view end  -->
-
-
-
+            {{-- Radio switcher Package <--> Tests --}}
 
             {{-- desktop version package  --}}
-            <div id='package-wrapper' class="row g-4 gx-0 health-package">
+            <div id='package-wrapper' class="row g-4 gx-0 health-package d-none">
                 @foreach ($packages as $package)
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s" data-wow-offset="0">
+                    <div class="col-lg-4 col-md-6 wow fadeInUp">
                         <div class="card health-package-card h-100 shadow">
-                            {{-- <div class="card-header">
-                                <img class='w-100' src="assets/img/packages{{ '/' . $package->package_photo_url }}"
-                                    alt="">
-                            </div> --}}
+
                             <div class="card-body">
                                 <div class="d-flex flex-row justify-content-between">
                                     <h5 class="card-title font-weight-bold" data-bs-toggle="modal"
@@ -570,8 +339,6 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                 </div>
 
                                 <div class="">
-
-                                    {{-- @dd($package->tests) --}}
                                     @php
                                         $testNames = [];
                                         if (!empty($package->test_id)) {
@@ -590,6 +357,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                 <p class="card-text text-dark overflow-hidden"
                                     style="width:385px; height: 50px; text-overflow: ellipsis;">
                                     {{ $package->description }}</p>
+
                                 <style>
                                     .collapse-content {
                                         display: none;
@@ -600,44 +368,31 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                     }
                                 </style>
 
-                                {{-- <div class="">
-                                    <b>Tests Included:</b>
-                                    <ul class="list-unstyled "> --}}
-                                {{-- @dd($package->tests) --}}
-                                {{-- @php
-                                            $testNames = [];
-                                            if (!empty($package->test_id)) {
-                                                $testIds = json_decode($package->test_id, true);
-                                                foreach ($testIds as $testId) {
-                                                    $test = App\Models\Test::find($testId);
-                                                    if ($test) {
-                                                        $testNames[] = $test->name;
-                                                    }
-                                                }
-                                            } --}}
-                                {{-- @endphp
-                                @foreach ($testNames as $testName)
-                                    <li>{{ $testName }}</li>
-                                @endforeach
-                                @foreach ($package->tests as $test)
-                                    <li>{{ $test->name }}</li>
-                                @endforeach --}}
-                                {{-- </ul>
-                            </div> --}}
+
 
                             </div>
-                            <form action="{{ route('cart.add') }}" method="post">
-                                @csrf
-                                <input type="hidden" id="package_id" name="product_id"
-                                    value="{{ $package->id }}">
-                                <input type="hidden" name="type" value="package">
-                                <input type="hidden" name="quantity" value="1">
-                                <input class="position-relative bottom-10 btn btn-block btn-accent w-100"
-                                    type="submit" value="Add to Cart">
-                            </form>
-                            {{-- <a href="{{ route('package.book', $package->id) }}"
-                                class="position-relative bottom-10 btn btn-accent">Book
-                            </a> --}}
+                            @if (isset($cart) && $cart->items->contains('package_id', $package->id))
+                                <form action="{{ route('cart.remove') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" id="test_id" name="product_id"
+                                        value="{{ $package->id }}">
+                                    <input type="hidden" name="type" value="package">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                        type="submit" value="Remove from Cart">
+                                </form>
+                            @else
+                                <form action="{{ route('cart.add') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" id="test_id" name="product_id"
+                                        value="{{ $package->id }}">
+                                    <input type="hidden" name="type" value="package">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input class="position-relative bottom-0 btn btn-block btn-accent w-100"
+                                        type="submit" value="Add to Cart">
+                                </form>
+                            @endif
+
                         </div>
                     </div>
                 @endforeach
@@ -669,9 +424,27 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                 </div>
                                 <h3 class="fs-6 text-dark">Description</h3>
                                 <p class="text-black" style='height: 48px;'>{{ $test->description }} </p>
-                                <a class="btn btn-block btn-accent w-100"
-                                    href="{{ route('test.view.select', $test->id) }}">Book<i
-                                        class="bi bi-chevron-double-right ms-1"></i></a>
+                                @if (isset($cart) && $cart->items->contains('test_id', $test->id))
+                                    <form action="{{ route('cart.remove') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" id="test_id" name="product_id"
+                                            value="{{ $test->id }}">
+                                        <input type="hidden" name="type" value="test">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                            type="submit" value="Remove from Cart">
+                                    </form>
+                                @else
+                                    <form action="{{ route('cart.add') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" id="test_id" name="product_id"
+                                            value="{{ $test->id }}">
+                                        <input type="hidden" name="type" value="test">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input class="position-relative bottom-0 btn btn-block btn-accent w-100"
+                                            type="submit" value="Add to Cart">
+                                    </form>
+                                @endif
                             </div>
                         </div>
                     @endforeach
@@ -723,12 +496,180 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             </div>
             <!-- test desktop view end  -->
 
+            <!-- package mobile view  -->
+            <style>
+                .health-package-mobile {
+                    display: none;
+                }
+
+                .health-package-head {
+                    display: none;
+                    justify-content: center;
+                    font-weight: 800;
+                }
+
+                .nowrap {
+                    white-space: nowrap;
+                }
+
+                @media (max-width: 750px) {
+                    .health-package-mobile .health-test-mobile {
+                        display: block;
+                    }
+
+                    .card-text {
+                        display: -webkit-box;
+                        -webkit-line-clamp: 3;
+                        /* Change this number to set the number of lines */
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 100%;
+                        height: 50px;
+                    }
+
+                    .owl-carousel .item {
+                        display: flex;
+                        align-items: stretch;
+                    }
+
+                    .card {
+                        display: flex;
+                        flex-direction: column;
+                        height: 100%;
+                    }
+
+                    .health-package-head {
+                        display: flex;
+                    }
+                }
+            </style>
+
+
+            <div class="font-weight-bolder text-dark my-2 " style="font-size: 1.8rem"> Top
+                Packages</div>
+            <div id='package-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile "
+                data-wow-delay="0.1s">
+                @foreach ($packages as $package)
+                    <div class="item">
+                        <div class="card health-package-card h-100 shadow w-100">
+                            <div class="p-4 card-hover">
+                                <div class="d-flex justify-content-start align-items-end">
+                                    <h5 class="card-title font-weight-bold" data-bs-toggle="modal"
+                                        data-bs-target="#package-modal" data-id="{{ $package->id }}"
+                                        onclick="getPackage({{ $package->id }})">
+                                        {{ $package->name }}</h5> &nbsp;&nbsp;
+
+
+                                </div>
+                                <p class="card-text ">{{ $package->description }}</p>
+                                <div class="collapse-hover d-flex justify-content-between align-items-end">
+                                    <a class="text-primary font-weight-bold fs-4">
+                                        <span>₹ </span> {{ $package->price }}
+                                    </a>
+
+                                    @if (isset($cart) && $cart->items->contains('package_id', $package->id))
+                                        <form action="{{ route('cart.remove') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" id="package_id" name="product_id"
+                                                value="{{ $package->id }}">
+                                            <input type="hidden" name="type" value="package">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                                type="submit" value="Remove from Cart">
+                                        </form>
+                                    @else
+                                        <form action="{{ route('cart.add') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" id="package_id" name="product_id"
+                                                value="{{ $package->id }}">
+                                            <input type="hidden" name="type" value="package">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input class="position-relative bottom-0 btn btn-block btn-accent w-100"
+                                                type="submit" value="Add to Cart">
+                                        </form>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+
+            <!-- package mobile view End -->
+
+            <!-- test mobile view start  -->
+            <div class="font-weight-bolder text-dark my-4" style="font-size: 1.8rem">Top
+                Tests
+            </div>
+            <div id='test-wrapper-mobile' class="owl-carousel owl-theme health-package-mobile ">
+                @foreach ($tests as $test)
+                    <div class="item card w-100">
+                        <div class="p-4 card-hover">
+                            <div class=" mb-4">
+                                <i class="{{ $test->icon }} text-dark"></i>
+                            </div>
+                            <div class="d-flex justify-content-start align-items-start">
+
+                                <h5 class="mb-3 card-title" data-bs-toggle="modal" data-bs-target="#test-modal"
+                                    data-id="{{ $test->id }}" onclick="getTest('{{ $test->id }}')">
+                                    {{ $test->name }}</h4> &nbsp;&nbsp;&nbsp;
+
+                            </div>
+                            <small class="text-muted card-text">{{ $test->description }} </small>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <p class="text-primary fs-3"><b>₹ {{ $test->price }}</b></p>
+                                @if (isset($cart) && $cart->items->contains('package_id', $package->id))
+                                    <form action="{{ route('cart.remove') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" id="test_id" name="product_id"
+                                            value="{{ $package->id }}">
+                                        <input type="hidden" name="type" value="package">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                            type="submit" value="Remove from Cart">
+                                    </form>
+                                @else
+                                    <form action="{{ route('cart.add') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" id="test_id" name="product_id"
+                                            value="{{ $package->id }}">
+                                        <input type="hidden" name="type" value="package">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input class="position-relative bottom-0 btn btn-block btn-accent w-100"
+                                            type="submit" value="Add to Cart">
+                                    </form>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+            <!-- test mobile view end  -->
+
+
+            <style>
+                .health-package {
+                    display: flex;
+                }
+
+                @media (max-width: 750px) {
+                    .health-package {
+                        /* display: none; */
+                    }
+
+                    .package-test-toggle {
+                        display: none;
+                    }
+                }
+            </style>
+
+
         </div>
     </div>
     <!-- About End -->
 
     {{-- Modals --}}
-
 
     <style>
         .ProductDetailInstructions_homeCollection__c8urV {
@@ -774,10 +715,29 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             line-height: 21px;
             color: #000;
         }
+
+        @keyframes fadeInRightBig {
+            from {
+                opacity: 0;
+                transform: translate3d(2000px, 0, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .fade-in-right-big {
+            animation-name: fadeInRightBig;
+            animation-duration: 0.75s;
+            animation-fill-mode: both;
+        }
     </style>
+
     <!-- Package Modal -->
-    <div class="modal fade-in-up" id="package-modal" data-bs-backdrop="static" data-bs-keyboard="true"
-        tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" style="bottom:-30px; top:initial;">
+    <div class="modal " id="package-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true" style="right:0 !important   ;top:0 !important;">
         <div class="modal-dialog modal-dialog-scrollable d-flex align-items-end">
             <div class="modal-content mb-4" style="border-top-left-radius: 25px;border-top-right-radius: 25px;">
                 <div class="modal-header">
@@ -878,14 +838,25 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                 </div> <!-- end of modal body  -->
                 @endfor
                 <div class="modal-footer">
-                    <form action="{{ route('cart.add') }}" method="post">
-                        @csrf
-                        <input type="hidden" id="package_id" name="product_id" value="{{ $package->id }}">
-                        <input type="hidden" name="type" value="package">
-                        <input type="hidden" name="quantity" value="1">
-                        <input class="position-relative bottom-10 btn btn-block btn-accent w-100" type="submit"
-                            value="Add to Cart">
-                    </form>
+                    @if (isset($cart) && $cart->items->contains('package_id', $package->id))
+                        <form action="{{ route('cart.remove') }}" method="post">
+                            @csrf
+                            <input type="hidden" id="test_id" name="product_id" value="{{ $package->id }}">
+                            <input type="hidden" name="type" value="package">
+                            <input type="hidden" name="quantity" value="1">
+                            <input class="position-relative bottom-0 btn btn-block btn-danger w-100" type="submit"
+                                value="Remove from Cart">
+                        </form>
+                    @else
+                        <form action="{{ route('cart.add') }}" method="post">
+                            @csrf
+                            <input type="hidden" id="test_id" name="product_id" value="{{ $package->id }}">
+                            <input type="hidden" name="type" value="package">
+                            <input type="hidden" name="quantity" value="1">
+                            <input class="position-relative bottom-0 btn btn-block btn-accent w-100" type="submit"
+                                value="Add to Cart">
+                        </form>
+                    @endif
 
                 </div>
             </div>
@@ -923,15 +894,25 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     </div>
                 @endfor
                 <div class="modal-footer">
-                    <form action="{{ route('cart.add') }}" method="post">
-                        @csrf
-                        <input type="hidden" id="test_id" name="product_id" value="{{ $test->id }}">
-                        <input type="hidden" id="test_id" name="name" value="{{ $test->name }}">
-                        <input type="hidden" name="type" value="test">
-                        <input type="hidden" name="quantity" value="1">
-                        <input class="position-relative bottom-10 btn btn-block btn-accent w-100" type="submit"
-                            value="Add to Cart">
-                    </form>
+                    @if (isset($cart) && $cart->items->contains('test_id', $test->id))
+                        <form action="{{ route('cart.remove') }}" method="post">
+                            @csrf
+                            <input type="hidden" id="test_id" name="product_id" value="{{ $test->id }}">
+                            <input type="hidden" name="type" value="test">
+                            <input type="hidden" name="quantity" value="1">
+                            <input class="position-relative bottom-0 btn btn-block btn-danger w-100" type="submit"
+                                value="Remove from Cart">
+                        </form>
+                    @else
+                        <form action="{{ route('cart.add') }}" method="post">
+                            @csrf
+                            <input type="hidden" id="test_id" name="product_id" value="{{ $test->id }}">
+                            <input type="hidden" name="type" value="test">
+                            <input type="hidden" name="quantity" value="1">
+                            <input class="position-relative bottom-0 btn btn-block btn-accent w-100" type="submit"
+                                value="Add to Cart">
+                        </form>
+                    @endif
                 </div>
             </div>
         </div>
@@ -959,7 +940,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
     {{-- Modal for Tests Section Ends --}}
 
 
-    {{-- Modals --}}
+    {{-- Modals End --}}
 
 
     {{-- desktop version package  --}}
@@ -968,11 +949,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
         @foreach ($packages as $package)
             <div class="col-lg-4 col-md-6 wow fadeInUp my-5" data-wow-delay="0.1s" data-wow-offset="0">
                 <div class="card health-package-card h-100 shadow">
-                    {{-- <div class="card-header">
-                        <img class="w-100"
-                            src="{{ asset('assets/img/packages') . '/' . $package->package_photo_url }}"
-                            alt="Jaanch Infertility Profile" />
-                    </div> --}}
+
                     <div class="card-body">
                         <div class="d-flex flex-row justify-content-between">
                             <h5 class="card-title font-weight-bold" data-bs-toggle="modal"
@@ -982,8 +959,6 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                         </div>
 
                         <div class="">
-
-                            {{-- @dd($package->tests) --}}
                             @php
                                 $testNames = [];
                                 if (!empty($package->test_id)) {
@@ -1013,19 +988,28 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                             }
                         </style>
                     </div>
-                    <form action="{{ route('cart.add') }}" method="post">
-                        @csrf
-                        <input type="hidden" id="package_id" name="product_id" value="{{ $package->id }}">
-                        <input type="hidden" name="type" value="package">
-                        <input type="hidden" name="quantity" value="1">
-                        <input class="position-relative bottom-10 btn btn-block btn-accent w-100" type="submit"
-                            value="Add to Cart">
-                    </form>
+                    @if (isset($cart) && $cart->items->contains('package_id', $test->id))
+                        <form action="{{ route('cart.remove') }}" method="post">
+                            @csrf
+                            <input type="hidden" id="test_id" name="product_id" value="{{ $package->id }}">
+                            <input type="hidden" name="type" value="package">
+                            <input type="hidden" name="quantity" value="1">
+                            <input class="position-relative bottom-0 btn btn-block btn-danger w-100" type="submit"
+                                value="Remove from Cart">
+                        </form>
+                    @else
+                        <form action="{{ route('cart.add') }}" method="post">
+                            @csrf
+                            <input type="hidden" id="test_id" name="product_id" value="{{ $package->id }}">
+                            <input type="hidden" name="type" value="package">
+                            <input type="hidden" name="quantity" value="1">
+                            <input class="position-relative bottom-0 btn btn-block btn-accent w-100" type="submit"
+                                value="Add to Cart">
+                        </form>
+                    @endif
                 </div>
             </div>
         @endforeach
-
-
     </div>
     {{-- desktop version for package ends --}}
 
@@ -1047,15 +1031,26 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                         </div>
                         <h3 class="fs-6 text-dark">Description</h3>
                         <p class="text-black" style='height: 48px;'>{{ $test->description }} </p>
-
-                        <form action="{{ route('cart.add') }}" method="post">
-                            @csrf
-                            <input type="hidden" id="test_id" name="product_id" value="{{ $test->id }}">
-                            <input type="hidden" name="type" value="test">
-                            <input type="hidden" name="quantity" value="1">
-                            <input class="position-relative bottom-10 btn btn-block btn-accent w-100" type="submit"
-                                value="Add to Cart">
-                        </form>
+                        {{-- {{ dump($cart) }} --}}
+                        @if (isset($cart) && $cart->items->contains('test_id', $test->id))
+                            <form action="{{ route('cart.remove') }}" method="post">
+                                @csrf
+                                <input type="hidden" id="test_id" name="product_id" value="{{ $test->id }}">
+                                <input type="hidden" name="type" value="test">
+                                <input type="hidden" name="quantity" value="1">
+                                <input class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                    type="submit" value="Remove from Cart">
+                            </form>
+                        @else
+                            <form action="{{ route('cart.add') }}" method="post">
+                                @csrf
+                                <input type="hidden" id="test_id" name="product_id" value="{{ $test->id }}">
+                                <input type="hidden" name="type" value="test">
+                                <input type="hidden" name="quantity" value="1">
+                                <input class="position-relative bottom-0 btn btn-block btn-accent w-100"
+                                    type="submit" value="Add to Cart">
+                            </form>
+                        @endif
                     </div>
                 </div>
             @endforeach
@@ -1200,7 +1195,6 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                                     screenings.</span>
                             </div>
                         </div>
-                        <!-- <a class="btn btn-primary py-3 px-5 wow fadeIn" data-wow-delay="0.5s" href="">Explore More</a> -->
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -1337,27 +1331,29 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
         const packageWrapperMobile = document.getElementById('package-wrapper-mobile')
         const testWrapperMobile = document.getElementById('test-wrapper-mobile')
 
-        function updateVisibility() {
-            const width = window.innerWidth;
-            if (width < 750) {
-                packageWrapperMobile.classList.remove('d-none');
-                testWrapperMobile.classList.remove('d-none');
+        //this makes the both package and test carousel only appear on mobile
 
-                packageWrapper.classList.add('d-none')
-                testWrapper.classList.add('d-none')
-            } else {
-                packageWrapperMobile.classList.add('d-none');
-                testWrapperMobile.classList.add('d-none');
+        // function updateVisibility() {
+        //     const width = window.innerWidth;
+        //     if (width < 750) {
+        //         packageWrapperMobile.classList.remove('d-none');
+        //         testWrapperMobile.classList.remove('d-none');
 
-                packageWrapper.classList.remove('d-none')
-                testWrapper.classList.add('d-none')
-            }
-        }
+        //         packageWrapper.classList.add('d-none')
+        //         testWrapper.classList.add('d-none')
+        //     } else {
+        //         packageWrapperMobile.classList.add('d-none');
+        //         testWrapperMobile.classList.add('d-none');
 
-        window.addEventListener('resize', updateVisibility);
+        //         packageWrapper.classList.remove('d-none')
+        //         testWrapper.classList.add('d-none')
+        //     }
+        // }
 
-        // Initial check on page load
-        updateVisibility();
+        // window.addEventListener('resize', updateVisibility);
+
+        // // Initial check on page load
+        // updateVisibility();
 
         packageRadio.addEventListener('change', () => {
             packageWrapper.classList.remove('d-none')
@@ -1420,13 +1416,172 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
 
         }
 
+        // function getTest(id) {
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open('GET', `/getTest/${id}`, true);
+        //     xhr.onreadystatechange = function() {
+        //         if (xhr.readyState === 4 && xhr.status === 200) {
+        //             var response = JSON.parse(xhr.responseText);
+        //             // console.log(response);
+        //             let test = {
+        //                 id: response.id,
+        //                 name: response.name,
+        //                 test_no: response.test_no,
+        //                 price: response.price,
+        //                 description: response.description,
+        //                 parameter_id: response.parameter_id,
+        //                 created_at: response.created_at,
+        //                 updated_at: response.updated_at
+        //             };
+        //             console.log("ID:", test.id);
+        //             console.log("Name:", test.name);
+        //             console.log("Test No:", test.test_no);
+        //             console.log("Price:", test.price);
+        //             console.log("Description:", test.description);
+        //             console.log("Parameter ID:", test.parameter_id);
+        //             console.log("Created at:", test.created_at);
+        //             console.log("Updated at:", test.updated_at);
+        //             const testNameElement = document.querySelector('.test_name');
+        //             if (testNameElement) {
+        //                 testNameElement.innerHTML = test.name;
+        //             }
+        //             const testDescriptionElement = document.querySelector('.test_description');
+        //             if (testDescriptionElement) {
+        //                 testDescriptionElement.innerHTML = response.description;
+        //             }
+        //             const testPriceElement = document.querySelector('.test_price');
+        //             if (testPriceElement) {
+        //                 testPriceElement.innerHTML = "₹ " + response.price + "/-";
+        //             }
+        //             // document.getElementById('test_id').href = "/view/test/" + response.id;
+        //         }
+        //     };
+        //     xhr.send();
+        // }
+
+
+        //     function getTestName(ids) {
+
+        //         ids = JSON.parse(ids);
+
+        //         ids = ids.map(function(id) {
+        //             id = Number(id);
+        //             return id;
+        //         });
+        //         console.info(ids);
+        //         var list = [];
+        //         var data = JSON.stringify(ids)
+        //         $.ajax({
+        //             type: "POST",
+        //             url: `/test/fetchAll`,
+        //             data: {
+        //                 "_token": "{{ csrf_token() }}",
+        //                 ids: data
+        //             },
+        //             success: function(response) {
+        //                 list = JSON.parse(response);
+        //                 var listElement = `
+    //                     <div class="">
+    //                         <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
+    //                         <ul class="list-unstyled ">
+    //                             ${list.map(function(test, index) {
+    //                                 var parameters = test.pname || [];
+    //                                 return 
+    //                                 `<li class='text-accent list-none py-2' id="package_test_name">
+        //     <!-- Trigger for collapsing the parameters list -->
+        //     <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
+        //         data-bs-toggle="collapse"
+        //         href="#collapseParameters${index}" role="button"
+        //         aria-expanded="false"
+        //         aria-controls="collapseParameters${index}"
+        //         style="color: inherit;">
+        //         ${test.name} <span
+        //             class="font-weight-bold">${parameters.length > 0 ? `(${parameters.length})` : ''}</span>
+        //     </a>
+
+        //     <!-- Collapsible content -->
+        //     <ul class="collapse " id="collapseParameters${index}">
+        //         ${parameters.map(function(parameter) {
+        //             return `<li>${parameter}</li>`;
+        //         }).join('')}
+        //     </ul>
+        // </li>`;
+    //                             }).join('')}
+    //                         </ul>
+    //                     </div>
+    //                 `;
+
+        //                 $('#wrapperTest').html(listElement);
+        //                 console.log(listElement);
+
+        //             }
+        //         });
+
+        //     }
+
+        // function getPackage(id) {
+        //     var test_ids;
+        //     var xhr = new XMLHttpRequest();
+        //     xhr.open('GET', `/getPackage/${id}`, true);
+        //     xhr.onreadystatechange = function() {
+        //         if (xhr.readyState === 4 && xhr.status === 200) {
+        //             var response = JSON.parse(xhr.responseText);
+        //             // console.info(response);
+        //             test_id = response.test_id;
+        //             getTestName(test_id);
+        //             let package = {
+        //                 id: response.id,
+        //                 name: response.name,
+        //                 price: response.price,
+        //                 description: response.description,
+        //                 test_ids: response.test_ids,
+        //                 package_photo_url: response.package_photo_url,
+        //                 created_at: response.created_at,
+        //                 updated_at: response.updated_at
+
+        //             };
+        //             console.log("ID:", package.id);
+        //             var packageIdElement = document.getElementsByClassName('test_id')[0];
+        //             if (packageIdElement) {
+        //                 packageIdElement.value = package.id;
+        //             }
+        //             var packageNameElement = document.getElementsByClassName('package_name')[0];
+        //             if (packageNameElement) {
+        //                 packageNameElement.innerHTML = response.name;
+        //             }
+        //             var packageDescriptionElement = document.getElementsByClassName('package_description')[0];
+        //             if (packageDescriptionElement) {
+        //                 packageDescriptionElement.innerHTML = response.description;
+        //             }
+        //             var packagePriceElement = document.getElementsByClassName('package_price')[0];
+        //             if (packagePriceElement) {
+        //                 packagePriceElement.innerHTML = "₹ " + response.price + "/-";
+        //             }
+        //             var packageIdElement = document.getElementsByClassName('package_id')[0];
+        //             if (packageIdElement) {
+        //                 packageIdElement.href = "/view/test/" + response.id;
+        //             }
+        //             var packageIdCart = document.getElementById('package_id');
+        //             if (packageIdCart) {
+        //                 packageIdCart.value = response.id;
+        //             }
+        //             var packageIdElement = document.getElementsByClassName('package_photo_url')[0];
+        //             if (packageIdElement) {
+        //                 packageIdElement.src = 'assets/img/packages/' + response.package_photo_url;
+        //             }
+
+        //         }
+        //     };
+        //     xhr.send();
+        // }
+
+
         function getTest(id) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', `/getTest/${id}`, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    // console.log(response);
+            $.ajax({
+                type: 'GET',
+                url: `/getTest/${id}`,
+                dataType: 'json',
+                success: function(response) {
                     let test = {
                         id: response.id,
                         name: response.name,
@@ -1437,44 +1592,31 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                         created_at: response.created_at,
                         updated_at: response.updated_at
                     };
-                    console.log("ID:", test.id);
-                    console.log("Name:", test.name);
-                    console.log("Test No:", test.test_no);
-                    console.log("Price:", test.price);
-                    console.log("Description:", test.description);
-                    console.log("Parameter ID:", test.parameter_id);
-                    console.log("Created at:", test.created_at);
-                    console.log("Updated at:", test.updated_at);
-                    const testNameElement = document.querySelector('.test_name');
-                    if (testNameElement) {
-                        testNameElement.innerHTML = test.name;
-                    }
-                    const testDescriptionElement = document.querySelector('.test_description');
-                    if (testDescriptionElement) {
-                        testDescriptionElement.innerHTML = response.description;
-                    }
-                    const testPriceElement = document.querySelector('.test_price');
-                    if (testPriceElement) {
-                        testPriceElement.innerHTML = "₹ " + response.price + "/-";
-                    }
-                    // document.getElementById('test_id').href = "/view/test/" + response.id;
+
+                    // console.log("ID:", test.id);
+                    // console.log("Name:", test.name);
+                    // console.log("Test No:", test.test_no);
+                    // console.log("Price:", test.price);
+                    // console.log("Description:", test.description);
+                    // console.log("Parameter ID:", test.parameter_id);
+                    // console.log("Created at:", test.created_at);
+                    // console.log("Updated at:", test.updated_at);
+
+                    $('.test_name').html(test.name);
+                    $('.test_description').html(response.description);
+                    $('.test_price').html("₹ " + response.price + "/-");
+                    // $('#test_id').attr('href', "/view/test/" + response.id);
                 }
-            };
-            xhr.send();
+            });
         }
 
-
         function getTestName(ids) {
-
             ids = JSON.parse(ids);
-
             ids = ids.map(function(id) {
-                id = Number(id);
-                return id;
+                return Number(id);
             });
             console.info(ids);
-            var list = [];
-            var data = JSON.stringify(ids)
+            var data = JSON.stringify(ids);
             $.ajax({
                 type: "POST",
                 url: `/test/fetchAll`,
@@ -1483,58 +1625,51 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     ids: data
                 },
                 success: function(response) {
-                    list = JSON.parse(response);
+                    var list = JSON.parse(response);
                     var listElement = `
-                        <div class="">
-                            <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
-                            <ul class="list-unstyled ">
-                                ${list.map(function(test, index) {
-                                    var parameters = test.pname || [];
-                                    return `
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <li class='text-accent list-none py-2' id="package_test_name">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- Trigger for collapsing the parameters list -->
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    data-bs-toggle="collapse"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    href="#collapseParameters${index}" role="button"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    aria-expanded="false"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    aria-controls="collapseParameters${index}"
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    style="color: inherit;">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${test.name} <span
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        class="font-weight-bold">${parameters.length > 0 ? `(${parameters.length})` : ''}</span>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </a>
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!-- Collapsible content -->
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <ul class="collapse " id="collapseParameters${index}">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ${parameters.map(function(parameter) {
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        return `<li>${parameter}</li>`;
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    }).join('')}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </ul>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        `;
-                                }).join('')}
-                            </ul>
-                        </div>
-                    `;
-
+        <div class="">
+          <b class="fs-5 font-weight-bold text-dark">Tests Included:</b>
+          <ul class="list-unstyled ">
+            ${list.map(function(test, index) {
+              var parameters = test.pname || [];
+              return `
+                                                                                                                                                                                                                                                            <li class='text-accent list-none py-2' id="package_test_name">
+                                                                                                                                                                                                                                                              <!-- Trigger for collapsing the parameters list -->
+                                                                                                                                                                                                                                                              <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
+                                                                                                                                                                                                                                                                data-bs-toggle="collapse"
+                                                                                                                                                                                                                                                                href="#collapseParameters${index}" role="button"
+                                                                                                                                                                                                                                                                aria-expanded="false"
+                                                                                                                                                                                                                                                                aria-controls="collapseParameters${index}"
+                                                                                                                                                                                                                                                                style="color: inherit;">
+                                                                                                                                                                                                                                                                ${test.name} <span
+                                                                                                                                                                                                                                                                  class="font-weight-bold">${parameters.length > 0 ? `(${parameters.length})` : ''}</span>
+                                                                                                                                                                                                                                                              </a>
+                                                                                                                                                                                                                                                              <!-- Collapsible content -->
+                                                                                                                                                                                                                                                              <ul class="collapse " id="collapseParameters${index}">
+                                                                                                                                                                                                                                                                ${parameters.map(function(parameter) {
+                                                                                                                                                                                                                                                                  return `<li>${parameter}</li>`;
+                                                                                                                                                                                                                                                                }).join('')}
+                                                                                                                                                                                                                                                              </ul>
+                                                                                                                                                                                                                                                            </li>
+                                                                                                                                                                                                                                                          `;
+            }).join('')}
+          </ul>
+        </div>
+      `;
                     $('#wrapperTest').html(listElement);
                     console.log(listElement);
-
                 }
             });
-
         }
 
+
         function getPackage(id) {
-            var test_ids;
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', `/getPackage/${id}`, true);
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    var response = JSON.parse(xhr.responseText);
-                    // console.info(response);
-                    test_id = response.test_id;
-                    getTestName(test_id);
-                    let package = {
+            $.ajax({
+                type: 'GET',
+                url: `/getPackage/${id}`,
+                dataType: 'json',
+                success: function(response) {
+                    var packageData = {
                         id: response.id,
                         name: response.name,
                         price: response.price,
@@ -1543,38 +1678,19 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                         package_photo_url: response.package_photo_url,
                         created_at: response.created_at,
                         updated_at: response.updated_at
-
                     };
-                    console.log("ID:", package.id);
 
-                    var packageNameElement = document.getElementsByClassName('package_name')[0];
-                    if (packageNameElement) {
-                        packageNameElement.innerHTML = response.name;
-                    }
-                    var packageDescriptionElement = document.getElementsByClassName('package_description')[0];
-                    if (packageDescriptionElement) {
-                        packageDescriptionElement.innerHTML = response.description;
-                    }
-                    var packagePriceElement = document.getElementsByClassName('package_price')[0];
-                    if (packagePriceElement) {
-                        packagePriceElement.innerHTML = "₹ " + response.price + "/-";
-                    }
-                    var packageIdElement = document.getElementsByClassName('package_id')[0];
-                    if (packageIdElement) {
-                        packageIdElement.href = "/view/test/" + response.id;
-                    }
-                    var packageIdCart = document.getElementById('package_id');
-                    if (packageIdCart) {
-                        packageIdCart.value = response.id;
-                    }
-                    var packageIdElement = document.getElementsByClassName('package_photo_url')[0];
-                    if (packageIdElement) {
-                        packageIdElement.src = 'assets/img/packages/' + response.package_photo_url;
-                    }
+                    console.log("Package ID:", packageData.id);
 
+                    $('.test_id').val(packageData.id);
+                    $('.package_name').html(response.name);
+                    $('.package_description').html(response.description);
+                    $('.package_price').html("₹ " + response.price + "/-");
+                    $('.package_id').attr('href', "/view/test/" + response.id);
+                    $('#package_id').val(response.id);
+                    $('.package_photo_url').attr('src', 'assets/img/packages/' + response.package_photo_url);
                 }
-            };
-            xhr.send();
+            });
         }
     </script>
 </x-guest>

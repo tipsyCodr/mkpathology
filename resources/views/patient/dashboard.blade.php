@@ -68,7 +68,8 @@
                         @foreach ($bookings as $booking)
                             <div class="{{ $loop->index % 2 == 0 ? 'bg-gray-200' : '' }} p-4">
                                 <p class="mb-2 flex items-center">
-                                    {{ $booking->package->name }} - {{ $booking->booking_date }} -
+                                    {{ $booking->package ? $booking->package->name : '' }} -
+                                    {{ $booking->booking_date }} -
                                     {{ $booking->slot }}
                                 </p>
                             </div>

@@ -1,5 +1,10 @@
 <x-guest>
     <div class="container m-auto p-3">
+        <div class="d-flex justify-content-start">
+            <button type="button" onclick="history.back()" class="btn btn-accent mb-3">
+                <i class="bi bi-arrow-left"></i> Back
+            </button>
+        </div>
         <form class="d-flex flex-column " action='{{ route('search.query') }}' onfocus="showlist();" onblur="hidelist();">
             <input id=searchInput class="  form-control me-2 border border-muted" style="border-radius: 10px"
                 type="search" placeholder="&#128270; Search Packages and Tests" aria-label="Search" name='q'

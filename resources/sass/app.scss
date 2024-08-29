@@ -1,0 +1,53 @@
+@import 'bootstrap/scss/bootstrap';
+
+
+/* Cart Button */
+.cart_wrapper {
+    border: 2px solid #031b4e;
+    margin-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left:  10px;
+    padding-right: 10px;
+    font-size: 1rem;
+    font-weight: bolder;
+    transition: all 0.2s;
+    border-radius: 5px;
+}
+.cart_wrapper:hover{
+        background-color: #031b4e;
+        a{
+            color:white;
+        }
+    }
+
+
+
+.cart_wrapper > a {
+    color: #031b4e;
+    white-space: nowrap;
+}
+.cart-badge{
+    // margin-left: 20px;
+}
+.cart-text{
+padding-left: 10px;
+}
+
+.cart_wrapper:hover {
+    cursor: pointer;
+    color: #efefef;
+}
+
+/* Cart Button */
+// logout btn border-danger text-dark
+.logout-btn{
+    background-color: #fff;
+    border:2px solid red;
+    border-radius: 5px;
+    padding: 10px;
+}
+.logout-btn:hover{
+    background-color: rgb(180, 40, 40);
+    color:white;
+}

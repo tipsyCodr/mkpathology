@@ -277,6 +277,13 @@
 
     }
 
+    @media (max-width: 768px) {
+        .owl-theme .owl-nav {
+            left: 85%;
+            transform: translateX(-50%);
+        }
+    }
+
     .owl-prev i,
     .owl-next i {
         /* transform: scale(1, 6); */

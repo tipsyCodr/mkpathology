@@ -71,12 +71,12 @@
                                 <small class="text-success"><i class="bi bi-check-circle-fill"></i> Lab
                                     Visit</small>
                             </div>
-                            <div class="body d-flex flex-row justify-content-between">
+                            <div class="body d-flex flex-row justify-content-between align-items-end">
                                 <div class="">
                                     <p class="card-text"
-                                        style='max-height: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
+                                        style=' overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
                                         {{ $test->description }} </p>
-                                    <small class='d-inline-block mb-2'>Reports in <span
+                                    <small class=' mb-2'>Reports in <span
                                             class='badge badge-danger bg-dark  rounded-pill'>72hr</span>
                                     </small>
                                 </div>

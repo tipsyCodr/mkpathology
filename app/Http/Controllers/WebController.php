@@ -58,7 +58,11 @@ class WebController extends Controller
             $packages = collect();  // Empty collection
         }
 
-        return view('search', compact('tests', 'packages'));
+        $cart = auth()->user()
+            ? auth()->user()->cart()->latest()->first() ?? auth()->user()->cart()->create()
+            : Cart::where('session_id', session()->getId())->first() ?? Cart::create(['session_id' => session()->getId()]);
+
+        return view('search', compact('tests', 'packages', 'cart'));
         foreach ($tests as $test) {
             echo $test->name;
             echo '<br>';

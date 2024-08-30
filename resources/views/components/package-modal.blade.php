@@ -157,7 +157,7 @@
 
             {{-- QnA ENd --}}
 
-            <div class="foot py-3 text-center">
+            <div class="foot py-5 my-5 text-center">
                 <small>MKPathology Labs </small>
 
             </div>

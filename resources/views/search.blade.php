@@ -1,4 +1,16 @@
 <x-guest>
+    <style>
+        .card-text {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            /* Change this number to set the number of lines */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            height: 50px;
+        }
+    </style>
     <div class="container m-auto p-3">
         <div class="d-flex justify-content-start">
             <button type="button" onclick="history.back()" class="btn btn-accent mb-3">
@@ -62,8 +74,8 @@
                             </div>
                             <div class="body d-flex flex-row justify-content-between">
                                 <div class="">
-                                    <p class="text-dark m-0"
-                                        style='max-height: 48px; overflow: hidden;word-break: break-word;overflow-wrap: break-word; text-overflow: ellipsis; white-space: nowrap;'>
+                                    <p class="card-text"
+                                        style='max-height: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
                                         {{ $test->description }} </p>
                                     <small class='d-inline-block mb-2'>Reports in <span
                                             class='badge badge-danger bg-dark  rounded-pill'>72hr</span>
@@ -122,8 +134,8 @@
                                 </div>
                                 <div class="body d-flex flex-row justify-content-between">
                                     <div class="">
-                                        <p class="text-dark m-0"
-                                            style='max-height: 48px; overflow: hidden;word-break: break-word;overflow-wrap: break-word; text-overflow: ellipsis; white-space: nowrap;'>
+                                        <p class="card-text"
+                                            style='max-height: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
                                             {{ $package->description }}
                                         </p>
                                         <small class='d-inline-block mb-2'>Reports in <span
@@ -187,8 +199,8 @@
                     </div>
                     <div class="body d-flex flex-row justify-content-between">
                         <div class="">
-                            <p class="text-dark m-0"
-                                style='max-height: 48px; overflow: hidden;word-break: break-word;overflow-wrap: break-word; text-overflow: ellipsis; white-space: nowrap;'>
+                            <p class="card-text"
+                                style='max-height: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
                                 {{ $test->description }}
                             </p>
                             <small class='d-inline-block mb-2'>Reports in <span

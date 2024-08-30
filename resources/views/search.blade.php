@@ -52,6 +52,13 @@
                                 </p>
                                 <div style="width:60px;"></div>
                                 <p class="text-dark bold font-weight-bold m-0 fs-5">₹{{ $test->price }}</p>
+
+                            </div>
+                            <div class="d-flex flex-row justify-content-between my-3">
+                                <small class="text-success"><i class="bi bi-check-circle-fill"></i> Home
+                                    Collection</small>
+                                <small class="text-success"><i class="bi bi-check-circle-fill"></i> Lab
+                                    Visit</small>
                             </div>
                             <div class="body d-flex flex-row justify-content-between">
                                 <div class="">
@@ -61,8 +68,27 @@
                                     </small>
                                 </div>
                                 <div class="">
-                                    <a href="{{ route('test.view.select', $test->id) }}"
-                                        class="bg-accent d-block text-white btn">Book</a>
+                                    @if (isset($cart) && $cart->items->contains('test_id', $test->id))
+                                        <form action="{{ route('cart.remove') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" id="test_id" name="product_id"
+                                                value="{{ $test->id }}">
+                                            <input type="hidden" name="type" value="test">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                                type="submit" value="Remove from Cart" style="margin-top: auto;">
+                                        </form>
+                                    @else
+                                        <form action="{{ route('cart.add') }}" method="post">
+                                            @csrf
+                                            <input type="hidden" id="test_id" name="product_id"
+                                                value="{{ $test->id }}">
+                                            <input type="hidden" name="type" value="test">
+                                            <input type="hidden" name="quantity" value="1">
+                                            <input class="position-relative bottom-0 btn btn-block btn-accent w-100"
+                                                type="submit" value="Add to Cart" style="margin-top: auto;">
+                                        </form>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -94,7 +120,8 @@
                                 </div>
                                 <div class="body d-flex flex-row justify-content-between">
                                     <div class="">
-                                        <p class="text-dark m-0" style='max-height: 48px;'>{{ $package->description }}
+                                        <p class="text-dark m-0" style='max-height: 48px;'>
+                                            {{ $package->description }}
                                         </p>
                                         <small class='d-inline-block mb-2'>Reports in <span
                                                 class='badge badge-danger bg-dark  rounded-pill'>72hr</span>

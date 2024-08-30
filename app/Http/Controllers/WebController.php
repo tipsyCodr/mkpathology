@@ -74,7 +74,11 @@ class WebController extends Controller
         $testsByCategory = Test::whereJsonContains('category_id', $categoryId)->get();
         $packageByCategory = Package::whereJsonContains('category_id', $categoryId)->get();
 
-        return view('search', compact('testsByCategory', 'packageByCategory', 'categoryName'));
+        $cart = auth()->user()
+            ? auth()->user()->cart()->latest()->first() ?? auth()->user()->cart()->create()
+            : Cart::where('session_id', session()->getId())->first() ?? Cart::create(['session_id' => session()->getId()]);
+
+        return view('search', compact('testsByCategory', 'packageByCategory', 'categoryName', 'cart'));
 
 
     }
@@ -269,7 +273,13 @@ class WebController extends Controller
             $item = Test::find($id);
 
         }
-        return view('view-description', compact('item', 'type'));
+
+        $cart = auth()->user()
+            ? auth()->user()->cart()->latest()->first() ?? auth()->user()->cart()->create()
+            : Cart::where('session_id', session()->getId())->first() ?? Cart::create(['session_id' => session()->getId()]);
+
+
+        return view('view-description', compact('item', 'type', 'cart'));
     }
     public function getTest(Request $request)
     {

@@ -12,8 +12,25 @@
                 <p class=" text-dark " style="font-size:1.5rem; font-weight: 900">₹{{ $item->price }}</p>
             </div>
             <br>
-            <a class="d-block w-full bg-dark text-center rounded-pill text-white p-2" href="/book/{{ $item->id }}">
-                Book Now </a>
+            @if (isset($cart) && $cart->items->contains('test_id', $item->id))
+                <form action="{{ route('cart.remove') }}" method="post">
+                    @csrf
+                    <input type="hidden" id="test_id" name="product_id" value="{{ $item->id }}">
+                    <input type="hidden" name="type" value="test">
+                    <input type="hidden" name="quantity" value="1">
+                    <input class="position-relative bottom-0 btn btn-block btn-danger w-100" type="submit"
+                        value="Remove from Cart" style="margin-top: auto;">
+                </form>
+            @else
+                <form action="{{ route('cart.add') }}" method="post">
+                    @csrf
+                    <input type="hidden" id="test_id" name="product_id" value="{{ $item->id }}">
+                    <input type="hidden" name="type" value="test">
+                    <input type="hidden" name="quantity" value="1">
+                    <input class="position-relative bottom-0 btn btn-block btn-accent w-100" type="submit"
+                        value="Add to Cart" style="margin-top: auto;">
+                </form>
+            @endif
             <br>
 
             @if (!is_null($item->id) && $type == 'test')

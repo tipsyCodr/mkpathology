@@ -19,9 +19,6 @@ Route::get('/', [WebController::class, 'home'])->name('home');
 
 Route::get('/downloadPdf/{prescription_file_name}', [WebController::class, 'downloadPDF'])->name('download.pdf');
 
-Route::get('search/', [WebController::class, 'search'])->name('search');
-Route::get('search/query', [WebController::class, 'searchByQuery'])->name('search.query');
-Route::get('search/category/{category}', [WebController::class, 'searchByCategory'])->name('search.category');
 
 Route::get('test', [WebController::class, 'showAllTests'])->name('test');
 Route::get('test-search', [WebController::class, 'searchAllTests'])->name('test.search');
@@ -41,6 +38,11 @@ Route::post('test/fetchAll', [PackageController::class, 'fetchTestData'])->name(
 Route::get('fetchPackage/{id}', [WebController::class, 'fetchPackage'])->name('fetch.package.data');
 Route::get('fetchTest/{id}', [WebController::class, 'fetchTest'])->name('fetch.test.data');
 Route::get('/get-cart-items', [CartController::class, 'getCartItems'])->name('cart.items');
+
+//search 
+Route::get('search/', [WebController::class, 'search'])->name('search');
+Route::get('search/query', [WebController::class, 'searchByQuery'])->name('search.query');
+Route::get('search/category/{category}', [WebController::class, 'searchByCategory'])->name('search.category');
 
 //Cart System
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');

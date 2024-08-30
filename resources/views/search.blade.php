@@ -5,7 +5,7 @@
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
-            max-width: 100%;
+            max-width: 420px;
             margin-bottom: 1rem;
             word-wrap: break-word;
         }

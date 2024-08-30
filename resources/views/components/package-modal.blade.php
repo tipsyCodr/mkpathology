@@ -383,7 +383,7 @@
                     }
                     let accordionHTML = createTestParameterCollapsible(data.tests[0]);
 
-                    // $('#sidebar_photo').attr('src', 'assets/img/packages/' + data.photoURL);
+                    $('#sidebar_photo').attr('src', '');
                     $('#accordionContainer').html(accordionHTML);
                     showSidebar();
                 }

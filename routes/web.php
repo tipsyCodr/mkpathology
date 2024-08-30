@@ -36,12 +36,17 @@ Route::get('getTest/{id}', [WebController::class, 'getTest'])->name('get.test.da
 Route::get('getPackage/{id}', [WebController::class, 'getPackage'])->name('get.package.data');
 Route::post('test/fetchAll', [PackageController::class, 'fetchTestData'])->name('get.test.all');
 
+
+// API Calls
 Route::get('fetchPackage/{id}', [WebController::class, 'fetchPackage'])->name('fetch.package.data');
+Route::get('fetchTest/{id}', [WebController::class, 'fetchTest'])->name('fetch.test.data');
+Route::get('/get-cart-items', [CartController::class, 'getCartItems'])->name('cart.items');
 
 //Cart System
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
 Route::get('/cart', [CartController::class, 'viewCart'])->name('cart.view');
+
 
 // Checkout System
 Route::get('/checkout', [CheckoutController::class, 'showCheckoutForm'])->name('checkout.form');

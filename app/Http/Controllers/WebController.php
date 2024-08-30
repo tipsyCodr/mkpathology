@@ -275,7 +275,10 @@ class WebController extends Controller
         $id = request()->segment(2);
         $package = Package::find($id);
         $packageName = $package->name;
+        $packageDesc = $package->description;
+        $photoURL = $package->package_photo_url;
         $testIDs = $package->test_id;
+        $testCount = json_decode($testIDs) ? count(json_decode($testIDs)) : 0;
         $price = $package->price;
         $tests = [];
         $testIDs = json_decode($testIDs, true);
@@ -284,25 +287,70 @@ class WebController extends Controller
             $testName = $test->name;
             $parameters = json_decode($test->parameter_id, true);
             $parameterNames = [];
+            $parameterCount = 0;
+
             if (is_array($parameters)) {
+                $parameterCount = count($parameters); // Get the count of parameters
                 foreach ($parameters as $parameter) {
                     $parameterNames[] = Parameter::find($parameter)->name;
                 }
             }
             $tests[] = [
                 'name' => $testName,
-                'items' => $parameterNames
+                'items' => $parameterNames,
+                'parameterCount' => $parameterCount // Add parameter count to the array
             ];
         }
 
         $data = [
+            'id' => $id,
             'name' => $packageName,
             'price' => $price,
-            'tests' => $tests
+            'description' => $packageDesc,
+            'testCount' => $testCount,
+            'tests' => $tests,
+            'photoURL' => $photoURL
         ];
         return response()->json($data);
 
     }
+
+    public function fetchTest(Request $request)
+    {
+        $id = request()->segment(2);
+        $test = Test::find($id);
+        $name = $test->name;
+        $description = $test->description;
+        $price = $test->price;
+        $parameters = json_decode($test->parameter_id, true);
+        $parameterNames = [];
+        $parameterCount = 0;
+
+        if (is_array($parameters)) {
+            $parameterCount = count($parameters); // Get the count of parameters
+            foreach ($parameters as $parameter) {
+                $parameterNames[] = Parameter::find($parameter)->name;
+            }
+        }
+        $tests[] = [
+            'name' => $name,
+            'items' => $parameterNames,
+            'parameterCount' => $parameterCount // Add parameter count to the array
+        ];
+
+        $data = [
+            'id' => $id,
+            'name' => $name,
+            'price' => $price,
+            'description' => $description,
+            'tests' => $tests,
+            // 'testCount' => $testCount,
+            // 'photoURL' => 'N/A'
+        ];
+        return response()->json($data);
+
+    }
+
 
     public function getPackage(Request $request)
     {

@@ -296,7 +296,6 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             <div id="package-images" class="owl-carousel owl-theme py-2 my-4 ">
                 @foreach ($packages as $package)
                     <div class="item " style="height: 176px; overflow: hidden;border-radius: 20px;"
-                        data-id="{{ $package->id }}" {{-- onclick="getPackage({{ $package->id }})" --}}
                         onclick="populateSidebar({{ $package->id }}, 'package')">
                         <img src="{{ asset('assets/img/packages/wide/' . $package->package_photo_url) }}"
                             class="w-100 d-block " style="border-radius: 15px;" alt="{{ $package->name }} slide" />
@@ -331,9 +330,9 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
 
                             <div class="card-body">
                                 <div class="d-flex flex-row justify-content-between">
-                                    <h5 class="card-title font-weight-bold" data-bs-toggle="modal"
-                                        data-bs-target="#package-modal" data-id="{{ $package->id }}"
-                                        onclick="getPackage({{ $package->id }})">{{ $package->name }}</h5>
+                                    <h5 class="card-title font-weight-bold"
+                                        onclick="populateSidebar({{ $package->id }}, 'package')">
+                                        {{ $package->name }}</h5>
                                     <a class="font-weight-bold text-accent">₹{{ $package->price }}</a>
                                 </div>
 
@@ -413,9 +412,8 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                             <div class="p-2 shadow card-hover">
 
                                 <div class="d-flex flex-row justify-content-between">
-                                    <h5 class="mb-3 text-accent" data-bs-toggle="modal" data-bs-target="#test-modal"
-                                        data-id="{{ $test->id }}" onclick="getTest('{{ $test->id }}')"
-                                        style='height: 65px;'>
+                                    <h5 class="mb-3 text-accent"
+                                        onclick="populateSidebar({{ $test->id }}, 'test')" style='height: 65px;'>
                                         {{ $test->name }}</h5>
                                     <p class="text-dark"><b style='white-space: nowrap;'>₹
                                             {{ $test->price }}</b>
@@ -554,9 +552,8 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                         <div class="card health-package-card h-100 shadow w-100">
                             <div class="p-4 card-hover">
                                 <div class="d-flex justify-content-start align-items-end">
-                                    <h5 class="card-title font-weight-bold" data-bs-toggle="modal"
-                                        data-bs-target="#package-modal" data-id="{{ $package->id }}"
-                                        onclick="getPackage({{ $package->id }})">
+                                    <h5 class="card-title font-weight-bold"
+                                        onclick="populateSidebar({{ $package->id }}, 'package')">
                                         {{ $package->name }}</h5> &nbsp;&nbsp;
 
 
@@ -626,8 +623,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                             </div>
                             <div class="d-flex justify-content-start align-items-start">
 
-                                <h5 class="mb-3 card-title" data-bs-toggle="modal" data-bs-target="#test-modal"
-                                    data-id="{{ $test->id }}" onclick="getTest('{{ $test->id }}')">
+                                <h5 class="mb-3 card-title" onclick="populateSidebar({{ $test->id }}, 'test')">
                                     {{ $test->name }}</h4> &nbsp;&nbsp;&nbsp;
 
                             </div>
@@ -686,69 +682,6 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
 
     {{-- Modals --}}
 
-    <style>
-        .ProductDetailInstructions_homeCollection__c8urV {
-            margin: 0 0 20px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 15px;
-            flex-direction: row;
-            font-size: 15px;
-            font-style: normal;
-            font-weight: 500;
-            color: #2f3032;
-            text-transform: capitalize;
-            background: linear-gradient(90deg, rgba(219, 245, 249, .75), hsla(0, 0%, 100%, .75));
-            border-radius: 10px;
-            padding: 8px;
-        }
-
-        .ProductDetailInstructions_product__instructions__YlmoF {
-            display: flex;
-            column-gap: 10px;
-            justify-content: flex-start;
-            align-items: center;
-            width: 90%;
-            margin: 20px auto 30px;
-            scroll-behavior: smooth;
-            white-space: nowrap;
-        }
-
-        .ProductDetailInstructions_product__instructions__box__6ZaNF {
-            border: 1px solid #d9d9d9;
-            border-radius: 15px;
-            padding: 12px 16px;
-            display: flex;
-            flex-direction: column;
-            flex: 1 1;
-        }
-
-        .ProductDetailInstructions_product__instructions__box__fastingDur__mDNMM {
-            font-weight: 500;
-            font-size: 14px;
-            line-height: 21px;
-            color: #000;
-        }
-
-        @keyframes fadeInRightBig {
-            from {
-                opacity: 0;
-                transform: translate3d(2000px, 0, 0);
-            }
-
-            to {
-                opacity: 1;
-                transform: none;
-            }
-        }
-
-        .fade-in-right-big {
-            animation-name: fadeInRightBig;
-            animation-duration: 0.75s;
-            animation-fill-mode: both;
-        }
-    </style>
 
     <!-- Package Modal -->
     <div class="modal " id="package-modal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1"
@@ -951,6 +884,23 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             transform: scale(1.02);
             background-color: #f5f5f5;
         }
+
+        .homeCollection_section {
+            margin: 0 0 20px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            flex-direction: row;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 500;
+            color: #2f3032;
+            text-transform: capitalize;
+            background: linear-gradient(90deg, rgba(219, 245, 249, .75), hsla(0, 0%, 100%, .75));
+            border-radius: 10px;
+            padding: 8px;
+        }
     </style>
     {{-- Modal for Tests Section Ends --}}
 
@@ -967,9 +917,8 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
 
                     <div class="card-body">
                         <div class="d-flex flex-row justify-content-between">
-                            <h5 class="card-title font-weight-bold" data-bs-toggle="modal"
-                                data-bs-target="#package-modal" data-id="{{ $package->id }}"
-                                onclick="getPackage({{ $package->id }})">{{ $package->name }}</h5>
+                            <h5 class="card-title font-weight-bold"
+                                onclick="populateSidebar({{ $package->id }}, 'package')"></h5>
                             <a class="font-weight-bold text-accent">₹{{ $package->price }}</a>
                         </div>
 
@@ -1037,8 +986,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     <div class="p-2 shadow card-hover">
 
                         <div class="d-flex flex-row justify-content-between">
-                            <h5 class="mb-3 text-accent" data-bs-toggle="modal" data-bs-target="#test-modal"
-                                data-id="{{ $test->id }}" onclick="getTest('{{ $test->id }}')"
+                            <h5 class="mb-3 text-accent" onclick="populateSidebar({{ $test->id }}, 'test')"
                                 style='height: 65px;'>
                                 {{ $test->name }}</h5>
                             <p class="text-dark"><b style='white-space: nowrap;'>₹ {{ $test->price }}</b>
@@ -1649,25 +1597,25 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             ${list.map(function(test, index) {
               var parameters = test.pname || [];
               return `
-                                                                                                                                                                                                                                                                                                                        <li class='text-accent list-none py-2' id="package_test_name">
-                                                                                                                                                                                                                                                                                                                          <!-- Trigger for collapsing the parameters list -->
-                                                                                                                                                                                                                                                                                                                          <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
-                                                                                                                                                                                                                                                                                                                            data-bs-toggle="collapse"
-                                                                                                                                                                                                                                                                                                                            href="#collapseParameters${index}" role="button"
-                                                                                                                                                                                                                                                                                                                            aria-expanded="false"
-                                                                                                                                                                                                                                                                                                                            aria-controls="collapseParameters${index}"
-                                                                                                                                                                                                                                                                                                                            style="color: inherit;">
-                                                                                                                                                                                                                                                                                                                            ${test.name} <span
-                                                                                                                                                                                                                                                                                                                              class="font-weight-bold">${parameters.length > 0 ? `(${parameters.length})` : ''}</span>
-                                                                                                                                                                                                                                                                                                                          </a>
-                                                                                                                                                                                                                                                                                                                          <!-- Collapsible content -->
-                                                                                                                                                                                                                                                                                                                          <ul class="collapse " id="collapseParameters${index}">
-                                                                                                                                                                                                                                                                                                                            ${parameters.map(function(parameter) {
-                                                                                                                                                                                                                                                                                                                              return `<li>${parameter}</li>`;
-                                                                                                                                                                                                                                                                                                                            }).join('')}
-                                                                                                                                                                                                                                                                                                                          </ul>
-                                                                                                                                                                                                                                                                                                                        </li>
-                                                                                                                                                                                                                                                                                                                      `;
+                                                                                                                                                                                                                                                                                                                                                                                                    <li class='text-accent list-none py-2' id="package_test_name">
+                                                                                                                                                                                                                                                                                                                                                                                                      <!-- Trigger for collapsing the parameters list -->
+                                                                                                                                                                                                                                                                                                                                                                                                      <a class="d-block text-decoration-none text-accent hover:text-accent fs-5"
+                                                                                                                                                                                                                                                                                                                                                                                                        data-bs-toggle="collapse"
+                                                                                                                                                                                                                                                                                                                                                                                                        href="#collapseParameters${index}" role="button"
+                                                                                                                                                                                                                                                                                                                                                                                                        aria-expanded="false"
+                                                                                                                                                                                                                                                                                                                                                                                                        aria-controls="collapseParameters${index}"
+                                                                                                                                                                                                                                                                                                                                                                                                        style="color: inherit;">
+                                                                                                                                                                                                                                                                                                                                                                                                        ${test.name} <span
+                                                                                                                                                                                                                                                                                                                                                                                                          class="font-weight-bold">${parameters.length > 0 ? `(${parameters.length})` : ''}</span>
+                                                                                                                                                                                                                                                                                                                                                                                                      </a>
+                                                                                                                                                                                                                                                                                                                                                                                                      <!-- Collapsible content -->
+                                                                                                                                                                                                                                                                                                                                                                                                      <ul class="collapse " id="collapseParameters${index}">
+                                                                                                                                                                                                                                                                                                                                                                                                        ${parameters.map(function(parameter) {
+                                                                                                                                                                                                                                                                                                                                                                                                          return `<li>${parameter}</li>`;
+                                                                                                                                                                                                                                                                                                                                                                                                        }).join('')}
+                                                                                                                                                                                                                                                                                                                                                                                                      </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                    </li>
+                                                                                                                                                                                                                                                                                                                                                                                                  `;
             }).join('')}
           </ul>
         </div>

@@ -81,4 +81,16 @@ class CartController extends Controller
 
         return view('cart.index', compact('cart'));
     }
+    public function getCartItems()
+    {
+        if (auth()->check()) {
+            $cart = auth()->user()->cart;
+        } else {
+            $sessionId = session()->getId();
+            $cart = Cart::where('session_id', $sessionId)->first();
+        }
+
+        $cartItems = $cart->items; // Adjust according to your cart structure
+        return response()->json($cartItems);
+    }
 }

@@ -1,14 +1,13 @@
 <x-guest>
     <style>
         .card-text {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            /* Change this number to set the number of lines */
-            -webkit-box-orient: vertical;
+            height: 50px;
             overflow: hidden;
             text-overflow: ellipsis;
-            width: 100%;
-            height: 50px;
+            white-space: nowrap;
+            max-width: 100%;
+            margin-bottom: 1rem;
+            word-wrap: break-word;
         }
     </style>
     <div class="container m-auto p-3">

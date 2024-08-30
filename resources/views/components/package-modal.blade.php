@@ -56,8 +56,9 @@
 
         <div class="box-body p-3 overflow-y-scroll">
             <div class="d-flex justify-content-between align-items-center">
-                <p id='sidebar_name' class="font-weight-bold text-accent fs-4"> </p>
-                <p id='sidebar_price' class=" text-dark font-weight-bold fs-5 nowrap"></p>
+                <p id='sidebar_name' class="font-weight-bold text-accent fs-5"> </p>
+                <p> </p>
+                <p id='sidebar_price' class=" text-dark font-weight-bold fs-5 nowrap" style='white-space: nowrap;'></p>
             </div>
             <div>
                 <p class="text-dark font-weight-normal fs-6" id='sidebar_count'></p>
@@ -369,10 +370,12 @@
                                             value="Remove From Cart">
                                     </form>`;
 
-
                     $('#sidebar_name').html(data.name);
                     $('#sidebar_price').html("₹ " + data.price + "/-");
-                    $('#sidebar_count').html('Includes ' + data.tests.parameterCount + ' Parameters(s)');
+                    if (data.tests[0].parameterCount > 0) {
+                        $('#sidebar_count').html('Includes ' + data.tests[0].parameterCount +
+                            ' Parameters(s)');
+                    }
                     if (cartContains) {
                         $('#sidebar_addtocart').html(removeFromCart);
                     } else {

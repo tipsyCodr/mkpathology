@@ -7,7 +7,7 @@
                 <i class="bi bi-arrow-left"></i> Back
             </button>
         </div>
-
+        <x-package-modal />
         <div class="container pt-5">
             <div class="text-center mx-auto wow fadeInUp" data-wow-delay="0.1s" style="max-width: 600px;">
                 <h1 class="display-6 mb-3">Mostly Booked Lab Tests</h1>
@@ -17,18 +17,55 @@
                 <input class='form-control m-4' placeholder="Search Test Here...." type="text" name="search"
                     id="searchInput" onkeyup="searchTest();">
             </div>
+            <style>
+                .service-box {
+                    border: 1px solid #efefef;
+                    height: 150px;
+                    width: 250px;
+                    background-color: #fff;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.1);
+                    border-radius: 5px;
+                    padding-top: 10px;
+                }
+
+                .service-box>.body {
+                    padding-left: 20px;
+                    padding-right: 20px;
+
+                }
+            </style>
             <div class="row g-4">
                 @foreach ($tests as $test)
-                    <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="{{ $loop->index * 0.1 }}s">
-                        <div class="service-item">
-                            <div class="icon-box-primary mb-4">
-                                <i class="{{ $test->icon }} text-dark"></i>
-                            </div>
-                            <h5 class="mb-3">{{ $test->name }}</h4>
+                    <div class="col-lg-3 col-md-6 ">
+                        <div class="service-box "onclick="populateSidebar(${ test.id }, 'test')"
+                            style="display: flex; flex-direction: column; justify-content: space-between; height: 250px;">
+                            <div class=" body">
+
+                                <h5 class="mb-3" onclick="populateSidebar({{ $test->id }}, 'test')">
+                                    {{ $test->name }}</h5>
                                 <small class="text-muted">{{ $test->description }} </small>
                                 <p class="text-primary"><b>₹ {{ $test->price }}</b></p>
-                                <a class="btn btn-primary px-3" href="{{ route('patient.tests.view') }}">Add<i
-                                        class="bi bi-chevron-double-right ms-1"></i></a>
+
+                            </div>
+                            @if (isset($cart) && $cart->items->contains('test_id', $test->id))
+                                <form action="{{ route('cart.remove') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" id="test_id" name="product_id" value="{{ $test->id }}">
+                                    <input type="hidden" name="type" value="test">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                        type="submit" value="Remove from Cart" style="margin-top: auto;">
+                                </form>
+                            @else
+                                <form action="{{ route('cart.add') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" id="test_id" name="product_id" value="{{ $test->id }}">
+                                    <input type="hidden" name="type" value="test">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input class="position-relative bottom-0 btn btn-block btn-accent w-100"
+                                        type="submit" value="Add to Cart" style="margin-top: auto;">
+                                </form>
+                            @endif
                         </div>
                     </div>
                 @endforeach
@@ -56,16 +93,15 @@
                                     target.empty();
                                     data.forEach(function(test) {
                                         target.append(`
-                                            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="${test.index * 0.1}s">
-                                                <div class="service-item">
-                                                    <div class="icon-box-primary mb-4">
-                                                        <i class="${test.icon} text-dark"></i>
-                                                    </div>
-                                                    <h5 class="mb-3">${test.name}</h5>
+                                            <div class="col-lg-3 col-md-6 onclick="populateSidebar(${ test.id }, 'test')" ">
+                                                <div class="service-box "
+                                                    style="display: flex; flex-direction: column; justify-content: space-between; height: 250px;">
+                                                    <div class=" body">
+                                                        <h5 class="mb-3" onclick="populateSidebar(${ test.id }, 'test')" >${test.name}</h5>
                                                         <small class="text-muted">${test.description} </small>
                                                         <p class="text-primary"><b>₹ ${test.price}</b></p>
-                                                        <a class="btn btn-primary px-3" href="${test.url}">Add<i
-                                                                class="bi bi-chevron-double-right ms-1"></i></a>
+                                                    </div>
+                                                    <button class="position-relative bottom-0 btn btn-block btn-accent w-100" onclick="populateSidebar(${ test.id }, 'test')"  >View</button>
                                                 </div>
                                             </div>
                                         `);

@@ -220,10 +220,16 @@ class WebController extends Controller
             $query->where('name', 'like', '%' . $search . '%');
         })->paginate(30);
 
-        return view('tests', compact('tests', 'search'));
+        //Get cart  
+        $cart = auth()->user()
+            ? auth()->user()->cart()->latest()->first() ?? auth()->user()->cart()->create()
+            : Cart::where('session_id', session()->getId())->first() ?? Cart::create(['session_id' => session()->getId()]);
+
+
+        return view('tests', compact('tests', 'search', 'cart'));
     }
 
-    public function searchAllTests(Request $request, )
+    public function searchAllTests(Request $request)
     {
         $search = $request->get('search', '');
         $tests = $search ? Test::where('name', 'like', '%' . $search . '%')->get() : Test::all()->paginate(30);
@@ -344,8 +350,7 @@ class WebController extends Controller
             'price' => $price,
             'description' => $description,
             'tests' => $tests,
-            // 'testCount' => $testCount,
-            // 'photoURL' => 'N/A'
+
         ];
         return response()->json($data);
 

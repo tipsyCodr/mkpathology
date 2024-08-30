@@ -122,7 +122,8 @@
                                 </div>
                                 <div class="body d-flex flex-row justify-content-between">
                                     <div class="">
-                                        <p class="text-dark m-0" style='max-height: 48px;'>
+                                        <p class="text-dark m-0"
+                                            style='max-height: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
                                             {{ $package->description }}
                                         </p>
                                         <small class='d-inline-block mb-2'>Reports in <span
@@ -130,8 +131,30 @@
                                         </small>
                                     </div>
                                     <div class="">
-                                        <a href="{{ route('test.view.select', $package->id) }}"
-                                            class="bg-accent d-block text-white btn">Book</a>
+                                        @if (isset($cart) && $cart->items->contains('package_id', $package->id))
+                                            <form action="{{ route('cart.remove') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" id="package_id" name="product_id"
+                                                    value="{{ $package->id }}">
+                                                <input type="hidden" name="type" value="package">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <input
+                                                    class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                                    type="submit" value="Remove from Cart"
+                                                    style="margin-top: auto;">
+                                            </form>
+                                        @else
+                                            <form action="{{ route('cart.add') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" id="package_id" name="product_id"
+                                                    value="{{ $package->id }}">
+                                                <input type="hidden" name="type" value="package">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <input
+                                                    class="position-relative bottom-0 btn btn-block btn-accent w-100"
+                                                    type="submit" value="Add to Cart" style="margin-top: auto;">
+                                            </form>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -164,15 +187,36 @@
                     </div>
                     <div class="body d-flex flex-row justify-content-between">
                         <div class="">
-                            <p class="text-dark m-0" style='max-height: 48px;'>{{ $test->description }}
+                            <p class="text-dark m-0"
+                                style='max-height: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
+                                {{ $test->description }}
                             </p>
                             <small class='d-inline-block mb-2'>Reports in <span
                                     class='badge badge-danger bg-dark  rounded-pill'>72hr</span>
                             </small>
                         </div>
                         <div class="">
-                            <a href="{{ route('test.view.select', $test->id) }}"
-                                class="bg-accent d-block text-white btn">Book</a>
+                            @if (isset($cart) && $cart->items->contains('test_id', $test->id))
+                                <form action="{{ route('cart.remove') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" id="test_id" name="product_id"
+                                        value="{{ $test->id }}">
+                                    <input type="hidden" name="type" value="test">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                        type="submit" value="Remove from Cart" style="margin-top: auto;">
+                                </form>
+                            @else
+                                <form action="{{ route('cart.add') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" id="test_id" name="product_id"
+                                        value="{{ $test->id }}">
+                                    <input type="hidden" name="type" value="test">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input class="position-relative bottom-0 btn btn-block btn-accent w-100"
+                                        type="submit" value="Add to Cart" style="margin-top: auto;">
+                                </form>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -193,8 +237,6 @@
                         var tests = searchResults.tests;
                         var packages = searchResults.packages;
 
-                        console.log(tests);
-                        console.log(packages);
 
                         var resultsHTML = '';
 

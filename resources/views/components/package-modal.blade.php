@@ -304,31 +304,14 @@
                     let cartContains = isItemInCart(data.id);
                     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute(
                         'content');
-                    let addToCart = ` < form action = "{{ route('cart.add') }}"
-        method = "post" >
-            <
-            input type = "hidden"
-        name = "_token"
-        value = "${csrfToken}" >
-            <
-            input type = "hidden"
-        id = "test_id"
-        name = "product_id"
-        value = "${data.id}" >
-            <
-            input type = "hidden"
-        name = "type"
-        value = "package" >
-            <
-            input type = "hidden"
-        name = "quantity"
-        value = "1" >
-            <
-            input class = "position-relative bottom-0 btn btn-block btn-accent w-100 rounded-pill"
-        type = "submit"
-        value = "Add to Cart" >
-            <
-            /form>`;
+                    let addToCart = `<form action="{{ route('cart.add') }}" method="post">
+                                        <input type="hidden" name="_token" value="${csrfToken}">
+                                        <input type="hidden" id="test_id" name="product_id" value="${data.id}">
+                                        <input type="hidden" name="type" value="package">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input class="position-relative bottom-0 btn btn-block btn-accent w-100 rounded-pill" type="submit"
+                                            value="Add to Cart">
+                                    </form>`;
 
                     let removeFromCart = `<form action="{{ route('cart.remove') }}" method="post">
                                         <input type="hidden" name="_token" value="${csrfToken}">
@@ -371,7 +354,7 @@
                     let addToCart = `<form action="{{ route('cart.add') }}" method="post">
                                         <input type="hidden" name="_token" value="${csrfToken}">
                                         <input type="hidden" id="test_id" name="product_id" value="${data.id}">
-                                        <input type="hidden" name="type" value="package">
+                                        <input type="hidden" name="type" value="test">
                                         <input type="hidden" name="quantity" value="1">
                                         <input class="position-relative bottom-0 btn btn-block btn-accent w-100 rounded-pill" type="submit"
                                             value="Add to Cart">
@@ -380,7 +363,7 @@
                     let removeFromCart = `<form action="{{ route('cart.remove') }}" method="post">
                                         <input type="hidden" name="_token" value="${csrfToken}">
                                         <input type="hidden" id="test_id" name="product_id" value="${data.id}">
-                                        <input type="hidden" name="type" value="package">
+                                        <input type="hidden" name="type" value="test">
                                         <input type="hidden" name="quantity" value="1">
                                         <input class="position-relative bottom-0 btn btn-block btn-danger w-100 rounded-pill" type="submit"
                                             value="Remove From Cart">

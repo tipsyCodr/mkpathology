@@ -918,7 +918,7 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     <div class="card-body">
                         <div class="d-flex flex-row justify-content-between">
                             <h5 class="card-title font-weight-bold"
-                                onclick="populateSidebar({{ $package->id }}, 'package')"></h5>
+                                onclick="populateSidebar({{ $package->id }}, 'package')">{{ $package->name }}</h5>
                             <a class="font-weight-bold text-accent">₹{{ $package->price }}</a>
                         </div>
 

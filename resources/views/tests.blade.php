@@ -41,11 +41,17 @@
                             style="display: flex; flex-direction: column; justify-content: space-between; height: 250px;">
                             <div class=" body">
 
-                                <h5 class="mb-3" onclick="populateSidebar({{ $test->id }}, 'test')">
+                                <h5 class="mb-3" onclick="populateSidebar({{ $test->id }}, 'test')"
+                                    style='height: 65px;'>
                                     {{ $test->name }}</h5>
                                 <small class="text-muted">{{ $test->description }} </small>
                                 <p class="text-primary"><b>₹ {{ $test->price }}</b></p>
-
+                                <div class="d-flex flex-row justify-content-between">
+                                    <small class="text-success"><i class="bi bi-check-circle-fill"></i> Home
+                                        Collection</small>
+                                    <small class="text-success"><i class="bi bi-check-circle-fill"></i> Lab
+                                        Visit</small>
+                                </div>
                             </div>
                             @if (isset($cart) && $cart->items->contains('test_id', $test->id))
                                 <form action="{{ route('cart.remove') }}" method="post">
@@ -97,9 +103,15 @@
                                                 <div class="service-box "
                                                     style="display: flex; flex-direction: column; justify-content: space-between; height: 250px;">
                                                     <div class=" body">
-                                                        <h5 class="mb-3" onclick="populateSidebar(${ test.id }, 'test')" >${test.name}</h5>
+                                                        <h5 class="mb-3" onclick="populateSidebar(${ test.id }, 'test')" style='height: 65px;'>${test.name}</h5>
                                                         <small class="text-muted">${test.description} </small>
                                                         <p class="text-primary"><b>₹ ${test.price}</b></p>
+                                                        <div class="d-flex flex-row justify-content-between">
+                                                            <small class="text-success"><i class="bi bi-check-circle-fill"></i> Home
+                                                                Collection</small>
+                                                            <small class="text-success"><i class="bi bi-check-circle-fill"></i> Lab
+                                                                Visit</small>
+                                                        </div>
                                                     </div>
                                                     <button class="position-relative bottom-0 btn btn-block btn-accent w-100" onclick="populateSidebar(${ test.id }, 'test')"  >View</button>
                                                 </div>

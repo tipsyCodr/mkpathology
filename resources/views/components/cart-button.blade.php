@@ -3,23 +3,31 @@
     <a href="{{ route('cart.view') }}" class="" style="">
         @php
             $user = auth()->user();
-            if ($user && !$user->hasRole('admin')) {
-                if ($user && !$user->hasRole('patient')) {
-                    // Ensure the user has a cart
-                    if (!$user->cart) {
-                        $user->cart()->create(); // Create a cart if none exists
-                    }
-                    $cart = $user->cart;
-                } else {
-                    // Handle session-based cart
-                    $cart = App\Models\Cart::firstOrCreate(
-                        ['session_id' => session()->getId()],
-                        ['user_id' => null], // Adjust this as necessary
-                    );
+            if ($user && !$user->hasRole('patient')) {
+                // Ensure the user has a cart
+                if (!$user->cart) {
+                    $user->cart()->create(); // Create a cart if none exists
                 }
-                $itemCount = $cart && $cart->items ? $cart->items->count() : 0;
+                $cart = $user->cart;
+
+                // $itemCount = $cart && $cart->items ? $cart->items->count() : 0;
+            } elseif ($user && !$user->hasRole('admin')) {
+                // Handle user-based cart
+                $cart = App\Models\Cart::firstOrCreate(
+                    ['session_id' => session()->getId()],
+                    ['user_id' => null], // Adjust this as necessary
+                );
+            } else {
+                // Handle session-based cart
+                $cart = App\Models\Cart::firstOrCreate(
+                    ['session_id' => session()->getId()],
+                    ['user_id' => null], // Adjust this as necessary
+                );
             }
-            $itemCount = 0;
+            $itemCount = $cart && $cart->items ? $cart->items->count() : 0;
+
+            // $itemCount = 0;
+
         @endphp
 
         @if ($itemCount > 0)

@@ -7,22 +7,36 @@
                 @if (isset($cart->items))
                     @foreach ($cart->items as $item)
                         <div class="card mb-3 shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title">
-                                    @if (is_null($item->test_id))
-                                        {{ $item->package->name }}
-                                    @else
-                                        {{ $item->test->name }}
-                                    @endif
-                                </h5>
-                                <p class="card-text">Quantity: {{ $item->quantity }}</p>
-                                <p class="card-text">Price:
-                                    @if (is_null($item->test_id))
-                                        {{ $item->package->price }}
-                                    @else
-                                        {{ $item->test->price }}
-                                    @endif
-                                </p>
+                            <div class="card-body d-flex flex-row justify-content-md-between">
+                                <div class="">
+                                    <h5 class="card-title">
+                                        @if (is_null($item->test_id))
+                                            {{ $item->package->name }}
+                                        @else
+                                            {{ $item->test->name }}
+                                        @endif
+                                    </h5>
+                                    <p class="card-text">Quantity: {{ $item->quantity }}</p>
+                                    <p class="card-text">Price:
+                                        @if (is_null($item->test_id))
+                                            {{ $item->package->price }}
+                                        @else
+                                            {{ $item->test->price }}
+                                        @endif
+                                    </p>
+                                </div>
+                                <div class="">
+                                    <form action="{{ route('cart.remove') }}" method="post">
+                                        @csrf
+                                        <input type="hidden" id="test_id" name="product_id"
+                                            value="{{ is_null($item->test_id) ? $item->package->id : $item->test->id }}">
+                                        <input type="hidden" name="type"
+                                            value="{{ is_null($item->test_id) ? 'package' : 'test' }}">
+                                        <input type="hidden" name="quantity" value="1">
+                                        <input class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                            type="submit" value="Remove from Cart">
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     @endforeach

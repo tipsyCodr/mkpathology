@@ -62,7 +62,9 @@
                             </div>
                             <div class="body d-flex flex-row justify-content-between">
                                 <div class="">
-                                    <p class="text-dark m-0" style='max-height: 48px;'>{{ $test->description }} </p>
+                                    <p class="text-dark m-0"
+                                        style='max-height: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
+                                        {{ $test->description }} </p>
                                     <small class='d-inline-block mb-2'>Reports in <span
                                             class='badge badge-danger bg-dark  rounded-pill'>72hr</span>
                                     </small>

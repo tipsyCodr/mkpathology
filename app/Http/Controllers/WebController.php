@@ -65,6 +65,45 @@ class WebController extends Controller
 
         return response()->download($fileName);
     }
+    function exportTestsWithParameters()
+    {
+        // Open or create the CSV file
+        $fileName = public_path('tests_export.csv');
+        $file = fopen($fileName, 'w');
+
+        // Write the headers to the CSV file
+        fputcsv($file, ['Test Name', 'Test Price', 'Parameter Name', 'Parameter Unit', 'Normal Range']);
+
+        // Fetch all tests
+        $tests = Test::all();
+
+        foreach ($tests as $test) {
+            // Retrieve related parameters for each test
+            $parameters = Parameter::whereIn('id', json_decode($test->parameter_id, true) ?? [])->get();
+
+            if ($parameters->count() === 0) {
+                // If no parameters, write only test details
+                fputcsv($file, [$test->name, $test->price, '', '', '']);
+            } else {
+                // Write each parameter for the test
+                foreach ($parameters as $parameter) {
+                    fputcsv($file, [
+                        $test->name,
+                        $test->price,
+                        $parameter->name,
+                        $parameter->unit,
+                        $parameter->normal_range,
+                    ]);
+                }
+            }
+        }
+
+        // Close the file
+        fclose($file);
+
+        return response()->download($fileName);
+    }
+
     public function home(Request $request)
     {
         $search = $request->query('search', '');

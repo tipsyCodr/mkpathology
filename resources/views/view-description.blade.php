@@ -81,7 +81,9 @@
                                     @php
                                         $test = App\Models\Test::find($testId);
                                         $parameter_id = json_decode($test->parameter_id);
-                                        $parameters = App\Models\Parameter::whereIn('id', $parameter_id)->get();
+                                        $parameters = $parameter_id
+                                            ? App\Models\Parameter::whereIn('id', $parameter_id)->get()
+                                            : collect();
                                     @endphp
                                     <li class="bg-gray-700 p-2 m-2 list-unstyled">
                                         <a class="d-block text-decoration-none" data-bs-toggle="collapse"

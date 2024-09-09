@@ -114,7 +114,7 @@
         @endif
 
         <div class="container my-4">
-            {{ // dd($packageByCategory) }}
+
             @if ($packageByCategory)
                 <div class="container">
                     <h1>Search results for "{{ $categoryName }}" package</h1>

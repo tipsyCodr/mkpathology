@@ -206,3 +206,5 @@ Route::middleware(['isadmin'])->group(function () {
     Route::post('destroy-package/{id}', [PackageController::class, 'destroy'])->name('package.destroy');
 
 });
+
+Route::get('export-csv', [WebController::class, 'exportPackagesWithTestsAndParameters'])->name('export.csv');

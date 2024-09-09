@@ -9,6 +9,9 @@ use App\Models\Parameter;
 use App\Models\Test;
 use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+
+
 
 class WebController extends Controller
 {
@@ -17,6 +20,51 @@ class WebController extends Controller
         return view($view);
     }
 
+
+    function exportPackagesWithTestsAndParameters()
+    {
+        // Open or create the CSV file
+        $fileName = public_path('packages_export.csv');
+        $file = fopen($fileName, 'w');
+
+        // Write the headers to the CSV file
+        fputcsv($file, ['Package Name', 'Package Price', 'Test Name', 'Parameter Name', 'Parameter Unit', 'Normal Range']);
+
+        // Fetch all packages
+        $packages = Package::all();
+
+        foreach ($packages as $package) {
+            // Retrieve related tests for the package
+            $tests = Test::whereIn('id', json_decode($package->test_id, true))->get();
+
+            foreach ($tests as $test) {
+                // Retrieve related parameters for each test
+                $parameters = Parameter::whereIn('id', json_decode($test->parameter_id, true) ?? [])->get();
+
+                if ($parameters->count() === 0) {
+                    // If no parameters, write only package and test details
+                    fputcsv($file, [$package->name, $package->price, $test->name, '', '', '']);
+                } else {
+                    // Write each parameter for the test
+                    foreach ($parameters as $parameter) {
+                        fputcsv($file, [
+                            $package->name,
+                            $package->price,
+                            $test->name,
+                            $parameter->name,
+                            $parameter->unit,
+                            $parameter->normal_range,
+                        ]);
+                    }
+                }
+            }
+        }
+
+        // Close the file
+        fclose($file);
+
+        return response()->download($fileName);
+    }
     public function home(Request $request)
     {
         $search = $request->query('search', '');
@@ -170,6 +218,7 @@ class WebController extends Controller
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
+
 
     public function booking()
     {

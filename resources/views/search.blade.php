@@ -47,6 +47,70 @@
     @endif
 
     @if (isset($testsByCategory) || isset($packageByCategory))
+        <div class="container my-4">
+
+            @if ($packageByCategory)
+                <div class="container">
+                    <h1>Search results for "{{ $categoryName }}" package</h1>
+                    <div class=" list-unstyled d-flex flex-sm-column flex-lg-row flex-wrap justify-content-evenly">
+                        @foreach ($packageByCategory as $package)
+                            <div class="m-2 p-4  d-flex flex-column border" style="width:500px">
+                                <div class="d-flex flex-row justify-content-between ">
+                                    <p>
+                                        <b class=""><a class="d-block text-accent fs-4"
+                                                href="{{ route('view.description', ['type' => 'test', 'id' => $package->id]) }}"
+                                                style="width:265px; height:100px">
+                                                {{ $package->name }}
+                                            </a></b>
+                                    </p>
+                                    <div style="width:60px;"></div>
+                                    <p class="text-dark bold font-weight-bold m-0 fs-5">₹{{ $package->price }}</p>
+                                </div>
+                                <div class="body d-flex flex-row justify-content-between">
+                                    <div class="">
+                                        <p class="card-text"
+                                            style='max-height: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
+                                            {{ $package->description }}
+                                        </p>
+                                        <small class='d-inline-block mb-2'>Reports in <span
+                                                class='badge badge-danger bg-dark  rounded-pill'>72hr</span>
+                                        </small>
+                                    </div>
+                                    <div class="">
+                                        @if (isset($cart) && $cart->items->contains('package_id', $package->id))
+                                            <form action="{{ route('cart.remove') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" id="package_id" name="product_id"
+                                                    value="{{ $package->id }}">
+                                                <input type="hidden" name="type" value="package">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <input class="position-relative bottom-0 btn btn-block btn-danger w-100"
+                                                    type="submit" value="Remove from Cart" style="margin-top: auto;">
+                                            </form>
+                                        @else
+                                            <form action="{{ route('cart.add') }}" method="post">
+                                                @csrf
+                                                <input type="hidden" id="package_id" name="product_id"
+                                                    value="{{ $package->id }}">
+                                                <input type="hidden" name="type" value="package">
+                                                <input type="hidden" name="quantity" value="1">
+                                                <input class="position-relative bottom-0 btn btn-block btn-accent w-100"
+                                                    type="submit" value="Add to Cart" style="margin-top: auto;">
+                                            </form>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+                @if ($packageByCategory->count() < 1)
+                    <h5 class="text-center text-muted m-5"> No Packages</h5>
+                @endif
+
+            @endif
+        </div>
+
         @if ($testsByCategory)
             <div class="container">
                 <h1>Search results for "{{ $categoryName }}" test</h1>
@@ -113,72 +177,7 @@
             @endif
         @endif
 
-        <div class="container my-4">
 
-            @if ($packageByCategory)
-                <div class="container">
-                    <h1>Search results for "{{ $categoryName }}" package</h1>
-                    <div class=" list-unstyled d-flex flex-sm-column flex-lg-row flex-wrap justify-content-evenly">
-                        @foreach ($packageByCategory as $package)
-                            <div class="m-2 p-4  d-flex flex-column border" style="width:500px">
-                                <div class="d-flex flex-row justify-content-between ">
-                                    <p>
-                                        <b class=""><a class="d-block text-accent fs-4"
-                                                href="{{ route('view.description', ['type' => 'test', 'id' => $package->id]) }}"
-                                                style="width:265px; height:100px">
-                                                {{ $package->name }}
-                                            </a></b>
-                                    </p>
-                                    <div style="width:60px;"></div>
-                                    <p class="text-dark bold font-weight-bold m-0 fs-5">₹{{ $package->price }}</p>
-                                </div>
-                                <div class="body d-flex flex-row justify-content-between">
-                                    <div class="">
-                                        <p class="card-text"
-                                            style='max-height: 48px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;'>
-                                            {{ $package->description }}
-                                        </p>
-                                        <small class='d-inline-block mb-2'>Reports in <span
-                                                class='badge badge-danger bg-dark  rounded-pill'>72hr</span>
-                                        </small>
-                                    </div>
-                                    <div class="">
-                                        @if (isset($cart) && $cart->items->contains('package_id', $package->id))
-                                            <form action="{{ route('cart.remove') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" id="package_id" name="product_id"
-                                                    value="{{ $package->id }}">
-                                                <input type="hidden" name="type" value="package">
-                                                <input type="hidden" name="quantity" value="1">
-                                                <input
-                                                    class="position-relative bottom-0 btn btn-block btn-danger w-100"
-                                                    type="submit" value="Remove from Cart"
-                                                    style="margin-top: auto;">
-                                            </form>
-                                        @else
-                                            <form action="{{ route('cart.add') }}" method="post">
-                                                @csrf
-                                                <input type="hidden" id="package_id" name="product_id"
-                                                    value="{{ $package->id }}">
-                                                <input type="hidden" name="type" value="package">
-                                                <input type="hidden" name="quantity" value="1">
-                                                <input
-                                                    class="position-relative bottom-0 btn btn-block btn-accent w-100"
-                                                    type="submit" value="Add to Cart" style="margin-top: auto;">
-                                            </form>
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-                @if ($packageByCategory->count() < 1)
-                    <h5 class="text-center text-muted m-5"> No Packages</h5>
-                @endif
-
-            @endif
-        </div>
 
     @endif
 

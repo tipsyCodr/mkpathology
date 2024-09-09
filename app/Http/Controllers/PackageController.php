@@ -33,6 +33,10 @@ class PackageController extends Controller
         $package = new Package();
         $package->test_id = json_encode($request->input('tests'));
 
+        //add categories
+        $categories = json_encode($request->input('categories'));
+        $package->category_id = $categories;
+
         $package_photo_url = $request->file('package_photo_url');
         $package_photo_url_wide = $request->file('package_photo_url_wide');
 

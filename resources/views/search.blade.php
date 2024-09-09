@@ -58,7 +58,7 @@
                                 <div class="d-flex flex-row justify-content-between ">
                                     <p>
                                         <b class=""><a class="d-block text-accent fs-4"
-                                                href="{{ route('view.description', ['type' => 'test', 'id' => $package->id]) }}"
+                                                href="{{ route('view.description', ['type' => 'package', 'id' => $package->id]) }}"
                                                 style="width:265px; height:100px">
                                                 {{ $package->name }}
                                             </a></b>

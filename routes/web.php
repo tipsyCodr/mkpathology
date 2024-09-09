@@ -207,5 +207,5 @@ Route::middleware(['isadmin'])->group(function () {
 
 });
 
-Route::get('export-package-csv', [WebController::class, 'exportPackagesWithTestsAndParameters'])->name('export.csv');
-Route::get('export-test-csv', [WebController::class, 'exportTestsWithParameters'])->name('export.csv');
+Route::get('export-package-csv', [WebController::class, 'exportPackagesWithTestsAndParameters'])->name('export.package.csv');
+Route::get('export-test-csv', [WebController::class, 'exportTestsWithParameters'])->name('export.test.csv');

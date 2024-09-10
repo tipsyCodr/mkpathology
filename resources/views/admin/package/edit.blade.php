@@ -12,7 +12,8 @@
             padding: 15px;
         }
     </style>
-    <form action="{{ route('package.update') }}" method="post" onsubmit="esvent.preventDefault();">
+    <form action="{{ route('package.update') }}" method="post" enctype="multipart/form-data"
+        onsubmit="esvent.preventDefault();">
         @csrf
         <x-input name="name" label="Package Name" :placeholder="'Enter Package name'" value="{{ $package->name }}" />
         <x-input name="price" label="Package Price" :placeholder="'Enter Package price'" value="{{ $package->price }}" />

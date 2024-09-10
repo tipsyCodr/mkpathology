@@ -168,7 +168,7 @@ class PackageController extends Controller
 
             $package_photo_url = $request->file('package_photo_url');
             $package_photo_url_wide = $request->file('package_photo_url_wide');
-
+            dd($package_photo_url, $package_photo_url_wide);
             $package_photo_filename = strtolower(str_replace(' ', '_', $request->input('name')));
             $package_photo_filename_wide = strtolower(str_replace(' ', '_', $request->input('name')));
             // dd($package_photo_filename, $package_photo_filename_wide);

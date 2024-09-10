@@ -47,7 +47,16 @@
                 <option value="{{ $test->id }}">{{ $test->name }}</option>
             @endforeach
         </select>
-
+        <div class="my-2">
+            <label for="package_photo_url"><b>Upload Package Photo (Size: Portrait)</b> </label>
+            <br>
+            <input class="my-2" type="file" name="package_photo_url" id="package_photo_url">
+        </div>
+        <div class="my-2">
+            <label for="package_photo_url"><b>Upload Package Photo (Size: Landscape) </b> </label>
+            <br>
+            <input class="my-2" type="file" name="package_photo_url_wide" id="package_photo_url_wide  ">
+        </div>
         <br>
         <button class='bg-blue-500 p-2 my-2 rounded-md text-white'>Update Package</button>
     </form>

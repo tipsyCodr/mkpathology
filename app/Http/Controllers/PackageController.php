@@ -165,6 +165,22 @@ class PackageController extends Controller
             $package->price = $request->input('price');
             $package->description = $request->input('description');
             $package->test_id = json_encode($request->input('tests', []));
+
+            $package_photo_url = $request->file('package_photo_url');
+            $package_photo_url_wide = $request->file('package_photo_url_wide');
+
+            $package_photo_filename = strtolower(str_replace(' ', '_', $request->input('name')));
+            $package_photo_filename_wide = strtolower(str_replace(' ', '_', $request->input('name')));
+            // dd($package_photo_filename, $package_photo_filename_wide);
+
+            $ext = $package_photo_url->getClientOriginalExtension();
+            $package_photo_url->move(public_path('assets/img/packages'), $package_photo_filename . '.' . $ext);
+
+            $ext = $package_photo_url_wide->getClientOriginalExtension();
+            $package_photo_url_wide->move(public_path('assets/img/packages/wide'), $package_photo_filename_wide . '.' . $ext);
+
+            $package->package_photo_url = $package_photo_filename . "." . $ext;
+
             $package->category_id = json_encode($request->input('categories', []));
             $package->save();
 

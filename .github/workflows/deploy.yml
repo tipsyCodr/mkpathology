@@ -1,0 +1,59 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+
+    - name: Install NPM Dependencies & Build Assets
+      run: |
+        npm install
+        npm run build
+
+    - name: SFTP Deploy Code
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: "145.79.213.127"
+        username: "u335174260"
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: 65002
+        protocol: sftp
+        local-dir: ./
+        server-dir: /domains/mkpathologylab.in/public_html/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/vendor/**
+          .github/**
+          .env
+          storage/logs/**
+          storage/app/public/uploads/**
+
+    - name: Run SSH Post-Deployment Commands
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: "145.79.213.127"
+        username: "u335174260"
+        password: ${{ secrets.SSH_PASSWORD }}
+        port: 65002
+        script: |
+          cd /home/u335174260/domains/mkpathologylab.in/public_html
+          /opt/alt/php84/usr/bin/php /usr/local/bin/composer install --no-dev --optimize-autoloader --no-interaction
+          /opt/alt/php84/usr/bin/php artisan migrate --force
+          /opt/alt/php84/usr/bin/php artisan config:cache
+          /opt/alt/php84/usr/bin/php artisan route:cache
+          /opt/alt/php84/usr/bin/php artisan view:cache
+          chmod -R 775 storage bootstrap/cache

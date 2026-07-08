@@ -11,8 +11,6 @@ use Illuminate\Contracts\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
-
-
 class WebController extends Controller
 {
     public function __invoke($view)
@@ -21,7 +19,7 @@ class WebController extends Controller
     }
 
 
-    function exportPackagesWithTestsAndParameters()
+    public function exportPackagesWithTestsAndParameters()
     {
         // Open or create the CSV file
         $fileName = public_path('packages_export.csv');
@@ -65,7 +63,7 @@ class WebController extends Controller
 
         return response()->download($fileName);
     }
-    function exportTestsWithParameters()
+    public function exportTestsWithParameters()
     {
         // Open or create the CSV file
         $fileName = public_path('tests_export.csv');
@@ -316,7 +314,7 @@ class WebController extends Controller
             $query->where('name', 'like', '%' . $search . '%');
         })->paginate(30);
 
-        //Get cart  
+        //Get cart
         $cart = auth()->user()
             ? auth()->user()->cart()->latest()->first() ?? auth()->user()->cart()->create()
             : Cart::where('session_id', session()->getId())->first() ?? Cart::create(['session_id' => session()->getId()]);

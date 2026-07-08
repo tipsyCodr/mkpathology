@@ -22,25 +22,22 @@ jobs:
         npm install
         npm run build
 
-    - name: SFTP Deploy Code
-      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-      with:
-        server: "145.79.213.127"
-        username: "u335174260"
-        password: ${{ secrets.SSH_PASSWORD }}
-        port: 65002
-        protocol: sftp
-        local-dir: ./
-        server-dir: /domains/mkpathologylab.in/public_html/
-        exclude: |
-          **/.git*
-          **/.git*/**
-          **/node_modules/**
-          **/vendor/**
-          .github/**
-          .env
-          storage/logs/**
-          storage/app/public/uploads/**
+    - name: Install sshpass
+      run: sudo apt-get update && sudo apt-get install -y sshpass
+
+    - name: Rsync Deploy Code
+      env:
+        SSH_PASSWORD: ${{ secrets.SSH_PASSWORD }}
+      run: |
+        sshpass -p "$SSH_PASSWORD" rsync -avz -e "ssh -p 65002 -o StrictHostKeyChecking=no" \
+          --exclude="node_modules" \
+          --exclude="vendor" \
+          --exclude=".git" \
+          --exclude=".github" \
+          --exclude=".env" \
+          --exclude="storage/logs" \
+          --exclude="storage/app/public/uploads" \
+          ./ u335174260@145.79.213.127:/home/u335174260/domains/mkpathologylab.in/public_html/
 
     - name: Run SSH Post-Deployment Commands
       uses: appleboy/ssh-action@v1.0.3

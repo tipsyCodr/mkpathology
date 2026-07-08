@@ -295,11 +295,13 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
             <h2 class="pt-4 mb-5">Family Care Packages </h2>
             <div id="package-images" class="owl-carousel owl-theme py-2 my-4 ">
                 @foreach ($packages as $package)
-                    <div class="item " style="height: 176px; overflow: hidden;border-radius: 20px;"
-                        onclick="populateSidebar({{ $package->id }}, 'package')">
-                        <img src="{{ asset('assets/img/packages/wide/' . $package->package_photo_url) }}"
-                            class="w-100 d-block " style="border-radius: 15px;" alt="{{ $package->name }} slide" />
-                    </div>
+                    @if ($package->package_photo_url)
+                        <div class="item " style="height: 176px; overflow: hidden;border-radius: 20px;"
+                            onclick="populateSidebar({{ $package->id }}, 'package')">
+                            <img src="{{ asset('assets/img/packages/wide/' . $package->package_photo_url) }}"
+                                class="w-100 d-block " style="border-radius: 15px;" alt="{{ $package->name }} slide" />
+                        </div>
+                    @endif
                 @endforeach
             </div>
 
@@ -1652,7 +1654,11 @@ background: linear-gradient(90deg, rgba(5,35,99,1) 49%, rgba(0,55,171,1) 77%, rg
                     $('.package_price').html("₹ " + response.price + "/-");
                     $('.package_id').attr('href', "/view/test/" + response.id);
                     $('#package_id').val(response.id);
-                    $('.package_photo_url').attr('src', 'assets/img/packages/' + response.package_photo_url);
+                    if (response.package_photo_url) {
+                        $('.package_photo_url').attr('src', 'assets/img/packages/' + response.package_photo_url).show();
+                    } else {
+                        $('.package_photo_url').hide();
+                    }
                 }
             });
         }
